@@ -1,0 +1,175 @@
+<div class="material-form-page showcase-form-page">
+  <form (ngSubmit)="onSubmit()">
+    <mat-card class="mb-4 checkout-status-card">
+      <mat-card-content>
+        <policy-validation-policy-group-status
+          [model]="model"
+          policyGroupName="checkout"
+          label="Entire page (checkout policy group)"
+          pendingTooltip="Validates PersonalInfo + ShippingAddress + BillingAddress policies together on submit."
+          evaluatedTooltip="Combined result across all three form sections."
+        ></policy-validation-policy-group-status>
+        <policy-validation-policy-group-summary [model]="model" policyGroupName="checkout"></policy-validation-policy-group-summary>
+        <policy-validation-summary [model]="model" title="All errors on this page:"></policy-validation-summary>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="mb-4">
+      <mat-card-header>
+        <mat-card-title>Personal Information</mat-card-title>
+        <mat-card-subtitle>Policy: PersonalInfo · Group: personalInfo</mat-card-subtitle>
+        <span class="mat-card-header-spacer"></span>
+        <policy-validation-group-status
+          [model]="model"
+          groupName="personalInfo"
+          pendingTooltip="All personal fields are always required. Status updates after you submit."
+          evaluatedTooltip="Valid when first name, last name, email, and phone pass validation."
+        ></policy-validation-group-status>
+      </mat-card-header>
+      <mat-card-content>
+        <policy-validation-group-summary [model]="model" groupName="personalInfo"></policy-validation-group-summary>
+        <div class="mat-fields-grid">
+          <mat-form-field appearance="outline" data-policy-validation-field>
+            <mat-label>First Name</mat-label>
+            <input matInput id="matFirstName" name="firstName" [(ngModel)]="model.personal.firstName"
+              policyValidator [validateModel]="'form.personal.firstName'" [actualModel]="model"
+              [withPolicy]="'PersonalInfo'" groupName="personalInfo" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" data-policy-validation-field>
+            <mat-label>Last Name</mat-label>
+            <input matInput id="matLastName" name="lastName" [(ngModel)]="model.personal.lastName"
+              policyValidator [validateModel]="'form.personal.lastName'" [actualModel]="model"
+              [withPolicy]="'PersonalInfo'" groupName="personalInfo" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" data-policy-validation-field>
+            <mat-label>Email</mat-label>
+            <input matInput type="email" id="matPersonalEmail" name="personalEmail" [(ngModel)]="model.personal.email"
+              policyValidator [validateModel]="'form.personal.email'" [actualModel]="model"
+              [withPolicy]="'PersonalInfo'" groupName="personalInfo" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" data-policy-validation-field>
+            <mat-label>Phone</mat-label>
+            <input matInput type="tel" id="matPhone" name="phone" placeholder="(555) 555-5555" [(ngModel)]="model.personal.phone"
+              policyValidator [validateModel]="'form.personal.phone'" [actualModel]="model"
+              [withPolicy]="'PersonalInfo'" groupName="personalInfo" />
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="mb-4">
+      <mat-card-header>
+        <mat-card-title>Shipping Address</mat-card-title>
+        <mat-card-subtitle>Policy: ShippingAddress · Conditional city/state/zip</mat-card-subtitle>
+        <span class="mat-card-header-spacer"></span>
+        <policy-validation-group-status
+          [model]="model"
+          groupName="shippingInfo"
+          pendingTooltip="City, State, ZIP, and Country are required only when Street Address has a value."
+          evaluatedTooltip="Valid when required shipping fields pass validation."
+        ></policy-validation-group-status>
+      </mat-card-header>
+      <mat-card-content>
+        <policy-validation-group-summary [model]="model" groupName="shippingInfo"></policy-validation-group-summary>
+        <mat-form-field appearance="outline" class="mat-field-full" data-policy-validation-field>
+          <mat-label>Street Address</mat-label>
+          <input matInput id="matShippingLine1" name="shippingLine1" [(ngModel)]="model.shipping.line1"
+            policyValidator [validateModel]="'form.shipping.line1'" [actualModel]="model"
+            [withPolicy]="'ShippingAddress'" groupName="shippingInfo" />
+          <mat-hint>Enter a street address to enable required city, state, ZIP, and country.</mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="mat-field-full">
+          <mat-label>Street Address 2 (optional)</mat-label>
+          <input matInput id="matShippingLine2" name="shippingLine2" [(ngModel)]="model.shipping.line2" />
+        </mat-form-field>
+        <div class="mat-fields-grid">
+          <mat-form-field appearance="outline" data-policy-validation-field>
+            <mat-label>City</mat-label>
+            <input matInput id="matShippingCity" name="shippingCity" [(ngModel)]="model.shipping.city"
+              policyValidator [validateModel]="'form.shipping.city'" [actualModel]="model"
+              [withPolicy]="'ShippingAddress'" groupName="shippingInfo" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" data-policy-validation-field>
+            <mat-label>State</mat-label>
+            <input matInput id="matShippingState" name="shippingState" [(ngModel)]="model.shipping.state"
+              policyValidator [validateModel]="'form.shipping.state'" [actualModel]="model"
+              [withPolicy]="'ShippingAddress'" groupName="shippingInfo" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" data-policy-validation-field>
+            <mat-label>ZIP Code</mat-label>
+            <input matInput id="matShippingZip" name="shippingZip" [(ngModel)]="model.shipping.zip"
+              policyValidator [validateModel]="'form.shipping.zip'" [actualModel]="model"
+              [withPolicy]="'ShippingAddress'" groupName="shippingInfo" />
+          </mat-form-field>
+        </div>
+        <mat-form-field appearance="outline" class="mat-field-full" data-policy-validation-field>
+          <mat-label>Country</mat-label>
+          <mat-select id="matShippingCountry" name="shippingCountry" [(ngModel)]="model.shipping.country"
+            policyValidator [validateModel]="'form.shipping.country'" [actualModel]="model"
+            [withPolicy]="'ShippingAddress'" groupName="shippingInfo">
+            <mat-option value="">Choose...</mat-option>
+            <mat-option value="US">United States</mat-option>
+            <mat-option value="CA">Canada</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="mb-4">
+      <mat-card-header>
+        <mat-card-title>Billing Address</mat-card-title>
+        <mat-card-subtitle>Policy: BillingAddress · Depends on !billing.sameAsShipping</mat-card-subtitle>
+        <span class="mat-card-header-spacer"></span>
+        <policy-validation-group-status
+          [model]="model"
+          groupName="billingInfo"
+          pendingTooltip="Billing fields are required only when 'Same as shipping' is unchecked."
+          evaluatedTooltip="Valid when billing rules pass for the current selection."
+        ></policy-validation-group-status>
+      </mat-card-header>
+      <mat-card-content>
+        <policy-validation-group-summary [model]="model" groupName="billingInfo"></policy-validation-group-summary>
+        <mat-checkbox class="mb-3" id="matSameAsShipping" name="sameAsShipping"
+          [(ngModel)]="model.billing.sameAsShipping" (ngModelChange)="onSameAsShippingChange()">
+          Same as shipping address
+        </mat-checkbox>
+
+        @if (!model.billing.sameAsShipping) {
+        <div>
+          <mat-form-field appearance="outline" class="mat-field-full" data-policy-validation-field>
+            <mat-label>Street Address</mat-label>
+            <input matInput id="matBillingLine1" name="billingLine1" [(ngModel)]="model.billing.line1"
+              policyValidator [validateModel]="'form.billing.line1'" [actualModel]="model"
+              [withPolicy]="'BillingAddress'" groupName="billingInfo" />
+          </mat-form-field>
+          <div class="mat-fields-grid">
+            <mat-form-field appearance="outline" data-policy-validation-field>
+              <mat-label>City</mat-label>
+              <input matInput id="matBillingCity" name="billingCity" [(ngModel)]="model.billing.city"
+                policyValidator [validateModel]="'form.billing.city'" [actualModel]="model"
+                [withPolicy]="'BillingAddress'" groupName="billingInfo" />
+            </mat-form-field>
+            <mat-form-field appearance="outline" data-policy-validation-field>
+              <mat-label>ZIP Code</mat-label>
+              <input matInput id="matBillingZip" name="billingZip" [(ngModel)]="model.billing.zip"
+                policyValidator [validateModel]="'form.billing.zip'" [actualModel]="model"
+                [withPolicy]="'BillingAddress'" groupName="billingInfo" />
+            </mat-form-field>
+          </div>
+        </div>
+        }
+      </mat-card-content>
+    </mat-card>
+
+    <div class="mat-actions">
+      <button mat-flat-button color="primary" type="submit">Submit All Forms</button>
+      <button mat-stroked-button type="button" (click)="onClear()">Clear</button>
+    </div>
+
+    @if (submitMessage) {
+      <div class="mat-message" [class.error]="model.checkout?.isInValid" [class.success]="model.checkout?.isValid">
+        {{ submitMessage }}
+      </div>
+    }
+  </form>
+</div>

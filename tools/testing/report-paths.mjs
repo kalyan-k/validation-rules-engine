@@ -6,13 +6,20 @@ const toolsDirectory = path.dirname(fileURLToPath(import.meta.url));
 
 export const workspaceRoot = path.resolve(toolsDirectory, '..', '..');
 export const reportsRoot = path.join(workspaceRoot, 'reports');
-export const projects = Object.freeze(['core', 'angular', 'react', 'angular-demo', 'react-demo']);
+export const projects = Object.freeze(['core', 'angular', 'react', 'angular-showcase', 'react-showcase']);
+const projectReportPaths = Object.freeze({
+  core: ['packages', 'core'],
+  angular: ['packages', 'angular'],
+  react: ['packages', 'react'],
+  'angular-showcase': ['showcases', 'angular'],
+  'react-showcase': ['showcases', 'react']
+});
 const projectScriptNames = Object.freeze({
   core: 'core',
   angular: 'angular',
   react: 'react',
-  'angular-demo': 'demo',
-  'react-demo': 'react-demo'
+  'angular-showcase': 'showcase:angular',
+  'react-showcase': 'showcase:react'
 });
 
 export function assertProject(projectName) {
@@ -23,7 +30,25 @@ export function assertProject(projectName) {
 
 export function projectReportRoot(projectName) {
   assertProject(projectName);
-  return path.join(reportsRoot, projectName);
+  return path.join(reportsRoot, ...projectReportPaths[projectName]);
+}
+
+export function projectReportHref(projectName) {
+  assertProject(projectName);
+  return projectReportPaths[projectName].join('/');
+}
+
+export function relativeReportHref(fromDirectory, targetFile) {
+  const relativePath = path.relative(fromDirectory, targetFile).replaceAll('\\', '/');
+  return relativePath.startsWith('.') ? relativePath : `./${relativePath}`;
+}
+
+export function projectDashboardHref(projectName) {
+  return relativeReportHref(projectReportRoot(projectName), path.join(reportsRoot, 'index.html'));
+}
+
+export function projectTestsDashboardHref(projectName) {
+  return relativeReportHref(path.join(projectReportRoot(projectName), 'tests'), path.join(reportsRoot, 'index.html'));
 }
 
 export function projectScriptName(projectName) {

@@ -46,7 +46,7 @@ article code { padding:.12rem .32rem; border-radius:4px; color:#8c2850; backgrou
 .docs-copy-button.copied .docs-copy-check { display:inline-block; }
 blockquote { margin:1.4rem 0; padding:1rem 1.1rem; border-left:4px solid var(--teal); color:#365b5a; background:#eaf5f3; }
 .live-example { margin-top:3.5rem; padding:1.2rem; border:1px solid #cde2df; border-radius:12px; background:#f0f8f7; } .live-example>p { margin:0 0 .65rem; color:#52706e; font-size:.72rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
-.demo-link { display:flex; justify-content:space-between; gap:1rem; color:#075f59; text-decoration:none; } .demo-link strong,.demo-link span { display:block; } .demo-link span { color:#52706e; font-size:.8rem; }
+.showcase-link { display:flex; justify-content:space-between; gap:1rem; color:#075f59; text-decoration:none; } .showcase-link strong,.showcase-link span { display:block; } .showcase-link span { color:#52706e; font-size:.8rem; }
 .pager { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:2.5rem; padding-top:1.5rem; border-top:1px solid var(--line); } .pager a { display:flex; flex-direction:column; color:#40546b; text-decoration:none; } .pager a.next { text-align:right; } .pager small { color:#8a99aa; }
 @media (max-width:1100px) { .docs-layout { grid-template-columns:240px minmax(0,1fr); } .on-page { display:none; } }
 @media (max-width:760px) { .docs-layout { display:block; } .docs-layout>aside:first-child { position:static; display:block; width:100%; height:auto; border-right:0; } .docs-navigation { overflow:visible; } .search-results { position:fixed; top:132px; right:1rem; left:1rem; width:auto; } main { padding:2rem 1.2rem 4rem; } }

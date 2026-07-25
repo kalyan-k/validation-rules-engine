@@ -34,13 +34,13 @@ test('indexes React pages and deep-links to hook headings', () => {
   assert.equal(result?.anchor, 'usevalidationfield');
 });
 
-test('catalogs every React state integration with a live demo route', () => {
+test('catalogs every React state integration with a live showcase route', () => {
   const stateEntries = documentationCatalog.filter(({ slug }) => slug.startsWith('react-state-'));
   assert.deepEqual(stateEntries.map(({ title }) => title), [
     'Local State', 'Redux Toolkit', 'Zustand', 'Jotai',
     'Recoil', 'MobX', 'Context API'
   ]);
-  assert.ok(stateEntries.every(({ demoPath }) => demoPath?.startsWith('/state/')));
+  assert.ok(stateEntries.every(({ showcasePath }) => showcasePath?.startsWith('/state/')));
 });
 
 test('catalogs package documentation sections for Core, Angular, and React', () => {

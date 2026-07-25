@@ -1,4 +1,4 @@
-﻿import { createReadStream, readFileSync } from 'node:fs';
+import { createReadStream, readFileSync } from 'node:fs';
 import http, { type IncomingMessage, type ServerResponse } from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -14,8 +14,8 @@ const shellRoot = path.join(workspaceRoot, 'tools', 'platform-shell');
 const docsPort = configuredPort('VALIDATION_RULES_DOCS_PORT', 4201);
 const docsUrl = configuredBaseUrl('VALIDATION_RULES_DOCS_URL', `http://127.0.0.1:${docsPort}`);
 const portalUrl = configuredBaseUrl('VALIDATION_RULES_PORTAL_URL', 'http://127.0.0.1:4200');
-const angularDemoUrl = configuredBaseUrl('VALIDATION_RULES_ANGULAR_DEMO_URL', 'http://127.0.0.1:4202');
-const reactDemoUrl = configuredBaseUrl('VALIDATION_RULES_REACT_DEMO_URL', 'http://127.0.0.1:4204');
+const angularShowcaseUrl = configuredBaseUrl('VALIDATION_RULES_ANGULAR_SHOWCASE_URL', 'http://127.0.0.1:4202');
+const reactShowcaseUrl = configuredBaseUrl('VALIDATION_RULES_REACT_SHOWCASE_URL', 'http://127.0.0.1:4204');
 const workspacePackage = JSON.parse(readFileSync(path.join(workspaceRoot, 'package.json'), 'utf8')) as { version?: string };
 const assetVersion = encodeURIComponent(workspacePackage.version ?? '0.0.0');
 const platformAssets = new Set([
@@ -99,19 +99,19 @@ function renderPage(entry: DocumentationEntry | undefined, content: string): str
     <section class="nav-section"><h2>${escapeHtml(section)}</h2>${renderNavigationItems(sectionEntries, entry)}</section>
   `;
   }).join('');
-  const demoLinks = entry?.slug.startsWith('react-')
-    ? `<a class="demo-link" href="${reactDemoUrl}${entry.demoPath ?? ''}"><strong>Open React Demo</strong><span>Try the hooks and policies in a live React application &rarr;</span></a>`
+  const showcaseLinks = entry?.slug.startsWith('react-')
+    ? `<a class="showcase-link" href="${reactShowcaseUrl}${entry.showcasePath ?? ''}"><strong>Open React Showcase</strong><span>Try the hooks and policies in a live React application &rarr;</span></a>`
     : entry?.section === 'Core Package'
-    ? `<a class="demo-link" href="${portalUrl}"><strong>Open Demo Portal</strong><span>Choose Angular or React demos that all use Core policies &rarr;</span></a>`
-    : `<a class="demo-link" href="${angularDemoUrl}${entry?.demoPath ?? ''}"><strong>Open Angular Demo</strong><span>See the concepts running in a real application &rarr;</span></a>`;
+    ? `<a class="showcase-link" href="${portalUrl}"><strong>Open Portal</strong><span>Choose Angular or React showcases that all use Core policies &rarr;</span></a>`
+    : `<a class="showcase-link" href="${angularShowcaseUrl}${entry?.showcasePath ?? ''}"><strong>Open Angular Showcase</strong><span>See the concepts running in a real application &rarr;</span></a>`;
 
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${escapeHtml(entry?.summary ?? 'Validation Rules documentation')}"><meta name="theme-color" content="#10243e"><title>${escapeHtml(entry?.title ?? 'Not found')} &middot; Validation Rules</title><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/validation-rules-mark.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/validation-rules-icon-180.png"><link rel="manifest" href="/site.webmanifest"><link rel="preload" href="/platform-shell.css" as="style"><link rel="stylesheet" href="/platform-shell.css"><link rel="stylesheet" href="/platform-theme.css"><link rel="stylesheet" href="/styles.css"><script src="/platform-config.js?v=${assetVersion}"></script><script src="/platform-shell.js?v=${assetVersion}"></script><script src="/search.js?v=${assetVersion}" defer></script></head>
-  <body><validation-platform-shell active-application="documentation" application-name="Documentation" version="${escapeHtml(workspacePackage.version ?? '0.0.0')}" portal-url="${portalUrl}" docs-url="${docsUrl}" angular-url="${angularDemoUrl}" react-url="${reactDemoUrl}">
+  <body><validation-platform-shell active-application="documentation" application-name="Documentation" version="${escapeHtml(workspacePackage.version ?? '0.0.0')}" portal-url="${portalUrl}" docs-url="${docsUrl}" angular-url="${angularShowcaseUrl}" react-url="${reactShowcaseUrl}">
   <div class="docs-layout"><aside><div class="docs-search"><label for="docs-search">Search documentation</label><div class="docs-search-control"><input id="docs-search" type="search" placeholder="Search docs..." autocomplete="off" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false"><button id="docs-search-clear" class="docs-search-clear" type="button" aria-label="Clear documentation search" title="Clear search" hidden>&times;</button></div><div id="docs-search-results" class="search-results" role="listbox" hidden></div></div><div class="docs-navigation">${groupedNavigation}</div></aside>
   <main><div class="vr-breadcrumb"><a href="${portalUrl}">Home</a><span>/</span><a href="/docs/overview">Documentation</a><span>/</span><span>${escapeHtml(entry?.section ?? 'Documentation')}</span></div><article id="docs-content">${content}</article>
-  ${entry ? `<section class="live-example"><p>Continue in the live platform</p>${demoLinks}</section>` : ''}
+  ${entry ? `<section class="live-example"><p>Continue in the live platform</p>${showcaseLinks}</section>` : ''}
   <nav class="pager" aria-label="Documentation pages">${previous ? `<a href="/docs/${previous.slug}"><small>Previous</small><strong>&larr; ${escapeHtml(previous.title)}</strong></a>` : '<span></span>'}${next ? `<a class="next" href="/docs/${next.slug}"><small>Next</small><strong>${escapeHtml(next.title)} &rarr;</strong></a>` : ''}</nav></main>
-  <aside class="on-page"><strong>On this page</strong><p>${escapeHtml(entry?.summary ?? '')}</p><a href="${portalUrl}">Back to Demo Portal &rarr;</a><a href="${portalUrl}/reports/index.html">Test reports &rarr;</a></aside></div>
+  <aside class="on-page"><strong>On this page</strong><p>${escapeHtml(entry?.summary ?? '')}</p><a href="${portalUrl}">Back to Portal &rarr;</a><a href="${portalUrl}/reports/index.html">Test reports &rarr;</a></aside></div>
   </validation-platform-shell></body></html>`;
 }
 
@@ -150,22 +150,27 @@ function renderNavigationLink(item: DocumentationEntry, activeEntry: Documentati
   return `<a data-search="${escapeHtml(`${item.title} ${item.summary}`.toLowerCase())}" class="${active ? 'active' : ''}"${active ? ' aria-current="page"' : ''} href="/docs/${item.slug}">${escapeHtml(item.title)}</a>`;
 }
 
-function configuredPort(name: string, fallback: number): number {
-  const value = Number.parseInt(process.env[name] ?? '', 10);
+function configuredValue(names: string | string[]): string | undefined {
+  const candidates = Array.isArray(names) ? names : [names];
+  return candidates.map((name) => process.env[name]).find((value): value is string => Boolean(value));
+}
+
+function configuredPort(names: string | string[], fallback: number): number {
+  const value = Number.parseInt(configuredValue(names) ?? '', 10);
   return Number.isFinite(value) && value > 0 ? value : fallback;
 }
 
-function configuredBaseUrl(name: string, fallback: string): string {
-  return (process.env[name] ?? fallback).replace(/\/$/, '');
+function configuredBaseUrl(names: string | string[], fallback: string): string {
+  return (configuredValue(names) ?? fallback).replace(/\/$/, '');
 }
 
 function rewriteConfiguredLinks(html: string): string {
   return html
     .replaceAll('http://127.0.0.1:4200', portalUrl)
     .replaceAll('http://127.0.0.1:4201', docsUrl)
-    .replaceAll('http://127.0.0.1:4202', angularDemoUrl)
-    .replaceAll('http://127.0.0.1:4203', angularDemoUrl)
-    .replaceAll('http://127.0.0.1:4204', reactDemoUrl);
+    .replaceAll('http://127.0.0.1:4202', angularShowcaseUrl)
+    .replaceAll('http://127.0.0.1:4203', angularShowcaseUrl)
+    .replaceAll('http://127.0.0.1:4204', reactShowcaseUrl);
 }
 
 function sendJson(response: ServerResponse, status: number, value: unknown): void {
@@ -183,8 +188,8 @@ function platformConfigScript(): string {
     urls: {
       portal: portalUrl,
       docs: docsUrl,
-      angular: angularDemoUrl,
-      react: reactDemoUrl
+      angular: angularShowcaseUrl,
+      react: reactShowcaseUrl
     }
   })};`;
 }

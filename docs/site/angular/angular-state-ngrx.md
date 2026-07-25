@@ -14,9 +14,9 @@ Choose NgRx when explicit events and reducer tests are more important than minim
 
 ## Integration pattern
 
-The unified Angular demo stores the form snapshot through NgRx actions and reducers while `@validation-rules/angular` evaluates the same model paths used by every other Angular state demo.
+The unified Angular showcase stores the form snapshot through NgRx actions and reducers while `@validation-rules/angular` evaluates the same model paths used by every other Angular state showcase.
 
-## Demo pages
+## Showcase pages
 
 - [Overview](http://127.0.0.1:4202/state/ngrx)
 - [Simple Form](http://127.0.0.1:4202/state/ngrx/simple)
@@ -153,12 +153,12 @@ export const selectProfileErrors = createSelector(selectProfileDraft, (draft) =>
 Read the draft with `async`, dispatch changes, and bind `policyValidator` to the selected model.
 
 ```html
-<ng-container *ngIf="draft$ | async as draft">
+@if (draft$ | async; as draft) {
   <input [ngModel]="draft.email" (ngModelChange)="change('email', $event)" policyValidator
     [validateModel]="'email'" [actualModel]="draft" [withPolicy]="'ProfileDraft'" groupName="profileDraftGroup" />
   <policy-validation-message [model]="draft" propertyName="email"></policy-validation-message>
   <policy-validation-summary [model]="draft"></policy-validation-summary>
-</ng-container>
+}
 ```
 
 ### Step 7 — Validate
@@ -252,14 +252,16 @@ export class NgrxProfileComponent implements OnInit, OnDestroy {
 ```
 
 ```html
-<form *ngIf="draft$ | async as draft" (ngSubmit)="submit(draft)" novalidate>
-  <label>Email <input type="email" [ngModel]="draft.email" name="email" (ngModelChange)="change('email', $event)" policyValidator
-    [validateModel]="'email'" [actualModel]="draft" [withPolicy]="'ProfileDraft'" groupName="profileDraftGroup" /></label>
-  <label><input type="checkbox" [ngModel]="draft.accepted" name="accepted" (ngModelChange)="change('accepted', $event)" policyValidator
-    [validateModel]="'accepted'" [actualModel]="draft" [withPolicy]="'ProfileDraft'" groupName="profileDraftGroup" /> Accept terms</label>
-  <policy-validation-group-status [model]="draft" groupName="profileDraftGroup"></policy-validation-group-status>
-  <policy-validation-summary [model]="draft"></policy-validation-summary>
-  <button type="submit">Save</button>
-  <button type="button" (click)="reset(draft)">Reset</button>
-</form>
+@if (draft$ | async; as draft) {
+  <form (ngSubmit)="submit(draft)" novalidate>
+    <label>Email <input type="email" [ngModel]="draft.email" name="email" (ngModelChange)="change('email', $event)" policyValidator
+      [validateModel]="'email'" [actualModel]="draft" [withPolicy]="'ProfileDraft'" groupName="profileDraftGroup" /></label>
+    <label><input type="checkbox" [ngModel]="draft.accepted" name="accepted" (ngModelChange)="change('accepted', $event)" policyValidator
+      [validateModel]="'accepted'" [actualModel]="draft" [withPolicy]="'ProfileDraft'" groupName="profileDraftGroup" /> Accept terms</label>
+    <policy-validation-group-status [model]="draft" groupName="profileDraftGroup"></policy-validation-group-status>
+    <policy-validation-summary [model]="draft"></policy-validation-summary>
+    <button type="submit">Save</button>
+    <button type="button" (click)="reset(draft)">Reset</button>
+  </form>
+}
 ```

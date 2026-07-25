@@ -2,9 +2,9 @@
 
 ## Overview
 
-The Context API demo uses only React's built-in provider, consumer hook, and reducer to share a form model across a subtree.
+The Context API showcase uses only React's built-in provider, consumer hook, and reducer to share a form model across a subtree.
 
-[Open Live Demo](http://127.0.0.1:4204/state/context)
+[Open Live Showcase](http://127.0.0.1:4204/state/context)
 
 ## Using @validation-rules/react
 
@@ -339,4 +339,4 @@ const [state, dispatch] = useReducer(reducer, { model: initialModel, revision: 0
 </FormContext.Provider>
 ```
 
-[Open Live Demo](http://127.0.0.1:4204/state/context)
+[Open Live Showcase](http://127.0.0.1:4204/state/context)

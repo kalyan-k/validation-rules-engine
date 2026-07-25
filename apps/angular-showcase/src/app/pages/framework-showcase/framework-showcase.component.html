@@ -1,0 +1,83 @@
+@if (frameworkMeta; as meta) {
+<div class="showcase-page framework-showcase-page">
+  <div class="vr-breadcrumb"><a [href]="portalUrl">Home</a><span>/</span><span>Angular Showcase</span><span>/</span><span>{{ meta.label }}</span></div>
+  <header class="vr-page-heading">
+    <div><p class="vr-eyebrow">UI framework showcase</p><h1>{{ meta.label }} Showcase</h1>
+    <p>{{ meta.description }}</p>
+    <p class="strategy-note">
+      Display strategy: <code>{{ meta.strategy }}</code>
+    </p></div>
+  </header>
+
+  <ul class="showcase-tabs" role="tablist">
+    @for (tab of tabs; track tab.id) {
+      <li>
+        <button
+          type="button"
+          class="showcase-tab"
+          role="tab"
+          [class.active]="activeTab === tab.id"
+          [attr.aria-selected]="activeTab === tab.id"
+          (click)="setTab(tab.id)"
+        >
+          {{ tab.label }}
+        </button>
+      </li>
+    }
+  </ul>
+
+  @for (tab of tabs; track tab.id) {
+    <p class="tab-description">
+      @if (activeTab === tab.id) {
+        {{ tab.description }}
+      }
+    </p>
+  }
+
+  <div class="showcase-tab-panel">
+    @switch (framework) {
+      @case ('bootstrap') {
+        @switch (activeTab) {
+          @case ('sample') {
+            <app-sample-form></app-sample-form>
+          }
+          @case ('complex') {
+            <app-complex-form></app-complex-form>
+          }
+          @case ('performance') {
+            <app-performance-form [uiFramework]="framework"></app-performance-form>
+          }
+        }
+      }
+
+      @case ('material') {
+        @switch (activeTab) {
+          @case ('sample') {
+            <app-sample-form-material></app-sample-form-material>
+          }
+          @case ('complex') {
+            <app-complex-form-material></app-complex-form-material>
+          }
+          @case ('performance') {
+            <app-performance-form [uiFramework]="framework"></app-performance-form>
+          }
+        }
+      }
+
+      @case ('tailwind') {
+        @switch (activeTab) {
+          @case ('sample') {
+            <app-sample-form-tailwind></app-sample-form-tailwind>
+          }
+          @case ('complex') {
+            <app-complex-form-tailwind></app-complex-form-tailwind>
+          }
+          @case ('performance') {
+            <app-performance-form [uiFramework]="framework"></app-performance-form>
+          }
+        }
+      }
+    }
+  </div>
+</div>
+}

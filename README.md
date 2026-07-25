@@ -6,7 +6,7 @@
 
 Validation Rules is an extendable monorepo for policy-driven model and form validation. It separates a framework-independent rules engine from framework adapters, so validation behavior can stay reusable and testable while each UI integration owns its lifecycle and rendering concerns.
 
-The repository ships a core engine plus production Angular and React adapters inside a multi-application developer platform. A framework-neutral portal launches the documentation site, Angular demos, and a hooks-first React demo from one command.
+The repository ships a core engine plus production Angular and React adapters inside a multi-application developer platform. A framework-neutral portal launches the documentation site, Angular showcases, and a hooks-first React showcase from one command.
 
 ## Key features
 
@@ -18,10 +18,10 @@ The repository ships a core engine plus production Angular and React adapters in
 - Form-group and multi-policy-group validation status
 - Field, group, policy-group, and page-level error summaries
 - Bootstrap, Angular Material, Tailwind-friendly, generic, automatic, and custom display strategies
-- One-command demo platform with application health monitoring and automatic browser launch
+- One-command portal with application health monitoring and automatic browser launch
 - Instant documentation search across titles, headings, prose, and code with section deep links
-- Independent tests, 90% coverage gates, and browsable reports for every package and demo project
-- Enforced dependency direction from Angular/React demos to their adapters to core
+- Independent tests, 90% coverage gates, and browsable reports for every package and showcase project
+- Enforced dependency direction from Angular/React showcases to their adapters to core
 
 ## Why Validation Rules?
 
@@ -32,17 +32,17 @@ This separation makes rules easier to reuse, test, review, and evolve without ty
 ## Architecture
 
 ```text
-apps/demo (launcher) ----URLs----> apps/docs
-         |                         apps/angular-demo
-         |                         apps/react-demo
+apps/portal (launcher) ----URLs----> apps/docs
+         |                         apps/angular-showcase
+         |                         apps/react-showcase
          |
          +---- application registry and health status
 
-Angular demo --> @validation-rules/angular --> @validation-rules/core
-React demo ----> @validation-rules/react -----> @validation-rules/core
+Angular showcase --> @validation-rules/angular --> @validation-rules/core
+React showcase ----> @validation-rules/react -----> @validation-rules/core
 ```
 
-Dependencies flow in one direction. Each private demo consumes its framework adapter, each adapter consumes the core public entry point, and core has no Angular or React dependency. `npm run architecture:verify` enforces these boundaries and rejects speculative Vue placeholders.
+Dependencies flow in one direction. Each private showcase consumes its framework adapter, each adapter consumes the core public entry point, and core has no Angular or React dependency. `npm run architecture:verify` enforces these boundaries and rejects speculative Vue placeholders.
 
 See [Architecture](docs/architecture.md) for ownership decisions and extension guidance.
 
@@ -51,10 +51,10 @@ See [Architecture](docs/architecture.md) for ownership decisions and extension g
 ```text
 validation-rules/
 |-- apps/
-|   |-- demo/                  # framework-neutral portal, launcher, and health dashboard
+|   |-- portal/                # framework-neutral launcher, health dashboard, and report gateway
 |   |-- docs/                  # Markdown-backed documentation website
-|   |-- angular-demo/          # Angular UI framework and state-management demos
-|   `-- react-demo/            # hooks-first controlled React forms
+|   |-- angular-showcase/      # Angular UI framework and state-management showcases
+|   `-- react-showcase/        # hooks-first controlled React forms
 |-- packages/
 |   |-- angular/               # @validation-rules/angular and Angular CLI workspace
 |   |-- core/                  # @validation-rules/core and core Karma config
@@ -200,37 +200,37 @@ Form groups aggregate field status for one portion of a view. Policy groups aggr
 | `packages/core` | `@validation-rules/core` | Framework-neutral contracts, rules, validators, results, and model-state utilities |
 | `packages/angular` | `@validation-rules/angular` | Angular policy execution, forms integration, directives, services, components, and display strategies |
 | `packages/react` | `@validation-rules/react` | React validation engine, provider, hooks, controlled-field helpers, and accessible messages |
-| `apps/angular-demo` | private | Browser demo, Angular UI framework examples, and Angular state-management integrations |
-| `apps/react-demo` | private | Home, simple, complex, and performance React examples |
+| `apps/angular-showcase` | private | Browser showcase, Angular UI framework examples, and Angular state-management integrations |
+| `apps/react-showcase` | private | Home, simple, complex, and performance React examples |
 | `apps/docs` | private | Search-ready Markdown documentation server and site shell |
-| `apps/demo` | private | Application launcher, status API, report gateway, and product dashboard |
+| `apps/portal` | private | Application launcher, status API, report gateway, and product dashboard |
 
-Build artifacts are written beneath `dist/`, with publishable packages in `dist/packages/*`, browser demos in `dist/demos/*`, and Node platform applications in `dist/apps/*`.
+Build artifacts are written beneath `dist/`, with publishable packages in `dist/packages/*`, browser showcases in `dist/showcases/*`, and Node platform applications in `dist/apps/*`.
 
-## Demo and documentation platform
+## Portal and showcase platform
 
 Start the complete local experience with one command:
 
 ```bash
-npm run demo
+npm start
 ```
 
-The command builds the packages and Node applications, starts the portal at `http://127.0.0.1:4200`, documentation at `4201`, the Angular demo at `4202`, and React at `4204`, then opens the portal in the default browser. The portal polls every registered application and shows startup, healthy, or failed state without coupling their runtimes.
+The command builds the packages and Node applications, starts the portal at `http://127.0.0.1:4200`, documentation at `4201`, the Angular showcase at `4202`, and React at `4204`, then opens the portal in the default browser. The portal polls every registered application and shows startup, healthy, or failed state without coupling their runtimes.
 
-Deployment URLs are runtime configurable. Set `VALIDATION_RULES_PORTAL_URL`, `VALIDATION_RULES_DOCS_URL`, `VALIDATION_RULES_ANGULAR_DEMO_URL`, and `VALIDATION_RULES_REACT_DEMO_URL` for the Node portal/docs servers. Static Angular and React demo deployments can replace the copied `platform-config.js` with `globalThis.validationRulesPlatformConfig = { urls: { portal, docs, angular, react } };`.
+Deployment URLs are runtime configurable. Set `VALIDATION_RULES_PORTAL_URL`, `VALIDATION_RULES_DOCS_URL`, `VALIDATION_RULES_ANGULAR_SHOWCASE_URL`, and `VALIDATION_RULES_REACT_SHOWCASE_URL` for the Node portal/docs servers. Static Angular and React showcase deployments can replace the copied `platform-config.js` with `globalThis.validationRulesPlatformConfig = { urls: { portal, docs, angular, react } };`.
 
-The application registry in `apps/demo/src/applications.ts` is the single place to add a future demo. Each application remains independently runnable and communicates through stable local URLs.
+The application registry in `apps/portal/src/applications.ts` is the single place to add a future showcase application. Each application remains independently runnable and communicates through stable local URLs.
 
-All browser applications use the framework-neutral shell in `tools/platform-shell`. It provides one product identity, a compact Home / Docs / Demos / Reports / GitHub navigation, footer, page width, spacing system, breadcrumbs, action bars, cards, responsive breakpoints, and shared logo/icon assets while leaving each application's framework-specific components intact. The shell stylesheet is preloaded and the custom element is defined before application scripts to avoid navigation flicker.
+All browser applications use the framework-neutral shell in `tools/platform-shell`. It provides one product identity, a compact Home / Docs / Showcases / Reports / GitHub navigation, footer, page width, spacing system, breadcrumbs, action bars, cards, responsive breakpoints, and shared logo/icon assets while leaving each application's framework-specific components intact. The shell stylesheet is preloaded and the custom element is defined before application scripts to avoid navigation flicker.
 
-Documentation search is performed from a browser-cached index and returns highlighted title, heading, prose, and code matches with direct section links and full keyboard navigation. Generated reports use the exact shared application shell: collapsible Packages and Demo Applications groups plus Summary / Tests / Coverage tabs update one workspace, while the original Istanbul output remains unchanged.
+Documentation search is performed from a browser-cached index and returns highlighted title, heading, prose, and code matches with direct section links and full keyboard navigation. Generated reports use the exact shared application shell: collapsible Packages and Showcase Applications groups plus Summary / Tests / Coverage tabs update one workspace, while the original Istanbul output remains unchanged.
 
 ## Roadmap
 
 - Continue strengthening the framework-neutral engine and adapter contract
 - Evaluate a parser abstraction that could move expression execution out of Angular without changing behavior
 - Improve package release coordination and consumer migration tooling after package names are approved
-- Add Vue or other adapters only with complete implementations, tests, documentation, and real consumer demos
+- Add Vue or other adapters only with complete implementations, tests, documentation, and real consumer showcases
 
 React is implemented and verified; no Vue or other framework placeholder exists in this repository.
 
@@ -247,13 +247,13 @@ npm run build:all
 
 | Command | Purpose |
 | --- | --- |
-| `npm start` / `npm run demo` | Launch the portal, docs, Angular demo, and React demo |
-| `npm run serve:demo` | Build packages and serve only the Angular demo |
+| `npm start` / `npm run portal` | Launch the portal, docs, Angular showcase, and React showcase |
+| `npm run serve:angular-showcase` | Serve only the Angular showcase |
 | `npm run serve:docs` | Build and serve only the documentation site |
 | `npm run build` | Build core plus Angular and React adapters in dependency order |
-| `npm run build:all` | Build packages, both Node applications, and both demos |
-| `npm run build:demo` | Build the Angular demo and its package dependencies |
-| `npm run build:react` / `npm run build:react-demo` | Build the React package or demo and dependencies |
+| `npm run build:all` | Build packages, both Node applications, and both showcases |
+| `npm run build:angular-showcase` | Build the Angular showcase and its package dependencies |
+| `npm run build:react` / `npm run build:react-showcase` | Build the React package or showcase and dependencies |
 | `npm test` | Run Node, Angular/Karma, and React/Vitest suites |
 | `npm run test:coverage` | Run all tests and independent 90% coverage gates |
 | `npm run test:reports` | Generate and verify browsable reports for every project |
@@ -274,7 +274,7 @@ npm run build:all
 npm run lint:all
 ```
 
-Add behavior-focused tests with production changes, do not exclude executable code to raise coverage, and do not scaffold future-framework packages without an implementation. The root and demo packages are private. CI validates the repository but does not publish packages.
+Add behavior-focused tests with production changes, do not exclude executable code to raise coverage, and do not scaffold future-framework packages without an implementation. The root and showcase packages are private. CI validates the repository but does not publish packages.
 
 ## License
 

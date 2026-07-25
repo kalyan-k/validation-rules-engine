@@ -42,4 +42,4 @@ Render the harness in `<StrictMode>`, validate, unmount, and assert policy owner
 
 ## Coverage
 
-The workspace enforces independent 90% statement, branch, function, and line thresholds for the React package and React demo. HTML, JSON summary, LCOV, and JUnit output are generated under `reports/react` and `reports/react-demo`.
+The workspace enforces independent 90% statement, branch, function, and line thresholds for the React package and React showcase. HTML, JSON summary, LCOV, and JUnit output are generated under `reports/packages/react` and `reports/showcases/react`.

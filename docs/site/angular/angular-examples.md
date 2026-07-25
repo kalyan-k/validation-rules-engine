@@ -26,6 +26,6 @@ generate(fields: FieldDefinition[]): void {
 
 Wrap your design-system input with `ControlValueAccessor`, then apply `policyValidator` where the value is bound.
 
-## Live demos
+## Live showcases
 
-[Angular Demo](http://127.0.0.1:4202/) compares Bootstrap, Material, Tailwind-compatible display, and Angular state management workflows including NgRx, NGXS, Akita, Elf, RxAngular State, Signals, and a custom RxJS store.
+[Angular Showcase](http://127.0.0.1:4202/) compares Bootstrap, Material, Tailwind-compatible display, and Angular state management workflows including NgRx, NGXS, Akita, Elf, RxAngular State, Signals, and a custom RxJS store.

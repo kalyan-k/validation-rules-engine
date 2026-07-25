@@ -25,11 +25,11 @@ validate(): void {
 }
 ```
 
-## Live demo
+## Live showcase
 
-The unified Angular demo shows Reactive Forms with the same Overview, Simple Form, Complex Form, and Performance Form structure used by every Angular state strategy.
+The unified Angular showcase shows Reactive Forms with the same Overview, Simple Form, Complex Form, and Performance Form structure used by every Angular state strategy.
 
-[Open Reactive Forms state demo](http://127.0.0.1:4202/state/reactive-forms)
+[Open Reactive Forms state showcase](http://127.0.0.1:4202/state/reactive-forms)
 
 ## Using @validation-rules/angular
 

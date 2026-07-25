@@ -1,0 +1,39 @@
+.vr-showcase-nav__state
+  gap: .45rem
+
+.vr-showcase-nav__strategy
+  border-radius: .5rem
+
+.vr-showcase-nav__subchildren
+  display: grid
+  gap: 1px
+  margin: .1rem 0 .45rem 1rem
+  padding-left: .55rem
+  border-left: 1px solid rgba(255, 255, 255, .12)
+
+.vr-showcase-nav__subchildren.vr-showcase-nav__flyout-menu
+  display: none
+  margin: 0
+  padding: .45rem
+  border-left: 0
+
+.vr-showcase-nav__flyout:hover > .vr-showcase-nav__subchildren.vr-showcase-nav__flyout-menu,
+.vr-showcase-nav__flyout:focus-within > .vr-showcase-nav__subchildren.vr-showcase-nav__flyout-menu
+  display: grid
+
+.vr-showcase-nav__sublink
+  min-height: 30px
+  padding-bottom: .35rem
+  padding-top: .35rem
+  font-size: .7rem
+
+@media (max-width: 760px)
+  .vr-showcase-nav__subchildren.vr-showcase-nav__flyout-menu
+    display: none
+    margin: .12rem 0 .35rem .55rem
+    padding-left: .45rem
+    border-left: 1px solid rgba(255, 255, 255, .12)
+
+  .vr-showcase-nav__flyout:hover > .vr-showcase-nav__subchildren.vr-showcase-nav__flyout-menu,
+  .vr-showcase-nav__flyout:focus-within > .vr-showcase-nav__subchildren.vr-showcase-nav__flyout-menu
+    display: grid

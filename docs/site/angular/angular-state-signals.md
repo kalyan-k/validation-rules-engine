@@ -14,9 +14,9 @@ Choose Signals when local or shared state should be simple, synchronous, and fin
 
 ## Integration pattern
 
-The unified Angular demo keeps the same policies and page layout while the Signals route commits model changes through Angular signal state.
+The unified Angular showcase keeps the same policies and page layout while the Signals route commits model changes through Angular signal state.
 
-## Demo pages
+## Showcase pages
 
 - [Overview](http://127.0.0.1:4202/state/signals)
 - [Simple Form](http://127.0.0.1:4202/state/signals/simple)

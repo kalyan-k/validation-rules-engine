@@ -95,6 +95,17 @@ function countStatuses(specs) {
   };
 }
 
+function defaultReportOutputDir(workspaceRoot, projectName) {
+  const reportPaths = {
+    core: ['packages', 'core'],
+    angular: ['packages', 'angular'],
+    react: ['packages', 'react'],
+    'angular-showcase': ['showcases', 'angular'],
+    'react-showcase': ['showcases', 'react']
+  };
+  return path.join(workspaceRoot, 'reports', ...(reportPaths[projectName] || [projectName]));
+}
+
 function renderSpec(spec) {
   const sources = spec.sourceFiles.length > 0
     ? spec.sourceFiles.map((file) => `<code>${escapeHtml(file)}</code>`).join(', ')
@@ -116,6 +127,8 @@ function renderSpec(spec) {
 }
 
 function renderHtml(report) {
+  const dashboardHref = report.dashboardHref || '../../index.html';
+  const summaryHref = report.summaryHref || `${dashboardHref}#${report.projectName}/summary`;
   const groups = groupSpecs(report.specs);
   const navigation = groups.map(([name, specs], index) => {
     const counts = countStatuses(specs);
@@ -193,12 +206,12 @@ function renderHtml(report) {
     reportType: 'Test execution report',
     generatedAt: report.finishedAt,
     version: report.version || 'unknown',
-    dashboardHref: '../../index.html',
+    dashboardHref,
     coverageHref: '../coverage.html'
   })}
   ${reportBranding.renderReportSubnavigation({
-    dashboardHref: '../../index.html',
-    summaryHref: '../../index.html#' + report.projectName + '/summary',
+    dashboardHref,
+    summaryHref,
     testsHref: './index.html',
     coverageHref: '../coverage.html',
     junitHref: '../junit/test-results.xml'
@@ -281,12 +294,14 @@ function PersistentTestResultsReporter(baseReporterDecorator, config, logger) {
     core: 'Core Engine',
     angular: 'Angular Adapter',
     react: 'React Adapter',
-    'angular-demo': 'Angular Demo',
-    'react-demo': 'React Demo'
+    'angular-showcase': 'Angular Showcase',
+    'react-showcase': 'React Showcase'
   };
   const displayName = displayNames[projectName] || projectName;
-  const outputDir = options.outputDir || path.join(config.basePath, 'reports', projectName);
   const workspaceRoot = config.basePath || process.cwd();
+  const outputDir = options.outputDir || defaultReportOutputDir(workspaceRoot, projectName);
+  const dashboardHref = options.dashboardHref || '../../index.html';
+  const summaryHref = options.summaryHref || `${dashboardHref}#${projectName}/summary`;
   let workspaceVersion = 'unknown';
   try {
     workspaceVersion = JSON.parse(fs.readFileSync(path.join(workspaceRoot, 'package.json'), 'utf8')).version || workspaceVersion;
@@ -333,6 +348,8 @@ function PersistentTestResultsReporter(baseReporterDecorator, config, logger) {
         summary: countStatuses(specs),
         browsers: [...browserNames],
         runError: Boolean(results.error || results.disconnected),
+        dashboardHref,
+        summaryHref,
         specs
       };
       const testsDir = path.join(outputDir, 'tests');

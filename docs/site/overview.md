@@ -21,10 +21,10 @@ The repository contains three publishable packages and several private applicati
 - `@validation-rules/core` owns contracts, rules, validators, metadata, and result shapes.
 - `@validation-rules/angular` owns Angular policy execution, forms integration, directives, components, and display strategies.
 - `@validation-rules/react` owns React provider scope, hooks, controlled-field helpers, lifecycle-safe policy registration, and accessible messages.
-- The Demo Portal launches documentation and every complete demo application.
-- The Angular demo covers ngModel, Reactive Forms, NgRx, NGXS, Akita, Elf, RxAngular State, Signals, custom RxJS store workflows, and multiple UI strategies.
-- The React demo covers Local State, Redux Toolkit, Zustand, Jotai, Recoil, MobX, Context API, and generated performance forms.
+- The Portal launches documentation and every complete showcase application.
+- The Angular showcase covers ngModel, Reactive Forms, NgRx, NGXS, Akita, Elf, RxAngular State, Signals, custom RxJS store workflows, and multiple UI strategies.
+- The React showcase covers Local State, Redux Toolkit, Zustand, Jotai, Recoil, MobX, Context API, and generated performance forms.
 
 ## Where to go next
 
-Start with [Installation & Quick Start](/docs/getting-started), then read [Policies & Rules](/docs/policies-and-rules). Use the live demos whenever you want to see a concept in a running application.
+Start with [Installation & Quick Start](/docs/getting-started), then read [Policies & Rules](/docs/policies-and-rules). Use the live showcases whenever you want to see a concept in a running application.

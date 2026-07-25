@@ -7,17 +7,38 @@ const persistentTestResultsReporter = require('./persistent-test-results-reporte
 applyKarmaGlobCompatibility();
 
 const workspaceRoot = path.resolve(__dirname, '..', '..');
+const reportsRoot = path.join(workspaceRoot, 'reports');
+const reportPaths = {
+  core: ['packages', 'core'],
+  angular: ['packages', 'angular'],
+  'angular-showcase': ['showcases', 'angular']
+};
+
+function reportPath(projectName) {
+  const segments = reportPaths[projectName];
+  if (!segments) {
+    throw new Error(`Unknown Karma report project: ${projectName}`);
+  }
+  return path.join(reportsRoot, ...segments);
+}
+
+function href(fromDirectory, toFile) {
+  const relativePath = path.relative(fromDirectory, toFile).replaceAll('\\', '/');
+  return relativePath.startsWith('.') ? relativePath : `./${relativePath}`;
+}
 
 function configureKarma(config, projectName) {
   const sourceRoots = {
     core: path.join(workspaceRoot, 'packages', 'core'),
     angular: path.join(workspaceRoot, 'packages', 'angular'),
-    'angular-demo': path.join(workspaceRoot, 'apps', 'angular-demo')
+    'angular-showcase': path.join(workspaceRoot, 'apps', 'angular-showcase')
   };
   const sourceRoot = sourceRoots[projectName];
   if (!sourceRoot) {
     throw new Error(`Unknown Karma project: ${projectName}`);
   }
+  const outputDir = reportPath(projectName);
+  const dashboardHref = href(path.join(outputDir, 'tests'), path.join(reportsRoot, 'index.html'));
 
   config.set({
     basePath: workspaceRoot,
@@ -42,11 +63,13 @@ function configureKarma(config, projectName) {
     },
     persistentTestResultsReporter: {
       projectName,
-      outputDir: path.join(workspaceRoot, 'reports', projectName),
+      outputDir,
+      dashboardHref,
+      summaryHref: `${dashboardHref}#${projectName}/summary`,
       sourceRoot
     },
     coverageReporter: {
-      dir: path.join(workspaceRoot, 'reports', projectName, 'coverage'),
+      dir: path.join(outputDir, 'coverage'),
       subdir: '.',
       fixWebpackSourcePaths: true,
       reporters: [

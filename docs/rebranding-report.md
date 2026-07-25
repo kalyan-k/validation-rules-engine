@@ -2,7 +2,7 @@
 
 ## Scope
 
-This milestone aligns the monorepo, npm packages, build artifacts, reports, CI labels, demo copy, and documentation under the Validation Rules identity. It preserves application behavior, Angular APIs, validation logic, selectors, styling hooks, and consumer-facing runtime contracts.
+This milestone aligns the monorepo, npm packages, build artifacts, reports, CI labels, showcase copy, and documentation under the Validation Rules identity. It preserves application behavior, Angular APIs, validation logic, selectors, styling hooks, and consumer-facing runtime contracts.
 
 No packages were published, and no tags or releases were created.
 
@@ -16,12 +16,12 @@ No packages were published, and no tags or releases were created.
 | npm scope | `@validation-rules` |
 | Core package | `@validation-rules/core` |
 | Angular package | `@validation-rules/angular` |
-| Demo workspace | `@validation-rules/angular-demo` (private) |
+| Showcase workspace | `@validation-rules/angular-showcase` (private) |
 
 ## Architecture
 
 ```text
-apps/angular-demo
+apps/angular-showcase
         |
         v
 @validation-rules/angular
@@ -30,7 +30,7 @@ apps/angular-demo
 @validation-rules/core
 ```
 
-The existing package ownership and one-way dependency model are unchanged. Core remains framework-independent, Angular owns integration and expression execution, and the demo consumes the Angular public API. The architecture verifier was updated to enforce the final package identities.
+The existing package ownership and one-way dependency model are unchanged. Core remains framework-independent, Angular owns integration and expression execution, and the showcase consumes the Angular public API. The architecture verifier was updated to enforce the final package identities.
 
 ## Final repository tree
 
@@ -39,7 +39,7 @@ validation-rules/
 |-- .github/
 |   `-- workflows/test.yml
 |-- apps/
-|   `-- angular-demo/
+|   `-- angular-showcase/
 |       |-- src/app/
 |       |-- karma.conf.cjs
 |       |-- package.json
@@ -86,7 +86,7 @@ Changing these identifiers would be a functional, consumer-visible breaking chan
 - Updated package metadata and repository URLs for the intended `validation-rules` repository.
 - Updated the local Git `origin` URL without fetching, pushing, or changing the hosted repository.
 - Renamed core and Angular package output folders under `dist/packages/core` and `dist/packages/angular`.
-- Updated the demo stylesheet input, package dry-run path, and publication path to the new Angular artifact location.
+- Updated the showcase stylesheet input, package dry-run path, and publication path to the new Angular artifact location.
 - Regenerated npm workspace links and `package-lock.json`.
 - Updated report dashboard branding, safe-clean workspace identity, CI artifact names, and architecture checks.
 
@@ -95,7 +95,7 @@ Changing these identifiers would be a functional, consumer-visible breaking chan
 - Rebuilt the root README around the product, architecture, installation, usage, policies, rules, groups, packages, roadmap, development, contribution, and licensing.
 - Updated package READMEs with focused installation, examples, APIs, and compatibility guidance.
 - Updated architecture and testing guides for the final package identities, artifacts, reports, and CI labels.
-- Updated visible demo product copy without changing its forms, routes, selectors, or behavior.
+- Updated visible showcase product copy without changing its forms, routes, selectors, or behavior.
 - Replaced the earlier repository migration record with this current rebranding and alignment report.
 
 ## Change inventory
@@ -159,32 +159,32 @@ packages/angular/src/lib/strategies/tailwind-validation-display.strategy.ts
 packages/angular/src/lib/strategies/validation-display-strategies.spec.ts
 ```
 
-Angular demo files modified for package imports or visible product copy:
+Angular showcase files modified for package imports or visible product copy:
 
 ```text
-apps/angular-demo/package.json
-apps/angular-demo/src/app/app.integration.spec.ts
-apps/angular-demo/src/app/app.module.ts
-apps/angular-demo/src/app/application-behavior.spec.ts
-apps/angular-demo/src/app/validation.providers.ts
-apps/angular-demo/src/app/demo/demo-framework.providers.ts
-apps/angular-demo/src/app/layout/demo-shell.component.html
-apps/angular-demo/src/app/pages/home/home.component.html
-apps/angular-demo/src/app/components/complex-form/complex-form-material.component.ts
-apps/angular-demo/src/app/components/complex-form/complex-form-tailwind.component.ts
-apps/angular-demo/src/app/components/complex-form/complex-form.component.ts
-apps/angular-demo/src/app/components/complex-form/complex-form.validation.policy.ts
-apps/angular-demo/src/app/components/performance-form/performance-components.spec.ts
-apps/angular-demo/src/app/components/performance-form/performance-form-builder.service.spec.ts
-apps/angular-demo/src/app/components/performance-form/performance-form-builder.service.ts
-apps/angular-demo/src/app/components/performance-form/performance-form-error-summary.component.ts
-apps/angular-demo/src/app/components/performance-form/performance-form-section.component.ts
-apps/angular-demo/src/app/components/performance-form/performance-form.component.ts
-apps/angular-demo/src/app/components/performance-form/performance-form.validation.policy.ts
-apps/angular-demo/src/app/components/sample-form/sample-form-material.component.ts
-apps/angular-demo/src/app/components/sample-form/sample-form-tailwind.component.ts
-apps/angular-demo/src/app/components/sample-form/sample-form.component.ts
-apps/angular-demo/src/app/components/sample-form/sample-form.validation.policy.ts
+apps/angular-showcase/package.json
+apps/angular-showcase/src/app/app.integration.spec.ts
+apps/angular-showcase/src/app/app.module.ts
+apps/angular-showcase/src/app/application-behavior.spec.ts
+apps/angular-showcase/src/app/validation.providers.ts
+apps/angular-showcase/src/app/showcase/showcase-framework.providers.ts
+apps/angular-showcase/src/app/layout/showcase-shell.component.html
+apps/angular-showcase/src/app/pages/home/home.component.html
+apps/angular-showcase/src/app/components/complex-form/complex-form-material.component.ts
+apps/angular-showcase/src/app/components/complex-form/complex-form-tailwind.component.ts
+apps/angular-showcase/src/app/components/complex-form/complex-form.component.ts
+apps/angular-showcase/src/app/components/complex-form/complex-form.validation.policy.ts
+apps/angular-showcase/src/app/components/performance-form/performance-components.spec.ts
+apps/angular-showcase/src/app/components/performance-form/performance-form-builder.service.spec.ts
+apps/angular-showcase/src/app/components/performance-form/performance-form-builder.service.ts
+apps/angular-showcase/src/app/components/performance-form/performance-form-error-summary.component.ts
+apps/angular-showcase/src/app/components/performance-form/performance-form-section.component.ts
+apps/angular-showcase/src/app/components/performance-form/performance-form.component.ts
+apps/angular-showcase/src/app/components/performance-form/performance-form.validation.policy.ts
+apps/angular-showcase/src/app/components/sample-form/sample-form-material.component.ts
+apps/angular-showcase/src/app/components/sample-form/sample-form-tailwind.component.ts
+apps/angular-showcase/src/app/components/sample-form/sample-form.component.ts
+apps/angular-showcase/src/app/components/sample-form/sample-form.validation.policy.ts
 ```
 
 Repository tools modified:
@@ -201,7 +201,7 @@ Local Git metadata modified outside the source tree:
 .git/config                 # origin URL only
 ```
 
-Two generated and ignored pre-rebrand package output directories were removed from `dist/`; only the final core, Angular, and demo artifact directories remain.
+Two generated and ignored pre-rebrand package output directories were removed from `dist/`; only the final core, Angular, and showcase artifact directories remain.
 
 The physical repository directory rename was attempted only after verifying the exact source, target, and workspace junction. Windows rejected it because the active Codex parent process holds the repository directory open. No partial move occurred and the existing junction was verified intact. The source-controlled repository has no obsolete repository-name references; the on-disk folder rename must be completed after this workspace closes.
 
@@ -210,11 +210,11 @@ The physical repository directory rename was attempted only after verifying the 
 | Check | Result |
 | --- | --- |
 | `npm install` | Passed; workspace links refreshed, 0 vulnerabilities |
-| scoped workspace dependency listing | Passed; demo to Angular to core links resolved locally |
+| scoped workspace dependency listing | Passed; showcase to Angular to core links resolved locally |
 | `npm run architecture:verify` | Passed |
 | `npm run build` | Passed; core and Angular artifacts use renamed destinations |
-| `npm run build:demo` | Passed; existing 1.75 MB warning remains below the 2 MB error budget |
-| `npm test` | Passed: core 16, Angular 91, demo 65 tests |
+| `npm run build:angular-showcase` | Passed; existing 1.75 MB warning remains below the 2 MB error budget |
+| `npm test` | Passed: core 16, Angular 91, showcase 65 tests |
 | `npm run test:coverage` | Passed all independent 90% gates |
 | `npm run test:reports` | Passed; dashboard generated and report structure/local navigation verified |
 | `npm run lint:all` | Passed all three projects |
@@ -227,19 +227,19 @@ Coverage from the final report run:
 | --- | ---: | ---: | ---: | ---: |
 | Core | 99.49% | 98.43% | 100% | 99.49% |
 | Angular | 97.14% | 90.32% | 99.63% | 97.09% |
-| Angular demo | 98.86% | 92.70% | 100% | 98.83% |
+| Angular showcase | 98.86% | 92.70% | 100% | 98.83% |
 
 Generated outputs:
 
 ```text
 dist/
-|-- angular-demo/
+|-- angular-showcase/
 |-- validation-rules-angular/
 `-- validation-rules-core/
 
 reports/
 |-- angular/
-|-- angular-demo/
+|-- angular-showcase/
 |-- core/
 `-- index.html
 ```
@@ -251,6 +251,6 @@ reports/
 - Plan a separately versioned migration only if compatibility selectors or stylesheet names ever need a new identity.
 - Extract an expression-evaluator abstraction before considering policy execution framework-neutral.
 - Add release coordination and publishing automation in a separate, explicitly approved milestone.
-- Add another framework adapter only when a complete implementation, demo, tests, and documentation are ready.
+- Add another framework adapter only when a complete implementation, showcase, tests, and documentation are ready.
 
 This milestone stops for human review before publishing, tagging, releasing, or adding speculative framework packages.

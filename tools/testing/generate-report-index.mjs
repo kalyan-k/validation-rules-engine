@@ -2,6 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {
   isDirectModule,
+  projectReportHref,
+  projectReportRoot,
   projects,
   reportsRoot,
   requiredProjectReports,
@@ -31,7 +33,7 @@ function metric(coverage, name) {
 }
 
 function projectData(projectName) {
-  const root = path.join(reportsRoot, projectName);
+  const root = projectReportRoot(projectName);
   const tests = readJson(path.join(root, 'tests', 'summary.json'));
   const coverage = readJson(path.join(root, 'coverage', 'coverage-summary.json'));
   const missing = requiredProjectReports(projectName).filter((file) => !fs.existsSync(file));
@@ -39,12 +41,13 @@ function projectData(projectName) {
 }
 
 function renderProject({ projectName, tests, coverage, missing }) {
+  const projectHref = projectReportHref(projectName);
   const titles = {
     core: 'Core Engine',
     angular: 'Angular Adapter',
     react: 'React Adapter',
-    'angular-demo': 'Angular Demo',
-    'react-demo': 'React Demo'
+    'angular-showcase': 'Angular Showcase',
+    'react-showcase': 'React Showcase'
   };
   const title = titles[projectName] || projectName;
   const summary = tests?.summary;
@@ -62,9 +65,9 @@ function renderProject({ projectName, tests, coverage, missing }) {
         <span class="project-status ${statusClass}">${escapeHtml(statusText)}</span>
       </div>
       <div class="report-links">
-        <a href="./${projectName}/tests/index.html"><strong>Test execution report</strong><span>Suites, cases, status, timing, and failure details</span></a>
-        <a href="./${projectName}/coverage/index.html"><strong>Code-coverage report</strong><span>Folders, source files, lines, and branch highlighting</span></a>
-        <a class="secondary" href="./${projectName}/junit/test-results.xml"><strong>JUnit XML</strong><span>CI-interoperable test results</span></a>
+        <a href="./${projectHref}/tests/index.html"><strong>Test execution report</strong><span>Suites, cases, status, timing, and failure details</span></a>
+        <a href="./${projectHref}/coverage/index.html"><strong>Code-coverage report</strong><span>Folders, source files, lines, and branch highlighting</span></a>
+        <a class="secondary" href="./${projectHref}/junit/test-results.xml"><strong>JUnit XML</strong><span>CI-interoperable test results</span></a>
       </div>
       <div class="metrics" aria-label="${escapeHtml(title)} test summary">
         <div><span>Tests</span><strong>${summary?.total ?? '—'}</strong></div>
@@ -122,7 +125,7 @@ function renderDashboard(data, generatedAt) {
   <header>
     <span class="eyebrow">Validation Rules monorepo</span>
     <h1>Test and code-coverage reports</h1>
-    <p>Independent reports for the core engine, Angular adapter, and both demonstration applications</p>
+    <p>Independent reports for the core engine, Angular adapter, and both showcase applications</p>
   </header>
   <main>${data.map(renderProject).join('\n')}</main>
   <footer>Generated ${escapeHtml(generatedAt)}</footer>

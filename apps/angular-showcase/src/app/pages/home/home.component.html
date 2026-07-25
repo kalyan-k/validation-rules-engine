@@ -1,0 +1,85 @@
+<div class="vr-showcase-home">
+  <div class="vr-breadcrumb"><a [href]="portalUrl">Home</a><span>/</span><span>Angular Showcase</span><span>/</span><span>Overview</span></div>
+  <header class="vr-showcase-home__header">
+    <p class="vr-eyebrow">Angular forms</p>
+    <h1>Validation Rules Showcase Application</h1>
+    <p class="lead">
+      Explore policy-based Angular form validation with pluggable error display strategies.
+      The same validation engine powers Bootstrap, Angular Material, and Tailwind CSS examples.
+    </p>
+  </header>
+
+  <section class="vr-showcase-home__grid">
+    <article class="vr-showcase-home__card">
+      <h2>What you can try</h2>
+      <ul>
+        @for (showcase of showcases; track showcase.label) {
+          <li>
+            <strong>{{ showcase.label }}</strong> - {{ showcase.description }}
+          </li>
+        }
+      </ul>
+    </article>
+
+    <article class="vr-showcase-home__card">
+      <h2>UI framework showcases</h2>
+      <p>Pick a framework from the left menu. Each showcase page includes tabs for all three form scenarios.</p>
+      <div class="vr-showcase-home__links">
+        @for (fw of frameworks; track fw.id) {
+          <a [routerLink]="['/showcases', fw.id]">
+            {{ fw.label }}
+          </a>
+        }
+      </div>
+    </article>
+
+    <article class="vr-showcase-home__card">
+      <h2>State management showcases</h2>
+      <p>Compare the same Overview, Simple Form, Complex Form, and Performance Form across Angular state strategies.</p>
+      <div class="vr-showcase-home__links">
+        @for (strategy of stateStrategies; track strategy.id) {
+          <a [routerLink]="['/state', strategy.id]">
+            {{ strategy.shortLabel }}
+          </a>
+        }
+      </div>
+    </article>
+  </section>
+
+  <section class="vr-showcase-home__card">
+    <h2>Quick start</h2>
+    <ol class="vr-showcase-home__steps">
+      @for (item of quickStart; track item.title) {
+        <li>
+          <strong>{{ item.title }}</strong>
+          <span>{{ item.detail }}</span>
+        </li>
+      }
+    </ol>
+    <p class="mb-0">
+      Read the authoritative <a [href]="docsUrl">Angular package guide</a> for architecture, API reference, and best practices.
+    </p>
+  </section>
+
+  <section class="vr-showcase-home__card">
+    <h2>Validation UX patterns shown</h2>
+    <div class="vr-showcase-home__patterns">
+      <div>
+        <h3>Field-level</h3>
+        <p>Errors after blur/change via <code>policyValidator</code> and display strategies.</p>
+      </div>
+      <div>
+        <h3>Section badges</h3>
+        <p><code>policy-validation-group-status</code> per form group after submit or validate.</p>
+      </div>
+      <div>
+        <h3>Policy groups</h3>
+        <p>Aggregate status across multiple sections (checkout, performance form).</p>
+      </div>
+      <div>
+        <h3>Summaries</h3>
+        <p>Page-level and section-level error lists after full validation.</p>
+      </div>
+    </div>
+  </section>
+</div>

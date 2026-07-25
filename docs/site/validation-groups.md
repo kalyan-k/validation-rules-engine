@@ -34,7 +34,7 @@ validation.evaluatePolicies(
 
 The Angular adapter provides group and policy-group status and summary components. Display strategies decide the CSS and DOM treatment; the validation model remains the source of truth.
 
-[Open the Angular group examples](http://127.0.0.1:4202/demos/bootstrap) or [compare the NgRx integration](http://127.0.0.1:4203/state).
+[Open the Angular group examples](http://127.0.0.1:4202/showcases/bootstrap) or [compare the NgRx integration](http://127.0.0.1:4203/state).
 
 ## Good group boundaries
 

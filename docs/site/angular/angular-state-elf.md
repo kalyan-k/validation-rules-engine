@@ -14,9 +14,9 @@ Choose Elf when you want store discipline with minimal ceremony. Validation Rule
 
 ## Integration pattern
 
-The unified Angular demo uses an Elf store for state snapshots and the same `@validation-rules/angular` policy registration, validation groups, summaries, and performance generator as every other implementation.
+The unified Angular showcase uses an Elf store for state snapshots and the same `@validation-rules/angular` policy registration, validation groups, summaries, and performance generator as every other implementation.
 
-## Demo pages
+## Showcase pages
 
 - [Overview](http://127.0.0.1:4202/state/elf)
 - [Simple Form](http://127.0.0.1:4202/state/elf/simple)
@@ -150,12 +150,12 @@ export class ProfileElfStore {
 Use the selected store snapshot as the `actualModel` for directives and summaries.
 
 ```html
-<ng-container *ngIf="draft$ | async as draft">
+@if (draft$ | async; as draft) {
   <input name="email" [ngModel]="draft.email" (ngModelChange)="state.change('email', $event)" policyValidator
     [validateModel]="'email'" [actualModel]="draft" [withPolicy]="'ProfileElf'" groupName="profileElfGroup" />
   <policy-validation-message [model]="draft" propertyName="email"></policy-validation-message>
   <policy-validation-summary [model]="draft"></policy-validation-summary>
-</ng-container>
+}
 ```
 
 ### Step 7 — Validate
@@ -239,16 +239,18 @@ export class ElfProfileComponent implements OnInit, OnDestroy {
 ```
 
 ```html
-<form *ngIf="draft$ | async as draft" (ngSubmit)="submit(draft)" novalidate>
-  <label>Email <input type="email" name="email" [ngModel]="draft.email" (ngModelChange)="state.change('email', $event)" policyValidator
-    [validateModel]="'email'" [actualModel]="draft" [withPolicy]="'ProfileElf'" groupName="profileElfGroup" /></label>
-  <label>Frequency <select name="frequency" [ngModel]="draft.notificationFrequency" (ngModelChange)="state.change('notificationFrequency', $event)" policyValidator
-    [validateModel]="'notificationFrequency'" [actualModel]="draft" [withPolicy]="'ProfileElf'" groupName="profileElfGroup">
-    <option value="">Select</option><option value="weekly">Weekly</option>
-  </select></label>
-  <policy-validation-group-status [model]="draft" groupName="profileElfGroup"></policy-validation-group-status>
-  <policy-validation-summary [model]="draft"></policy-validation-summary>
-  <button type="submit">Save</button>
-  <button type="button" (click)="reset(draft)">Reset</button>
-</form>
+@if (draft$ | async; as draft) {
+  <form (ngSubmit)="submit(draft)" novalidate>
+    <label>Email <input type="email" name="email" [ngModel]="draft.email" (ngModelChange)="state.change('email', $event)" policyValidator
+      [validateModel]="'email'" [actualModel]="draft" [withPolicy]="'ProfileElf'" groupName="profileElfGroup" /></label>
+    <label>Frequency <select name="frequency" [ngModel]="draft.notificationFrequency" (ngModelChange)="state.change('notificationFrequency', $event)" policyValidator
+      [validateModel]="'notificationFrequency'" [actualModel]="draft" [withPolicy]="'ProfileElf'" groupName="profileElfGroup">
+      <option value="">Select</option><option value="weekly">Weekly</option>
+    </select></label>
+    <policy-validation-group-status [model]="draft" groupName="profileElfGroup"></policy-validation-group-status>
+    <policy-validation-summary [model]="draft"></policy-validation-summary>
+    <button type="submit">Save</button>
+    <button type="button" (click)="reset(draft)">Reset</button>
+  </form>
+}
 ```

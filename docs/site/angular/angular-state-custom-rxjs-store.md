@@ -14,9 +14,9 @@ Choose a custom RxJS store when transparency and minimal dependencies matter. Va
 
 ## Integration pattern
 
-The unified Angular demo commits state through a BehaviorSubject-backed store while reusing the same `@validation-rules/angular` policies, groups, summaries, and performance generator.
+The unified Angular showcase commits state through a BehaviorSubject-backed store while reusing the same `@validation-rules/angular` policies, groups, summaries, and performance generator.
 
-## Demo pages
+## Showcase pages
 
 - [Overview](http://127.0.0.1:4202/state/custom-rxjs-store)
 - [Simple Form](http://127.0.0.1:4202/state/custom-rxjs-store/simple)
@@ -148,12 +148,14 @@ export class ProfileRxjsStore {
 Use the current observable value as `actualModel` and publish changes through the store.
 
 ```html
-<form *ngIf="draft$ | async as draft" (ngSubmit)="submit(draft)" novalidate>
-  <input name="email" type="email" [ngModel]="draft.email" (ngModelChange)="store.change('email', $event)" policyValidator
-    [validateModel]="'email'" [actualModel]="draft" [withPolicy]="'RxjsProfile'" groupName="rxjsProfileGroup" />
-  <policy-validation-message [model]="draft" propertyName="email"></policy-validation-message>
-  <policy-validation-summary [model]="draft"></policy-validation-summary>
-</form>
+@if (draft$ | async; as draft) {
+  <form (ngSubmit)="submit(draft)" novalidate>
+    <input name="email" type="email" [ngModel]="draft.email" (ngModelChange)="store.change('email', $event)" policyValidator
+      [validateModel]="'email'" [actualModel]="draft" [withPolicy]="'RxjsProfile'" groupName="rxjsProfileGroup" />
+    <policy-validation-message [model]="draft" propertyName="email"></policy-validation-message>
+    <policy-validation-summary [model]="draft"></policy-validation-summary>
+  </form>
+}
 ```
 
 ### Step 7 — Validate
@@ -242,14 +244,16 @@ export class RxjsProfileComponent implements OnInit, OnDestroy {
 ```
 
 ```html
-<form *ngIf="draft$ | async as draft" (ngSubmit)="submit(draft)" novalidate>
-  <label>Email <input type="email" name="email" [ngModel]="draft.email" (ngModelChange)="store.change('email', $event)" policyValidator
-    [validateModel]="'email'" [actualModel]="draft" [withPolicy]="'RxjsProfile'" groupName="rxjsProfileGroup" /></label>
-  <label><input type="checkbox" name="phoneOptIn" [ngModel]="draft.phoneOptIn" (ngModelChange)="store.change('phoneOptIn', $event)" policyValidator
-    [validateModel]="'phoneOptIn'" [actualModel]="draft" [withPolicy]="'RxjsProfile'" groupName="rxjsProfileGroup" /> Phone opt-in confirmed</label>
-  <policy-validation-group-status [model]="draft" groupName="rxjsProfileGroup"></policy-validation-group-status>
-  <policy-validation-summary [model]="draft"></policy-validation-summary>
-  <button type="submit">Save</button>
-  <button type="button" (click)="reset(draft)">Reset</button>
-</form>
+@if (draft$ | async; as draft) {
+  <form (ngSubmit)="submit(draft)" novalidate>
+    <label>Email <input type="email" name="email" [ngModel]="draft.email" (ngModelChange)="store.change('email', $event)" policyValidator
+      [validateModel]="'email'" [actualModel]="draft" [withPolicy]="'RxjsProfile'" groupName="rxjsProfileGroup" /></label>
+    <label><input type="checkbox" name="phoneOptIn" [ngModel]="draft.phoneOptIn" (ngModelChange)="store.change('phoneOptIn', $event)" policyValidator
+      [validateModel]="'phoneOptIn'" [actualModel]="draft" [withPolicy]="'RxjsProfile'" groupName="rxjsProfileGroup" /> Phone opt-in confirmed</label>
+    <policy-validation-group-status [model]="draft" groupName="rxjsProfileGroup"></policy-validation-group-status>
+    <policy-validation-summary [model]="draft"></policy-validation-summary>
+    <button type="submit">Save</button>
+    <button type="button" (click)="reset(draft)">Reset</button>
+  </form>
+}
 ```

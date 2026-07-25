@@ -89,7 +89,7 @@ fieldset.policy-validation-radio-group-invalid {
   display: block !important;
 }
 
-/* Bootstrap demo field errors */
+/* Bootstrap showcase field errors */
 .bootstrap-form-page .policy-validation-bootstrap-error-container,
 .policy-validation-bootstrap-error-container {
   margin-top: 0.25rem;

@@ -1,0 +1,56 @@
+@if (visible) {
+<div class="perf-error-summary" role="alert" aria-live="polite">
+  <div class="perf-error-summary-header d-flex align-items-center flex-wrap gap-2">
+    <button
+      type="button"
+      class="btn btn-sm btn-outline-danger perf-error-toggle"
+      (click)="toggleSummaryCollapsed()"
+      [attr.aria-expanded]="!summaryCollapsed"
+      [attr.aria-label]="summaryCollapsed ? 'Expand error summary' : 'Collapse error summary'"
+    >
+      {{ summaryCollapsed ? '▶' : '▼' }}
+    </button>
+    <strong class="perf-error-summary-title">{{ title }}</strong>
+    <span class="badge bg-danger">{{ totalErrorCount }}</span>
+    @if (!summaryCollapsed) {
+      <div class="d-flex flex-wrap gap-2 ms-auto">
+        <button type="button" class="btn btn-sm btn-outline-secondary" (click)="collapseAllGroups()">
+          Collapse all
+        </button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" (click)="expandAllGroups()">
+          Expand all
+        </button>
+      </div>
+    }
+  </div>
+
+  @if (!summaryCollapsed) {
+    <div class="perf-error-summary-body">
+      @for (group of groupedErrors; track trackGroup($index, group)) {
+        <div class="perf-error-group">
+      <div class="perf-error-group-header d-flex align-items-center gap-2">
+        <button
+          type="button"
+          class="btn btn-sm btn-outline-secondary perf-error-toggle"
+          (click)="toggleGroup(group.sectionId)"
+          [attr.aria-expanded]="!isGroupCollapsed(group.sectionId)"
+          [attr.aria-label]="isGroupCollapsed(group.sectionId) ? 'Expand section errors' : 'Collapse section errors'"
+        >
+          {{ isGroupCollapsed(group.sectionId) ? '▶' : '▼' }}
+        </button>
+        <span class="fw-semibold">{{ group.title }}</span>
+        <span class="badge bg-secondary">{{ group.errors.length }}</span>
+      </div>
+          @if (!isGroupCollapsed(group.sectionId)) {
+            <ul class="perf-error-group-list mb-0">
+              @for (err of group.errors; track $index) {
+                <li>{{ err.error.message }}</li>
+              }
+            </ul>
+          }
+        </div>
+      }
+    </div>
+  }
+</div>
+}

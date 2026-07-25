@@ -15,23 +15,23 @@ import { ValidationProviderService } from '../services/validation-provider.servi
   selector: 'policy-validation-group-status',
   standalone: false,
   template: `
-    <span
-      *ngIf="status?.isEvaluated; else pendingBadge"
-      class="policy-validation-group-badge badge"
-      [class.bg-success]="status?.isValid"
-      [class.bg-danger]="status?.isInValid"
-      [attr.title]="evaluatedTooltip"
-    >
-      {{ status?.isValid ? 'Valid' : 'Invalid' }}
-    </span>
-    <ng-template #pendingBadge>
+    @if (status?.isEvaluated) {
+      <span
+        class="policy-validation-group-badge badge"
+        [class.bg-success]="status.isValid"
+        [class.bg-danger]="status.isInValid"
+        [attr.title]="evaluatedTooltip"
+      >
+        {{ status.isValid ? 'Valid' : 'Invalid' }}
+      </span>
+    } @else {
       <span
         class="policy-validation-group-badge badge bg-secondary"
         [attr.title]="pendingTooltip"
       >
         {{ pendingLabel }}
       </span>
-    </ng-template>
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })

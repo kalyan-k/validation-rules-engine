@@ -2,9 +2,9 @@
 
 ## Overview
 
-The Jotai demo models form state as atoms and uses a derived atom for live populated-value state. The validation layer consumes ordinary model values.
+The Jotai showcase models form state as atoms and uses a derived atom for live populated-value state. The validation layer consumes ordinary model values.
 
-[Open Live Demo](http://127.0.0.1:4204/state/jotai)
+[Open Live Showcase](http://127.0.0.1:4204/state/jotai)
 
 ## Using @validation-rules/react
 
@@ -329,4 +329,4 @@ const [model, setModel] = useAtom(modelAtom);
 const populated = useAtomValue(populatedAtom);
 ```
 
-[Open Live Demo](http://127.0.0.1:4204/state/jotai)
+[Open Live Showcase](http://127.0.0.1:4204/state/jotai)

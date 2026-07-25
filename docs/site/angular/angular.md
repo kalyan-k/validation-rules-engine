@@ -41,7 +41,7 @@ The directive registers the control, evaluates field rules during interaction, r
 
 ## Reactive Forms and state management
 
-The adapter does not require Angular Forms, but it can be coordinated with Reactive Forms and application-owned state. The Angular demo exposes a comparable state-management section where every strategy has Overview, Simple Form, Complex Form, and Performance Form pages.
+The adapter does not require Angular Forms, but it can be coordinated with Reactive Forms and application-owned state. The Angular showcase exposes a comparable state-management section where every strategy has Overview, Simple Form, Complex Form, and Performance Form pages.
 
 ## Multiple Forms
 
@@ -63,4 +63,4 @@ The directive-driven lifecycle validates fields during interaction, updates touc
 
 Custom Angular inputs integrate by forwarding `ngModel`, path, policy, and form-group information to the validation directive or by using the service directly. Design-system components should keep rendering decisions in the component while leaving rule definitions in reusable policies.
 
-[Open the Angular demo](http://127.0.0.1:4202/) or jump directly to the [Angular state-management overview](http://127.0.0.1:4202/state/template-driven).
+[Open the Angular showcase](http://127.0.0.1:4202/) or jump directly to the [Angular state-management overview](http://127.0.0.1:4202/state/template-driven).

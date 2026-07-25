@@ -2,9 +2,9 @@
 
 ## Overview
 
-The Redux Toolkit demo proves that validation policies can remain framework-neutral while a Redux slice owns form transitions and memoized selectors expose the active model and derived state.
+The Redux Toolkit showcase proves that validation policies can remain framework-neutral while a Redux slice owns form transitions and memoized selectors expose the active model and derived state.
 
-[Open Live Demo](http://127.0.0.1:4204/state/redux-toolkit)
+[Open Live Showcase](http://127.0.0.1:4204/state/redux-toolkit)
 
 ## Using @validation-rules/react
 
@@ -330,7 +330,7 @@ function ProfileForm() {
 
 ## Architecture
 
-`configureStore` hosts a dedicated slice. Slice actions replace or reset the serializable model, and selectors read the model, revision, and populated-value count. The React adapter receives the selected model through the shared demo bridge.
+`configureStore` hosts a dedicated slice. Slice actions replace or reset the serializable model, and selectors read the model, revision, and populated-value count. The React adapter receives the selected model through the shared showcase bridge.
 
 ```text
 Controls → slice actions → Redux store → selectors → validation hooks → core
@@ -362,7 +362,7 @@ Validation remains outside reducers. Reducers store form transitions; hooks run 
 
 ```tsx
 const slice = createSlice({
-  name: 'validationDemo',
+  name: 'validationShowcase',
   initialState,
   reducers: {
     modelReplaced(state, action) { state.serializedModel = JSON.stringify(action.payload); },
@@ -374,4 +374,4 @@ const model = useSelector(selectModel);
 dispatch(slice.actions.modelReplaced(nextModel));
 ```
 
-[Open Live Demo](http://127.0.0.1:4204/state/redux-toolkit)
+[Open Live Showcase](http://127.0.0.1:4204/state/redux-toolkit)

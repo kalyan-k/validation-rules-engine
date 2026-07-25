@@ -2,11 +2,11 @@
 
 ## Overview
 
-The Recoil demo is provided for teams maintaining existing Recoil applications. It demonstrates atoms, selectors, and the same Validation Rules lifecycle as every other React example.
+The Recoil showcase is provided for teams maintaining existing Recoil applications. It shows atoms, selectors, and the same Validation Rules lifecycle as every other React example.
 
 The upstream Recoil repository is archived. Prefer an actively maintained option for new applications, and treat this page as integration and migration support.
 
-[Open Live Demo](http://127.0.0.1:4204/state/recoil)
+[Open Live Showcase](http://127.0.0.1:4204/state/recoil)
 
 ## Using @validation-rules/react
 
@@ -269,7 +269,7 @@ Custom inputs should write through `useRecoilState` or a setter hook and use val
 
 ## Performance Considerations
 
-Keep the form route boundary small. Recoil is best demonstrated here for existing codebases; new projects should weigh maintenance status before choosing it.
+Keep the form route boundary small. Recoil is best shown here for existing codebases; new projects should weigh maintenance status before choosing it.
 
 ## Troubleshooting
 
@@ -299,7 +299,7 @@ function ProfileForm() {
 
 ## Architecture
 
-A `RecoilRoot` initializes a model atom and revision atom. A selector derives populated-value state. Because Recoil 0.7 checks a React 18 internal dispatcher name, the React 19 demo includes a narrow app-only compatibility alias; no adapter or engine API is changed.
+A `RecoilRoot` initializes a model atom and revision atom. A selector derives populated-value state. Because Recoil 0.7 checks a React 18 internal dispatcher name, the React 19 showcase includes a narrow app-only compatibility alias; no adapter or engine API is changed.
 
 ```text
 Controls → Recoil atoms → selector → validation hooks → core policies
@@ -331,14 +331,14 @@ Atom setters own model transitions. Recoil selectors provide derived UI state, w
 
 ```tsx
 const modelState = atom({
-  key: 'validationRulesDemoModel',
+  key: 'validationRulesShowcaseModel',
   default: initialModel,
   dangerouslyAllowMutability: true
 });
 const populatedState = selector({
-  key: 'validationRulesDemoPopulated',
+  key: 'validationRulesShowcasePopulated',
   get: ({ get }) => countPopulatedValues(get(modelState))
 });
 ```
 
-[Open Live Demo](http://127.0.0.1:4204/state/recoil)
+[Open Live Showcase](http://127.0.0.1:4204/state/recoil)

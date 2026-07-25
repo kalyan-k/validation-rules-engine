@@ -3,6 +3,10 @@ import path from 'node:path';
 import { createRequire } from 'node:module';
 import {
   isDirectModule,
+  projectDashboardHref,
+  projectReportHref,
+  projectReportRoot,
+  projectTestsDashboardHref,
   projects,
   reportsRoot,
   requiredProjectReports,
@@ -16,12 +20,12 @@ const projectTitles = Object.freeze({
   core: 'Core Engine',
   angular: 'Angular Adapter',
   react: 'React Adapter',
-  'angular-demo': 'Angular Demo',
-  'react-demo': 'React Demo'
+  'angular-showcase': 'Angular Showcase',
+  'react-showcase': 'React Showcase'
 });
 const reportGroups = Object.freeze([
   { label: 'Packages', projects: ['core', 'angular', 'react'] },
-  { label: 'Demo Applications', projects: ['angular-demo', 'react-demo'] }
+  { label: 'Showcase Applications', projects: ['angular-showcase', 'react-showcase'] }
 ]);
 
 function readJson(filePath) {
@@ -43,7 +47,7 @@ function formatDuration(milliseconds) {
 }
 
 function projectData(projectName, workspaceVersion) {
-  const root = path.join(reportsRoot, projectName);
+  const root = projectReportRoot(projectName);
   const tests = readJson(path.join(root, 'tests', 'summary.json'));
   const coverage = readJson(path.join(root, 'coverage', 'coverage-summary.json'));
   const missing = requiredProjectReports(projectName).filter((file) => !fs.existsSync(file));
@@ -58,6 +62,7 @@ function projectData(projectName, workspaceVersion) {
 }
 
 function renderProject({ projectName, title, tests, coverage, missing }) {
+  const projectHref = projectReportHref(projectName);
   const summary = tests?.summary;
   const failed = Boolean(summary?.failed || tests?.runError || missing.length > 0);
   const statusText = missing.length > 0
@@ -73,9 +78,9 @@ function renderProject({ projectName, title, tests, coverage, missing }) {
     </div>
     <p class="project-generation">Generated ${reportBranding.escapeHtml(tests?.finishedAt || 'Unavailable')} · ${reportBranding.escapeHtml(formatDuration(tests?.durationMs))}</p>
     <div class="report-links">
-      <a href="./${projectName}/tests/index.html"><strong>Test execution report</strong><span>Suites, cases, timing, source mapping, and failure details</span></a>
-      <a href="./${projectName}/coverage.html"><strong>Code-coverage report</strong><span>Branded report shell with original Istanbul details preserved</span></a>
-      <a class="secondary" href="./${projectName}/junit/test-results.xml"><strong>JUnit XML</strong><span>CI-interoperable test results</span></a>
+      <a href="./${projectHref}/tests/index.html"><strong>Test execution report</strong><span>Suites, cases, timing, source mapping, and failure details</span></a>
+      <a href="./${projectHref}/coverage.html"><strong>Code-coverage report</strong><span>Branded report shell with original Istanbul details preserved</span></a>
+      <a class="secondary" href="./${projectHref}/junit/test-results.xml"><strong>JUnit XML</strong><span>CI-interoperable test results</span></a>
     </div>
     <div class="metrics" aria-label="${reportBranding.escapeHtml(title)} test summary">
       <div><span>Tests</span><strong>${summary?.total ?? '—'}</strong></div>
@@ -109,10 +114,11 @@ function renderReportTree(data) {
     <summary>${reportBranding.escapeHtml(group.label)}<span aria-hidden="true"></span></summary>
     <div>${group.projects.map((projectName) => {
       const project = projectsByName.get(projectName);
+      const projectHref = projectReportHref(projectName);
       return `<section class="report-tree-project"><strong>${reportBranding.escapeHtml(project?.title || projectName)}</strong><div>
         <button type="button" data-project="${projectName}" data-view="summary">Summary</button>
-        <button type="button" data-project="${projectName}" data-view="tests" data-source="./${projectName}/tests/index.html?embed=1">Tests</button>
-        <button type="button" data-project="${projectName}" data-view="coverage" data-source="./${projectName}/coverage/index.html">Coverage</button>
+        <button type="button" data-project="${projectName}" data-view="tests" data-source="./${projectHref}/tests/index.html?embed=1">Tests</button>
+        <button type="button" data-project="${projectName}" data-view="coverage" data-source="./${projectHref}/coverage/index.html">Coverage</button>
       </div></section>`;
     }).join('')}</div>
   </details>`).join('');
@@ -216,20 +222,28 @@ export function generateReportIndex() {
   const generatedAt = new Date().toISOString();
 
   for (const project of data) {
+    fs.mkdirSync(projectReportRoot(project.projectName), { recursive: true });
     if (project.tests) {
+      const dashboardHref = projectTestsDashboardHref(project.projectName);
       fs.writeFileSync(
-        path.join(reportsRoot, project.projectName, 'tests', 'index.html'),
-        persistentReporter.renderHtml(project.tests),
+        path.join(projectReportRoot(project.projectName), 'tests', 'index.html'),
+        persistentReporter.renderHtml({
+          ...project.tests,
+          dashboardHref,
+          summaryHref: `${dashboardHref}#${project.projectName}/summary`
+        }),
         'utf8'
       );
     }
     fs.writeFileSync(
-      path.join(reportsRoot, project.projectName, 'coverage.html'),
+      path.join(projectReportRoot(project.projectName), 'coverage.html'),
       reportBranding.renderCoverageWrapper({
         applicationName: project.title,
         generatedAt: project.tests?.finishedAt || generatedAt,
         version: project.version,
-        projectName: project.projectName
+        projectName: project.projectName,
+        dashboardHref: projectDashboardHref(project.projectName),
+        summaryHref: `${projectDashboardHref(project.projectName)}#${project.projectName}/summary`
       }),
       'utf8'
     );

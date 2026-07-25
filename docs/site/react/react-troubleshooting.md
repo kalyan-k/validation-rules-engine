@@ -38,4 +38,4 @@ Built-in field tokens ignore older adapter runs. Ensure the async rule returns i
 
 ## Server rendering fails
 
-Do not execute browser-only demo code in the server bundle. The adapter itself is import-safe. Keep validation events/effects on the client or use core/domain validation on the server.
+Do not execute browser-only showcase code in the server bundle. The adapter itself is import-safe. Keep validation events/effects on the client or use core/domain validation on the server.

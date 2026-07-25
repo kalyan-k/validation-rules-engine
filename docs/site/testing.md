@@ -1,6 +1,6 @@
 # Testing, Coverage & Reports
 
-The repository tests the core engine, Angular and React adapters, all demos, portal, and documentation while keeping coverage results isolated by project.
+The repository tests the core engine, Angular and React adapters, all showcases, portal, and documentation while keeping coverage results isolated by project.
 
 ## Common commands
 
@@ -25,7 +25,7 @@ Each Angular or React target writes:
 - Istanbul HTML coverage,
 - LCOV and coverage-summary JSON.
 
-The Demo Portal exposes the unified report dashboard at `/reports/index.html` after reports have been generated. Its left navigation tree separates collapsible Packages and Demo Applications groups, both expanded by default. Summary, Tests, and Coverage tabs update one right-hand workspace with Summary selected initially, so report exploration stays in a single browser tab.
+The Portal exposes the unified report dashboard at `/reports/index.html` after reports have been generated. Its left navigation tree separates collapsible Packages and Showcase Applications groups, both expanded by default. Summary, Tests, and Coverage tabs update one right-hand workspace with Summary selected initially, so report exploration stays in a single browser tab.
 
 The dashboard, test execution pages, and coverage wrappers share product navigation and a collapsible metadata summary with application name, version, report type, and generation time. The summary starts expanded, collapses automatically after about ten seconds, and remembers a manual preference for the current browser session. Coverage views embed untouched Istanbul pages, preserving folder navigation, source views, highlighting, and generated metrics.
 

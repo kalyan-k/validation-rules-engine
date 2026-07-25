@@ -64,9 +64,9 @@ describe('ValidationEngine', () => {
     } as unknown as ValidationTarget;
     const errors = (await engine.validate(model, ['conditional'])).errors;
     expect(errors.map(({ error }) => error.message)).toEqual(['function', 'path', 'negated', 'equal', 'not equal']);
-    model.enabled = false;
-    model.disabled = true;
-    model.kind = 'personal';
+    (model as any)['enabled'] = false;
+    (model as any)['disabled'] = true;
+    (model as any)['kind'] = 'personal';
     expect((await engine.validate(model, ['conditional'])).errors).toEqual([]);
   });
 
@@ -78,7 +78,7 @@ describe('ValidationEngine', () => {
     ]));
     const model = { first: '', second: '' } as ValidationTarget;
     await engine.validate(model, ['fields']);
-    model.first = 'ok';
+    model['first'] = 'ok';
     const snapshot = await engine.validateField(model, 'first', ['fields']);
     expect(snapshot.errors).toEqual([{ propertyName: 'second', error: { message: 'Second' } }]);
     await engine.validateField(model, 'unknown', ['fields']);
@@ -96,7 +96,7 @@ describe('ValidationEngine', () => {
     const snapshot = await engine.validateGroup(model, 'section');
     expect(snapshot.errors).toEqual([{ propertyName: 'a', error: { message: 'A' } }]);
     expect(model['section']).toMatchObject({ isValid: false, isInValid: true, isEvaluated: true });
-    model.a = 'ok';
+    model['a'] = 'ok';
     await engine.validate(model, undefined, { group: 'section' });
     expect(model['section']).toMatchObject({ isValid: true, isInValid: false });
     release();
@@ -134,7 +134,7 @@ describe('ValidationEngine', () => {
     ]));
     const model = { code: 'first' } as ValidationTarget;
     const first = engine.validateField(model, 'code', ['async']);
-    model.code = 'second';
+    model['code'] = 'second';
     const second = engine.validateField(model, 'code', ['async']);
     resolvers[1]?.(true);
     await second;

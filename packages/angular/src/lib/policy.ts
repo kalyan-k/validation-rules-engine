@@ -290,7 +290,7 @@ export class Policy {
 
     /**
      * Evaluates a single form group's validity. Uses policy property paths when registered
-     * DOM paths are unavailable (e.g. billing fields hidden by *ngIf).
+     * DOM paths are unavailable (e.g. billing fields hidden by conditional rendering).
      */
     public evaluateFormGroup = (
         model: any,

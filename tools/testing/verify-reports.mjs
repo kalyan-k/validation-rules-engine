@@ -2,6 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {
   isDirectModule,
+  projectReportHref,
+  projectReportRoot,
   projects,
   reportsRoot,
   requiredProjectReports,
@@ -65,7 +67,7 @@ function verifyLocalLinks(htmlFile, failures) {
 }
 
 function verifyProject(projectName, failures) {
-  const projectRoot = path.join(reportsRoot, projectName);
+  const projectRoot = projectReportRoot(projectName);
   const testHtmlPath = path.join(projectRoot, 'tests', 'index.html');
   const testSummaryPath = path.join(projectRoot, 'tests', 'summary.json');
   const coverageRoot = path.join(projectRoot, 'coverage');
@@ -190,7 +192,7 @@ export function verifyReports() {
     requireText(dashboard, 'data-tab="summary"', dashboardPath, failures);
     requireText(dashboard, '<details class="report-tree-group" open>', dashboardPath, failures);
     requireText(dashboard, 'Packages', dashboardPath, failures);
-    requireText(dashboard, 'Demo Applications', dashboardPath, failures);
+    requireText(dashboard, 'Showcase Applications', dashboardPath, failures);
     requireText(dashboard, 'data-report-summary', dashboardPath, failures);
     requireText(dashboard, 'setTimeout(()=>setExpanded(false,false),10000)', dashboardPath, failures);
     requireText(dashboard, "let selectedView = 'summary'", dashboardPath, failures);
@@ -201,8 +203,9 @@ export function verifyReports() {
       failures.push(`${relative(dashboardPath)} does not order report tabs as Summary, Tests, Coverage`);
     }
     for (const projectName of projects) {
-      requireText(dashboard, `./${projectName}/tests/index.html`, dashboardPath, failures);
-      requireText(dashboard, `./${projectName}/coverage/index.html`, dashboardPath, failures);
+      const projectHref = projectReportHref(projectName);
+      requireText(dashboard, `./${projectHref}/tests/index.html`, dashboardPath, failures);
+      requireText(dashboard, `./${projectHref}/coverage/index.html`, dashboardPath, failures);
       requireText(dashboard, `data-summary-project="${projectName}"`, dashboardPath, failures);
       requireText(dashboard, `data-project="${projectName}" data-view="summary"`, dashboardPath, failures);
     }

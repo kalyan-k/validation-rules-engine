@@ -1,0 +1,53 @@
+<div class="vr-showcase-shell">
+  <aside class="vr-showcase-sidebar">
+    <header class="vr-showcase-sidebar__intro">
+      <p class="vr-showcase-sidebar__eyebrow">Angular showcase</p>
+      <h2>Forms showcase</h2>
+      <p>Compare one validation policy across Bootstrap, Angular Material, and Tailwind-compatible presentation.</p>
+    </header>
+
+    <nav class="vr-showcase-nav" aria-label="Angular showcase navigation">
+      <a class="vr-showcase-nav__link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+      <p class="vr-showcase-nav__section">Showcases</p>
+      <div class="vr-showcase-nav__group">
+        <button type="button" class="vr-showcase-nav__toggle" (click)="isFrameworksExpanded = !isFrameworksExpanded" [attr.aria-expanded]="isFrameworksExpanded">UI frameworks</button>
+        @if (isFrameworksExpanded) {
+          <div class="vr-showcase-nav__children">
+            @for (framework of frameworks; track framework.id) {
+              <a class="vr-showcase-nav__link" [routerLink]="'/showcases/' + framework.id" routerLinkActive="active">{{ framework.label }}</a>
+            }
+          </div>
+        }
+      </div>
+      <div class="vr-showcase-nav__group">
+        <p class="vr-showcase-nav__section">State management</p>
+        <div class="vr-showcase-nav__children vr-showcase-nav__state">
+          @for (strategy of stateStrategies; track strategy.id) {
+            <section class="vr-showcase-nav__strategy vr-showcase-nav__flyout">
+              <a class="vr-showcase-nav__link" [routerLink]="['/state', strategy.id]" routerLinkActive="active">{{ strategy.shortLabel }}</a>
+              <div class="vr-showcase-nav__subchildren vr-showcase-nav__flyout-menu">
+                @for (page of statePages; track page.page) {
+                  <a
+                    class="vr-showcase-nav__link vr-showcase-nav__sublink"
+                    [routerLink]="page.path ? ['/state', strategy.id, page.path] : ['/state', strategy.id]"
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                  >
+                    {{ page.label }}
+                  </a>
+                }
+              </div>
+            </section>
+          }
+        </div>
+      </div>
+    </nav>
+
+    <footer class="vr-showcase-sidebar__footer">
+      <a [href]="docsUrl">Read Angular documentation &rarr;</a>
+      <span>Policy-based validation for Angular forms - (c) {{ currentYear }}</span>
+    </footer>
+  </aside>
+
+  <main class="vr-showcase-main"><router-outlet></router-outlet></main>
+</div>

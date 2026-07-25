@@ -1,0 +1,287 @@
+@switch (uiFramework) {
+  @case ('bootstrap') {
+    <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+      <ng-container *ngTemplateOutlet="sectionHeaderLeft"></ng-container>
+      <ng-container *ngTemplateOutlet="sectionHeaderActions; context: { fillClass: 'btn btn-sm btn-outline-secondary', clearClass: 'btn btn-sm btn-outline-secondary', validateClass: 'btn btn-sm btn-outline-primary' }"></ng-container>
+    </div>
+    @if (!collapsed) {
+      <div class="card-body">
+        <ng-container *ngTemplateOutlet="sectionErrorsBlock"></ng-container>
+        <div class="row">
+          <ng-container *ngTemplateOutlet="bootstrapFields"></ng-container>
+        </div>
+      </div>
+    }
+  }
+
+  @case ('material') {
+    <mat-card-header class="perf-mat-section-header">
+      <ng-container *ngTemplateOutlet="sectionHeaderLeft; context: { titleTag: 'mat-card-title', subtitleTag: 'mat-card-subtitle' }"></ng-container>
+      <span class="mat-card-header-spacer"></span>
+      <ng-container *ngTemplateOutlet="sectionHeaderActions; context: { material: true }"></ng-container>
+    </mat-card-header>
+    @if (!collapsed) {
+      <mat-card-content>
+        <ng-container *ngTemplateOutlet="sectionErrorsBlock"></ng-container>
+        <div class="mat-fields-grid perf-mat-fields">
+          <ng-container *ngTemplateOutlet="materialFields"></ng-container>
+        </div>
+      </mat-card-content>
+    }
+  }
+
+  @case ('tailwind') {
+    <header class="tw-panel-header perf-tw-section-header">
+      <ng-container *ngTemplateOutlet="sectionHeaderLeft; context: { titleClass: 'tw-panel-title', subtitleClass: 'tw-panel-subtitle' }"></ng-container>
+      <ng-container *ngTemplateOutlet="sectionHeaderActions; context: { tailwind: true }"></ng-container>
+    </header>
+    @if (!collapsed) {
+      <div class="tw-panel-body">
+        <ng-container *ngTemplateOutlet="sectionErrorsBlock"></ng-container>
+        <div class="tw-grid-2 perf-tw-fields">
+          <ng-container *ngTemplateOutlet="tailwindFields"></ng-container>
+        </div>
+      </div>
+    }
+  }
+}
+
+<ng-template #sectionHeaderLeft let-titleTag="titleTag" let-subtitleTag="subtitleTag" let-titleClass="titleClass" let-subtitleClass="subtitleClass">
+  <div class="d-flex align-items-center gap-2 flex-wrap flex-grow-1">
+    @if (uiFramework === 'bootstrap') {
+      <button
+        type="button"
+        class="btn btn-sm btn-outline-secondary perf-section-toggle"
+        (click)="toggleCollapsed()"
+        [attr.aria-expanded]="!collapsed"
+      >{{ collapsed ? '▶' : '▼' }}</button>
+    }
+    @if (uiFramework === 'material') {
+      <button mat-stroked-button type="button" (click)="toggleCollapsed()">{{ collapsed ? '▶' : '▼' }}</button>
+    }
+    @if (uiFramework === 'tailwind') {
+      <button type="button" class="tw-btn tw-btn-secondary tw-btn-sm" (click)="toggleCollapsed()">{{ collapsed ? '▶' : '▼' }}</button>
+    }
+    <div>
+      @if (!titleTag && !titleClass) {
+        <h5 class="mb-0">{{ section.title }}</h5>
+      }
+      @if (titleTag === 'mat-card-title') {
+        <mat-card-title>{{ section.title }}</mat-card-title>
+      }
+      @if (titleClass) {
+        <h3 [class]="titleClass">{{ section.title }}</h3>
+      }
+      @if (!subtitleTag && !subtitleClass) {
+        <small class="text-muted">
+          Policy: <code>{{ section.policyName }}</code> · Group: <code>{{ section.groupName }}</code> · {{ section.fields.length }} controls
+          @if (visibleFields.length < section.fields.length) {
+            <span> (rendering {{ visibleFields.length }}/{{ section.fields.length }})</span>
+          }
+        </small>
+      }
+      @if (subtitleTag === 'mat-card-subtitle') {
+        <mat-card-subtitle>
+          Policy: {{ section.policyName }} · Group: {{ section.groupName }} · {{ section.fields.length }} controls
+        </mat-card-subtitle>
+      }
+      @if (subtitleClass) {
+        <p [class]="subtitleClass">
+          Policy: {{ section.policyName }} · Group: {{ section.groupName }} · {{ section.fields.length }} controls
+        </p>
+      }
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #sectionHeaderActions let-material="material" let-tailwind="tailwind" let-fillClass="fillClass" let-clearClass="clearClass" let-validateClass="validateClass">
+  <div class="d-flex flex-wrap gap-2 align-items-center">
+    @if (!material && !tailwind) {
+      <button type="button" [class]="fillClass" (click)="onFillSection()" [disabled]="!canUseSectionActions">Fill section</button>
+      <button type="button" [class]="clearClass" (click)="onClearSection()" [disabled]="!canUseSectionActions">Clear section</button>
+      <button type="button" [class]="validateClass" (click)="onValidateSection()" [disabled]="!canUseSectionActions">Validate section</button>
+    }
+    @if (material) {
+      <button mat-stroked-button type="button" (click)="onFillSection()" [disabled]="!canUseSectionActions">Fill section</button>
+      <button mat-stroked-button type="button" (click)="onClearSection()" [disabled]="!canUseSectionActions">Clear section</button>
+      <button mat-flat-button color="primary" type="button" (click)="onValidateSection()" [disabled]="!canUseSectionActions">Validate section</button>
+    }
+    @if (tailwind) {
+      <button type="button" class="tw-btn tw-btn-secondary tw-btn-sm" (click)="onFillSection()" [disabled]="!canUseSectionActions">Fill section</button>
+      <button type="button" class="tw-btn tw-btn-secondary tw-btn-sm" (click)="onClearSection()" [disabled]="!canUseSectionActions">Clear section</button>
+      <button type="button" class="tw-btn tw-btn-primary tw-btn-sm" (click)="onValidateSection()" [disabled]="!canUseSectionActions">Validate section</button>
+    }
+    <policy-validation-group-status
+      [model]="model"
+      [groupName]="section.groupName"
+      pendingTooltip="Section fields validate on blur/change; badge updates after submit or validate all."
+      evaluatedTooltip="All controls in this section pass validation."
+    ></policy-validation-group-status>
+  </div>
+</ng-template>
+
+<ng-template #sectionErrorsBlock>
+  @if (sectionErrorsVisible) {
+    <div class="perf-section-error-summary mb-3">
+      <div class="d-flex align-items-center gap-2 mb-2">
+        <button type="button" class="btn btn-sm btn-outline-secondary perf-section-toggle" (click)="toggleSectionErrorsCollapsed()">{{ sectionErrorsCollapsed ? '▶' : '▼' }}</button>
+        <span class="small fw-semibold text-danger">Errors in this section</span>
+        <span class="badge bg-danger">{{ sectionErrorCount }}</span>
+      </div>
+      @if (!sectionErrorsCollapsed) {
+        <ul class="mb-0 ps-3 small">
+          @for (err of sectionErrors; track $index) {
+            <li>{{ err.error.message }}</li>
+          }
+        </ul>
+      }
+    </div>
+  }
+</ng-template>
+
+<ng-template #bootstrapFields>
+  @for (field of visibleFields; track trackField($index, field)) {
+    @if (field.type === 'text' || field.type === 'email' || field.type === 'number' || field.type === 'date') {
+      <div class="col-md-6 form-group mb-3" data-policy-validation-field>
+        <label [for]="field.elementId">{{ field.label }}</label>
+        <input [type]="field.type" class="form-control" [id]="field.elementId" [name]="field.elementId" [(ngModel)]="model.sections[section.id][field.id]"
+          policyValidator [validateModel]="field.validateModel" [actualModel]="model" [withPolicy]="field.policyName" [groupName]="field.groupName" />
+      </div>
+    }
+    @if (field.type === 'checkbox') {
+      <div class="col-md-6 form-check mb-3" data-policy-validation-field>
+        <input type="checkbox" class="form-check-input" [id]="field.elementId" [name]="field.elementId" [(ngModel)]="model.sections[section.id][field.id]"
+          policyValidator [validateModel]="field.validateModel" [actualModel]="model" [withPolicy]="field.policyName" [groupName]="field.groupName" />
+        <label class="form-check-label" [for]="field.elementId">{{ field.label }}</label>
+      </div>
+    }
+    @if (field.type === 'select') {
+      <div class="col-md-6 form-group mb-3" data-policy-validation-field>
+        <label [for]="field.elementId">{{ field.label }}</label>
+        <select class="form-control" [id]="field.elementId" [name]="field.elementId" [(ngModel)]="model.sections[section.id][field.id]"
+          policyValidator [validateModel]="field.validateModel" [actualModel]="model" [withPolicy]="field.policyName" [groupName]="field.groupName">
+          <option value="">— Select —</option>
+          @for (opt of field.selectOptions ?? []; track opt) {
+            <option [value]="opt">{{ opt }}</option>
+          }
+        </select>
+      </div>
+    }
+    @if (field.type === 'textarea') {
+      <div class="col-md-12 form-group mb-3" data-policy-validation-field>
+        <label [for]="field.elementId">{{ field.label }}</label>
+        <textarea class="form-control" rows="2" [id]="field.elementId" [name]="field.elementId" [(ngModel)]="model.sections[section.id][field.id]"
+          policyValidator [validateModel]="field.validateModel" [actualModel]="model" [withPolicy]="field.policyName" [groupName]="field.groupName"></textarea>
+      </div>
+    }
+    @if (field.type === 'radio') {
+      <fieldset class="col-md-6 mb-3 perf-radio-fieldset" data-policy-validation-field policyValidator
+        [validateModel]="field.validateModel" [actualModel]="model" [withPolicy]="field.policyName" [groupName]="field.groupName">
+        <legend class="form-label fs-6">{{ field.label }}</legend>
+        @for (opt of field.radioOptions ?? []; track opt.value) {
+          <div class="form-check">
+            <input type="radio" class="form-check-input" [id]="field.elementId + '_' + opt.value" [name]="field.elementId" [value]="opt.value" [(ngModel)]="model.sections[section.id][field.id]" />
+            <label class="form-check-label" [for]="field.elementId + '_' + opt.value">{{ opt.label }}</label>
+          </div>
+        }
+      </fieldset>
+    }
+  }
+</ng-template>
+
+<ng-template #materialFields>
+  @for (field of visibleFields; track trackField($index, field)) {
+    @if (field.type === 'text' || field.type === 'email' || field.type === 'number' || field.type === 'date') {
+      <mat-form-field appearance="outline" data-policy-validation-field>
+        <mat-label>{{ field.label }}</mat-label>
+        <input matInput [type]="field.type" [id]="field.elementId" [name]="field.elementId" [(ngModel)]="model.sections[section.id][field.id]"
+          policyValidator [validateModel]="field.validateModel" [actualModel]="model" [withPolicy]="field.policyName" [groupName]="field.groupName" />
+      </mat-form-field>
+    }
+    @if (field.type === 'checkbox') {
+      <div class="mat-checkbox-field mat-field-full" data-policy-validation-field>
+        <mat-checkbox [id]="field.elementId" [name]="field.elementId" [(ngModel)]="model.sections[section.id][field.id]"
+          policyValidator [validateModel]="field.validateModel" [actualModel]="model" [withPolicy]="field.policyName" [groupName]="field.groupName">{{ field.label }}</mat-checkbox>
+      </div>
+    }
+    @if (field.type === 'select') {
+      <mat-form-field appearance="outline" data-policy-validation-field>
+        <mat-label>{{ field.label }}</mat-label>
+        <mat-select [id]="field.elementId" [name]="field.elementId" [(ngModel)]="model.sections[section.id][field.id]"
+          policyValidator [validateModel]="field.validateModel" [actualModel]="model" [withPolicy]="field.policyName" [groupName]="field.groupName">
+          <mat-option value="">— Select —</mat-option>
+          @for (opt of field.selectOptions ?? []; track opt) {
+            <mat-option [value]="opt">{{ opt }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    }
+    @if (field.type === 'textarea') {
+      <mat-form-field appearance="outline" class="mat-field-full" data-policy-validation-field>
+        <mat-label>{{ field.label }}</mat-label>
+        <textarea matInput rows="2" [id]="field.elementId" [name]="field.elementId" [(ngModel)]="model.sections[section.id][field.id]"
+          policyValidator [validateModel]="field.validateModel" [actualModel]="model" [withPolicy]="field.policyName" [groupName]="field.groupName"></textarea>
+      </mat-form-field>
+    }
+    @if (field.type === 'radio') {
+      <div class="mat-field-full mat-radio-block" data-policy-validation-field>
+        <mat-label class="mat-group-label">{{ field.label }}</mat-label>
+        <mat-radio-group [name]="field.elementId" [(ngModel)]="model.sections[section.id][field.id]"
+          policyValidator [validateModel]="field.validateModel" [actualModel]="model" [withPolicy]="field.policyName" [groupName]="field.groupName">
+          @for (opt of field.radioOptions ?? []; track opt.value) {
+            <mat-radio-button [value]="opt.value">{{ opt.label }}</mat-radio-button>
+          }
+        </mat-radio-group>
+      </div>
+    }
+  }
+</ng-template>
+
+<ng-template #tailwindFields>
+  @for (field of visibleFields; track trackField($index, field)) {
+    @if (field.type === 'text' || field.type === 'email' || field.type === 'number' || field.type === 'date') {
+      <div class="tw-field" data-policy-validation-field>
+        <label class="tw-label" [for]="field.elementId">{{ field.label }}</label>
+        <input class="tw-input" [type]="field.type" [id]="field.elementId" [name]="field.elementId" [(ngModel)]="model.sections[section.id][field.id]"
+          policyValidator [validateModel]="field.validateModel" [actualModel]="model" [withPolicy]="field.policyName" [groupName]="field.groupName" />
+      </div>
+    }
+    @if (field.type === 'checkbox') {
+      <div class="tw-field tw-check" data-policy-validation-field>
+        <input class="tw-checkbox" type="checkbox" [id]="field.elementId" [name]="field.elementId" [(ngModel)]="model.sections[section.id][field.id]"
+          policyValidator [validateModel]="field.validateModel" [actualModel]="model" [withPolicy]="field.policyName" [groupName]="field.groupName" />
+        <label class="tw-check-label" [for]="field.elementId">{{ field.label }}</label>
+      </div>
+    }
+    @if (field.type === 'select') {
+      <div class="tw-field" data-policy-validation-field>
+        <label class="tw-label" [for]="field.elementId">{{ field.label }}</label>
+        <select class="tw-input" [id]="field.elementId" [name]="field.elementId" [(ngModel)]="model.sections[section.id][field.id]"
+          policyValidator [validateModel]="field.validateModel" [actualModel]="model" [withPolicy]="field.policyName" [groupName]="field.groupName">
+          <option value="">— Select —</option>
+          @for (opt of field.selectOptions ?? []; track opt) {
+            <option [value]="opt">{{ opt }}</option>
+          }
+        </select>
+      </div>
+    }
+    @if (field.type === 'textarea') {
+      <div class="tw-field tw-field-full" data-policy-validation-field>
+        <label class="tw-label" [for]="field.elementId">{{ field.label }}</label>
+        <textarea class="tw-input tw-textarea" rows="2" [id]="field.elementId" [name]="field.elementId" [(ngModel)]="model.sections[section.id][field.id]"
+          policyValidator [validateModel]="field.validateModel" [actualModel]="model" [withPolicy]="field.policyName" [groupName]="field.groupName"></textarea>
+      </div>
+    }
+    @if (field.type === 'radio') {
+      <fieldset class="tw-fieldset tw-field-full" data-policy-validation-field policyValidator
+        [validateModel]="field.validateModel" [actualModel]="model" [withPolicy]="field.policyName" [groupName]="field.groupName">
+        <legend class="tw-label">{{ field.label }}</legend>
+        @for (opt of field.radioOptions ?? []; track opt.value) {
+          <label class="tw-radio">
+            <input type="radio" [name]="field.elementId" [value]="opt.value" [(ngModel)]="model.sections[section.id][field.id]" /> {{ opt.label }}
+          </label>
+        }
+      </fieldset>
+    }
+  }
+</ng-template>

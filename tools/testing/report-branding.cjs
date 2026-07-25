@@ -84,7 +84,14 @@ function reportStyles() {
   `;
 }
 
-function renderCoverageWrapper({ applicationName, generatedAt, version, projectName }) {
+function renderCoverageWrapper({
+  applicationName,
+  generatedAt,
+  version,
+  projectName,
+  dashboardHref = '../index.html',
+  summaryHref = `../index.html#${projectName}/summary`
+}) {
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -100,7 +107,7 @@ function renderCoverageWrapper({ applicationName, generatedAt, version, projectN
 </head>
 <body>
   ${renderReportHeader({ applicationName, reportType: 'Code coverage report', generatedAt, version })}
-  ${renderReportSubnavigation({ dashboardHref: '../index.html', summaryHref: `../index.html#${projectName}/summary`, testsHref: './tests/index.html', coverageHref: './coverage.html', junitHref: './junit/test-results.xml' })}
+  ${renderReportSubnavigation({ dashboardHref, summaryHref, testsHref: './tests/index.html', coverageHref: './coverage.html', junitHref: './junit/test-results.xml' })}
   <iframe class="coverage-frame" src="./coverage/index.html" title="${escapeHtml(applicationName)} Istanbul coverage details"></iframe>
   ${renderReportFooter()}
 </body>

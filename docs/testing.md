@@ -1,10 +1,10 @@
 # Testing and reports
 
-The workspace tests the framework-independent core engine, Angular adapter, Angular demo, React adapter, React demo, and both Node applications. Every Angular project produces persistent test results, source coverage, and JUnit XML and independently enforces 90% global coverage thresholds.
+The workspace tests the framework-independent core engine, Angular adapter, Angular showcase, React adapter, React showcase, and both Node applications. Every Angular project produces persistent test results, source coverage, and JUnit XML and independently enforces 90% global coverage thresholds.
 
 ## Test stack
 
-Tests use Jasmine 5.4, Karma 6.4, and headless Chrome through Angular CLI targets. Core specifications exercise plain TypeScript behavior; adapter and demo specifications also use Angular TestBed, browser DOM APIs, routing, dependency injection, and template rendering where appropriate.
+Tests use Jasmine 5.4, Karma 6.4, and headless Chrome through Angular CLI targets. Core specifications exercise plain TypeScript behavior; adapter and showcase specifications also use Angular TestBed, browser DOM APIs, routing, dependency injection, and template rendering where appropriate.
 
 Two browsable HTML report types are generated:
 
@@ -13,13 +13,13 @@ Two browsable HTML report types are generated:
 
 The unified dashboard, persistent test pages, and coverage landing pages use the shared report branding module. Every page identifies the application, workspace version, report type, and generation time. This metadata is initially expanded, automatically collapses after about ten seconds, and stores a manual expanded/collapsed preference in session storage.
 
-The dashboard keeps report exploration in one browser tab. Its left tree separates collapsible Packages and Demo Applications groups, both expanded by default. Each project exposes Summary, Tests, and Coverage in that order; the same ordered tabs update the right pane with Summary selected initially. Coverage views load the unmodified Istanbul site in an iframe, and the raw source report remains available under each project's `coverage/` directory.
+The dashboard keeps report exploration in one browser tab. Its left tree separates collapsible Packages and Showcase Applications groups, both expanded by default. Each project exposes Summary, Tests, and Coverage in that order; the same ordered tabs update the right pane with Summary selected initially. Coverage views load the unmodified Istanbul site in an iframe, and the raw source report remains available under each project's `coverage/` directory.
 
 The interactive `kjhtml` page and console progress remain enabled for local watch runs. Persistent reports remain usable after Karma exits and can be opened directly from the file system.
 
 Karma 6 expects older `glob` and `minimatch` APIs. `tools/testing/karma-glob-compat.cjs` adapts the two properties Karma reads, while a scoped npm override gives Karma patched `minimatch` 3.1.4. This compatibility is limited to the runner.
 
-The Angular test targets and demo builds enable `preserveSymlinks`, keeping module identity stable when the workspace is opened through a junction or symbolic link. The portal and docs use Node's built-in test runner after TypeScript compilation.
+The Angular test targets and showcase builds enable `preserveSymlinks`, keeping module identity stable when the workspace is opened through a junction or symbolic link. The portal and docs use Node's built-in test runner after TypeScript compilation.
 
 ## Install and run
 
@@ -28,7 +28,8 @@ npm ci
 
 npm run test:reports:core       # core engine reports
 npm run test:reports:angular    # Angular adapter reports
-npm run test:reports:demo       # Angular demo reports
+npm run test:reports:showcase:angular
+npm run test:reports:showcase:react
 npm run test:reports            # all projects plus dashboard and verification
 npm run test:ci                 # same pipeline with ChromeHeadlessCI
 ```
@@ -39,17 +40,20 @@ Focused commands:
 npm test
 npm run test:core
 npm run test:angular
-npm run test:demo
+npm run test:showcase:angular
+npm run test:showcase:react
 npm run test:platform
 
 npm run test:coverage
 npm run test:coverage:core
 npm run test:coverage:angular
-npm run test:coverage:demo
+npm run test:coverage:showcase:angular
+npm run test:coverage:showcase:react
 
 npm run test:watch:core
 npm run test:watch:angular
-npm run test:watch:demo
+npm run test:watch:showcase:angular
+npm run test:watch:showcase:react
 ```
 
 Report management:
@@ -66,9 +70,11 @@ npm run reports:verify     # validate output structure and local navigation
 | Project | Test execution | Coverage | JUnit |
 | --- | --- | --- | --- |
 | Unified | `reports/index.html` | - | - |
-| Core engine | `reports/core/tests/index.html` | `reports/core/coverage.html` | `reports/core/junit/test-results.xml` |
-| Angular adapter | `reports/angular/tests/index.html` | `reports/angular/coverage.html` | `reports/angular/junit/test-results.xml` |
-| Angular demo | `reports/angular-demo/tests/index.html` | `reports/angular-demo/coverage.html` | `reports/angular-demo/junit/test-results.xml` |
+| Core engine | `reports/packages/core/tests/index.html` | `reports/packages/core/coverage.html` | `reports/packages/core/junit/test-results.xml` |
+| Angular adapter | `reports/packages/angular/tests/index.html` | `reports/packages/angular/coverage.html` | `reports/packages/angular/junit/test-results.xml` |
+| React adapter | `reports/packages/react/tests/index.html` | `reports/packages/react/coverage.html` | `reports/packages/react/junit/test-results.xml` |
+| Angular showcase | `reports/showcases/angular/tests/index.html` | `reports/showcases/angular/coverage.html` | `reports/showcases/angular/junit/test-results.xml` |
+| React showcase | `reports/showcases/react/tests/index.html` | `reports/showcases/react/coverage.html` | `reports/showcases/react/junit/test-results.xml` |
 
 Each `tests/` directory also contains `summary.json`. Each `coverage/` directory contains the original Istanbul `index.html`, browsable source pages, `lcov.info`, and `coverage-summary.json`.
 
@@ -84,7 +90,7 @@ Karma exposes mapped stacks for failed Jasmine results. Passing results do not e
 
 `tools/testing/karma.shared.conf.cjs` enforces these minimums independently:
 
-| Metric | Core | Angular | Angular Demo |
+| Metric | Core | Angular | Angular Showcase |
 | --- | ---: | ---: | ---: |
 | Statements | 90% | 90% | 90% |
 | Branches | 90% | 90% | 90% |
@@ -100,7 +106,7 @@ All executable TypeScript reached by a target is instrumented. Exclusions are na
 - `packages/core/src/public-api.ts`: export-only package barrel.
 - `packages/core/src/lib/interfaces/**/*.ts`: type-only declarations.
 - `packages/angular/src/public-api.ts`: export-only adapter barrel.
-- `apps/angular-demo/src/main.ts`: platform bootstrap; `AppModule` behavior is covered by integration tests.
+- `apps/angular-showcase/src/main.ts`: platform bootstrap; `AppModule` behavior is covered by integration tests.
 
 Do not exclude executable production code merely to increase a percentage. Add behavior-focused tests or separately review and remove dead code.
 
@@ -127,7 +133,7 @@ Do not exclude executable production code merely to increase a percentage. Add b
 | Validation summary and group status/summary components | `components/validation-components.spec.ts` |
 | Angular DOM helpers | `utils/validation-utils.spec.ts` |
 
-### Angular demo
+### Angular showcase
 
 | Production surface | Primary specifications |
 | --- | --- |

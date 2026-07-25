@@ -2,9 +2,9 @@
 
 ## Overview
 
-The MobX demo uses observable state, computed data, actions, and an observer bridge. Validation policies remain ordinary core policies.
+The MobX showcase uses observable state, computed data, actions, and an observer bridge. Validation policies remain ordinary core policies.
 
-[Open Live Demo](http://127.0.0.1:4204/state/mobx)
+[Open Live Showcase](http://127.0.0.1:4204/state/mobx)
 
 ## Using @validation-rules/react
 
@@ -357,4 +357,4 @@ class FormStore {
 }
 ```
 
-[Open Live Demo](http://127.0.0.1:4204/state/mobx)
+[Open Live Showcase](http://127.0.0.1:4204/state/mobx)

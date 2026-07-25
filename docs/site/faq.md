@@ -2,7 +2,7 @@
 
 ## Does Validation Rules require Angular Forms?
 
-No. The engine evaluates models. The pure NgRx demo validates store state without `FormGroup` or `ngModel`.
+No. The engine evaluates models. The pure NgRx showcase validates store state without `FormGroup` or `ngModel`.
 
 ## Why does the Angular adapter own policy execution?
 
@@ -22,12 +22,12 @@ Use `replacePolicy()` when generated fields change and unregister the policy whe
 
 ## Are React or Vue packages available?
 
-No. They remain roadmap directions until complete adapters and real consumer demos exist.
+No. They remain roadmap directions until complete adapters and real consumer showcases exist.
 
 ## Where are coverage reports?
 
-Generate them with `npm run test:reports`, then open the report dashboard from the Demo Portal or run `npm run reports:open`.
+Generate them with `npm run test:reports`, then open the report dashboard from the Portal or run `npm run reports:open`.
 
-## Does the demo platform publish packages?
+## Does the portal publish packages?
 
 No. Portal startup, tests, builds, and local documentation do not publish npm packages or create Git tags.

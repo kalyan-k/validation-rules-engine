@@ -2,7 +2,7 @@
 
 ## A portal application remains in “Starting”
 
-Read the prefixed application output in the terminal that launched `npm run demo`. The portal reports a failed child process without hiding its original output.
+Read the prefixed application output in the terminal that launched `npm start` or `npm run portal`. The portal reports a failed child process without hiding its original output.
 
 ## A port is already in use
 
@@ -20,7 +20,7 @@ Check whether the application requested `showAllErrors`, whether a control is to
 
 Register the form-group mapping, use matching group names, and execute validation with group evaluation enabled.
 
-## The demo cannot resolve a local package
+## The showcase cannot resolve a local package
 
 Build packages first with `npm run build:packages`. Portal startup does this automatically.
 

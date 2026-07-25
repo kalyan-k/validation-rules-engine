@@ -18,8 +18,8 @@ The application owns the model. The React adapter reads the model, runs policies
 
 ## How do generated performance forms work?
 
-The demo generates sections, controls per section, seeded field types, policies, and groups from one metadata source. Changing the section count, controls per section, or random seed rebuilds the model and policy registrations.
+The showcase generates sections, controls per section, seeded field types, policies, and groups from one metadata source. Changing the section count, controls per section, or random seed rebuilds the model and policy registrations.
 
 ## Is Recoil recommended for new applications?
 
-The Recoil demo exists for teams with existing Recoil codebases. For new projects, prefer an actively maintained state layer unless your platform has a specific reason to keep Recoil.
+The Recoil showcase exists for teams with existing Recoil codebases. For new projects, prefer an actively maintained state layer unless your platform has a specific reason to keep Recoil.

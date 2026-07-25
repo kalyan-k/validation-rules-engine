@@ -14,9 +14,9 @@ Choose Akita when Store + Query separation keeps feature state readable. Validat
 
 ## Integration pattern
 
-The unified Angular demo updates an Akita store for the selected strategy and keeps `@validation-rules/angular` policies identical to every other state implementation.
+The unified Angular showcase updates an Akita store for the selected strategy and keeps `@validation-rules/angular` policies identical to every other state implementation.
 
-## Demo pages
+## Showcase pages
 
 - [Overview](http://127.0.0.1:4202/state/akita)
 - [Simple Form](http://127.0.0.1:4202/state/akita/simple)
@@ -150,12 +150,14 @@ export class ProfileQuery extends Query<ProfileStoreState> {
 Bind the queried model to the template and call store update methods from control changes.
 
 ```html
-<form *ngIf="draft$ | async as draft" (ngSubmit)="submit(draft)" novalidate>
-  <input name="department" [ngModel]="draft.department" (ngModelChange)="store.change('department', $event)" policyValidator
-    [validateModel]="'department'" [actualModel]="draft" [withPolicy]="'ProfileStore'" groupName="profileStoreGroup" />
-  <policy-validation-message [model]="draft" propertyName="department"></policy-validation-message>
-  <policy-validation-summary [model]="draft"></policy-validation-summary>
-</form>
+@if (draft$ | async; as draft) {
+  <form (ngSubmit)="submit(draft)" novalidate>
+    <input name="department" [ngModel]="draft.department" (ngModelChange)="store.change('department', $event)" policyValidator
+      [validateModel]="'department'" [actualModel]="draft" [withPolicy]="'ProfileStore'" groupName="profileStoreGroup" />
+    <policy-validation-message [model]="draft" propertyName="department"></policy-validation-message>
+    <policy-validation-summary [model]="draft"></policy-validation-summary>
+  </form>
+}
 ```
 
 ### Step 7 — Validate
@@ -243,14 +245,16 @@ export class AkitaProfileComponent implements OnInit, OnDestroy {
 ```
 
 ```html
-<form *ngIf="draft$ | async as draft" (ngSubmit)="submit(draft)" novalidate>
-  <label>Email <input name="email" type="email" [ngModel]="draft.email" (ngModelChange)="store.change('email', $event)" policyValidator
-    [validateModel]="'email'" [actualModel]="draft" [withPolicy]="'ProfileStore'" groupName="profileStoreGroup" /></label>
-  <label><input name="active" type="checkbox" [ngModel]="draft.active" (ngModelChange)="store.change('active', $event)" policyValidator
-    [validateModel]="'active'" [actualModel]="draft" [withPolicy]="'ProfileStore'" groupName="profileStoreGroup" /> Active employee</label>
-  <policy-validation-group-status [model]="draft" groupName="profileStoreGroup"></policy-validation-group-status>
-  <policy-validation-summary [model]="draft"></policy-validation-summary>
-  <button type="submit">Save</button>
-  <button type="button" (click)="reset(draft)">Reset</button>
-</form>
+@if (draft$ | async; as draft) {
+  <form (ngSubmit)="submit(draft)" novalidate>
+    <label>Email <input name="email" type="email" [ngModel]="draft.email" (ngModelChange)="store.change('email', $event)" policyValidator
+      [validateModel]="'email'" [actualModel]="draft" [withPolicy]="'ProfileStore'" groupName="profileStoreGroup" /></label>
+    <label><input name="active" type="checkbox" [ngModel]="draft.active" (ngModelChange)="store.change('active', $event)" policyValidator
+      [validateModel]="'active'" [actualModel]="draft" [withPolicy]="'ProfileStore'" groupName="profileStoreGroup" /> Active employee</label>
+    <policy-validation-group-status [model]="draft" groupName="profileStoreGroup"></policy-validation-group-status>
+    <policy-validation-summary [model]="draft"></policy-validation-summary>
+    <button type="submit">Save</button>
+    <button type="button" (click)="reset(draft)">Reset</button>
+  </form>
+}
 ```

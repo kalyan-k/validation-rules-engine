@@ -5,12 +5,16 @@ import { getValidationMeta, ValidationResult } from '@validation-rules/core';
   selector: 'policy-validation-summary',
   standalone: false,
   template: `
-    <div *ngIf="visible" class="policy-validation-summary" role="alert" [attr.aria-live]="'polite'">
-      <strong class="policy-validation-summary-title">{{ title }}</strong>
-      <ul class="policy-validation-summary-list">
-        <li *ngFor="let err of errors">{{ err.error.message }}</li>
-      </ul>
-    </div>
+    @if (visible) {
+      <div class="policy-validation-summary" role="alert" [attr.aria-live]="'polite'">
+        <strong class="policy-validation-summary-title">{{ title }}</strong>
+        <ul class="policy-validation-summary-list">
+          @for (err of errors; track $index) {
+            <li>{{ err.error.message }}</li>
+          }
+        </ul>
+      </div>
+    }
   `
 })
 export class ValidationSummaryComponent {

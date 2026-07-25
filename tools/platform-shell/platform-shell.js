@@ -122,9 +122,9 @@ const documentationSections = [
   }
 ];
 
-const demoItems = [
-  ['Angular Demo', 'angular'],
-  ['React Demo', 'react']
+const showcaseItems = [
+  ['Angular Showcase', 'angular'],
+  ['React Showcase', 'react']
 ];
 
 function normalizedBase(value, fallback) {
@@ -185,21 +185,21 @@ class ValidationPlatformShell extends HTMLElement {
     const applicationName = this.getAttribute('application-name') || 'Platform';
     const version = this.getAttribute('version') || '0.0.0';
     const brandMarkUrl = this.getAttribute('brand-mark-url') || '/validation-rules-mark.svg';
-    const defaultPortalUrl = currentOriginWhen(activeApplication, ['demo-portal', 'reports'], 'http://127.0.0.1:4200');
+    const defaultPortalUrl = currentOriginWhen(activeApplication, ['portal', 'reports'], 'http://127.0.0.1:4200');
     const urls = {
       portal: configuredBase('portal', this.getAttribute('portal-url'), defaultPortalUrl),
       docs: configuredBase('docs', this.getAttribute('docs-url'), currentOriginWhen(activeApplication, ['documentation'], 'http://127.0.0.1:4201')),
-      angular: configuredBase('angular', this.getAttribute('angular-url'), currentOriginWhen(activeApplication, ['angular-demo'], 'http://127.0.0.1:4202')),
-      react: configuredBase('react', this.getAttribute('react-url'), currentOriginWhen(activeApplication, ['react-demo'], 'http://127.0.0.1:4204'))
+      angular: configuredBase('angular', this.getAttribute('angular-url'), currentOriginWhen(activeApplication, ['angular-showcase'], 'http://127.0.0.1:4202')),
+      react: configuredBase('react', this.getAttribute('react-url'), currentOriginWhen(activeApplication, ['react-showcase'], 'http://127.0.0.1:4204'))
     };
     const docsActive = activeApplication === 'documentation';
-    const demosActive = activeApplication === 'angular-demo' || activeApplication === 'react-demo';
+    const showcasesActive = activeApplication === 'angular-showcase' || activeApplication === 'react-showcase';
     const docsNavigation = documentationSections.map((section) => {
       const active = docsActive && isDocsSectionActive(section);
       return `<a href="${urls.docs}${firstDocsPath(section)}"${active ? ' aria-current="page" class="active"' : ''}>${section.label}</a>`;
     }).join('');
-    const demosNavigation = demoItems.map(([label, target]) => {
-      const applicationId = target === 'angular' ? 'angular-demo' : 'react-demo';
+    const showcasesNavigation = showcaseItems.map(([label, target]) => {
+      const applicationId = target === 'angular' ? 'angular-showcase' : 'react-showcase';
       const active = activeApplication === applicationId;
       return `<a href="${urls[target]}/"${active ? ' aria-current="page" class="active"' : ''}>${label}</a>`;
     }).join('');
@@ -216,14 +216,14 @@ class ValidationPlatformShell extends HTMLElement {
         <span class="platform-version" data-version title="Workspace version">v${version}</span>
         <button class="platform-menu" type="button" aria-expanded="false" aria-controls="platform-navigation">Menu</button>
         <nav id="platform-navigation" class="platform-navigation" aria-label="Platform navigation">
-          <a class="platform-nav-link ${activeApplication === 'demo-portal' ? 'active' : ''}" href="${urls.portal}/"${activeApplication === 'demo-portal' ? ' aria-current="page"' : ''}>Home</a>
+          <a class="platform-nav-link ${activeApplication === 'portal' ? 'active' : ''}" href="${urls.portal}/"${activeApplication === 'portal' ? ' aria-current="page"' : ''}>Home</a>
           <details class="platform-nav-group ${docsActive ? 'active' : ''}">
             <summary>Docs<span aria-hidden="true"></span></summary>
             <div class="platform-dropdown platform-docs-dropdown">${docsNavigation}</div>
           </details>
-          <details class="platform-nav-group ${demosActive ? 'active' : ''}">
-            <summary>Demos<span aria-hidden="true"></span></summary>
-            <div class="platform-dropdown">${demosNavigation}</div>
+          <details class="platform-nav-group ${showcasesActive ? 'active' : ''}">
+            <summary>Showcases<span aria-hidden="true"></span></summary>
+            <div class="platform-dropdown">${showcasesNavigation}</div>
           </details>
           <a class="platform-nav-link ${activeApplication === 'reports' ? 'active' : ''}" href="${urls.portal}/reports/index.html"${activeApplication === 'reports' ? ' aria-current="page"' : ''}>Reports</a>
           <a class="platform-nav-link" href="https://github.com/kalyan-k/validation-rules">GitHub</a>

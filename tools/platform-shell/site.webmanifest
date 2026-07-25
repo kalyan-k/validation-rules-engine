@@ -1,7 +1,7 @@
 {
   "name": "Validation Rules",
   "short_name": "Validation Rules",
-  "description": "Policy-driven validation tools, documentation, demos, and reports.",
+  "description": "Policy-driven validation tools, documentation, showcases, and reports.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f4f7fa",

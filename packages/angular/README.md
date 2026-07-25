@@ -105,7 +105,7 @@ validation.clearValidationState(model, [policyName]);
 - display configuration, resolver, factory, provider, and token APIs
 - Angular `Policy` execution plus re-exported framework-neutral contracts
 
-## Demo
+## Showcase
 
 The repository includes a private Angular consumer with Bootstrap, Material, and Tailwind-style examples:
 

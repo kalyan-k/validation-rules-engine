@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vitest/config';
 
 const workspaceRoot = resolve(__dirname, '../..');
+const reportsRoot = resolve(workspaceRoot, 'reports/packages/react');
 
 export default defineConfig({
   root: __dirname,
@@ -16,12 +17,12 @@ export default defineConfig({
     restoreMocks: true,
     reporters: ['default', 'json', 'junit'],
     outputFile: {
-      json: resolve(workspaceRoot, 'reports/react/tests/results.json'),
-      junit: resolve(workspaceRoot, 'reports/react/junit/test-results.xml')
+      json: resolve(reportsRoot, 'tests/results.json'),
+      junit: resolve(reportsRoot, 'junit/test-results.xml')
     },
     coverage: {
       provider: 'v8',
-      reportsDirectory: resolve(workspaceRoot, 'reports/react/coverage'),
+      reportsDirectory: resolve(reportsRoot, 'coverage'),
       reporter: ['text-summary', 'html', 'lcov', 'json-summary'],
       include: ['src/**/*.{ts,tsx}'],
       exclude: ['src/**/*.spec.{ts,tsx}', 'src/index.ts', 'src/testing/**', 'src/types.ts'],

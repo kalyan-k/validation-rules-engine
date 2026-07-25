@@ -85,4 +85,4 @@ export function App() {
 - Use the exact policy name in `policyNames`.
 - Use full nested paths such as `address.city`.
 
-Run this pattern in the [Simple form demo](http://127.0.0.1:4204/state/local-state/simple).
+Run this pattern in the [Simple form showcase](http://127.0.0.1:4204/state/local-state/simple).

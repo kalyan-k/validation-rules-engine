@@ -3,10 +3,10 @@ import test from 'node:test';
 import { renderMarkdown } from './markdown.js';
 
 test('renders headings, lists, links, and fenced code', () => {
-  const html = renderMarkdown('# Guide\n\n- One\n- Two\n\n[Demo](/demo)\n\n```ts\nconst ready = true;\n```');
+  const html = renderMarkdown('# Guide\n\n- One\n- Two\n\n[Showcase](/showcase)\n\n```ts\nconst ready = true;\n```');
   assert.match(html, /<h1 id="guide">Guide<\/h1>/);
   assert.match(html, /<ul>/);
-  assert.match(html, /href="\/demo"/);
+  assert.match(html, /href="\/showcase"/);
   assert.match(html, /data-language="ts"/);
 });
 

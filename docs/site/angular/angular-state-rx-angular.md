@@ -14,9 +14,9 @@ Choose RxAngular State when form state should be scoped to the component tree. V
 
 ## Integration pattern
 
-The unified Angular demo provides RxAngular State at the demo component boundary and stores the same simple, complex, and performance state shape used by the other strategies.
+The unified Angular showcase provides RxAngular State at the showcase component boundary and stores the same simple, complex, and performance state shape used by the other strategies.
 
-## Demo pages
+## Showcase pages
 
 - [Overview](http://127.0.0.1:4202/state/rx-angular-state)
 - [Simple Form](http://127.0.0.1:4202/state/rx-angular-state/simple)
@@ -139,12 +139,14 @@ commitValidated(draft: RxProfileState): void {
 Bind the selected snapshot to `policyValidator` and publish changes through `RxState`.
 
 ```html
-<form *ngIf="draft$ | async as draft" (ngSubmit)="submit(draft)" novalidate>
-  <input name="email" type="email" [ngModel]="draft.email" (ngModelChange)="change('email', $event)" policyValidator
-    [validateModel]="'email'" [actualModel]="draft" [withPolicy]="'RxProfile'" groupName="rxProfileGroup" />
-  <policy-validation-message [model]="draft" propertyName="email"></policy-validation-message>
-  <policy-validation-summary [model]="draft"></policy-validation-summary>
-</form>
+@if (draft$ | async; as draft) {
+  <form (ngSubmit)="submit(draft)" novalidate>
+    <input name="email" type="email" [ngModel]="draft.email" (ngModelChange)="change('email', $event)" policyValidator
+      [validateModel]="'email'" [actualModel]="draft" [withPolicy]="'RxProfile'" groupName="rxProfileGroup" />
+    <policy-validation-message [model]="draft" propertyName="email"></policy-validation-message>
+    <policy-validation-summary [model]="draft"></policy-validation-summary>
+  </form>
+}
 ```
 
 ### Step 7 — Validate
@@ -238,14 +240,16 @@ export class RxProfileComponent implements OnInit, OnDestroy {
 ```
 
 ```html
-<form *ngIf="draft$ | async as draft" (ngSubmit)="submit(draft)" novalidate>
-  <label>Email <input type="email" name="email" [ngModel]="draft.email" (ngModelChange)="change('email', $event)" policyValidator
-    [validateModel]="'email'" [actualModel]="draft" [withPolicy]="'RxProfile'" groupName="rxProfileGroup" /></label>
-  <label><input type="checkbox" name="consent" [ngModel]="draft.consent" (ngModelChange)="change('consent', $event)" policyValidator
-    [validateModel]="'consent'" [actualModel]="draft" [withPolicy]="'RxProfile'" groupName="rxProfileGroup" /> Consent received</label>
-  <policy-validation-group-status [model]="draft" groupName="rxProfileGroup"></policy-validation-group-status>
-  <policy-validation-summary [model]="draft"></policy-validation-summary>
-  <button type="submit">Save</button>
-  <button type="button" (click)="reset(draft)">Reset</button>
-</form>
+@if (draft$ | async; as draft) {
+  <form (ngSubmit)="submit(draft)" novalidate>
+    <label>Email <input type="email" name="email" [ngModel]="draft.email" (ngModelChange)="change('email', $event)" policyValidator
+      [validateModel]="'email'" [actualModel]="draft" [withPolicy]="'RxProfile'" groupName="rxProfileGroup" /></label>
+    <label><input type="checkbox" name="consent" [ngModel]="draft.consent" (ngModelChange)="change('consent', $event)" policyValidator
+      [validateModel]="'consent'" [actualModel]="draft" [withPolicy]="'RxProfile'" groupName="rxProfileGroup" /> Consent received</label>
+    <policy-validation-group-status [model]="draft" groupName="rxProfileGroup"></policy-validation-group-status>
+    <policy-validation-summary [model]="draft"></policy-validation-summary>
+    <button type="submit">Save</button>
+    <button type="button" (click)="reset(draft)">Reset</button>
+  </form>
+}
 ```

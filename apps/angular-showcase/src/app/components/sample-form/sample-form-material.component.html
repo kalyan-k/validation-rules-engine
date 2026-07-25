@@ -1,0 +1,104 @@
+<div class="material-form-page showcase-form-page">
+  <form (ngSubmit)="onSubmit()">
+    <div class="mat-toolbar-row mb-3">
+      <policy-validation-group-status
+        [model]="model"
+        groupName="mainForm"
+        pendingTooltip="Submit the form to evaluate all fields."
+        evaluatedTooltip="Validation status for this Material form group."
+      ></policy-validation-group-status>
+    </div>
+
+    <policy-validation-summary [model]="model"></policy-validation-summary>
+    <policy-validation-group-summary [model]="model" groupName="mainForm"></policy-validation-group-summary>
+
+    <div class="mat-fields-grid">
+      <mat-form-field appearance="outline" data-policy-validation-field>
+        <mat-label>Text Input</mat-label>
+        <input matInput id="matTextInput" name="textInput" [(ngModel)]="model.textInput"
+          policyValidator [validateModel]="'form.textInput'" [actualModel]="model"
+          [withPolicy]="'SampleForm'" groupName="mainForm" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" data-policy-validation-field>
+        <mat-label>Email</mat-label>
+        <input matInput type="email" id="matEmailInput" name="emailInput" [(ngModel)]="model.emailInput"
+          policyValidator [validateModel]="'form.emailInput'" [actualModel]="model"
+          [withPolicy]="'SampleForm'" groupName="mainForm" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" data-policy-validation-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" id="matPasswordInput" name="passwordInput" [(ngModel)]="model.passwordInput"
+          policyValidator [validateModel]="'form.passwordInput'" [actualModel]="model"
+          [withPolicy]="'SampleForm'" groupName="mainForm" />
+        <mat-hint>Minimum 8 characters</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" data-policy-validation-field>
+        <mat-label>Number (1–100)</mat-label>
+        <input matInput type="number" id="matNumberInput" name="numberInput" [(ngModel)]="model.numberInput"
+          policyValidator [validateModel]="'form.numberInput'" [actualModel]="model"
+          [withPolicy]="'SampleForm'" groupName="mainForm" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" data-policy-validation-field>
+        <mat-label>Date</mat-label>
+        <input matInput type="date" id="matDateInput" name="dateInput" [(ngModel)]="model.dateInput"
+          policyValidator [validateModel]="'form.dateInput'" [actualModel]="model"
+          [withPolicy]="'SampleForm'" groupName="mainForm" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" data-policy-validation-field>
+        <mat-label>Select</mat-label>
+        <mat-select id="matSelectInput" name="selectInput" [(ngModel)]="model.selectInput"
+          policyValidator [validateModel]="'form.selectInput'" [actualModel]="model"
+          [withPolicy]="'SampleForm'" groupName="mainForm">
+          <mat-option value="">Choose...</mat-option>
+          <mat-option value="option1">Option 1</mat-option>
+          <mat-option value="option2">Option 2</mat-option>
+          <mat-option value="option3">Option 3</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="mat-field-full" data-policy-validation-field>
+        <mat-label>Textarea</mat-label>
+        <textarea matInput rows="4" id="matTextareaInput" name="textareaInput" [(ngModel)]="model.textareaInput"
+          policyValidator [validateModel]="'form.textareaInput'" [actualModel]="model"
+          [withPolicy]="'SampleForm'" groupName="mainForm"></textarea>
+        <mat-hint>Minimum 10 characters</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div class="mat-checkbox-field" data-policy-validation-field>
+      <mat-checkbox class="mb-3"
+        id="matCheckboxInput" name="checkboxInput" [(ngModel)]="model.checkboxInput"
+        policyValidator [validateModel]="'form.checkboxInput'" [actualModel]="model"
+        [withPolicy]="'SampleForm'" groupName="mainForm">
+        I accept the terms and conditions
+      </mat-checkbox>
+    </div>
+
+    <div class="mat-radio-block mb-3" data-policy-validation-field>
+      <mat-label class="mat-group-label">Radio Group</mat-label>
+      <mat-radio-group
+        name="radioGroup" [(ngModel)]="model.radioGroup"
+        policyValidator [validateModel]="'form.radioGroup'" [actualModel]="model"
+        [withPolicy]="'SampleForm'" groupName="mainForm">
+        <mat-radio-button value="option1">Option 1</mat-radio-button>
+        <mat-radio-button value="option2">Option 2</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="mat-actions">
+      <button mat-flat-button color="primary" type="submit">Submit</button>
+      <button mat-stroked-button type="button" (click)="onClear()">Clear</button>
+    </div>
+
+    @if (submitMessage) {
+      <div class="mat-message" [class.error]="model.mainForm?.isInValid" [class.success]="model.mainForm?.isValid">
+        {{ submitMessage }}
+      </div>
+    }
+  </form>
+</div>

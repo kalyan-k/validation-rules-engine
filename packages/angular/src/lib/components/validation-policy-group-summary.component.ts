@@ -5,16 +5,19 @@ import { FormGroupStatus } from '@validation-rules/core';
   selector: 'policy-validation-policy-group-summary',
   standalone: false,
   template: `
-    <div
-      *ngIf="status?.isEvaluated && status?.errors?.length"
-      class="policy-validation-policy-group-summary"
-      role="alert"
-    >
-      <strong class="policy-validation-summary-title">{{ title }}</strong>
-      <ul class="policy-validation-summary-list">
-        <li *ngFor="let err of status?.errors">{{ err.error.message }}</li>
-      </ul>
-    </div>
+    @if (status?.isEvaluated && status.errors?.length) {
+      <div
+        class="policy-validation-policy-group-summary"
+        role="alert"
+      >
+        <strong class="policy-validation-summary-title">{{ title }}</strong>
+        <ul class="policy-validation-summary-list">
+          @for (err of status.errors; track $index) {
+            <li>{{ err.error.message }}</li>
+          }
+        </ul>
+      </div>
+    }
   `
 })
 export class ValidationPolicyGroupSummaryComponent {

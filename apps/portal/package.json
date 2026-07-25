@@ -1,0 +1,7 @@
+{
+  "name": "@validation-rules/portal",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Framework-neutral launcher and status dashboard for the Validation Rules portal"
+}

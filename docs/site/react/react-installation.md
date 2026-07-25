@@ -26,7 +26,7 @@ npm run test:react
 npm run test:coverage:react
 ```
 
-The React demo consumes the workspace package through `@validation-rules/react`; it does not copy adapter source into the application.
+The React showcase consumes the workspace package through `@validation-rules/react`; it does not copy adapter source into the application.
 
 ## TypeScript
 

@@ -6,9 +6,9 @@ const workspaceRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)),
 const coreRoot = path.join(workspaceRoot, 'packages', 'core');
 const angularRoot = path.join(workspaceRoot, 'packages', 'angular');
 const reactRoot = path.join(workspaceRoot, 'packages', 'react');
-const demoRoot = path.join(workspaceRoot, 'apps', 'angular-demo');
-const reactDemoRoot = path.join(workspaceRoot, 'apps', 'react-demo');
-const portalRoot = path.join(workspaceRoot, 'apps', 'demo');
+const angularShowcaseRoot = path.join(workspaceRoot, 'apps', 'angular-showcase');
+const reactShowcaseRoot = path.join(workspaceRoot, 'apps', 'react-showcase');
+const portalRoot = path.join(workspaceRoot, 'apps', 'portal');
 const docsRoot = path.join(workspaceRoot, 'apps', 'docs');
 const platformShellRoot = path.join(workspaceRoot, 'tools', 'platform-shell');
 const failures = [];
@@ -48,7 +48,7 @@ function expect(condition, message) {
   }
 }
 
-for (const root of [coreRoot, angularRoot, reactRoot, demoRoot, reactDemoRoot, portalRoot, docsRoot]) {
+for (const root of [coreRoot, angularRoot, reactRoot, angularShowcaseRoot, reactShowcaseRoot, portalRoot, docsRoot]) {
   expect(fs.existsSync(root), `Missing workspace project: ${relative(root)}`);
 }
 for (const file of [
@@ -71,8 +71,8 @@ if (failures.length === 0) {
   const corePackage = readJson(path.join(coreRoot, 'package.json'));
   const angularPackage = readJson(path.join(angularRoot, 'package.json'));
   const reactPackage = readJson(path.join(reactRoot, 'package.json'));
-  const demoPackage = readJson(path.join(demoRoot, 'package.json'));
-  const reactDemoPackage = readJson(path.join(reactDemoRoot, 'package.json'));
+  const angularShowcasePackage = readJson(path.join(angularShowcaseRoot, 'package.json'));
+  const reactShowcasePackage = readJson(path.join(reactShowcaseRoot, 'package.json'));
   const portalPackage = readJson(path.join(portalRoot, 'package.json'));
   const docsPackage = readJson(path.join(docsRoot, 'package.json'));
   const coreDependencies = {
@@ -95,15 +95,15 @@ if (failures.length === 0) {
   expect(typeof reactPackage.peerDependencies?.react === 'string', 'React adapter must declare React as a peer dependency.');
   expect(typeof reactPackage.peerDependencies?.['react-dom'] === 'string', 'React adapter must declare React DOM as a peer dependency.');
   expect(
-    demoPackage.dependencies?.['@validation-rules/angular'] === angularPackage.version,
-    'Angular demo must depend on the local Angular adapter version.'
+    angularShowcasePackage.dependencies?.['@validation-rules/angular'] === angularPackage.version,
+    'Angular showcase must depend on the local Angular adapter version.'
   );
   expect(
-    demoPackage.dependencies?.['@validation-rules/core'] === undefined,
-    'Angular demo must consume framework-neutral APIs through @validation-rules/angular.'
+    angularShowcasePackage.dependencies?.['@validation-rules/core'] === undefined,
+    'Angular showcase must consume framework-neutral APIs through @validation-rules/angular.'
   );
-  expect(reactDemoPackage.private === true, 'React demo must remain private.');
-  expect(portalPackage.private === true, 'Demo portal must remain private.');
+  expect(reactShowcasePackage.private === true, 'React showcase must remain private.');
+  expect(portalPackage.private === true, 'Portal must remain private.');
   expect(docsPackage.private === true, 'Documentation application must remain private.');
   for (const dependency of [
     '@ngrx/store',
@@ -113,17 +113,17 @@ if (failures.length === 0) {
     '@rx-angular/state'
   ]) {
     expect(
-      typeof demoPackage.dependencies?.[dependency] === 'string',
-      `Angular demo must declare ${dependency} for state-management demonstrations.`
+      typeof angularShowcasePackage.dependencies?.[dependency] === 'string',
+      `Angular showcase must declare ${dependency} for state-management showcases.`
     );
   }
   expect(
-    reactDemoPackage.dependencies?.['@validation-rules/react'] === reactPackage.version,
-    'React demo must depend on the local React adapter version.'
+    reactShowcasePackage.dependencies?.['@validation-rules/react'] === reactPackage.version,
+    'React showcase must depend on the local React adapter version.'
   );
   expect(
-    reactDemoPackage.dependencies?.['@validation-rules/core'] === undefined,
-    'React demo must consume core APIs through @validation-rules/react.'
+    reactShowcasePackage.dependencies?.['@validation-rules/core'] === undefined,
+    'React showcase must consume core APIs through @validation-rules/react.'
   );
 
   for (const dependency of Object.keys(coreDependencies)) {
@@ -153,11 +153,11 @@ if (failures.length === 0) {
     failures.push(`React adapter depends on Angular: ${relative(file)}`);
   }
   expect(
-    findSourceMatches(demoRoot, /(['"])@validation-rules\/angular\1/).length > 0,
-    'Angular demo source must consume @validation-rules/angular.'
+    findSourceMatches(angularShowcaseRoot, /(['"])@validation-rules\/angular\1/).length > 0,
+    'Angular showcase source must consume @validation-rules/angular.'
   );
-  for (const file of findSourceMatches(demoRoot, /(['"])@validation-rules\/core\1/)) {
-    failures.push(`Angular demo bypasses the adapter: ${relative(file)}`);
+  for (const file of findSourceMatches(angularShowcaseRoot, /(['"])@validation-rules\/core\1/)) {
+    failures.push(`Angular showcase bypasses the adapter: ${relative(file)}`);
   }
   for (const [dependency, label] of [
     ['@ngrx/store', 'NgRx'],
@@ -167,16 +167,16 @@ if (failures.length === 0) {
     ['@rx-angular/state', 'RxAngular State']
   ]) {
     expect(
-      findSourceMatches(demoRoot, new RegExp(`(['"])${dependency.replaceAll('/', '\\/')}(?:\\/[^'"]*)?\\1`)).length > 0,
-      `Angular demo source must demonstrate ${label}.`
+      findSourceMatches(angularShowcaseRoot, new RegExp(`(['"])${dependency.replaceAll('/', '\\/')}(?:\\/[^'"]*)?\\1`)).length > 0,
+      `Angular showcase source must cover ${label}.`
     );
   }
   expect(
-    findSourceMatches(reactDemoRoot, /(['"])@validation-rules\/react\1/).length > 0,
-    'React demo source must consume @validation-rules/react.'
+    findSourceMatches(reactShowcaseRoot, /(['"])@validation-rules\/react\1/).length > 0,
+    'React showcase source must consume @validation-rules/react.'
   );
-  for (const file of findSourceMatches(reactDemoRoot, /(['"])@validation-rules\/core\1/)) {
-    failures.push(`React demo bypasses the adapter: ${relative(file)}`);
+  for (const file of findSourceMatches(reactShowcaseRoot, /(['"])@validation-rules\/core\1/)) {
+    failures.push(`React showcase bypasses the adapter: ${relative(file)}`);
   }
 
   const angularImports = /(?:from\s+|import\s*\()(['"])(?:@angular\/|@ngrx\/|@validation-rules\/angular)\S*\1/;
@@ -189,8 +189,8 @@ if (failures.length === 0) {
   const shellConsumers = [
     path.join(portalRoot, 'public', 'index.html'),
     path.join(docsRoot, 'src', 'server.ts'),
-    path.join(demoRoot, 'src', 'app', 'app.component.html'),
-    path.join(reactDemoRoot, 'src', 'app.tsx')
+    path.join(angularShowcaseRoot, 'src', 'app', 'app.component.html'),
+    path.join(reactShowcaseRoot, 'src', 'app.tsx')
   ];
   for (const file of shellConsumers) {
     expect(
@@ -200,7 +200,7 @@ if (failures.length === 0) {
   }
 
   const shellSource = fs.readFileSync(path.join(platformShellRoot, 'platform-shell.js'), 'utf8');
-  for (const label of ['Home', 'Docs', 'Demos', 'Reports', 'GitHub']) {
+  for (const label of ['Home', 'Docs', 'Showcases', 'Reports', 'GitHub']) {
     expect(shellSource.includes(label), `Shared application shell must expose the ${label} navigation destination.`);
   }
   expect(
@@ -213,33 +213,33 @@ if (failures.length === 0) {
     'Documentation application must provide a client-side search index and controller.'
   );
   expect(
-    !fs.existsSync(path.join(demoRoot, 'src', 'app', 'pages', 'docs', 'docs.component.ts')),
-    'Angular demo must not duplicate the authoritative documentation application.'
+    !fs.existsSync(path.join(angularShowcaseRoot, 'src', 'app', 'pages', 'docs', 'docs.component.ts')),
+    'Angular showcase must not duplicate the authoritative documentation application.'
   );
   expect(
-    fs.readFileSync(path.join(workspaceRoot, 'docs', 'site', 'angular.md'), 'utf8').includes('## Template-driven controls'),
-    'Angular-specific documentation consolidated from the demo must remain in the documentation application.'
+    fs.readFileSync(path.join(workspaceRoot, 'docs', 'site', 'angular', 'angular.md'), 'utf8').includes('## Template-driven controls'),
+    'Angular-specific documentation consolidated from the showcase must remain in the documentation application.'
   );
   expect(
-    fs.existsSync(path.join(reactDemoRoot, 'src', 'pages', 'home-page.tsx')),
-    'React demo must provide a landing page parallel to the Angular demos.'
+    fs.existsSync(path.join(reactShowcaseRoot, 'src', 'pages', 'home-page.tsx')),
+    'React showcase must provide a landing page parallel to the Angular showcases.'
   );
   for (const file of [
-    path.join(demoRoot, 'src', 'app', 'layout', 'demo-shell.component.html'),
-    path.join(reactDemoRoot, 'src', 'app.tsx')
+    path.join(angularShowcaseRoot, 'src', 'app', 'layout', 'showcase-shell.component.html'),
+    path.join(reactShowcaseRoot, 'src', 'app.tsx')
   ]) {
-    expect(fs.readFileSync(file, 'utf8').includes('vr-demo-shell'), `${relative(file)} must use the shared demo layout.`);
+    expect(fs.readFileSync(file, 'utf8').includes('vr-showcase-shell'), `${relative(file)} must use the shared showcase layout.`);
   }
 
   expect(
-    fs.existsSync(path.join(workspaceRoot, 'docs', 'site', 'react-overview.md')),
+    fs.existsSync(path.join(workspaceRoot, 'docs', 'site', 'react', 'react-overview.md')),
     'Documentation application must contain the React overview.'
   );
 
   for (const framework of ['vue']) {
     expect(
       !fs.existsSync(path.join(workspaceRoot, 'packages', framework))
-        && !fs.existsSync(path.join(workspaceRoot, 'apps', `${framework}-demo`)),
+        && !fs.existsSync(path.join(workspaceRoot, 'apps', `${framework}-showcase`)),
       `Out-of-scope ${framework} placeholder detected.`
     );
   }
@@ -250,8 +250,8 @@ if (failures.length > 0) {
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exitCode = 1;
 } else {
-  console.log('Verified dependency direction: Angular demo -> angular adapter -> core engine.');
-  console.log('Verified dependency direction: React demo -> React adapter -> core engine.');
+  console.log('Verified dependency direction: Angular showcase -> angular adapter -> core engine.');
+  console.log('Verified dependency direction: React showcase -> React adapter -> core engine.');
   console.log('Verified that the portal and documentation applications remain Angular-free.');
   console.log('Verified that @validation-rules/core has no Angular dependency.');
   console.log('Verified that every application renders the shared platform shell.');

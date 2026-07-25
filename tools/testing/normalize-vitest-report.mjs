@@ -1,17 +1,23 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
-import { assertProject, projectReportRoot, workspaceRoot } from './report-paths.mjs';
+import {
+  assertProject,
+  projectReportRoot,
+  projectTestsDashboardHref,
+  workspaceRoot
+} from './report-paths.mjs';
 
 const require = createRequire(import.meta.url);
 const persistentReporter = require('./persistent-test-results-reporter.cjs');
-const displayNames = Object.freeze({ react: 'React Adapter', 'react-demo': 'React Demo' });
+const displayNames = Object.freeze({ react: 'React Adapter', 'react-showcase': 'React Showcase' });
 const projectName = process.argv[2];
 
 assertProject(projectName);
 if (!displayNames[projectName]) throw new Error(`Vitest normalization is not configured for ${projectName}.`);
 
 const root = projectReportRoot(projectName);
+const dashboardHref = projectTestsDashboardHref(projectName);
 const resultPath = path.join(root, 'tests', 'results.json');
 const outputPath = path.join(root, 'tests', 'summary.json');
 const workspacePackage = JSON.parse(fs.readFileSync(path.join(workspaceRoot, 'package.json'), 'utf8'));
@@ -44,6 +50,8 @@ const report = {
   durationMs,
   browsers: ['Vitest · jsdom'],
   runError: result.success === false && summary.failed === 0,
+  dashboardHref,
+  summaryHref: `${dashboardHref}#${projectName}/summary`,
   summary,
   specs
 };

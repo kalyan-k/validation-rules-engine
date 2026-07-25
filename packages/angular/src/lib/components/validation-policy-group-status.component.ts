@@ -17,18 +17,18 @@ import { ValidationProviderService } from '../services/validation-provider.servi
   template: `
     <div class="policy-validation-policy-group-status d-flex align-items-center gap-2">
       <span class="fw-semibold">{{ label }}</span>
-      <span
-        *ngIf="status?.isEvaluated; else pendingBadge"
-        class="badge"
-        [class.bg-success]="status?.isValid"
-        [class.bg-danger]="status?.isInValid"
-        [attr.title]="evaluatedTooltip"
-      >
-        {{ status?.isValid ? 'All sections valid' : 'Has errors' }}
-      </span>
-      <ng-template #pendingBadge>
+      @if (status?.isEvaluated) {
+        <span
+          class="badge"
+          [class.bg-success]="status.isValid"
+          [class.bg-danger]="status.isInValid"
+          [attr.title]="evaluatedTooltip"
+        >
+          {{ status.isValid ? 'All sections valid' : 'Has errors' }}
+        </span>
+      } @else {
         <span class="badge bg-secondary" [attr.title]="pendingTooltip">{{ pendingLabel }}</span>
-      </ng-template>
+      }
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -2,9 +2,9 @@
 
 ## Overview
 
-The Zustand demo uses a route-scoped external store and focused selectors. Validation behavior is identical to the local and Redux examples.
+The Zustand showcase uses a route-scoped external store and focused selectors. Validation behavior is identical to the local and Redux examples.
 
-[Open Live Demo](http://127.0.0.1:4204/state/zustand)
+[Open Live Showcase](http://127.0.0.1:4204/state/zustand)
 
 ## Using @validation-rules/react
 
@@ -342,4 +342,4 @@ const store = createStore((set) => ({
 const model = useStore(store, (state) => state.model);
 ```
 
-[Open Live Demo](http://127.0.0.1:4204/state/zustand)
+[Open Live Showcase](http://127.0.0.1:4204/state/zustand)

@@ -4,7 +4,7 @@
 
 Local state is the baseline integration. The form model stays in the route subtree, while `@validation-rules/react` handles policy lifecycle, field state, messages, summaries, groups, and submission.
 
-[Open Live Demo](http://127.0.0.1:4204/state/local-state)
+[Open Live Showcase](http://127.0.0.1:4204/state/local-state)
 
 ## Using @validation-rules/react
 
@@ -298,7 +298,7 @@ function ProfileForm() {
 
 ## Architecture
 
-The demo uses `useState` for the model and `useReducer` for an explicit revision counter. A thin bridge presents the same model contract used by every state-management example.
+The showcase uses `useState` for the model and `useReducer` for an explicit revision counter. A thin bridge presents the same model contract used by every state-management example.
 
 ```text
 Form controls → useState model → React validation hooks → core policies
@@ -339,4 +339,4 @@ function replaceModel(nextModel) {
 }
 ```
 
-[Open Live Demo](http://127.0.0.1:4204/state/local-state)
+[Open Live Showcase](http://127.0.0.1:4204/state/local-state)

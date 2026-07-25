@@ -21,10 +21,10 @@ The Angular CLI workspace is owned by `packages/angular`. Root npm commands dele
 The default developer entry point is now:
 
 ```bash
-npm run demo
+npm start
 ```
 
-This launches the portal, documentation, original Angular demo, and NgRx demo.
+This launches the portal, documentation, Angular showcase, and React showcase.
 
 ## TypeScript path mappings
 
