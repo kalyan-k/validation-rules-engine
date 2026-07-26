@@ -5,18 +5,23 @@ import { FormGroupStatus } from '@validation-rules/core';
   selector: 'policy-validation-policy-group-summary',
   standalone: false,
   template: `
-    @if (status?.isEvaluated && status.errors?.length) {
-      <div
-        class="policy-validation-policy-group-summary"
-        role="alert"
-      >
-        <strong class="policy-validation-summary-title">{{ title }}</strong>
-        <ul class="policy-validation-summary-list">
-          @for (err of status.errors; track $index) {
-            <li>{{ err.error.message }}</li>
-          }
-        </ul>
-      </div>
+    @if (status; as currentStatus) {
+      @if (currentStatus.isEvaluated) {
+        @let errors = currentStatus.errors ?? [];
+        @if (errors.length) {
+          <div
+            class="policy-validation-policy-group-summary"
+            role="alert"
+          >
+            <strong class="policy-validation-summary-title">{{ title }}</strong>
+            <ul class="policy-validation-summary-list">
+              @for (err of errors; track $index) {
+                <li>{{ err.error.message }}</li>
+              }
+            </ul>
+          </div>
+        }
+      }
     }
   `
 })

@@ -15,15 +15,24 @@ import { ValidationProviderService } from '../services/validation-provider.servi
   selector: 'policy-validation-group-status',
   standalone: false,
   template: `
-    @if (status?.isEvaluated) {
-      <span
-        class="policy-validation-group-badge badge"
-        [class.bg-success]="status.isValid"
-        [class.bg-danger]="status.isInValid"
-        [attr.title]="evaluatedTooltip"
-      >
-        {{ status.isValid ? 'Valid' : 'Invalid' }}
-      </span>
+    @if (status; as currentStatus) {
+      @if (currentStatus.isEvaluated) {
+        <span
+          class="policy-validation-group-badge badge"
+          [class.bg-success]="currentStatus.isValid"
+          [class.bg-danger]="currentStatus.isInValid"
+          [attr.title]="evaluatedTooltip"
+        >
+          {{ currentStatus.isValid ? 'Valid' : 'Invalid' }}
+          </span>
+      } @else {
+        <span
+          class="policy-validation-group-badge badge bg-secondary"
+          [attr.title]="pendingTooltip"
+        >
+          {{ pendingLabel }}
+        </span>
+      }
     } @else {
       <span
         class="policy-validation-group-badge badge bg-secondary"

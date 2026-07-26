@@ -17,15 +17,19 @@ import { ValidationProviderService } from '../services/validation-provider.servi
   template: `
     <div class="policy-validation-policy-group-status d-flex align-items-center gap-2">
       <span class="fw-semibold">{{ label }}</span>
-      @if (status?.isEvaluated) {
-        <span
-          class="badge"
-          [class.bg-success]="status.isValid"
-          [class.bg-danger]="status.isInValid"
-          [attr.title]="evaluatedTooltip"
-        >
-          {{ status.isValid ? 'All sections valid' : 'Has errors' }}
-        </span>
+      @if (status; as currentStatus) {
+        @if (currentStatus.isEvaluated) {
+          <span
+            class="badge"
+            [class.bg-success]="currentStatus.isValid"
+            [class.bg-danger]="currentStatus.isInValid"
+            [attr.title]="evaluatedTooltip"
+          >
+            {{ currentStatus.isValid ? 'All sections valid' : 'Has errors' }}
+          </span>
+        } @else {
+          <span class="badge bg-secondary" [attr.title]="pendingTooltip">{{ pendingLabel }}</span>
+        }
       } @else {
         <span class="badge bg-secondary" [attr.title]="pendingTooltip">{{ pendingLabel }}</span>
       }
