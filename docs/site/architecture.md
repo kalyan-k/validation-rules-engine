@@ -24,11 +24,13 @@ Portal
 
 The framework-neutral Portal owns a registry of independent applications. Each entry supplies a start script, URL, health URL, description, and documentation link. Startup and status UI are generated from this registry.
 
+Repository-level Playwright automation under `tests/e2e` exercises those applications through public URLs. Playwright configuration, server orchestration, and portal report manifests live under `playwright/`. Generated HTML/JSON/JUnit artifacts and the portal Automation Testing summary are excluded from Playwright E2E coverage.
+
 ## Shared application shell
 
 `tools/platform-shell` owns the framework-neutral product header, navigation, footer, layout tokens, breadcrumbs, page headings, action bars, card rhythm, and responsive breakpoints. It is distributed as static JavaScript and CSS, so the Node, Angular, Angular Material, Bootstrap, and Tailwind surfaces can share the product chrome without sharing application runtime state.
 
-The global navigation is deliberately compact: Home, Docs, Showcases, Reports, and GitHub. Docs and Showcases are keyboard-accessible menus that expose documentation sections and independently hosted applications without crowding the top level. Each application identifies itself to the shell so its global destination is highlighted while its framework-specific controls remain inside the application.
+The global navigation is deliberately compact: Home, Docs, Showcases, Reports, and GitHub. Docs, Showcases, and Reports are keyboard-accessible menus that expose documentation sections, independently hosted applications, and report destinations without crowding the top level. Each application identifies itself to the shell so its global destination is highlighted while its framework-specific controls remain inside the application.
 
 The shell logo, favicon, application icons, and web manifest also live in `tools/platform-shell`. Every browser surface preloads the shared stylesheet and loads the shell definition before application scripts, which reserves the header space and prevents unstyled navigation from flashing during startup. Node applications serve these immutable shell assets with short cache headers, while Angular builds copy the same asset directory.
 

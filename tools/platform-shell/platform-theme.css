@@ -1,11 +1,11 @@
 :root {
   --vr-ink: #17273c;
-  --vr-muted: #607086;
+  --vr-muted: #52657a;
   --vr-line: #dbe3eb;
   --vr-paper: #ffffff;
   --vr-canvas: #f4f7fa;
   --vr-navy: #10243e;
-  --vr-teal: #0d8f82;
+  --vr-teal: #08736a;
   --vr-teal-dark: #08736a;
   --vr-blue: #315fce;
   --vr-success: #16835d;
@@ -22,7 +22,7 @@
 .vr-page-heading h1,.vr-page-heading h2 { margin: 0; color: var(--vr-ink); font-size: clamp(2rem,4vw,3.4rem); font-weight:700; line-height: 1.06; letter-spacing: -.045em; }
 .vr-page-heading p { max-width: 690px; margin: .75rem 0 0; color: var(--vr-muted); }
 .vr-eyebrow { margin: 0 0 .55rem; color: var(--vr-teal); font-size: .7rem; font-weight: 820; letter-spacing: .12em; text-transform: uppercase; }
-.vr-breadcrumb { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.4rem; color: #8493a3; font-size: .73rem; }
+.vr-breadcrumb { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.4rem; color: #52657a; font-size: .73rem; }
 .vr-breadcrumb a { color: var(--vr-teal-dark); text-decoration: none; }
 .vr-action-bar { display: flex; align-items: center; flex-wrap: wrap; gap: .65rem; margin: 1.25rem 0; padding: .85rem 1rem; border: 1px solid var(--vr-line); border-radius: 10px; background: #eef3f6; }
 .vr-section-header { display: flex; justify-content: space-between; align-items: end; gap: 1.5rem; margin-bottom: 1rem; }
@@ -75,7 +75,7 @@
 .vr-showcase-home__steps li { position:relative; margin:0; padding:2.35rem .9rem .9rem; border-radius:9px; background:#f3f7f9; counter-increment:step; }
 .vr-showcase-home__steps li::before { position:absolute; top:.75rem; left:.9rem; display:grid; width:1.25rem; height:1.25rem; place-items:center; border-radius:50%; color:#fff; background:var(--vr-teal); content:counter(step); font-size:.64rem; font-weight:800; }
 .vr-showcase-home__steps strong,.vr-showcase-home__steps span { display:block; }
-.vr-showcase-home__steps span { margin-top:.25rem; color:#718197; font-size:.76rem; }
+.vr-showcase-home__steps span { margin-top:.25rem; color:#52657a; font-size:.76rem; }
 .vr-showcase-home__patterns { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }
 .vr-showcase-home__patterns>div { padding:1rem; border-radius:9px; background:#f3f7f9; }
 .vr-showcase-home__patterns p { margin:0; font-size:.8rem; }

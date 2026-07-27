@@ -85,7 +85,7 @@ A future extraction should first define a small expression-evaluator port in cor
 
 `apps/portal` owns process startup, health polling, the application registry, report links, and the browser entry point. `apps/docs` owns Markdown rendering, navigation, and search. These Node applications communicate with the showcases through URLs and remain framework-neutral.
 
-`tools/platform-shell` owns the shared product chrome as a dependency-free Web Component plus static CSS. Node servers expose those files directly and Angular targets copy them as application assets. Applications keep their existing Bootstrap, Angular Material, and Tailwind components inside the shell slot; no application imports another application's runtime. The shell contract standardizes branding, application identity, version, the compact Home / Docs / Showcases / Reports / GitHub navigation, footer links, page width, spacing, breadcrumbs, action bars, card rhythm, and responsive breakpoints.
+`tools/platform-shell` owns the shared product chrome as a dependency-free Web Component plus static CSS. Node servers expose those files directly and Angular targets copy them as application assets. Applications keep their existing Bootstrap, Angular Material, and Tailwind components inside the shell slot; no application imports another application's runtime. The shell contract standardizes branding, application identity, version, the compact Home / Docs / Showcases / Reports / GitHub navigation, report subnavigation, footer links, page width, spacing, breadcrumbs, action bars, card rhythm, and responsive breakpoints.
 
 The same directory owns the product SVG, raster application icons, favicon, and web manifest. Applications preload the shell stylesheet and define the custom element before their own scripts, reserving header space and avoiding a flash of unstyled navigation. Node servers cache these shared static assets; Angular builds copy them through a single asset glob.
 
@@ -109,8 +109,9 @@ Specifications live beside the code whose behavior they protect:
 - Core validator and metadata tests live under `packages/core`.
 - Angular services, policy execution, directive, component, parser, display, and DOM tests live under `packages/angular`.
 - Application and integration tests live under each application.
+- Repository-level browser automation lives under `tests/e2e` with Playwright configuration at the repository root (`playwright.config.ts` and `playwright/`).
 
-Each Angular target generates separate HTML, JSON, LCOV, and JUnit reports and independently enforces 90% global thresholds. The Node applications use the built-in Node test runner. High coverage in one Angular layer cannot hide gaps in another.
+Each Angular target generates separate HTML, JSON, LCOV, and JUnit reports and independently enforces 90% global thresholds. The Node applications use the built-in Node test runner. High coverage in one Angular layer cannot hide gaps in another. Playwright complements unit and coverage gates with smoke, regression, accessibility, and targeted visual checks; generated Playwright artifacts are published into the portal Automation Testing area without becoming part of the E2E subject under test.
 
 ## Adding an adapter
 

@@ -33,12 +33,25 @@ export const portalPort = configuredPort('VALIDATION_RULES_PORTAL_PORT', 4200);
 const docsPort = configuredPort('VALIDATION_RULES_DOCS_PORT', 4201);
 const angularShowcasePort = configuredPort('VALIDATION_RULES_ANGULAR_SHOWCASE_PORT', 4202);
 const reactShowcasePort = configuredPort('VALIDATION_RULES_REACT_SHOWCASE_PORT', 4204);
+const useStaticShowcases = process.env['VALIDATION_RULES_STATIC_SHOWCASES'] === '1';
 export const platformUrls = {
   portal: configuredBaseUrl('VALIDATION_RULES_PORTAL_URL', `http://127.0.0.1:${portalPort}`),
   docs: configuredBaseUrl('VALIDATION_RULES_DOCS_URL', `http://127.0.0.1:${docsPort}`),
   angular: configuredBaseUrl('VALIDATION_RULES_ANGULAR_SHOWCASE_URL', `http://127.0.0.1:${angularShowcasePort}`),
   react: configuredBaseUrl('VALIDATION_RULES_REACT_SHOWCASE_URL', `http://127.0.0.1:${reactShowcasePort}`)
 };
+
+function showcaseStartScript(defaultScript: string): string {
+  return useStaticShowcases ? 'serve:static' : defaultScript;
+}
+
+function showcaseHealthUrl(url: string): string {
+  return useStaticShowcases ? `${url}/health` : url;
+}
+
+function staticShowcaseArgs(root: string, port: number, name: string): string[] {
+  return ['--root', root, '--host', '127.0.0.1', '--port', String(port), '--name', name, '--spa', 'true'];
+}
 
 export const applicationDefinitions: ApplicationDefinition[] = [
   {
@@ -60,9 +73,11 @@ export const applicationDefinitions: ApplicationDefinition[] = [
     description: 'Angular validation showcases with UI framework examples and comparable state management implementations.',
     kind: 'showcase',
     url: platformUrls.angular,
-    healthUrl: platformUrls.angular,
-    startScript: 'serve:angular-showcase',
-    startArgs: ['--host', '127.0.0.1', '--port', String(angularShowcasePort)],
+    healthUrl: showcaseHealthUrl(platformUrls.angular),
+    startScript: showcaseStartScript('serve:angular-showcase'),
+    startArgs: useStaticShowcases
+      ? staticShowcaseArgs('dist/showcases/angular', angularShowcasePort, 'angular-showcase')
+      : ['--host', '127.0.0.1', '--port', String(angularShowcasePort)],
     documentationUrl: `${platformUrls.docs}/docs/angular`,
     tags: ['ngModel', 'Reactive Forms', 'NgRx', 'NGXS', 'Signals'],
     showcaseLinks: [
@@ -88,9 +103,11 @@ export const applicationDefinitions: ApplicationDefinition[] = [
     description: 'Hooks-first controlled forms with nested policies, dynamic groups, accessibility, and measured large-form behavior.',
     kind: 'showcase',
     url: platformUrls.react,
-    healthUrl: platformUrls.react,
-    startScript: 'serve:react-showcase',
-    startArgs: ['--host', '127.0.0.1', '--port', String(reactShowcasePort)],
+    healthUrl: showcaseHealthUrl(platformUrls.react),
+    startScript: showcaseStartScript('serve:react-showcase'),
+    startArgs: useStaticShowcases
+      ? staticShowcaseArgs('dist/showcases/react', reactShowcasePort, 'react-showcase')
+      : ['--host', '127.0.0.1', '--port', String(reactShowcasePort)],
     documentationUrl: `${platformUrls.docs}/docs/react-overview`,
     tags: ['React', 'Hooks', 'Seven state integrations'],
     showcaseLinks: [

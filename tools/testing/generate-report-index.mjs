@@ -93,7 +93,7 @@ function renderDashboard(data, generatedAt) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Validation Rules test reports</title>
   <style>
-    :root { color-scheme:light; --ink:#172033; --muted:#667085; --line:#d7deea; --panel:#fff; --bg:#eef2f8; --accent:#3157d5; --pass:#087443; --warn:#b54708; }
+    :root { color-scheme:light; --ink:#172033; --muted:#52657a; --line:#d7deea; --panel:#fff; --bg:#eef2f8; --accent:#3157d5; --pass:#087443; --warn:#b54708; }
     * { box-sizing:border-box; }
     body { margin:0; color:var(--ink); background:var(--bg); font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif; }
     header { padding:42px 28px 34px; text-align:center; color:#fff; background:linear-gradient(125deg,#172554,#3157d5 62%,#4f46e5); }

@@ -5,11 +5,27 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+    inputs:
+      playwright_scope:
+        description: Playwright suite to run
+        required: false
+        default: smoke
+        type: choice
+        options:
+          - smoke
+          - full
+      include_visual_regression:
+        description: Run visual regression checks during a manual full run
+        required: false
+        default: false
+        type: boolean
+  schedule:
+    - cron: '0 5 * * 1'
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 90
 
     steps:
       - name: Check out repository
@@ -33,6 +49,43 @@ jobs:
       - name: Build packages and applications
         run: npm run build:all
 
+      - name: Install Playwright Chromium browser
+        if: github.event_name != 'schedule' && !(github.event_name == 'workflow_dispatch' && github.event.inputs.playwright_scope == 'full')
+        run: npx playwright install --with-deps chromium
+
+      - name: Install Playwright cross-browser support
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.event.inputs.playwright_scope == 'full')
+        run: npx playwright install --with-deps chromium firefox webkit
+
+      - name: Run Playwright smoke tests
+        if: github.event_name == 'pull_request' || (github.event_name == 'workflow_dispatch' && github.event.inputs.playwright_scope != 'full')
+        run: npm run test:e2e:smoke
+        env:
+          PLAYWRIGHT_HEADLESS: '1'
+          PLAYWRIGHT_SKIP_PLATFORM_BUILD: '1'
+
+      - name: Run Playwright Chromium regression
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: npm run test:e2e:chromium
+        env:
+          PLAYWRIGHT_HEADLESS: '1'
+          PLAYWRIGHT_SKIP_PLATFORM_BUILD: '1'
+
+      - name: Run Playwright full cross-browser regression
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.event.inputs.playwright_scope == 'full')
+        run: npm run test:e2e:all -- --project=accessibility-chromium --project=responsive-tablet --project=responsive-mobile
+        env:
+          PLAYWRIGHT_HEADLESS: '1'
+          PLAYWRIGHT_SKIP_PLATFORM_BUILD: '1'
+
+      - name: Run Playwright visual regression
+        # Visual baselines are OS-sensitive; keep them opt-in for stable CI hosts.
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.playwright_scope == 'full' && github.event.inputs.include_visual_regression == 'true'
+        run: npm run test:e2e:visual
+        env:
+          PLAYWRIGHT_HEADLESS: '1'
+          PLAYWRIGHT_SKIP_PLATFORM_BUILD: '1'
+
       - name: Upload browsable test reports
         if: always()
         uses: actions/upload-artifact@v4
@@ -40,6 +93,15 @@ jobs:
           name: validation-rules-test-reports
           path: reports/
           if-no-files-found: warn
+
+      - name: Upload Playwright artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-rules-playwright-artifacts
+          path: artifacts/playwright/
+          if-no-files-found: warn
+          retention-days: 14
 
       - name: Upload JUnit results
         if: always()

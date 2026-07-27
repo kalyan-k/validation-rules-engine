@@ -60,7 +60,7 @@ function renderReportFooter() {
 
 function reportStyles() {
   return `
-    :root { color-scheme:light; --vr-ink:#17273c; --vr-muted:#607086; --vr-line:#dbe3eb; --vr-panel:#fff; --vr-bg:#eef2f8; --vr-accent:#0d8f82; --vr-pass:#087443; --vr-warn:#b54708; --vr-fail:#b42318; }
+    :root { color-scheme:light; --vr-ink:#17273c; --vr-muted:#52657a; --vr-line:#dbe3eb; --vr-panel:#fff; --vr-bg:#eef2f8; --vr-accent:#08736a; --vr-pass:#087443; --vr-warn:#b54708; --vr-fail:#b42318; }
     * { box-sizing:border-box; }
     body { margin:0; color:var(--vr-ink); background:var(--vr-bg); font:15px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif; }
     .vr-report-summary { box-sizing:border-box; max-width:1600px; margin:0 auto; padding:24px 28px; border-bottom:1px solid var(--vr-line); background:#fff; }
@@ -71,11 +71,11 @@ function reportStyles() {
     .vr-report-summary.collapsed .vr-report-summary__heading button i { transform:rotate(45deg); }
     .vr-report-summary__details { max-height:100px; overflow:hidden; opacity:1; transition:max-height .3s ease,opacity .22s ease,margin .3s ease; }
     .vr-report-summary.collapsed .vr-report-summary__details { max-height:0; margin:0; opacity:0; }
-    .vr-report-eyebrow { color:#0b887c; font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+    .vr-report-eyebrow { color:#075f59; font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
     .vr-report-summary h1 { margin:5px 0 0; color:var(--vr-ink); font-size:30px; line-height:1.15; }
     .vr-report-metadata { display:grid; grid-template-columns:repeat(4,minmax(120px,1fr)); gap:8px 24px; margin:18px 0 0; }
     .vr-report-metadata div { min-width:0; }
-    .vr-report-metadata dt { color:#718399; font-size:10px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
+    .vr-report-metadata dt { color:#52657a; font-size:10px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
     .vr-report-metadata dd { margin:1px 0 0; color:#40556b; font-size:12px; overflow-wrap:anywhere; }
     .vr-report-subnav { display:flex; flex-wrap:wrap; gap:7px; max-width:1500px; margin:0 auto; padding:14px 28px; border-bottom:1px solid var(--vr-line); background:#fff; }
     .vr-report-subnav a { padding:7px 11px; border:1px solid #cbd9df; border-radius:8px; color:#08736a; background:#f8fbfb; font-size:13px; font-weight:700; text-decoration:none; }

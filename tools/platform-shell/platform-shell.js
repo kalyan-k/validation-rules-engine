@@ -171,6 +171,12 @@ function isDocsSectionActive(section) {
   return section.items.some((item) => isDocsItemActive(item));
 }
 
+function isPathActive(pathname) {
+  return location.pathname === pathname
+    || (pathname.endsWith('/index.html') && location.pathname === pathname.replace(/index\.html$/u, ''))
+    || (pathname.endsWith('/index.html') && location.pathname === pathname.replace(/\/index\.html$/u, ''));
+}
+
 class ValidationPlatformShell extends HTMLElement {
   static get observedAttributes() {
     return ['version'];
@@ -194,6 +200,7 @@ class ValidationPlatformShell extends HTMLElement {
     };
     const docsActive = activeApplication === 'documentation';
     const showcasesActive = activeApplication === 'angular-showcase' || activeApplication === 'react-showcase';
+    const reportsActive = activeApplication === 'reports';
     const docsNavigation = documentationSections.map((section) => {
       const active = docsActive && isDocsSectionActive(section);
       return `<a href="${urls.docs}${firstDocsPath(section)}"${active ? ' aria-current="page" class="active"' : ''}>${section.label}</a>`;
@@ -202,6 +209,13 @@ class ValidationPlatformShell extends HTMLElement {
       const applicationId = target === 'angular' ? 'angular-showcase' : 'react-showcase';
       const active = activeApplication === applicationId;
       return `<a href="${urls[target]}/"${active ? ' aria-current="page" class="active"' : ''}>${label}</a>`;
+    }).join('');
+    const reportsNavigation = [
+      ['Tests & Coverage', '/reports/index.html'],
+      ['Automation Testing', '/reports/playwright.html']
+    ].map(([label, pathname]) => {
+      const active = reportsActive && isPathActive(pathname);
+      return `<a href="${urls.portal}${pathname}"${active ? ' aria-current="page" class="active"' : ''}>${label}</a>`;
     }).join('');
 
     const root = this.attachShadow({ mode: 'open' });
@@ -225,7 +239,10 @@ class ValidationPlatformShell extends HTMLElement {
             <summary>Showcases<span aria-hidden="true"></span></summary>
             <div class="platform-dropdown">${showcasesNavigation}</div>
           </details>
-          <a class="platform-nav-link ${activeApplication === 'reports' ? 'active' : ''}" href="${urls.portal}/reports/index.html"${activeApplication === 'reports' ? ' aria-current="page"' : ''}>Reports</a>
+          <details class="platform-nav-group ${reportsActive ? 'active' : ''}">
+            <summary>Reports<span aria-hidden="true"></span></summary>
+            <div class="platform-dropdown">${reportsNavigation}</div>
+          </details>
           <a class="platform-nav-link" href="https://github.com/kalyan-k/validation-rules">GitHub</a>
         </nav>
       </header>

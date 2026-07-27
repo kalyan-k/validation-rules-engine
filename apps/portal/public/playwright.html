@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Latest Validation Rules Playwright browser automation report summary.">
+  <meta name="theme-color" content="#10243e">
+  <title>Validation Rules &middot; Automation Testing</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/validation-rules-mark.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/validation-rules-icon-180.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="preload" href="/platform-shell.css" as="style">
+  <link rel="stylesheet" href="/platform-shell.css">
+  <link rel="stylesheet" href="/platform-theme.css">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/platform-config.js"></script>
+  <script src="/platform-shell.js"></script>
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <validation-platform-shell active-application="reports" application-name="Automation Testing" version="0.0.0">
+    <main class="automation-report-page">
+      <section id="automation-testing" class="section automation-section" aria-labelledby="automation-testing-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Reports</p>
+            <h1 id="automation-testing-title">Automation Testing</h1>
+          </div>
+          <p>Latest Playwright execution summary plus the full configured test catalog. Focused runs show their smaller execution count, while the catalog shows the complete automation estate.</p>
+        </div>
+        <nav class="report-page-links" aria-label="Report pages">
+          <a href="/reports/index.html">Tests &amp; Coverage</a>
+          <a class="active" href="/reports/playwright.html" aria-current="page">Automation Testing</a>
+        </nav>
+        <div id="playwright-results" class="playwright-results" aria-live="polite">
+          <article class="playwright-empty">
+            <h3>Loading Playwright result summary...</h3>
+            <p>If no report exists, run <code>npm run test:e2e:smoke</code>.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </validation-platform-shell>
+</body>
+</html>

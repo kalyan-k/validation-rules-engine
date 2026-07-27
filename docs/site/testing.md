@@ -9,6 +9,7 @@ npm test
 npm run test:coverage
 npm run test:reports
 npm run test:ci
+npm run test:e2e:smoke
 ```
 
 ## Coverage gates
@@ -25,7 +26,7 @@ Each Angular or React target writes:
 - Istanbul HTML coverage,
 - LCOV and coverage-summary JSON.
 
-The Portal exposes the unified report dashboard at `/reports/index.html` after reports have been generated. Its left navigation tree separates collapsible Packages and Showcase Applications groups, both expanded by default. Summary, Tests, and Coverage tabs update one right-hand workspace with Summary selected initially, so report exploration stays in a single browser tab.
+The Portal exposes report pages from the Reports menu. Tests & Coverage opens `/reports/index.html` after reports have been generated. Automation Testing opens `/reports/playwright.html` and displays the latest Playwright manifest when available. The Automation Testing page separates the full configured Playwright catalog from the latest executed run, which matches enterprise dashboards where smoke, focused, regression, and full-suite runs are distinct. The Tests & Coverage dashboard left navigation tree separates collapsible Packages and Showcase Applications groups, both expanded by default. Summary, Tests, and Coverage tabs update one right-hand workspace with Summary selected initially, so report exploration stays in a single browser tab.
 
 The dashboard, test execution pages, and coverage wrappers share product navigation and a collapsible metadata summary with application name, version, report type, and generation time. The summary starts expanded, collapses automatically after about ten seconds, and remembers a manual preference for the current browser session. Coverage views embed untouched Istanbul pages, preserving folder navigation, source views, highlighting, and generated metrics.
 
@@ -34,6 +35,12 @@ The dashboard, test execution pages, and coverage wrappers share product navigat
 The portal and documentation use Node's test runner for application registry and Markdown rendering behavior. They compile as strict TypeScript before tests execute.
 
 React uses Vitest, jsdom, React Testing Library, and user-event. A normalization step converts Vitest JSON into the same branded summary/test workspace used by Karma while preserving Vitest JUnit and V8/Istanbul coverage output.
+
+## Playwright E2E testing
+
+Repository-level Playwright tests cover the portal, documentation, reports, Angular Showcase, React Showcase, accessibility, visual checks, and responsive behavior. The portal also displays the latest normalized Playwright execution manifest when available.
+
+Read the dedicated [Playwright E2E Testing](./playwright.md) guide for commands, tags, browser projects, artifact locations, portal integration, and contribution guidance.
 
 ## CI behavior
 

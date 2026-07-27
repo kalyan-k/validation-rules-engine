@@ -138,7 +138,7 @@ function renderDashboard(data, generatedAt, workspaceVersion) {
     .report-tree { position:sticky; top:16px; align-self:start; max-height:calc(100vh - 32px); overflow:auto; padding:16px; border:1px solid var(--vr-line); border-radius:13px; background:#fff; box-shadow:0 8px 28px rgba(23,32,51,.06); }
     .report-tree-group { border-top:1px solid #e5ebf0; }
     .report-tree-group:first-child { border-top:0; }
-    .report-tree-group>summary { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 4px; color:#64758a; list-style:none; font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; }
+    .report-tree-group>summary { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 4px; color:#52657a; list-style:none; font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; }
     .report-tree-group>summary::-webkit-details-marker { display:none; }
     .report-tree-group>summary span { width:7px; height:7px; margin-right:4px; border-right:1px solid; border-bottom:1px solid; transform:rotate(45deg); transition:transform .18s ease; }
     .report-tree-group[open]>summary span { transform:rotate(225deg); }

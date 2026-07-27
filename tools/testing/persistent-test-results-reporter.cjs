@@ -155,7 +155,7 @@ function renderHtml(report) {
   <title>${escapeHtml(report.displayName)} test results</title>
   <style>
     ${reportBranding.reportStyles()}
-    :root { color-scheme: light; --ink:#172033; --muted:#667085; --line:#d7deea; --panel:#fff; --bg:#f5f7fb; --pass:#087443; --fail:#b42318; --skip:#805500; --accent:#3157d5; }
+    :root { color-scheme: light; --ink:#172033; --muted:#52657a; --line:#d7deea; --panel:#fff; --bg:#f5f7fb; --pass:#087443; --fail:#b42318; --skip:#805500; --accent:#3157d5; }
     * { box-sizing:border-box; }
     html { scroll-behavior:smooth; }
     body { margin:0; color:var(--ink); background:var(--bg); font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif; }

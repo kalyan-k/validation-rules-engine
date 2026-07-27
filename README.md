@@ -257,10 +257,12 @@ npm run build:all
 | `npm test` | Run Node, Angular/Karma, and React/Vitest suites |
 | `npm run test:coverage` | Run all tests and independent 90% coverage gates |
 | `npm run test:reports` | Generate and verify browsable reports for every project |
+| `npm run test:e2e:smoke` | Run the fast Playwright browser smoke suite |
+| `npm run test:e2e` | Run repository-level Playwright E2E tests in Chromium |
 | `npm run reports:open` | Open the generated report dashboard |
 | `npm run lint:all` | Lint every configured project |
 
-See [Testing and reports](docs/testing.md) for report locations, coverage scope, CI behavior, and troubleshooting.
+See [Testing and reports](docs/site/testing.md) and [Playwright E2E Testing](docs/site/playwright.md) for report locations, coverage scope, CI behavior, browser automation, and troubleshooting.
 
 ## Contributing
 

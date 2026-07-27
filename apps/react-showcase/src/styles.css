@@ -19,7 +19,7 @@ code { padding: .15rem .35rem; border-radius: 4px; background: #edf2f5; font-siz
 .form-field { display: grid; align-content: start; gap: .35rem; min-width: 0; }
 .form-field > label, .checkbox-field > label { color: #314960; font-size: .78rem; font-weight: 760; }
 .form-field input, .form-field select, .form-field textarea { width: 100%; min-height: 42px; padding: .62rem .7rem; border: 1px solid #b9c7d3; border-radius: 7px; color: #17273c; background: #fff; }
-.form-field input:focus, .form-field select:focus, .form-field textarea:focus { outline: 3px solid rgba(13, 143, 130, .16); border-color: #0d8f82; }
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus { outline: 3px solid rgba(8, 115, 106, .18); border-color: #08736a; }
 .form-field.invalid input, .form-field.invalid select, .form-field.invalid textarea, .checkbox-field.invalid, .radio-field.invalid { border-color: #c43d4d; }
 .validation-message { min-height: 1.1rem; color: #a32435; font-size: .73rem; }
 .validation-message p { margin: 0 0 .2rem; }
@@ -40,7 +40,7 @@ code { padding: .15rem .35rem; border-radius: 4px; background: #edf2f5; font-siz
 .form-section { margin: 1rem 0; padding: 1.35rem; }
 .form-section > header { display: flex; justify-content: space-between; align-items: start; gap: 1rem; margin-bottom: 1rem; }
 .form-section h2 { margin: 0; font-size: 1.2rem; }
-.group-status { display: inline-flex; margin-top: .4rem; padding: .22rem .52rem; border-radius: 999px; color: #65778a; background: #edf2f5; font-size: .67rem; font-weight: 760; }
+.group-status { display: inline-flex; margin-top: .4rem; padding: .22rem .52rem; border-radius: 999px; color: #52657a; background: #edf2f5; font-size: .67rem; font-weight: 760; }
 .group-status.valid { color: #0c6748; background: #dff4e9; }
 .group-status.invalid { color: #a32435; background: #fde6e9; }
 .repeatable-card { margin: 1rem 0; padding: 1rem; border: 1px solid #dce4ea; border-radius: 9px; }
@@ -50,7 +50,7 @@ code { padding: .15rem .35rem; border-radius: 4px; background: #edf2f5; font-siz
 .metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; overflow: hidden; background: #dbe3eb; }
 .metric-grid div { padding: 1rem; background: #fff; }
 .metric-grid span, .metric-grid strong { display: block; }
-.metric-grid span { color: #6d7e91; font-size: .66rem; font-weight: 780; text-transform: uppercase; letter-spacing: .06em; }
+.metric-grid span { color: #52657a; font-size: .66rem; font-weight: 780; text-transform: uppercase; letter-spacing: .06em; }
 .metric-grid strong { margin-top: .25rem; font-size: 1.25rem; }
 .performance-config-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
 .performance-fields { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: start; gap: .75rem; }
@@ -75,7 +75,7 @@ code { padding: .15rem .35rem; border-radius: 4px; background: #edf2f5; font-siz
 .state-showcase-runtime p { margin: .3rem 0 0; color: #52657a; font-size: .86rem; }
 .state-showcase-runtime .state-readout { justify-content: flex-end; margin: 0; }
 .state-readout { display: flex; flex-wrap: wrap; gap: .7rem; margin: 0 0 1rem; }
-.state-readout span { padding: .42rem .65rem; border: 1px solid #d6e1e8; border-radius: 999px; color: #607086; background: #fff; font-size: .7rem; font-weight: 700; }
+.state-readout span { padding: .42rem .65rem; border: 1px solid #d6e1e8; border-radius: 999px; color: #52657a; background: #fff; font-size: .7rem; font-weight: 700; }
 .state-readout strong { color: #08736a; }
 .state-home-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
 .primitive-list { display: flex; flex-wrap: wrap; gap: .45rem; margin: 1rem 0; }
