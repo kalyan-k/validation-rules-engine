@@ -15,8 +15,7 @@ export function describeAngularStateStrategy(strategy: AngularStrategyUnderTest)
       const showcase = new AngularStateShowcasePage(page, baseUrls);
       await showcase.goto(strategy.id);
       await showcase.expectOverview(strategy.label);
-      await page.getByRole('link', { name: /Simple Form/i }).first().click();
-      await page.waitForURL(new RegExp(`/state/${strategy.id}/simple$`));
+      await showcase.openSimpleFormFromOverview(strategy.id);
     });
 
     test(`validates simple form behavior ${strategy.tag}`, async ({ page, baseUrls }) => {

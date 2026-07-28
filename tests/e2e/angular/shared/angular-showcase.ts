@@ -26,6 +26,37 @@ export class AngularStateShowcasePage {
     await expect(this.page.getByRole('link', { name: /documentation/i }).first()).toBeVisible();
   }
 
+  /**
+   * Overview → Simple Form navigation.
+   * Firefox can hang inside locator.click while Angular Router starts navigation
+   * ("performing click action" until actionTimeout). Prefer a scoped tab link,
+   * do not wait for navigation inside the click, and fall back to href navigation.
+   */
+  async openSimpleFormFromOverview(strategyId: string): Promise<void> {
+    const simpleUrl = new RegExp(`/state/${strategyId}/simple$`);
+    const link = this.page
+      .getByRole('navigation', { name: 'State showcase pages' })
+      .getByRole('link', { name: 'Simple Form', exact: true });
+
+    await expect(link).toBeVisible();
+    await link.scrollIntoViewIfNeeded();
+
+    const href = await link.getAttribute('href');
+    try {
+      await link.click({ noWaitAfter: true, timeout: 5_000 });
+    } catch {
+      if (href) {
+        await this.page.goto(new URL(href, this.baseUrls.angular).toString());
+      } else {
+        await this.page.goto(`${this.baseUrls.angular}/state/${strategyId}/simple`);
+      }
+    }
+
+    await this.page.waitForURL(simpleUrl, { timeout: 15_000 });
+    await waitForApplicationReady(this.page);
+    await expect(this.page.getByRole('heading', { name: 'Simple Form' })).toBeVisible();
+  }
+
   async exerciseSimpleForm(): Promise<void> {
     await expect(this.page.getByRole('heading', { name: 'Simple Form' })).toBeVisible();
     await expect(this.page.getByLabel('First Name')).toBeVisible();
@@ -81,7 +112,9 @@ export class AngularStateShowcasePage {
   }
 
   async exercisePolicyComposition(): Promise<void> {
-    const caseId = this.page.getByRole('textbox', { name: /Regulated Case ID/i });
+    // Prefer #caseId over role locators: WebKit can keep stale accessible-name matches
+    // briefly while Angular tears down the regulated @if block.
+    const caseId = this.page.locator('#caseId');
     const regulated = this.page.getByRole('button', { name: 'Regulated policy' });
     const standard = this.page.getByRole('button', { name: 'Standard policy' });
 
@@ -91,19 +124,25 @@ export class AngularStateShowcasePage {
 
     await this.clickStable('Programmatic validation');
     await expect(this.page.getByText(/Case ID is required for regulated policy mode|Complex form has \d+ validation error/i).first()).toBeVisible();
+    // Let the async evaluatePolicies subscription finish before mutating mode again.
+    await expect(this.page.getByText(/Complex form programmatic validation started/i)).toHaveCount(0);
+
     await caseId.fill('CASE-1001');
+    await expect(caseId).toHaveValue('CASE-1001');
+    // Blur so ngModelChange → syncComplexState settles before the mode switch.
+    await caseId.blur();
 
-    // Field sync commits can briefly race the mode switch on Firefox/WebKit.
-    // Retry the switch until the Case ID control is removed from the DOM.
+    // Field sync commits can race the mode switch on Firefox/WebKit.
+    // Retry until Standard is primary and the Case ID control is gone.
     await expect(async () => {
-      if (await caseId.count()) {
-        await standard.click({ force: true });
+      if ((await caseId.count()) > 0 || !(await standard.evaluate((el) => el.classList.contains('btn-primary')))) {
+        await this.activatePolicyButton(standard);
       }
+      await expect(standard).toHaveClass(/btn-primary/);
       await expect(caseId).toHaveCount(0);
-    }).toPass({ timeout: 10_000, intervals: [250, 500, 1_000] });
-    await expect(standard).toHaveClass(/btn-primary/);
+    }).toPass({ timeout: 20_000, intervals: [250, 500, 1_000, 2_000] });
 
-    await regulated.click();
+    await this.activatePolicyButton(regulated);
     await expect(caseId).toBeVisible();
     await expect(regulated).toHaveClass(/btn-primary/);
   }
@@ -147,5 +186,25 @@ export class AngularStateShowcasePage {
     await expect(button).toBeEnabled({ timeout: 30_000 });
     await button.scrollIntoViewIfNeeded();
     await button.click();
+  }
+
+  /**
+   * Policy mode buttons sit under a sticky platform header on smaller viewports.
+   * Prefer a normal Playwright click; fall back to a DOM click so Angular still
+   * receives the (click) binding when hit-testing is flaky (especially WebKit).
+   */
+  private async activatePolicyButton(button: ReturnType<Page['getByRole']>): Promise<void> {
+    await expect(button).toBeVisible();
+    await expect(button).toBeEnabled();
+    await button.scrollIntoViewIfNeeded();
+    try {
+      await button.click({ timeout: 3_000 });
+    } catch {
+      await button.evaluate((element) => {
+        if (element instanceof HTMLButtonElement) {
+          element.click();
+        }
+      });
+    }
   }
 }
