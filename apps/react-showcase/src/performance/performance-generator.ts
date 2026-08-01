@@ -5,7 +5,7 @@ import {
   type ValidationPolicy,
   type ValidationTarget,
   type Validator
-} from '@validation-rules/react';
+} from '@validation-rules-engine/react';
 
 export type PerformanceControlType =
   | 'text'

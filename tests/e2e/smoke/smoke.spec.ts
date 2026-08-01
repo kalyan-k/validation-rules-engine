@@ -11,13 +11,13 @@ test.describe('Repository smoke suite @smoke', () => {
     await new PortalPage(page, baseUrls).expectApplicationCards();
 
     await page.goto(`${baseUrls.docs}/docs/overview`);
-    await expect(page.getByRole('heading', { name: /What is Validation Rules/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /What is Validation Rules Engine \(VRE\)/i })).toBeVisible();
 
     await page.goto(`${baseUrls.portal}/reports/index.html`);
     await expect(page.getByRole('heading', { name: /Test and coverage workspace|No generated reports/i })).toBeVisible();
 
     await page.goto(baseUrls.angular);
-    await expect(page.getByRole('heading', { name: /Validation Rules Showcase Application/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /Validation Rules Engine Showcase Application/i })).toBeVisible();
 
     await page.goto(baseUrls.react);
     await expect(page.getByRole('heading', { name: /Policy validation that fits React/i })).toBeVisible();

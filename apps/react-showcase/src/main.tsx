@@ -1,6 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { ValidationRulesProvider } from '@validation-rules/react';
+import { ValidationRulesProvider } from '@validation-rules-engine/react';
 import { App } from './app';
 import './styles.css';
 

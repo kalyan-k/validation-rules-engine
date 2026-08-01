@@ -8,7 +8,7 @@ const reportsRoot = resolve(workspaceRoot, 'reports/packages/react');
 export default defineConfig({
   root: __dirname,
   plugins: [react()],
-  resolve: { alias: { '@validation-rules/core': resolve(__dirname, '../core/src/public-api.ts') } },
+  resolve: { alias: { '@validation-rules-engine/core': resolve(__dirname, '../core/src/public-api.ts') } },
   test: {
     environment: 'jsdom',
     setupFiles: [resolve(__dirname, 'src/testing/setup.ts')],

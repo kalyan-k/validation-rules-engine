@@ -34,27 +34,27 @@ submit(): void {
 
 Keep the model object stable during validation, use explicit `name` attributes, and align `validateModel` paths with policy paths.
 
-## Using @validation-rules/angular
+## Using @validation-rules-engine/angular
 
-Template Driven Forms are the lowest-friction way to consume `@validation-rules/angular`: Angular owns `[(ngModel)]` binding and Validation Rules owns policy execution, field messages, group status, and submit validation.
+Template Driven Forms are the lowest-friction way to consume `@validation-rules-engine/angular`: Angular owns `[(ngModel)]` binding and Validation Rules Engine owns policy execution, field messages, group status, and submit validation.
 
 ### Step 1 — Install Package
 
 Install the Angular adapter next to Angular Forms. The adapter exports Core policy types, so application code can import policies from one package.
 
 ```bash
-npm install @validation-rules/angular @validation-rules/core
+npm install @validation-rules-engine/angular @validation-rules-engine/core
 npm install @angular/forms
 ```
 
-Use the adapter version that matches the Validation Rules workspace version used by your application. Angular itself remains a peer dependency of your app.
+Use the adapter version that matches the Validation Rules Engine workspace version used by your application. Angular itself remains a peer dependency of your app.
 
 ```json
 {
   "dependencies": {
     "@angular/forms": "^20.0.0",
-    "@validation-rules/angular": "^1.0.0",
-    "@validation-rules/core": "^1.0.0"
+    "@validation-rules-engine/angular": "^1.0.0",
+    "@validation-rules-engine/core": "^1.0.0"
   }
 }
 ```
@@ -67,7 +67,7 @@ Import `FormsModule` for `ngModel`, `ValidationModule` for directives/components
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { ValidationModule, provideBootstrapValidationDisplay } from '@validation-rules/angular';
+import { ValidationModule, provideBootstrapValidationDisplay } from '@validation-rules-engine/angular';
 import { ProfileComponent } from './profile.component';
 
 @NgModule({
@@ -84,7 +84,7 @@ export class AppModule {}
 Create a plain model and a Core-compatible policy. The paths used by `validateFor()` must match the `validateModel` paths in the template.
 
 ```ts
-import { ValidationModel, ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules/angular';
+import { ValidationModel, ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules-engine/angular';
 
 export interface ProfileModel extends ValidationModel {
   form: {
@@ -117,7 +117,7 @@ Register policies when the component is created and unregister them when the rou
 
 ```ts
 import { OnDestroy, OnInit } from '@angular/core';
-import { ValidationProviderService } from '@validation-rules/angular';
+import { ValidationProviderService } from '@validation-rules-engine/angular';
 import { ProfilePolicy } from './profile.policy';
 
 export class ProfileComponent implements OnInit, OnDestroy {
@@ -214,7 +214,7 @@ validateProfileGroup(): void {
 
 ### Step 8 — Reset
 
-Reset both the form model and Validation Rules metadata. If the component is going away, unregister the policy and group.
+Reset both the form model and Validation Rules Engine metadata. If the component is going away, unregister the policy and group.
 
 ```ts
 reset(): void {
@@ -249,7 +249,7 @@ Prefer one route-scoped policy name per feature form, stable model objects while
 
 ```ts
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ValidationProviderService } from '@validation-rules/angular';
+import { ValidationProviderService } from '@validation-rules-engine/angular';
 import { ProfileModel, ProfilePolicy, profilePaths } from './profile.policy';
 
 function emptyProfile(): ProfileModel {

@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, NgZone, SimpleChange } from '@angular/core';
 import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { of, Subject, throwError } from 'rxjs';
-import { ValidationProviderService } from '@validation-rules/angular';
+import { ValidationProviderService } from '@validation-rules-engine/angular';
 import {
   PerformanceFieldDef,
   PerformanceFormModel,

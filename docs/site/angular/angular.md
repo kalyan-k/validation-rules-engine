@@ -1,6 +1,6 @@
 # Angular Package
 
-`@validation-rules/angular` adapts Core policies to Angular lifecycles while preserving model-first validation. It supports template-driven `ngModel` forms, Reactive Forms coordination, Angular Material, Bootstrap, Tailwind-compatible classes, custom display strategies, dynamic sections, validation groups, summaries, and state workflows including NgRx, NGXS, Akita, Elf, RxAngular State, Signals, and custom RxJS stores.
+`@validation-rules-engine/angular` adapts Core policies to Angular lifecycles while preserving model-first validation. It supports template-driven `ngModel` forms, Reactive Forms coordination, Angular Material, Bootstrap, Tailwind-compatible classes, custom display strategies, dynamic sections, validation groups, summaries, and state workflows including NgRx, NGXS, Akita, Elf, RxAngular State, Signals, and custom RxJS stores.
 
 ## What Angular owns
 

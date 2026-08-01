@@ -2,7 +2,7 @@
 
 ## Coordination pattern
 
-Reactive Forms can own interaction state while Validation Rules owns policy execution.
+Reactive Forms can own interaction state while Validation Rules Engine owns policy execution.
 
 ```ts
 form = this.fb.group({
@@ -31,16 +31,16 @@ The unified Angular showcase shows Reactive Forms with the same Overview, Simple
 
 [Open Reactive Forms state showcase](http://127.0.0.1:4202/state/reactive-forms)
 
-## Using @validation-rules/angular
+## Using @validation-rules-engine/angular
 
-Reactive Forms pair well with `@validation-rules/angular` when the `FormGroup` owns user interaction state and a plain policy model owns validation state.
+Reactive Forms pair well with `@validation-rules-engine/angular` when the `FormGroup` owns user interaction state and a plain policy model owns validation state.
 
 ### Step 1 — Install Package
 
 Install the Angular adapter and Reactive Forms dependencies.
 
 ```bash
-npm install @validation-rules/angular @validation-rules/core
+npm install @validation-rules-engine/angular @validation-rules-engine/core
 npm install @angular/forms
 ```
 
@@ -51,7 +51,7 @@ Keep Angular, RxJS, and the adapter aligned with your application’s Angular ma
   "dependencies": {
     "@angular/forms": "^20.0.0",
     "rxjs": "^7.8.0",
-    "@validation-rules/angular": "^1.0.0"
+    "@validation-rules-engine/angular": "^1.0.0"
   }
 }
 ```
@@ -63,7 +63,7 @@ Import `ReactiveFormsModule` and `ValidationModule`. Display providers are optio
 ```ts
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ValidationModule, provideBootstrapValidationDisplay } from '@validation-rules/angular';
+import { ValidationModule, provideBootstrapValidationDisplay } from '@validation-rules-engine/angular';
 
 @NgModule({
   imports: [ReactiveFormsModule, ValidationModule],
@@ -77,7 +77,7 @@ export class AccountModule {}
 Use policy paths that match the plain model you derive from `form.getRawValue()`.
 
 ```ts
-import { ValidationModel, ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules/angular';
+import { ValidationModel, ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules-engine/angular';
 
 export interface AccountModel extends ValidationModel {
   firstName: string;
@@ -151,7 +151,7 @@ private applyPolicyErrors(model: AccountModel): void {
 
 ### Step 6 — Bind Controls
 
-Use normal `formControlName` binding and attach Validation Rules directives for messages and group state.
+Use normal `formControlName` binding and attach Validation Rules Engine directives for messages and group state.
 
 ```html
 <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
@@ -164,7 +164,7 @@ Use normal `formControlName` binding and attach Validation Rules directives for 
 
 ### Step 7 — Validate
 
-Rebuild the model from the form before every validation pass, then update both Validation Rules metadata and Reactive Forms errors.
+Rebuild the model from the form before every validation pass, then update both Validation Rules Engine metadata and Reactive Forms errors.
 
 ```ts
 submit(): void {
@@ -215,7 +215,7 @@ Do not store `FormControl` objects in global state. Store plain values, validate
 ```ts
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ValidationProviderService } from '@validation-rules/angular';
+import { ValidationProviderService } from '@validation-rules-engine/angular';
 import { AccountModel, AccountPolicy } from './account.policy';
 
 @Component({

@@ -132,7 +132,7 @@ function renderDashboard(data, generatedAt, workspaceVersion) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="report-project" content="workspace">
   ${reportBranding.reportHeadAssets()}
-  <title>Validation Rules test reports</title>
+  <title>Validation Rules Engine test reports</title>
   <style>${reportBranding.reportStyles()}
     .report-workspace { display:grid; grid-template-columns:260px minmax(0,1fr); gap:20px; max-width:1600px; margin:0 auto 36px; padding:22px 28px 6px; }
     .report-tree { position:sticky; top:16px; align-self:start; max-height:calc(100vh - 32px); overflow:auto; padding:16px; border:1px solid var(--vr-line); border-radius:13px; background:#fff; box-shadow:0 8px 28px rgba(23,32,51,.06); }

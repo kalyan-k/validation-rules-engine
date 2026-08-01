@@ -34,8 +34,8 @@ const platformAssets = new Set([
   'platform-shell.js',
   'platform-theme.css',
   'site.webmanifest',
-  'validation-rules-mark.svg',
-  ...[16, 32, 64, 180, 192, 512].map((size) => `validation-rules-icon-${size}.png`)
+  'vre-mark.svg',
+  ...[16, 32, 64, 180, 192, 512].map((size) => `vre-icon-${size}.png`)
 ]);
 
 export function createPortalServer(manager: ApplicationProcessManager): http.Server {
@@ -74,8 +74,8 @@ async function handleRequest(
     sendJson(response, 200, {
       version: rootPackage.version ?? '0.0.0',
       revision: repositoryRevision(),
-      builtAt: process.env['VALIDATION_RULES_BUILD_TIME'] ?? 'Local development',
-      repository: 'https://github.com/kalyan-k/validation-rules',
+      builtAt: process.env['VRE_BUILD_TIME'] ?? 'Local development',
+      repository: 'https://github.com/kalyan-k/validation-rules-engine',
       urls: platformUrls
     });
     return;
@@ -177,7 +177,7 @@ function escapeHtml(value: string): string {
 }
 
 function platformConfigScript(): string {
-  return `globalThis.validationRulesPlatformConfig = ${JSON.stringify({ urls: platformUrls })};`;
+  return `globalThis.vrePlatformConfig = ${JSON.stringify({ urls: platformUrls })};`;
 }
 
 function rewriteConfiguredLinks(html: string): string {
@@ -204,7 +204,7 @@ function missingReportsHtml(): string {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Validation Rules Reports</title>
+  <title>Validation Rules Engine Reports</title>
   <link rel="stylesheet" href="/platform-shell.css">
   <link rel="stylesheet" href="/platform-theme.css">
   <style>
@@ -231,7 +231,7 @@ function missingReportsHtml(): string {
 }
 
 function openPortal(url: string): void {
-  if (process.env['VALIDATION_RULES_NO_OPEN'] === '1') {
+  if (process.env['VRE_NO_OPEN'] === '1') {
     return;
   }
   const command = process.platform === 'win32' ? 'cmd.exe' : process.platform === 'darwin' ? 'open' : 'xdg-open';
@@ -244,7 +244,7 @@ async function main(): Promise<void> {
   const manager = new ApplicationProcessManager(applicationDefinitions, workspaceRoot);
   const server = createPortalServer(manager);
   server.listen(portalPort, '127.0.0.1', () => {
-    console.log(`Validation Rules Portal: ${platformUrls.portal}`);
+    console.log(`Validation Rules Engine Portal: ${platformUrls.portal}`);
     manager.startAll();
     openPortal(platformUrls.portal);
   });

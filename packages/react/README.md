@@ -1,14 +1,14 @@
-# @validation-rules/react
+# @validation-rules-engine/react
 
-Idiomatic React integration for the framework-independent `@validation-rules/core` policy model. The package supplies an engine, provider, focused hooks, accessible message components, Strict Mode-safe policy ownership, and async-safe field validation without imposing a visual design system or state-management library.
+Idiomatic React integration for Validation Rules Engine (VRE), built on the framework-independent `@validation-rules-engine/core` policy model. The package supplies an engine, provider, focused hooks, accessible message components, Strict Mode-safe policy ownership, and async-safe field validation without imposing a visual design system or state-management library.
 
 ## Installation
 
 ```bash
-npm install @validation-rules/core @validation-rules/react react react-dom
+npm install @validation-rules-engine/core @validation-rules-engine/react react react-dom
 ```
 
-React and React DOM 19.2, plus `@validation-rules/core` 1.x, are peer dependencies.
+React and React DOM 19.2, plus `@validation-rules-engine/core` 1.x, are peer dependencies.
 
 ## Quick start
 
@@ -21,7 +21,7 @@ import {
   ValidationSummary,
   useValidationField,
   useValidationForm
-} from '@validation-rules/react';
+} from '@validation-rules-engine/react';
 
 const accountPolicy: ValidationPolicy = {
   addValidations(helper: ValidatorHelper) {

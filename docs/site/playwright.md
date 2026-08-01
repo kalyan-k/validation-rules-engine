@@ -1,6 +1,6 @@
 # Playwright End-to-End Testing
 
-Validation Rules uses repository-level Playwright automation for browser-level confidence across the portal, documentation, existing reports, Angular Showcase, and React Showcase.
+Validation Rules Engine (VRE) uses repository-level Playwright automation for browser-level confidence across the portal, documentation, existing reports, Angular Showcase, and React Showcase.
 
 ## Purpose
 

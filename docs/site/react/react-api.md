@@ -1,6 +1,6 @@
 # React API Reference
 
-This page lists the supported public surface of `@validation-rules/react` 1.0.
+This page lists the supported public surface of `@validation-rules-engine/react` 1.0.
 
 ## ValidationEngine
 

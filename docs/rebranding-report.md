@@ -1,8 +1,8 @@
-# Validation Rules rebranding report
+# Validation Rules Engine (VRE) rebranding report
 
 ## Scope
 
-This milestone aligns the monorepo, npm packages, build artifacts, reports, CI labels, showcase copy, and documentation under the Validation Rules identity. It preserves application behavior, Angular APIs, validation logic, selectors, styling hooks, and consumer-facing runtime contracts.
+This milestone aligns the monorepo, npm packages, build artifacts, reports, CI labels, showcase copy, and documentation under the Validation Rules Engine identity. It preserves application behavior, Angular APIs, validation logic, selectors, styling hooks, and consumer-facing runtime contracts.
 
 No packages were published, and no tags or releases were created.
 
@@ -10,13 +10,13 @@ No packages were published, and no tags or releases were created.
 
 | Surface | Final identity |
 | --- | --- |
-| Product | Validation Rules |
-| Repository | `validation-rules` |
-| Workspace | `validation-rules-workspace` |
-| npm scope | `@validation-rules` |
-| Core package | `@validation-rules/core` |
-| Angular package | `@validation-rules/angular` |
-| Showcase workspace | `@validation-rules/angular-showcase` (private) |
+| Product | Validation Rules Engine (VRE) |
+| Repository | `validation-rules-engine` |
+| Workspace | `validation-rules-engine-workspace` |
+| npm scope | `@validation-rules-engine` |
+| Core package | `@validation-rules-engine/core` |
+| Angular package | `@validation-rules-engine/angular` |
+| Showcase workspace | `@validation-rules-engine/angular-showcase` (private) |
 
 ## Architecture
 
@@ -24,10 +24,10 @@ No packages were published, and no tags or releases were created.
 apps/angular-showcase
         |
         v
-@validation-rules/angular
+@validation-rules-engine/angular
         |
         v
-@validation-rules/core
+@validation-rules-engine/core
 ```
 
 The existing package ownership and one-way dependency model are unchanged. Core remains framework-independent, Angular owns integration and expression execution, and the showcase consumes the Angular public API. The architecture verifier was updated to enforce the final package identities.
@@ -35,7 +35,7 @@ The existing package ownership and one-way dependency model are unchanged. Core 
 ## Final repository tree
 
 ```text
-validation-rules/
+validation-rules-engine/
 |-- .github/
 |   `-- workflows/test.yml
 |-- apps/
@@ -83,7 +83,7 @@ Changing these identifiers would be a functional, consumer-visible breaking chan
 ## Workspace and build changes
 
 - Updated npm workspace package names, peer dependencies, local dependencies, imports, and TypeScript path aliases.
-- Updated package metadata and repository URLs for the intended `validation-rules` repository.
+- Updated package metadata and repository URLs for the intended `validation-rules-engine` repository.
 - Updated the local Git `origin` URL without fetching, pushing, or changing the hosted repository.
 - Renamed core and Angular package output folders under `dist/packages/core` and `dist/packages/angular`.
 - Updated the showcase stylesheet input, package dry-run path, and publication path to the new Angular artifact location.
@@ -233,20 +233,19 @@ Generated outputs:
 
 ```text
 dist/
-|-- angular-showcase/
-|-- validation-rules-angular/
-`-- validation-rules-core/
+|-- apps/                    # portal and documentation servers
+|-- packages/                # core, Angular, and React npm packages
+`-- showcases/               # Angular and React browser applications
 
 reports/
-|-- angular/
-|-- angular-showcase/
-|-- core/
-`-- index.html
+|-- packages/                # core, Angular, and React test/coverage reports
+|-- showcases/               # Angular and React showcase reports
+`-- index.html               # report workspace landing page
 ```
 
 ## Future opportunities
 
-- Close the active workspace and rename the physical repository directory to `validation-rules`; the Windows directory handle is the only incomplete identity surface.
+- Close the active workspace and rename the physical repository directory to `validation-rules-engine`; the Windows directory handle is the only incomplete identity surface.
 - Rename the hosted Git repository to match the already-updated local `origin` after human review.
 - Plan a separately versioned migration only if compatibility selectors or stylesheet names ever need a new identity.
 - Extract an expression-evaluator abstraction before considering policy execution framework-neutral.

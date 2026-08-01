@@ -1,8 +1,8 @@
 {
-  "name": "@validation-rules/angular-showcase",
+  "name": "@validation-rules-engine/angular-showcase",
   "version": "0.0.0",
   "private": true,
-  "description": "Private Angular showcase application for @validation-rules/angular",
+  "description": "Private Angular showcase application for @validation-rules-engine/angular",
   "dependencies": {
     "@datorama/akita": "^7.1.1",
     "@ngneat/elf": "^2.5.1",
@@ -11,6 +11,6 @@
     "@ngxs/store": "^20.1.0",
     "@rx-angular/cdk": "^20.1.0",
     "@rx-angular/state": "^20.1.0",
-    "@validation-rules/angular": "1.0.0"
+    "@validation-rules-engine/angular": "1.0.0"
   }
 }

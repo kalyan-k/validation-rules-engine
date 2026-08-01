@@ -6,16 +6,16 @@ The Zustand showcase uses a route-scoped external store and focused selectors. V
 
 [Open Live Showcase](http://127.0.0.1:4204/state/zustand)
 
-## Using @validation-rules/react
+## Using @validation-rules-engine/react
 
-With Zustand, keep the store focused on model transitions and let React components call Validation Rules hooks with the selected model.
+With Zustand, keep the store focused on model transitions and let React components call Validation Rules Engine hooks with the selected model.
 
 ### Step 1 — Install Package
 
 Install the React adapter, Core package, and Zustand.
 
 ```bash
-npm install @validation-rules/react @validation-rules/core zustand
+npm install @validation-rules-engine/react @validation-rules-engine/core zustand
 ```
 
 Zustand is independent of the adapter and should be versioned with the application.
@@ -24,7 +24,7 @@ Zustand is independent of the adapter and should be versioned with the applicati
 {
   "dependencies": {
     "zustand": "^5.0.0",
-    "@validation-rules/react": "^1.0.0"
+    "@validation-rules-engine/react": "^1.0.0"
   }
 }
 ```
@@ -36,7 +36,7 @@ Wrap the route in `ValidationRulesProvider`. Provide a scoped Zustand store when
 ```tsx
 import { createContext, useContext, useMemo } from 'react';
 import { createStore, useStore } from 'zustand';
-import { ValidationRulesProvider } from '@validation-rules/react';
+import { ValidationRulesProvider } from '@validation-rules-engine/react';
 
 const ProfileStoreContext = createContext<ReturnType<typeof createProfileStore> | null>(null);
 
@@ -57,7 +57,7 @@ export function ProfileRoute() {
 Keep policies separate from Zustand store creation.
 
 ```tsx
-import type { ValidationPolicy, ValidationTarget } from '@validation-rules/react';
+import type { ValidationPolicy, ValidationTarget } from '@validation-rules-engine/react';
 
 export type ProfileModel = ValidationTarget & {
   firstName: string;
@@ -177,7 +177,7 @@ Avoid subscribing every field component to the entire store, keep actions immuta
 ```tsx
 import { FormEvent, useMemo } from 'react';
 import { useStore } from 'zustand';
-import { ValidationMessage, ValidationSummary, useValidationRules } from '@validation-rules/react';
+import { ValidationMessage, ValidationSummary, useValidationRules } from '@validation-rules-engine/react';
 import { ProfileModel, profilePolicy } from './profilePolicy';
 
 export function ZustandProfileForm() {
@@ -219,7 +219,7 @@ function useProfileStore() {
 ## Installation
 
 ```bash
-npm install @validation-rules/react zustand
+npm install @validation-rules-engine/react zustand
 ```
 
 ## Package imports
@@ -227,7 +227,7 @@ npm install @validation-rules/react zustand
 ```tsx
 import { createStore } from 'zustand/vanilla';
 import { useStore } from 'zustand';
-import { useValidationRules, useValidationField, ValidationSummary } from '@validation-rules/react';
+import { useValidationRules, useValidationField, ValidationSummary } from '@validation-rules-engine/react';
 ```
 
 ## Provider setup
@@ -312,7 +312,7 @@ Controls → Zustand actions → vanilla store → focused selectors → validat
 
 Choose Zustand for a small external store, concise actions, scoped or shared state, and selector-based rendering without Redux-style ceremony.
 
-## How Validation Rules integrates
+## How Validation Rules Engine integrates
 
 The store owns model transitions. Validation policies and groups are registered by React hooks and never imported by the Zustand store.
 

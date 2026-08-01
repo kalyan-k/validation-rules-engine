@@ -1,4 +1,4 @@
-import { ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules/angular';
+import { ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules-engine/angular';
 import { PerformanceFieldDef } from '../../models/performance-form.model';
 
 export class PerformanceConfigValidationPolicy implements ValidationPolicy {

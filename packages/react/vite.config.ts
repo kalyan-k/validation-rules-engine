@@ -23,6 +23,6 @@ export default defineConfig({
     emptyOutDir: true,
     sourcemap: true,
     lib: { entry: resolve(__dirname, 'src/index.ts'), formats: ['es'], fileName: () => 'index.js' },
-    rollupOptions: { external: ['@validation-rules/core', 'react', 'react/jsx-runtime', 'react-dom'] }
+    rollupOptions: { external: ['@validation-rules-engine/core', 'react', 'react/jsx-runtime', 'react-dom'] }
   }
 });

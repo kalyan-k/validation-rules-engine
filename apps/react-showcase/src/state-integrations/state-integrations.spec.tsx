@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
-import { ValidationRulesProvider } from '@validation-rules/react';
+import { ValidationRulesProvider } from '@validation-rules-engine/react';
 import { App } from '../app';
 import { strategies } from './strategies';
 
@@ -15,7 +15,7 @@ describe.each(strategies)('$label state integration', (strategy) => {
 
   it('renders its home, active navigation, architecture, derived state, and client-side links', async () => {
     renderRoute(root);
-    expect(screen.getByRole('heading', { name: `${strategy.label} + Validation Rules` })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: `${strategy.label} + Validation Rules Engine` })).toBeTruthy();
     const navigation = screen.getByRole('navigation', { name: 'React showcase pages' });
     expect(within(navigation).getByRole('link', { name: strategy.label }).getAttribute('aria-current')).toBe('page');
     const pageTabs = screen.getByRole('navigation', { name: 'State showcase pages' });

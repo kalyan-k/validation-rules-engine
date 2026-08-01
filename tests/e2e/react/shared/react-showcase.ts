@@ -22,7 +22,7 @@ export class ReactStateShowcasePage {
   }
 
   async expectOverview(strategyLabel: string): Promise<void> {
-    await expect(this.page.getByRole('heading', { name: `${strategyLabel} + Validation Rules`, exact: true })).toBeVisible();
+    await expect(this.page.getByRole('heading', { name: `${strategyLabel} + Validation Rules Engine`, exact: true })).toBeVisible();
     await expect(this.page.getByRole('heading', { name: 'A thin state bridge' })).toBeVisible();
     await expect(this.page.getByRole('heading', { name: 'Compare identical validation workflows' })).toBeVisible();
     await expect(this.page.getByRole('link', { name: /Open simple form/i })).toBeVisible();

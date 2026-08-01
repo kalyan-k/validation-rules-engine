@@ -1,10 +1,10 @@
 # Roadmap
 
-Validation Rules grows through complete, tested capabilities rather than placeholder packages. The current platform keeps future additions discoverable without changing the core dependency direction.
+Validation Rules Engine grows through complete, tested capabilities rather than placeholder packages. The current platform keeps future additions discoverable without changing the core dependency direction.
 
 ## Framework adapters
 
-React is implemented as a complete adapter, showcase, documentation section, and independently reported test target. Vue and other adapters can be evaluated only when there is a concrete integration, a deliberate public API, independent tests, and a real consumer showcase. Each adapter must depend on `@validation-rules/core`; core must never depend on an adapter.
+React is implemented as a complete adapter, showcase, documentation section, and independently reported test target. Vue and other adapters can be evaluated only when there is a concrete integration, a deliberate public API, independent tests, and a real consumer showcase. Each adapter must depend on `@validation-rules-engine/core`; core must never depend on an adapter.
 
 ## Expression evaluation
 

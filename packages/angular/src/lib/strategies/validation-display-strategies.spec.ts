@@ -1,6 +1,6 @@
 import { Renderer2, RendererFactory2 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { ValidationResult } from '@validation-rules/core';
+import { ValidationResult } from '@validation-rules-engine/core';
 import { POLICY_VALIDATION_DOM } from '../display/validation-display.constants';
 import { PrimeNgValidationDisplayStrategy, PRIME_NG_DISPLAY_CLASSES } from '../display/examples/prime-ng-display.example';
 import { ValidationDisplayContext } from '../interfaces/validation-display.interface';

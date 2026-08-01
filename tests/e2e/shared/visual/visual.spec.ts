@@ -6,6 +6,9 @@ test.describe('Targeted visual regression @visual', () => {
   test('portal home remains visually stable @portal', async ({ page, baseUrls }) => {
     await page.goto(baseUrls.portal);
     await expect(page.getByRole('heading', { name: /Validation behavior/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Documentation' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Angular Showcase' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'React Showcase' })).toBeVisible();
     await page.addStyleTag({
       content: '.status-panel,.automation-section{display:none!important;}'
     });

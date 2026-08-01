@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from 'react';
-import type { ValidationResult } from '@validation-rules/core';
+import type { ValidationResult } from '@validation-rules-engine/core';
 
 export interface ValidationMessageProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   errors: readonly ValidationResult[];

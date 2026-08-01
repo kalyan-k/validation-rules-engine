@@ -9,7 +9,7 @@ export interface DocumentationEntry {
 }
 
 export const documentationCatalog: DocumentationEntry[] = [
-  { slug: 'overview', title: 'What is Validation Rules?', section: 'Introduction', summary: 'Purpose, philosophy, and the platform at a glance.', source: 'overview.md' },
+  { slug: 'overview', title: 'What is Validation Rules Engine (VRE)?', section: 'Introduction', summary: 'Validation Rules Engine (VRE), its purpose, philosophy, and platform packages.', source: 'overview.md' },
   { slug: 'getting-started', title: 'Installation & Quick Start', section: 'Introduction', summary: 'Install, configure, register, and run your first policy.', source: 'getting-started.md', showcasePath: '/' },
   { slug: 'core-package', title: 'Overview', section: 'Core Package', summary: 'Framework-neutral contracts, validators, and model state.', source: 'core/core-package.md' },
   { slug: 'core-installation', title: 'Installation', section: 'Core Package', summary: 'Install the framework-neutral package and understand peer boundaries.', source: 'core/core-installation.md' },
@@ -37,7 +37,7 @@ export const documentationCatalog: DocumentationEntry[] = [
   { slug: 'angular-state-ngrx', title: 'NgRx', section: 'Angular Package', summary: 'Action, reducer, and selector-based Angular state validation.', source: 'angular/angular-state-ngrx.md', showcasePath: '/state/ngrx', navGroup: 'State Management' },
   { slug: 'angular-state-ngxs', title: 'NGXS', section: 'Angular Package', summary: 'Class-based Angular state handlers with policy validation.', source: 'angular/angular-state-ngxs.md', showcasePath: '/state/ngxs', navGroup: 'State Management' },
   { slug: 'angular-state-akita', title: 'Akita', section: 'Angular Package', summary: 'Store and Query-based Angular validation state integration.', source: 'angular/angular-state-akita.md', showcasePath: '/state/akita', navGroup: 'State Management' },
-  { slug: 'angular-state-elf', title: 'Elf', section: 'Angular Package', summary: 'Lightweight Elf stores with Validation Rules snapshots.', source: 'angular/angular-state-elf.md', showcasePath: '/state/elf', navGroup: 'State Management' },
+  { slug: 'angular-state-elf', title: 'Elf', section: 'Angular Package', summary: 'Lightweight Elf stores with Validation Rules Engine snapshots.', source: 'angular/angular-state-elf.md', showcasePath: '/state/elf', navGroup: 'State Management' },
   { slug: 'angular-state-rx-angular', title: 'RxAngular State', section: 'Angular Package', summary: 'Component-scoped RxAngular State with policy validation.', source: 'angular/angular-state-rx-angular.md', showcasePath: '/state/rx-angular-state', navGroup: 'State Management' },
   { slug: 'angular-state-signals', title: 'Signals', section: 'Angular Package', summary: 'Angular Signal-backed validation model snapshots.', source: 'angular/angular-state-signals.md', showcasePath: '/state/signals', navGroup: 'State Management' },
   { slug: 'angular-state-custom-rxjs-store', title: 'Custom RxJS Store', section: 'Angular Package', summary: 'BehaviorSubject-backed feature stores and validation results.', source: 'angular/angular-state-custom-rxjs-store.md', showcasePath: '/state/custom-rxjs-store', navGroup: 'State Management' },

@@ -111,23 +111,23 @@ function parseArgs(values) {
 }
 
 function platformConfigScript() {
-  return `globalThis.validationRulesPlatformConfig = ${JSON.stringify({
+  return `globalThis.vrePlatformConfig = ${JSON.stringify({
     urls: {
-      portal: process.env.VALIDATION_RULES_PORTAL_URL ?? '',
-      docs: process.env.VALIDATION_RULES_DOCS_URL ?? '',
-      angular: process.env.VALIDATION_RULES_ANGULAR_SHOWCASE_URL ?? '',
-      react: process.env.VALIDATION_RULES_REACT_SHOWCASE_URL ?? ''
+      portal: process.env.VRE_PORTAL_URL ?? '',
+      docs: process.env.VRE_DOCS_URL ?? '',
+      angular: process.env.VRE_ANGULAR_SHOWCASE_URL ?? '',
+      react: process.env.VRE_REACT_SHOWCASE_URL ?? ''
     }
   })};`;
 }
 
 function rewriteConfiguredLinks(html) {
   return html
-    .replaceAll('http://127.0.0.1:4200', process.env.VALIDATION_RULES_PORTAL_URL ?? 'http://127.0.0.1:4200')
-    .replaceAll('http://127.0.0.1:4201', process.env.VALIDATION_RULES_DOCS_URL ?? 'http://127.0.0.1:4201')
-    .replaceAll('http://127.0.0.1:4202', process.env.VALIDATION_RULES_ANGULAR_SHOWCASE_URL ?? 'http://127.0.0.1:4202')
-    .replaceAll('http://127.0.0.1:4203', process.env.VALIDATION_RULES_ANGULAR_SHOWCASE_URL ?? 'http://127.0.0.1:4202')
-    .replaceAll('http://127.0.0.1:4204', process.env.VALIDATION_RULES_REACT_SHOWCASE_URL ?? 'http://127.0.0.1:4204');
+    .replaceAll('http://127.0.0.1:4200', process.env.VRE_PORTAL_URL ?? 'http://127.0.0.1:4200')
+    .replaceAll('http://127.0.0.1:4201', process.env.VRE_DOCS_URL ?? 'http://127.0.0.1:4201')
+    .replaceAll('http://127.0.0.1:4202', process.env.VRE_ANGULAR_SHOWCASE_URL ?? 'http://127.0.0.1:4202')
+    .replaceAll('http://127.0.0.1:4203', process.env.VRE_ANGULAR_SHOWCASE_URL ?? 'http://127.0.0.1:4202')
+    .replaceAll('http://127.0.0.1:4204', process.env.VRE_REACT_SHOWCASE_URL ?? 'http://127.0.0.1:4204');
 }
 
 function sendJson(response, status, value) {

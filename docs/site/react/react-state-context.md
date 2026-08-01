@@ -6,16 +6,16 @@ The Context API showcase uses only React's built-in provider, consumer hook, and
 
 [Open Live Showcase](http://127.0.0.1:4204/state/context)
 
-## Using @validation-rules/react
+## Using @validation-rules-engine/react
 
-Context API is useful when a form draft must be shared by a bounded subtree. Keep the reducer pure and run Validation Rules in components that consume the context model.
+Context API is useful when a form draft must be shared by a bounded subtree. Keep the reducer pure and run Validation Rules Engine in components that consume the context model.
 
 ### Step 1 — Install Package
 
 Install the React adapter and Core package.
 
 ```bash
-npm install @validation-rules/react @validation-rules/core
+npm install @validation-rules-engine/react @validation-rules-engine/core
 ```
 
 No additional state library is required.
@@ -24,7 +24,7 @@ No additional state library is required.
 {
   "dependencies": {
     "react": "^19.0.0",
-    "@validation-rules/react": "^1.0.0"
+    "@validation-rules-engine/react": "^1.0.0"
   }
 }
 ```
@@ -34,7 +34,7 @@ No additional state library is required.
 Compose your form context provider with `ValidationRulesProvider`.
 
 ```tsx
-import { ValidationRulesProvider } from '@validation-rules/react';
+import { ValidationRulesProvider } from '@validation-rules-engine/react';
 import { ProfileStateProvider } from './ProfileStateContext';
 
 export function ProfileRoute() {
@@ -53,7 +53,7 @@ export function ProfileRoute() {
 The policy targets the context model value.
 
 ```tsx
-import type { ValidationPolicy, ValidationTarget } from '@validation-rules/react';
+import type { ValidationPolicy, ValidationTarget } from '@validation-rules-engine/react';
 
 export type ProfileModel = ValidationTarget & {
   firstName: string;
@@ -171,7 +171,7 @@ Keep the provider close to the form subtree, split read/write contexts for very 
 
 ```tsx
 import { FormEvent, useMemo } from 'react';
-import { ValidationMessage, ValidationSummary, useValidationRules } from '@validation-rules/react';
+import { ValidationMessage, ValidationSummary, useValidationRules } from '@validation-rules-engine/react';
 import { ProfileModel, profilePolicy } from './profilePolicy';
 
 export function ContextProfileForm() {
@@ -209,14 +209,14 @@ function ProfileStateProvider({ children }: PropsWithChildren) {
 ## Installation
 
 ```bash
-npm install @validation-rules/react @validation-rules/core
+npm install @validation-rules-engine/react @validation-rules-engine/core
 ```
 
 ## Package imports
 
 ```tsx
 import { createContext, useContext, useReducer } from 'react';
-import { useValidationRules, useValidationField, ValidationSummary } from '@validation-rules/react';
+import { useValidationRules, useValidationField, ValidationSummary } from '@validation-rules-engine/react';
 ```
 
 ## Provider setup
@@ -310,7 +310,7 @@ Controls → reducer dispatch → Context Provider → consumers → validation 
 
 Choose Context when a form must be shared through a bounded component subtree and adding a state library would not provide enough value.
 
-## How Validation Rules integrates
+## How Validation Rules Engine integrates
 
 The provider owns model updates; validation hooks consume the current context model. Neither the context nor reducer depends on the validation engine.
 

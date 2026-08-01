@@ -15,7 +15,7 @@ export {
   type ValidationModel,
   type ValidationPolicy,
   type ValidationResult
-} from '@validation-rules/core';
+} from '@validation-rules-engine/core';
 export {
   ValidationRulesProvider,
   useValidationRulesContext,

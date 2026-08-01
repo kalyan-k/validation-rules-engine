@@ -2,7 +2,7 @@ import {
   ValidationMessage,
   useValidationField,
   type UseValidationFormResult
-} from '@validation-rules/react';
+} from '@validation-rules-engine/react';
 import type { PerformanceFieldDefinition, PerformanceStateModel } from './performance-generator';
 
 interface PerformanceFieldProps {

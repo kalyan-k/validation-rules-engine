@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { ValidationSummary } from '@validation-rules/react';
+import { ValidationSummary } from '@validation-rules-engine/react';
 import { FormField } from '../../components/form-field';
 import { PerformanceField } from '../../performance/performance-field';
 import { platformUrl } from '../../platform-urls';

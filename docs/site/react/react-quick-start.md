@@ -9,7 +9,7 @@ import {
   type ValidationPolicy,
   type Validator,
   type ValidatorHelper
-} from '@validation-rules/react';
+} from '@validation-rules-engine/react';
 
 const accountPolicy: ValidationPolicy = {
   addValidations(helper: ValidatorHelper): Validator[] {
@@ -30,7 +30,7 @@ import {
   ValidationSummary,
   useValidationField,
   useValidationForm
-} from '@validation-rules/react';
+} from '@validation-rules-engine/react';
 
 const policies = [{ name: 'account', policy: accountPolicy }];
 
@@ -65,7 +65,7 @@ function AccountForm() {
 ## Add the provider
 
 ```tsx
-import { ValidationRulesProvider } from '@validation-rules/react';
+import { ValidationRulesProvider } from '@validation-rules-engine/react';
 
 export function App() {
   return (

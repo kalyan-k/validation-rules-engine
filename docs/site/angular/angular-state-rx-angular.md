@@ -1,4 +1,4 @@
-# RxAngular State with @validation-rules/angular
+# RxAngular State with @validation-rules-engine/angular
 
 RxAngular State provides component-scoped reactive state with RxJS-friendly updates and lifecycle cleanup.
 
@@ -10,7 +10,7 @@ RxAngular State provides component-scoped reactive state with RxJS-friendly upda
 
 ## Why choose it
 
-Choose RxAngular State when form state should be scoped to the component tree. Validation Rules evaluates the model, and RxAngular State publishes the validated snapshot as local reactive state.
+Choose RxAngular State when form state should be scoped to the component tree. Validation Rules Engine (VRE) evaluates the model, and RxAngular State publishes the validated snapshot as local reactive state.
 
 ## Integration pattern
 
@@ -23,38 +23,38 @@ The unified Angular showcase provides RxAngular State at the showcase component 
 - [Complex Form](http://127.0.0.1:4202/state/rx-angular-state/complex)
 - [Performance Form](http://127.0.0.1:4202/state/rx-angular-state/performance)
 
-## Using @validation-rules/angular
+## Using @validation-rules-engine/angular
 
-RxAngular State is ideal for component-scoped form state. The component provides `RxState`, updates local slices, and Validation Rules validates the current snapshot.
+RxAngular State is ideal for component-scoped form state. The component provides `RxState`, updates local slices, and VRE validates the current snapshot.
 
 ### Step 1 — Install Package
 
-Install Validation Rules, Angular Forms, and RxAngular State.
+Install VRE, Angular Forms, and RxAngular State.
 
 ```bash
-npm install @validation-rules/angular @validation-rules/core @rx-angular/state @angular/forms
+npm install @validation-rules-engine/angular @validation-rules-engine/core @rx-angular/state @angular/forms
 ```
 
-RxAngular is an app dependency; `@validation-rules/angular` continues to validate plain objects.
+RxAngular is an app dependency; `@validation-rules-engine/angular` continues to validate plain objects.
 
 ```json
 {
   "dependencies": {
     "@angular/forms": "^20.0.0",
     "@rx-angular/state": "^20.0.0",
-    "@validation-rules/angular": "^1.0.0"
+    "@validation-rules-engine/angular": "^1.0.0"
   }
 }
 ```
 
 ### Step 2 — Configure Project
 
-Import forms and Validation Rules. Provide `RxState` at the component boundary so each route owns an isolated store.
+Import forms and VRE. Provide `RxState` at the component boundary so each route owns an isolated store.
 
 ```ts
 import { Component } from '@angular/core';
 import { RxState } from '@rx-angular/state';
-import { ValidationModule, provideBootstrapValidationDisplay } from '@validation-rules/angular';
+import { ValidationModule, provideBootstrapValidationDisplay } from '@validation-rules-engine/angular';
 
 @Component({
   selector: 'app-rx-profile',
@@ -69,7 +69,7 @@ export class RxProfileComponent {}
 Policies validate the local state shape published by `RxState`.
 
 ```ts
-import { ValidationModel, ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules/angular';
+import { ValidationModel, ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules-engine/angular';
 
 export interface RxProfileState extends ValidationModel {
   firstName: string;
@@ -195,7 +195,7 @@ Use observable projections for derived view state, keep policy construction stab
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RxState } from '@rx-angular/state';
 import { Observable } from 'rxjs';
-import { ValidationProviderService } from '@validation-rules/angular';
+import { ValidationProviderService } from '@validation-rules-engine/angular';
 import { RxProfileState, RxProfilePolicy } from './profile.policy';
 
 const initialRxProfileState: RxProfileState = { firstName: '', lastName: '', email: '', phone: '', consent: false };

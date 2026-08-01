@@ -2,13 +2,13 @@
 
 ## Goals
 
-Validation Rules separates reusable validation behavior from framework integration while preserving the established Angular API and runtime behavior. Product navigation, documentation, and framework showcases are separate applications so each can scale independently.
+Validation Rules Engine (VRE) separates reusable validation behavior from framework integration while preserving the established Angular and React APIs and runtime behavior. Product navigation, documentation, and framework showcases are separate applications so each can scale independently.
 
 ```text
-validation-rules/
+validation-rules-engine/
 |-- packages/
-|   |-- core/                 # @validation-rules/core
-|   `-- angular/              # @validation-rules/angular and Angular CLI workspace
+|   |-- core/                 # @validation-rules-engine/core
+|   `-- angular/              # @validation-rules-engine/angular and Angular CLI workspace
 |-- apps/
 |   |-- portal/                 # framework-neutral launcher and status dashboard
 |   |-- docs/                 # Markdown documentation application
@@ -27,15 +27,15 @@ There is no `shared` package because the current code has no additional ownershi
 ## Dependency graph
 
 ```text
-apps/angular-showcase ---------+
-                           +--> @validation-rules/angular --> @validation-rules/core
+apps/angular-showcase --> @validation-rules-engine/angular --> @validation-rules-engine/core
+apps/react-showcase ----> @validation-rules-engine/react -----> @validation-rules-engine/core
 
 apps/portal ----URLs----> apps/docs and framework showcases
 ```
 
-The Angular showcase imports only `@validation-rules/angular` plus showcase-only state libraries. The Angular adapter imports `@validation-rules/core`. Core imports neither Angular nor an adapter. The Node portal and docs applications import no Angular or state-management runtime. npm workspaces link the local packages during repository development; Angular-owned TypeScript path mappings support tests and local compilation.
+The Angular showcase imports only `@validation-rules-engine/angular` plus showcase-only state libraries. The Angular adapter imports `@validation-rules-engine/core`. Core imports neither Angular nor an adapter. The Node portal and docs applications import no Angular or state-management runtime. npm workspaces link the local packages during repository development; Angular-owned TypeScript path mappings support tests and local compilation.
 
-Run `npm run architecture:verify` to validate this direction. CI runs the same command before tests. The verifier rejects Angular dependencies in core, reverse adapter imports, direct showcase-to-core imports, missing workspace relationships, and out-of-scope React or Vue placeholders.
+Run `npm run architecture:verify` to validate this direction. CI runs the same command before tests. The verifier rejects framework dependencies in core, reverse adapter imports, direct showcase-to-core imports, missing workspace relationships, and out-of-scope placeholder adapters.
 
 ## Core engine boundary
 
@@ -59,11 +59,11 @@ The package compiles as a publishable Angular Package Format library through ng-
 - DOM rendering utilities and display strategies
 - Angular expression parsing and `Policy` execution
 
-The adapter consumes engine types and helpers through the `@validation-rules/core` public entry point. Its own entry point re-exports neutral symbols that existing Angular consumers historically imported from the adapter.
+The adapter consumes engine types and helpers through the `@validation-rules-engine/core` public entry point. Its own entry point re-exports neutral symbols that existing Angular consumers historically imported from the adapter.
 
 ## Compatibility boundary
 
-The repository, npm scope, imports, package metadata, report titles, and build destinations use the Validation Rules identity. Existing runtime and public API contracts remain unchanged:
+The repository, npm scope, imports, package metadata, report titles, and build destinations use the Validation Rules Engine identity. Existing runtime and public API contracts remain unchanged:
 
 - Angular selectors such as `policy-validation-group-status`
 - the `policyValidator` directive selector and inputs
@@ -95,8 +95,8 @@ Generated reports use `tools/testing/report-branding.cjs` to instantiate the sam
 
 Package builds follow dependency order:
 
-1. `@validation-rules/core` to `dist/packages/core`
-2. `@validation-rules/angular` to `dist/packages/angular`
+1. `@validation-rules-engine/core` to `dist/packages/core`
+2. `@validation-rules-engine/angular` to `dist/packages/angular`
 3. Portal and documentation TypeScript to `dist/apps/*`
 4. `angular-showcase` to `dist/showcases/angular`
 
@@ -117,7 +117,7 @@ Each Angular target generates separate HTML, JSON, LCOV, and JUnit reports and i
 
 Add a framework adapter only when there is concrete integration to implement. A complete adapter should:
 
-1. Depend on `@validation-rules/core` without introducing a reverse dependency.
+1. Depend on `@validation-rules-engine/core` without introducing a reverse dependency.
 2. Own its framework lifecycle, form bindings, and rendering behavior.
 3. Export a deliberate public entry point and document its compatibility contract.
 4. Include a private application that consumes the package name rather than source paths.

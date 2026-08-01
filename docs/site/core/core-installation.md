@@ -5,10 +5,10 @@
 Install Core when you are writing shared policies, validating plain TypeScript objects, or building framework adapter code.
 
 ```bash
-npm install @validation-rules/core
+npm install @validation-rules-engine/core
 ```
 
-Application forms usually install `@validation-rules/angular` or `@validation-rules/react`; those adapters depend on Core and expose framework-specific lifecycle APIs.
+Application forms usually install `@validation-rules-engine/angular` or `@validation-rules-engine/react`; those adapters depend on Core and expose framework-specific lifecycle APIs.
 
 ## Imports
 
@@ -19,7 +19,7 @@ import {
   type Validator,
   type ValidationModel,
   type ValidationResult
-} from '@validation-rules/core';
+} from '@validation-rules-engine/core';
 ```
 
 ## Runtime boundaries

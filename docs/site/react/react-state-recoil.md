@@ -2,22 +2,22 @@
 
 ## Overview
 
-The Recoil showcase is provided for teams maintaining existing Recoil applications. It shows atoms, selectors, and the same Validation Rules lifecycle as every other React example.
+The Recoil showcase is provided for teams maintaining existing Recoil applications. It shows atoms, selectors, and the same Validation Rules Engine lifecycle as every other React example.
 
 The upstream Recoil repository is archived. Prefer an actively maintained option for new applications, and treat this page as integration and migration support.
 
 [Open Live Showcase](http://127.0.0.1:4204/state/recoil)
 
-## Using @validation-rules/react
+## Using @validation-rules-engine/react
 
-Use this guide when you already have Recoil in an application. Keep Validation Rules in React components/hooks and keep Recoil atoms focused on plain draft state.
+Use this guide when you already have Recoil in an application. Keep Validation Rules Engine in React components/hooks and keep Recoil atoms focused on plain draft state.
 
 ### Step 1 — Install Package
 
 Install the React adapter, Core package, and Recoil.
 
 ```bash
-npm install @validation-rules/react @validation-rules/core recoil
+npm install @validation-rules-engine/react @validation-rules-engine/core recoil
 ```
 
 Recoil has been archived by its maintainers, so prefer this integration for existing apps rather than new long-lived greenfield architecture.
@@ -26,7 +26,7 @@ Recoil has been archived by its maintainers, so prefer this integration for exis
 {
   "dependencies": {
     "recoil": "^0.7.7",
-    "@validation-rules/react": "^1.0.0"
+    "@validation-rules-engine/react": "^1.0.0"
   }
 }
 ```
@@ -37,7 +37,7 @@ Wrap the route with `RecoilRoot` and `ValidationRulesProvider`.
 
 ```tsx
 import { RecoilRoot } from 'recoil';
-import { ValidationRulesProvider } from '@validation-rules/react';
+import { ValidationRulesProvider } from '@validation-rules-engine/react';
 
 export function ProfileRoute() {
   return (
@@ -55,7 +55,7 @@ export function ProfileRoute() {
 Policies target the atom model shape.
 
 ```tsx
-import type { ValidationPolicy, ValidationTarget } from '@validation-rules/react';
+import type { ValidationPolicy, ValidationTarget } from '@validation-rules-engine/react';
 
 export type ProfileModel = ValidationTarget & {
   firstName: string;
@@ -179,7 +179,7 @@ Plan a migration path for long-lived products, keep atom keys stable, and isolat
 ```tsx
 import { FormEvent, useMemo } from 'react';
 import { useRecoilState } from 'recoil';
-import { ValidationMessage, ValidationSummary, useValidationRules } from '@validation-rules/react';
+import { ValidationMessage, ValidationSummary, useValidationRules } from '@validation-rules-engine/react';
 import { ProfileModel, profilePolicy } from './profilePolicy';
 import { profileFields, profileModelState } from './profileRecoilState';
 
@@ -216,14 +216,14 @@ export function RecoilProfileForm() {
 ## Installation
 
 ```bash
-npm install @validation-rules/react recoil
+npm install @validation-rules-engine/react recoil
 ```
 
 ## Package imports
 
 ```tsx
 import { atom, selector, RecoilRoot, useRecoilState, useRecoilValue } from 'recoil';
-import { useValidationRules, useValidationField, ValidationSummary } from '@validation-rules/react';
+import { useValidationRules, useValidationField, ValidationSummary } from '@validation-rules-engine/react';
 ```
 
 ## Provider setup
@@ -307,9 +307,9 @@ Controls → Recoil atoms → selector → validation hooks → core policies
 
 ## Why use this state management library
 
-Choose this integration when an existing Recoil application needs Validation Rules. For greenfield work, account for the project's archived status before adopting it.
+Choose this integration when an existing Recoil application needs Validation Rules Engine. For greenfield work, account for the project's archived status before adopting it.
 
-## How Validation Rules integrates
+## How Validation Rules Engine integrates
 
 Atom setters own model transitions. Recoil selectors provide derived UI state, while validation policies stay outside the state graph.
 
@@ -331,12 +331,12 @@ Atom setters own model transitions. Recoil selectors provide derived UI state, w
 
 ```tsx
 const modelState = atom({
-  key: 'validationRulesShowcaseModel',
+  key: 'vreShowcaseModel',
   default: initialModel,
   dangerouslyAllowMutability: true
 });
 const populatedState = selector({
-  key: 'validationRulesShowcasePopulated',
+  key: 'vreShowcasePopulated',
   get: ({ get }) => countPopulatedValues(get(modelState))
 });
 ```

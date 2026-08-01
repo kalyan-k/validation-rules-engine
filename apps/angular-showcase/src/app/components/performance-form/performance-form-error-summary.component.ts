@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ValidationResult } from '@validation-rules/angular';
+import { ValidationResult } from '@validation-rules-engine/angular';
 import { PerformanceFormModel, PerformanceSectionMeta } from '../../models/performance-form.model';
 
 export interface PerformanceErrorGroup {

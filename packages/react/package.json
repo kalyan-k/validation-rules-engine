@@ -1,13 +1,13 @@
 {
-  "name": "@validation-rules/react",
+  "name": "@validation-rules-engine/react",
   "version": "1.0.0",
-  "description": "React hooks, provider, and accessible components for policy-based validation",
-  "keywords": ["react", "validation", "forms", "hooks", "validation-rules"],
+  "description": "React hooks, provider, and accessible components for Validation Rules Engine (VRE)",
+  "keywords": ["react", "validation", "forms", "hooks", "validation-rules-engine", "vre", "policy-validation"],
   "license": "MIT",
   "author": "Kalyan K <kalyan411@gmail.com>",
-  "homepage": "https://github.com/kalyan-k/validation-rules#readme",
-  "repository": { "type": "git", "url": "git+ssh://git@github.com:kalyan-k/validation-rules.git" },
-  "bugs": { "url": "https://github.com/kalyan-k/validation-rules/issues" },
+  "homepage": "https://github.com/kalyan-k/validation-rules-engine#readme",
+  "repository": { "type": "git", "url": "git+ssh://git@github.com:kalyan-k/validation-rules-engine.git" },
+  "bugs": { "url": "https://github.com/kalyan-k/validation-rules-engine/issues" },
   "type": "module",
   "main": "./index.js",
   "module": "./index.js",
@@ -24,10 +24,10 @@
     "test:coverage": "vitest run --config vitest.config.ts --coverage"
   },
   "peerDependencies": {
-    "@validation-rules/core": "^1.0.0",
+    "@validation-rules-engine/core": "^1.0.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
-  "devDependencies": { "@validation-rules/core": "1.0.0" },
+  "devDependencies": { "@validation-rules-engine/core": "1.0.0" },
   "publishConfig": { "access": "public" }
 }

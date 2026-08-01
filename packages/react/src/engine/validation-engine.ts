@@ -9,7 +9,7 @@ import {
   type ValidationResult,
   type Validator,
   ValidatorHelper
-} from '@validation-rules/core';
+} from '@validation-rules-engine/core';
 import type { ValidateOptions, ValidationGroupRegistration, ValidationSnapshot, ValidationTarget } from '../types';
 import { getPropertyValue } from '../utilities/paths';
 

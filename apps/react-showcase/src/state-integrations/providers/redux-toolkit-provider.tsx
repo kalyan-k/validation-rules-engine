@@ -1,7 +1,7 @@
 import { useMemo, useState, type PropsWithChildren } from 'react';
 import { configureStore, createSelector, createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { Provider, useDispatch, useSelector } from 'react-redux';
-import type { ValidationTarget } from '@validation-rules/react';
+import type { ValidationTarget } from '@validation-rules-engine/react';
 import { cloneModel, countPopulatedValues, ShowcaseStateContext, type StateProviderProps } from '../types';
 
 interface ShowcaseSliceState { serializedModel: string; revision: number; }

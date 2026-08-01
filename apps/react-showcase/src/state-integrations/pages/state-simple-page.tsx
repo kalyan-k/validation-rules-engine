@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { ValidationSummary } from '@validation-rules/react';
+import { ValidationSummary } from '@validation-rules-engine/react';
 import { FormField } from '../../components/form-field';
 import { platformUrl } from '../../platform-urls';
 import { SIMPLE_INITIAL_MODEL, simpleStatePolicy, type SimpleStateModel } from '../models';

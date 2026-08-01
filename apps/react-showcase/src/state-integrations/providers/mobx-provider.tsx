@@ -1,7 +1,7 @@
 import { useMemo, useState, type PropsWithChildren } from 'react';
 import { makeAutoObservable, observable } from 'mobx';
 import { observer } from 'mobx-react-lite';
-import type { ValidationTarget } from '@validation-rules/react';
+import type { ValidationTarget } from '@validation-rules-engine/react';
 import { cloneModel, countPopulatedValues, ShowcaseStateContext, type StateProviderProps } from '../types';
 
 class MobxShowcaseStore {

@@ -1,22 +1,25 @@
 {
-  "name": "@validation-rules/core",
+  "name": "@validation-rules-engine/core",
   "version": "1.0.0",
-  "description": "Framework-independent validation contracts, rules, validators, and model-state utilities",
+  "description": "Framework-independent core for Validation Rules Engine (VRE)",
   "keywords": [
     "validation",
     "validator",
     "form-validation",
-    "validation-rules"
+    "validation-rules-engine",
+    "vre",
+    "policy-validation",
+    "typescript"
   ],
   "license": "MIT",
   "author": "Kalyan K <kalyan411@gmail.com>",
-  "homepage": "https://github.com/kalyan-k/validation-rules#readme",
+  "homepage": "https://github.com/kalyan-k/validation-rules-engine#readme",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com:kalyan-k/validation-rules.git"
+    "url": "git+ssh://git@github.com:kalyan-k/validation-rules-engine.git"
   },
   "bugs": {
-    "url": "https://github.com/kalyan-k/validation-rules/issues"
+    "url": "https://github.com/kalyan-k/validation-rules-engine/issues"
   },
   "peerDependencies": {
     "underscore": "^1.13.8"

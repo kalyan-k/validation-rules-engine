@@ -5,7 +5,7 @@ import {
   type ValidationResult,
   type Validator,
   type ValidatorHelper
-} from '@validation-rules/angular';
+} from '@validation-rules-engine/angular';
 
 export type AngularStateStrategyId =
   | 'template-driven'
@@ -86,9 +86,9 @@ export const ANGULAR_STATE_STRATEGIES: AngularStateStrategy[] = [
     whyChoose: [
       'Lowest ceremony for Angular teams.',
       'Excellent for examples, prototypes, and forms with simple page-local state.',
-      'Validation Rules can attach directly to controls through policyValidator.'
+      'Validation Rules Engine can attach directly to controls through policyValidator.'
     ],
-    integration: '@validation-rules/angular validates the same model object that ngModel updates, while form groups and summaries are registered by policy name.',
+    integration: '@validation-rules-engine/angular validates the same model object that ngModel updates, while form groups and summaries are registered by policy name.',
     architecture: ['Template controls', 'ngModel updates form model', 'policyValidator evaluates field policy', 'Validation summaries read model results']
   },
   {
@@ -107,10 +107,10 @@ export const ANGULAR_STATE_STRATEGIES: AngularStateStrategy[] = [
     whyChoose: [
       'Strong TypeScript ergonomics for generated and nested forms.',
       'Good fit for enterprise workflows with programmatic validation.',
-      'Validation Rules policies stay framework-neutral while Reactive Forms handles control orchestration.'
+      'Validation Rules Engine policies stay framework-neutral while Reactive Forms handles control orchestration.'
     ],
-    integration: '@validation-rules/angular validates a plain policy model and can mirror the result back into FormGroup workflows when needed.',
-    architecture: ['FormGroup controls', 'Value snapshot model', 'Validation Rules policy', 'Angular control errors and summaries']
+    integration: '@validation-rules-engine/angular validates a plain policy model and can mirror the result back into FormGroup workflows when needed.',
+    architecture: ['FormGroup controls', 'Value snapshot model', 'Validation Rules Engine policy', 'Angular control errors and summaries']
   },
   {
     id: 'ngrx',
@@ -130,8 +130,8 @@ export const ANGULAR_STATE_STRATEGIES: AngularStateStrategy[] = [
       'Scales well for cross-page enterprise workflows.',
       'Validation payloads can be stored alongside form drafts without coupling policies to NgRx.'
     ],
-    integration: '@validation-rules/angular validates a cloned draft model, then NgRx commits the validation result snapshot through an action.',
-    architecture: ['Component dispatches action', 'NgRx reducer stores draft', 'Validation Rules evaluates clone', 'Validated snapshot dispatches back to store']
+    integration: '@validation-rules-engine/angular validates a cloned draft model, then NgRx commits the validation result snapshot through an action.',
+    architecture: ['Component dispatches action', 'NgRx reducer stores draft', 'Validation Rules Engine evaluates clone', 'Validated snapshot dispatches back to store']
   },
   {
     id: 'ngxs',
@@ -151,8 +151,8 @@ export const ANGULAR_STATE_STRATEGIES: AngularStateStrategy[] = [
       'Typed action classes make workflow intent easy to trace.',
       'Validation results can be patched into the same feature state as the form draft.'
     ],
-    integration: '@validation-rules/angular produces validation results on the model; NGXS action handlers patch the validated model into state.',
-    architecture: ['Component dispatches action class', 'NGXS @State handler patches draft', 'Validation Rules evaluates model', 'Validated model is patched back']
+    integration: '@validation-rules-engine/angular produces validation results on the model; NGXS action handlers patch the validated model into state.',
+    architecture: ['Component dispatches action class', 'NGXS @State handler patches draft', 'Validation Rules Engine evaluates model', 'Validated model is patched back']
   },
   {
     id: 'akita',
@@ -172,8 +172,8 @@ export const ANGULAR_STATE_STRATEGIES: AngularStateStrategy[] = [
       'Lightweight state transitions that still feel structured.',
       'Validation state can live beside the form draft and be selected by queries.'
     ],
-    integration: '@validation-rules/angular validates the feature model, then the Akita store updates the draft and validation metadata as one snapshot.',
-    architecture: ['Component updates Akita store', 'Query exposes current draft', 'Validation Rules evaluates draft', 'Store updates validation snapshot']
+    integration: '@validation-rules-engine/angular validates the feature model, then the Akita store updates the draft and validation metadata as one snapshot.',
+    architecture: ['Component updates Akita store', 'Query exposes current draft', 'Validation Rules Engine evaluates draft', 'Store updates validation snapshot']
   },
   {
     id: 'elf',
@@ -193,8 +193,8 @@ export const ANGULAR_STATE_STRATEGIES: AngularStateStrategy[] = [
       'Easy to keep feature stores close to the component tree.',
       'Validation policies remain independent from the store implementation.'
     ],
-    integration: '@validation-rules/angular evaluates the plain model; Elf setProps commits the updated draft and validation results.',
-    architecture: ['Elf store owns feature slice', 'setProps commits model changes', 'Validation Rules evaluates snapshot', 'Selectors render validation state']
+    integration: '@validation-rules-engine/angular evaluates the plain model; Elf setProps commits the updated draft and validation results.',
+    architecture: ['Elf store owns feature slice', 'setProps commits model changes', 'Validation Rules Engine evaluates snapshot', 'Selectors render validation state']
   },
   {
     id: 'rx-angular-state',
@@ -214,8 +214,8 @@ export const ANGULAR_STATE_STRATEGIES: AngularStateStrategy[] = [
       'Lifecycle cleanup is scoped to the component provider.',
       'Validation results can flow as a state slice without global store overhead.'
     ],
-    integration: '@validation-rules/angular writes results to the model while RxAngular State stores the current draft and validation lifecycle.',
-    architecture: ['Component-scoped RxState', 'State slice stores form model', 'Validation Rules evaluates model', 'RxState publishes validated snapshot']
+    integration: '@validation-rules-engine/angular writes results to the model while RxAngular State stores the current draft and validation lifecycle.',
+    architecture: ['Component-scoped RxState', 'State slice stores form model', 'Validation Rules Engine evaluates model', 'RxState publishes validated snapshot']
   },
   {
     id: 'signals',
@@ -233,10 +233,10 @@ export const ANGULAR_STATE_STRATEGIES: AngularStateStrategy[] = [
     whyChoose: [
       'Simple mental model for local state.',
       'Fine-grained updates without broad observable subscription chains.',
-      'Validation Rules can validate the object represented by a signal snapshot.'
+      'Validation Rules Engine can validate the object represented by a signal snapshot.'
     ],
-    integration: '@validation-rules/angular validates the current signal snapshot; the signal is updated with validation results and group status.',
-    architecture: ['Signal stores model snapshot', 'Template reads signal-backed state', 'Validation Rules evaluates plain model', 'Computed values summarize results']
+    integration: '@validation-rules-engine/angular validates the current signal snapshot; the signal is updated with validation results and group status.',
+    architecture: ['Signal stores model snapshot', 'Template reads signal-backed state', 'Validation Rules Engine evaluates plain model', 'Computed values summarize results']
   },
   {
     id: 'custom-rxjs-store',
@@ -254,10 +254,10 @@ export const ANGULAR_STATE_STRATEGIES: AngularStateStrategy[] = [
     whyChoose: [
       'Transparent implementation and no store framework lock-in.',
       'Works well when the state model is small and feature-scoped.',
-      'Validation Rules keeps policy logic separate from custom stream plumbing.'
+      'Validation Rules Engine keeps policy logic separate from custom stream plumbing.'
     ],
-    integration: '@validation-rules/angular validates the current BehaviorSubject value and pushes the validated snapshot back into the stream.',
-    architecture: ['BehaviorSubject owns snapshot', 'Update functions emit immutable copies', 'Validation Rules evaluates model', 'Subscribers render latest state']
+    integration: '@validation-rules-engine/angular validates the current BehaviorSubject value and pushes the validated snapshot back into the stream.',
+    architecture: ['BehaviorSubject owns snapshot', 'Update functions emit immutable copies', 'Validation Rules Engine evaluates model', 'Subscribers render latest state']
   }
 ];
 

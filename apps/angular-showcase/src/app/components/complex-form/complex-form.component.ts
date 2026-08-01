@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ValidationProviderService } from '@validation-rules/angular';
+import { ValidationProviderService } from '@validation-rules-engine/angular';
 import { AddressInfo, BillingInfo, ComplexFormModel, PersonalInfo } from '../../models/complex-form.model';
 
 @Component({

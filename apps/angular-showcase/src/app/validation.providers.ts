@@ -1,5 +1,5 @@
 import { APP_INITIALIZER } from '@angular/core';
-import { ValidationProviderService } from '@validation-rules/angular';
+import { ValidationProviderService } from '@validation-rules-engine/angular';
 import { SampleFormValidationPolicy } from './components/sample-form/sample-form.validation.policy';
 import {
   BillingAddressValidationPolicy,

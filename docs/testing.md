@@ -78,7 +78,7 @@ npm run reports:verify     # validate output structure and local navigation
 
 Each `tests/` directory also contains `summary.json`. Each `coverage/` directory contains the original Istanbul `index.html`, browsable source pages, `lcov.info`, and `coverage-summary.json`.
 
-`reports/` and the Angular CLI `coverage/` directory are generated and ignored by Git. Cleaning resolves the path relative to the repository, validates the Validation Rules workspace identity, and removes only the expected report root.
+`reports/` and the Angular CLI `coverage/` directory are generated and ignored by Git. Cleaning resolves the path relative to the repository, validates the Validation Rules Engine workspace identity, and removes only the expected report root.
 
 ## Failure behavior
 
@@ -152,8 +152,8 @@ Tests are colocated with production code and named `*.spec.ts`. Prefer public be
 
 GitHub Actions installs with `npm ci`, verifies dependency boundaries, runs `npm run test:ci`, and builds every package and application. `CI=true` selects the no-sandbox `ChromeHeadlessCI` launcher. On success or failure, the workflow uploads:
 
-- `validation-rules-test-reports`: the complete `reports/` tree, with `reports/index.html` as the landing page.
-- `validation-rules-junit-results`: every `reports/**/junit/test-results.xml` file.
+- `validation-rules-engine-test-reports`: the complete `reports/` tree, with `reports/index.html` as the landing page.
+- `validation-rules-engine-junit-results`: every `reports/**/junit/test-results.xml` file.
 
 The workflow does not publish packages.
 

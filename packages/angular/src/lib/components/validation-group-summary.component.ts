@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormGroupStatus } from '@validation-rules/core';
+import { FormGroupStatus } from '@validation-rules-engine/core';
 
 @Component({
   selector: 'policy-validation-group-summary',

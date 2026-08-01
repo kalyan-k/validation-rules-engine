@@ -1,6 +1,6 @@
 # Playwright E2E Automation
 
-This folder contains repository-level Playwright automation support for the Validation Rules platform.
+This folder contains repository-level Playwright automation support for the Validation Rules Engine platform.
 
 ## Responsibilities
 

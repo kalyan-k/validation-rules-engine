@@ -3,7 +3,7 @@ import { expect, test } from '../shared/fixtures/test';
 test.describe('Documentation application @docs @regression', () => {
   test('loads documentation, navigates packages, and supports deep links @smoke', async ({ page, baseUrls }) => {
     await page.goto(`${baseUrls.docs}/docs/overview`);
-    await expect(page.getByRole('heading', { name: /What is Validation Rules/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /What is Validation Rules Engine \(VRE\)/i })).toBeVisible();
     const corePackageNav = page.locator('.nav-section').filter({ has: page.getByRole('heading', { name: 'Core Package' }) });
     await expect(corePackageNav.getByRole('link', { name: 'Overview' })).toBeVisible();
     await corePackageNav.getByRole('link', { name: 'Overview' }).click();
@@ -37,10 +37,10 @@ test.describe('Documentation application @docs @regression', () => {
 
   test('code blocks and copy-code behavior work when available', async ({ page, baseUrls }) => {
     await page.addInitScript(() => {
-      const clipboardWindow = window as Window & { __validationRulesCopiedText?: string };
+      const clipboardWindow = window as Window & { __vreCopiedText?: string };
       const clipboardStub = {
         writeText: async (value: string) => {
-          clipboardWindow.__validationRulesCopiedText = value;
+          clipboardWindow.__vreCopiedText = value;
         }
       };
       try {
@@ -71,8 +71,8 @@ test.describe('Documentation application @docs @regression', () => {
       await copyButton.click({ force: true });
       await expect(copyButton).toContainText(/copied/i);
       await expect.poll(() => page.evaluate(() => {
-        return (window as Window & { __validationRulesCopiedText?: string }).__validationRulesCopiedText || '';
-      })).toContain('@validation-rules');
+        return (window as Window & { __vreCopiedText?: string }).__vreCopiedText || '';
+      })).toContain('@validation-rules-engine');
     }
   });
 

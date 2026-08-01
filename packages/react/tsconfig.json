@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "jsx": "react-jsx",
-    "paths": { "@validation-rules/core": ["../../dist/packages/core", "../core/src/public-api.ts"] },
+    "paths": { "@validation-rules-engine/core": ["../../dist/packages/core", "../core/src/public-api.ts"] },
     "types": ["react", "react-dom"]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.ts", "vitest.config.ts"]

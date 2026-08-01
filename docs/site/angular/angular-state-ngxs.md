@@ -1,4 +1,4 @@
-# NGXS with @validation-rules/angular
+# NGXS with @validation-rules-engine/angular
 
 NGXS is a class-oriented Angular state library that groups defaults, action handlers, selectors, and state context updates around a feature state.
 
@@ -10,11 +10,11 @@ NGXS is a class-oriented Angular state library that groups defaults, action hand
 
 ## Why choose it
 
-Choose NGXS when action classes and decorated state handlers match your team’s architecture style. Validation Rules stays independent: it validates the model, and NGXS patches the validated snapshot back into feature state.
+Choose NGXS when action classes and decorated state handlers match your team’s architecture style. Validation Rules Engine (VRE) stays independent: it validates the model, and NGXS patches the validated snapshot back into feature state.
 
 ## Integration pattern
 
-The unified Angular showcase commits form snapshots through NGXS action handlers while `@validation-rules/angular` owns validation policies, form groups, summaries, and result metadata.
+The unified Angular showcase commits form snapshots through NGXS action handlers while `@validation-rules-engine/angular` owns validation policies, form groups, summaries, and result metadata.
 
 ## Showcase pages
 
@@ -23,16 +23,16 @@ The unified Angular showcase commits form snapshots through NGXS action handlers
 - [Complex Form](http://127.0.0.1:4202/state/ngxs/complex)
 - [Performance Form](http://127.0.0.1:4202/state/ngxs/performance)
 
-## Using @validation-rules/angular
+## Using @validation-rules-engine/angular
 
-With NGXS, action classes describe form events and the state class owns updates. `@validation-rules/angular` validates the selected model and NGXS stores the resulting draft snapshot.
+With NGXS, action classes describe form events and the state class owns updates. `@validation-rules-engine/angular` validates the selected model and NGXS stores the resulting draft snapshot.
 
 ### Step 1 — Install Package
 
-Install Validation Rules, Angular Forms, and NGXS Store.
+Install VRE, Angular Forms, and NGXS Store.
 
 ```bash
-npm install @validation-rules/angular @validation-rules/core @ngxs/store @angular/forms
+npm install @validation-rules-engine/angular @validation-rules-engine/core @ngxs/store @angular/forms
 ```
 
 Use compatible Angular and NGXS major versions.
@@ -42,7 +42,7 @@ Use compatible Angular and NGXS major versions.
   "dependencies": {
     "@angular/forms": "^20.0.0",
     "@ngxs/store": "^20.0.0",
-    "@validation-rules/angular": "^1.0.0"
+    "@validation-rules-engine/angular": "^1.0.0"
   }
 }
 ```
@@ -55,7 +55,7 @@ Register `ValidationModule` and the NGXS feature state.
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgxsModule } from '@ngxs/store';
-import { ValidationModule, provideBootstrapValidationDisplay } from '@validation-rules/angular';
+import { ValidationModule, provideBootstrapValidationDisplay } from '@validation-rules-engine/angular';
 import { ProfileState } from './state/profile.state';
 
 @NgModule({
@@ -70,7 +70,7 @@ export class ProfileFeatureModule {}
 Policy rules stay framework-neutral and target the NGXS model shape.
 
 ```ts
-import { ValidationModel, ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules/angular';
+import { ValidationModel, ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules-engine/angular';
 
 export interface ProfileStateModel extends ValidationModel {
   firstName: string;
@@ -218,7 +218,7 @@ Prefer feature-scoped state classes, route-scoped policy registration, selectors
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { ValidationProviderService } from '@validation-rules/angular';
+import { ValidationProviderService } from '@validation-rules-engine/angular';
 import { ProfileStateModel, ProfileStatePolicy } from './profile.policy';
 import { ChangeProfileField, CommitValidatedProfile, ProfileState, ResetProfile } from './state/profile.state';
 

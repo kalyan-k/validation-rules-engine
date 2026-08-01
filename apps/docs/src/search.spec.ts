@@ -53,6 +53,14 @@ test('catalogs package documentation sections for Core, Angular, and React', () 
   assert.ok(documentationCatalog.some(({ slug }) => slug === 'react-best-practices'));
 });
 
+test('indexes the full product name and VRE abbreviation', () => {
+  const overview = documentationCatalog.find(({ slug }) => slug === 'overview');
+  assert.ok(overview);
+  const brandingIndex = buildSearchIndex([overview], () => '# Validation Rules Engine (VRE)\n\nPolicy-driven validation.');
+  assert.equal(searchDocumentation(brandingIndex, 'Validation Rules Engine')[0]?.slug, 'overview');
+  assert.equal(searchDocumentation(brandingIndex, 'VRE')[0]?.slug, 'overview');
+});
+
 test('indexes package docs for Core, Angular, and React search results', () => {
   const packageEntries: DocumentationEntry[] = [
     { slug: 'core-validation-rules', title: 'Validation Rules', section: 'Core Package', summary: 'Built-in rule behavior.', source: 'core-validation-rules.md' },
@@ -60,7 +68,7 @@ test('indexes package docs for Core, Angular, and React search results', () => {
     { slug: 'react-state-redux-toolkit', title: 'Redux Toolkit', section: 'React Package', summary: 'Slices and selectors.', source: 'react-state-redux-toolkit.md' }
   ];
   const packageIndex = buildSearchIndex(packageEntries, (candidate) => ({
-    'core-validation-rules': '# Validation Rules\n\n## Custom rules\n\nUse `userDefined` for domain validation.',
+    'core-validation-rules': '# Core Validation Rules\n\n## Custom rules\n\nUse `userDefined` for domain validation.',
     'angular-reactive-forms': '# Reactive Forms\n\n## Coordination pattern\n\nMap policyValidation errors back to controls.',
     'react-state-redux-toolkit': '# Redux Toolkit\n\n## Provider setup\n\nUse configureStore and react-redux Provider.'
   })[candidate.slug] ?? '');

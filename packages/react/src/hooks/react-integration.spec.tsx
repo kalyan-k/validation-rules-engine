@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
-import type { ValidationPolicy, ValidatorHelper } from '@validation-rules/core';
+import type { ValidationPolicy, ValidatorHelper } from '@validation-rules-engine/core';
 import { ValidationMessage } from '../components/validation-message';
 import { ValidationSummary } from '../components/validation-summary';
 import { ValidationRulesProvider, useValidationRulesContext } from '../context/validation-rules-context';

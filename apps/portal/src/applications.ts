@@ -29,16 +29,16 @@ function configuredBaseUrl(names: string | string[], fallback: string): string {
   return (configuredValue(names) ?? fallback).replace(/\/$/, '');
 }
 
-export const portalPort = configuredPort('VALIDATION_RULES_PORTAL_PORT', 4200);
-const docsPort = configuredPort('VALIDATION_RULES_DOCS_PORT', 4201);
-const angularShowcasePort = configuredPort('VALIDATION_RULES_ANGULAR_SHOWCASE_PORT', 4202);
-const reactShowcasePort = configuredPort('VALIDATION_RULES_REACT_SHOWCASE_PORT', 4204);
-const useStaticShowcases = process.env['VALIDATION_RULES_STATIC_SHOWCASES'] === '1';
+export const portalPort = configuredPort('VRE_PORTAL_PORT', 4200);
+const docsPort = configuredPort('VRE_DOCS_PORT', 4201);
+const angularShowcasePort = configuredPort('VRE_ANGULAR_SHOWCASE_PORT', 4202);
+const reactShowcasePort = configuredPort('VRE_REACT_SHOWCASE_PORT', 4204);
+const useStaticShowcases = process.env['VRE_STATIC_SHOWCASES'] === '1';
 export const platformUrls = {
-  portal: configuredBaseUrl('VALIDATION_RULES_PORTAL_URL', `http://127.0.0.1:${portalPort}`),
-  docs: configuredBaseUrl('VALIDATION_RULES_DOCS_URL', `http://127.0.0.1:${docsPort}`),
-  angular: configuredBaseUrl('VALIDATION_RULES_ANGULAR_SHOWCASE_URL', `http://127.0.0.1:${angularShowcasePort}`),
-  react: configuredBaseUrl('VALIDATION_RULES_REACT_SHOWCASE_URL', `http://127.0.0.1:${reactShowcasePort}`)
+  portal: configuredBaseUrl('VRE_PORTAL_URL', `http://127.0.0.1:${portalPort}`),
+  docs: configuredBaseUrl('VRE_DOCS_URL', `http://127.0.0.1:${docsPort}`),
+  angular: configuredBaseUrl('VRE_ANGULAR_SHOWCASE_URL', `http://127.0.0.1:${angularShowcasePort}`),
+  react: configuredBaseUrl('VRE_REACT_SHOWCASE_URL', `http://127.0.0.1:${reactShowcasePort}`)
 };
 
 function showcaseStartScript(defaultScript: string): string {

@@ -1,6 +1,6 @@
 # Core Package
 
-`@validation-rules/core` is the framework-neutral layer. It defines validation policies, validators, helper functions, model metadata, validation results, required-field results, and group status contracts. Angular and React both build on this package without changing rule behavior.
+`@validation-rules-engine/core` is the framework-neutral layer. It defines validation policies, validators, helper functions, model metadata, validation results, required-field results, and group status contracts. Angular and React both build on this package without changing rule behavior.
 
 ## What Core owns
 
@@ -17,7 +17,7 @@ Core does not render messages, inspect the DOM, subscribe to Angular forms, or m
 ## Minimal policy
 
 ```ts
-import type { ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules/core';
+import type { ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules-engine/core';
 
 export interface RegistrationModel {
   firstName: string;

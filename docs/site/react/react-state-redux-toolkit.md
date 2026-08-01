@@ -6,16 +6,16 @@ The Redux Toolkit showcase proves that validation policies can remain framework-
 
 [Open Live Showcase](http://127.0.0.1:4204/state/redux-toolkit)
 
-## Using @validation-rules/react
+## Using @validation-rules-engine/react
 
-Redux Toolkit should own form transitions and serializable draft state. `@validation-rules/react` should stay in React components/hooks, where it can register policies and validate the selected draft.
+Redux Toolkit should own form transitions and serializable draft state. `@validation-rules-engine/react` should stay in React components/hooks, where it can register policies and validate the selected draft.
 
 ### Step 1 — Install Package
 
 Install the React adapter, Core package, Redux Toolkit, and React Redux.
 
 ```bash
-npm install @validation-rules/react @validation-rules/core @reduxjs/toolkit react-redux
+npm install @validation-rules-engine/react @validation-rules-engine/core @reduxjs/toolkit react-redux
 ```
 
 Keep React Redux and Redux Toolkit versions aligned with your React version.
@@ -25,19 +25,19 @@ Keep React Redux and Redux Toolkit versions aligned with your React version.
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.0",
     "react-redux": "^9.0.0",
-    "@validation-rules/react": "^1.0.0"
+    "@validation-rules-engine/react": "^1.0.0"
   }
 }
 ```
 
 ### Step 2 — Configure Project
 
-Wrap the feature with both Redux and Validation Rules providers.
+Wrap the feature with both Redux and Validation Rules Engine providers.
 
 ```tsx
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-import { ValidationRulesProvider } from '@validation-rules/react';
+import { ValidationRulesProvider } from '@validation-rules-engine/react';
 import { profileReducer } from './profileSlice';
 
 const store = configureStore({ reducer: { profile: profileReducer } });
@@ -58,7 +58,7 @@ export function ProfileRoute() {
 Policies validate the selected Redux draft.
 
 ```tsx
-import type { ValidationPolicy, ValidationTarget } from '@validation-rules/react';
+import type { ValidationPolicy, ValidationTarget } from '@validation-rules-engine/react';
 
 export type ProfileDraft = ValidationTarget & {
   firstName: string;
@@ -184,7 +184,7 @@ Use selectors for derived UI state, dispatch semantic actions, and validate in t
 ```tsx
 import { FormEvent, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ValidationMessage, ValidationSummary, useValidationRules } from '@validation-rules/react';
+import { ValidationMessage, ValidationSummary, useValidationRules } from '@validation-rules-engine/react';
 import { ProfileDraft, profilePolicy } from './profilePolicy';
 import { profileActions, selectProfile } from './profileSlice';
 
@@ -227,7 +227,7 @@ export function ReduxProfileForm() {
 ## Installation
 
 ```bash
-npm install @validation-rules/react @reduxjs/toolkit react-redux
+npm install @validation-rules-engine/react @reduxjs/toolkit react-redux
 ```
 
 ## Package imports
@@ -235,12 +235,12 @@ npm install @validation-rules/react @reduxjs/toolkit react-redux
 ```tsx
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import { Provider, useDispatch, useSelector } from 'react-redux';
-import { useValidationRules, useValidationField, ValidationSummary } from '@validation-rules/react';
+import { useValidationRules, useValidationField, ValidationSummary } from '@validation-rules-engine/react';
 ```
 
 ## Provider setup
 
-Create a scoped store for the form route and render it under both Redux and Validation Rules providers.
+Create a scoped store for the form route and render it under both Redux and Validation Rules Engine providers.
 
 ```tsx
 <Provider store={store}>
@@ -340,7 +340,7 @@ Controls → slice actions → Redux store → selectors → validation hooks �
 
 Choose Redux Toolkit when form state participates in a larger application workflow, explicit events matter, Redux DevTools are valuable, or several distant features consume the same draft.
 
-## How Validation Rules integrates
+## How Validation Rules Engine integrates
 
 Validation remains outside reducers. Reducers store form transitions; hooks run policies against the selected model and dispatch the next immutable model after field changes.
 

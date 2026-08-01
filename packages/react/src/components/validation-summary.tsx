@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from 'react';
-import type { ValidationResult } from '@validation-rules/core';
+import type { ValidationResult } from '@validation-rules-engine/core';
 import { fieldId } from '../utilities/paths';
 
 export interface ValidationSummaryProps extends Omit<HTMLAttributes<HTMLElement>, 'children'> {

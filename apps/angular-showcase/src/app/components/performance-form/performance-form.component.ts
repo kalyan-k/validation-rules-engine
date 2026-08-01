@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { ShowcaseFramework } from '../../showcase/showcase-framework.model';
 import { Subscription } from 'rxjs';
-import { ValidationProviderService } from '@validation-rules/angular';
+import { ValidationProviderService } from '@validation-rules-engine/angular';
 import {
   PerformanceFormModel,
   PerformanceFormPhase,

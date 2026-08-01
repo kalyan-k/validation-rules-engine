@@ -1,4 +1,4 @@
-import type { ValidationPolicy, ValidationTarget, Validator, ValidatorHelper } from '@validation-rules/react';
+import type { ValidationPolicy, ValidationTarget, Validator, ValidatorHelper } from '@validation-rules-engine/react';
 import type { PerformanceStateModel } from '../performance/performance-generator';
 
 export type SimpleStateModel = ValidationTarget & {

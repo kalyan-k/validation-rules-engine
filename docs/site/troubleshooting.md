@@ -6,7 +6,7 @@ Read the prefixed application output in the terminal that launched `npm start` o
 
 ## A port is already in use
 
-Stop the existing process or configure the corresponding `VALIDATION_RULES_*_PORT` environment variable before launching the platform.
+Stop the existing process or configure the corresponding `VRE_*_PORT` environment variable before launching the platform.
 
 ## A policy is not found
 

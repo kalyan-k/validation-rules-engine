@@ -1,10 +1,10 @@
-# What is Validation Rules?
+# What is Validation Rules Engine (VRE)?
 
-Validation Rules is a policy-driven validation platform for applications that need reusable rules, explicit lifecycle control, and consistent validation state. It separates **what makes a model valid** from the framework code that renders fields and messages.
+Validation Rules Engine (VRE) is a policy-driven validation platform for applications that need reusable rules, explicit lifecycle control, and consistent validation state. It separates **what makes a model valid** from the framework code that renders fields and messages.
 
 ## Why it exists
 
-Validation logic often spreads across templates, components, event handlers, reducers, and API adapters. That makes the same rule difficult to reuse and even harder to test. Validation Rules gives rules a named policy, gives execution a deliberate lifecycle, and gives frameworks a narrow adapter boundary.
+Validation logic often spreads across templates, components, event handlers, reducers, and API adapters. That makes the same rule difficult to reuse and even harder to test. VRE gives rules a named policy, gives execution a deliberate lifecycle, and gives frameworks a narrow adapter boundary.
 
 ## Philosophy
 
@@ -18,9 +18,9 @@ Validation logic often spreads across templates, components, event handlers, red
 
 The repository contains three publishable packages and several private applications:
 
-- `@validation-rules/core` owns contracts, rules, validators, metadata, and result shapes.
-- `@validation-rules/angular` owns Angular policy execution, forms integration, directives, components, and display strategies.
-- `@validation-rules/react` owns React provider scope, hooks, controlled-field helpers, lifecycle-safe policy registration, and accessible messages.
+- `@validation-rules-engine/core` owns contracts, rules, validators, metadata, and result shapes.
+- `@validation-rules-engine/angular` owns Angular policy execution, forms integration, directives, components, and display strategies.
+- `@validation-rules-engine/react` owns React provider scope, hooks, controlled-field helpers, lifecycle-safe policy registration, and accessible messages.
 - The Portal launches documentation and every complete showcase application.
 - The Angular showcase covers ngModel, Reactive Forms, NgRx, NGXS, Akita, Elf, RxAngular State, Signals, custom RxJS store workflows, and multiple UI strategies.
 - The React showcase covers Local State, Redux Toolkit, Zustand, Jotai, Recoil, MobX, Context API, and generated performance forms.

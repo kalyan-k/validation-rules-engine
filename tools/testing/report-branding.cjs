@@ -5,7 +5,7 @@ const path = require('node:path');
 const shellRoot = path.join(__dirname, '..', 'platform-shell');
 const shellStyles = fs.readFileSync(path.join(shellRoot, 'platform-shell.css'), 'utf8');
 const shellScript = fs.readFileSync(path.join(shellRoot, 'platform-shell.js'), 'utf8');
-const logoDataUri = `data:image/svg+xml;base64,${fs.readFileSync(path.join(shellRoot, 'validation-rules-mark.svg')).toString('base64')}`;
+const logoDataUri = `data:image/svg+xml;base64,${fs.readFileSync(path.join(shellRoot, 'vre-mark.svg')).toString('base64')}`;
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -38,7 +38,7 @@ function renderReportHeader({ applicationName, reportType, generatedAt, version 
         <div><dt>Generated</dt><dd>${escapeHtml(generatedAt)}</dd></div>
       </dl></div>
     </section>
-    <script>(()=>{const root=document.currentScript.previousElementSibling;const button=root.querySelector('button');const key='validation-rules:report-summary';const preference=sessionStorage.getItem(key);const setExpanded=(expanded,persist)=>{root.classList.toggle('collapsed',!expanded);button.setAttribute('aria-expanded',String(expanded));button.querySelector('span').textContent=expanded?'Collapse details':'Expand details';if(persist)sessionStorage.setItem(key,expanded?'expanded':'collapsed');};setExpanded(preference!=='collapsed',false);button.addEventListener('click',()=>setExpanded(button.getAttribute('aria-expanded')!=='true',true));if(preference===null)setTimeout(()=>setExpanded(false,false),10000);})();</script>`;
+    <script>(()=>{const root=document.currentScript.previousElementSibling;const button=root.querySelector('button');const key='vre:report-summary';const preference=sessionStorage.getItem(key);const setExpanded=(expanded,persist)=>{root.classList.toggle('collapsed',!expanded);button.setAttribute('aria-expanded',String(expanded));button.querySelector('span').textContent=expanded?'Collapse details':'Expand details';if(persist)sessionStorage.setItem(key,expanded?'expanded':'collapsed');};setExpanded(preference!=='collapsed',false);button.addEventListener('click',()=>setExpanded(button.getAttribute('aria-expanded')!=='true',true));if(preference===null)setTimeout(()=>setExpanded(false,false),10000);})();</script>`;
 }
 
 function renderReportSubnavigation({ dashboardHref, summaryHref, testsHref, coverageHref, junitHref }) {

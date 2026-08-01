@@ -8,7 +8,7 @@ import {
   TailwindValidationDisplayStrategy,
   VALIDATION_DISPLAY_STRATEGY,
   ValidationProviderService
-} from '@validation-rules/angular';
+} from '@validation-rules-engine/angular';
 import { AppComponent } from './app.component';
 import { ComplexFormComponent } from './components/complex-form/complex-form.component';
 import { ComplexFormMaterialComponent } from './components/complex-form/complex-form-material.component';

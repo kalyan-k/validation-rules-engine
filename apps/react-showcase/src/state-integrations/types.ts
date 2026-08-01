@@ -1,5 +1,5 @@
 import { createContext, useContext, type ComponentType, type PropsWithChildren } from 'react';
-import type { ValidationTarget } from '@validation-rules/react';
+import type { ValidationTarget } from '@validation-rules-engine/react';
 
 export const strategyIds = [
   'local-state',

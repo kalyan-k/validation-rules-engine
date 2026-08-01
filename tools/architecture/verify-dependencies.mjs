@@ -55,11 +55,11 @@ for (const file of [
   'platform-shell.js',
   'platform-shell.css',
   'platform-theme.css',
-  'validation-rules-mark.svg',
-  'validation-rules-icon-32.png',
-  'validation-rules-icon-180.png',
-  'validation-rules-icon-192.png',
-  'validation-rules-icon-512.png',
+  'vre-mark.svg',
+  'vre-icon-32.png',
+  'vre-icon-180.png',
+  'vre-icon-192.png',
+  'vre-icon-512.png',
   'favicon.ico',
   'site.webmanifest'
 ]) {
@@ -81,26 +81,26 @@ if (failures.length === 0) {
     ...corePackage.optionalDependencies
   };
 
-  expect(corePackage.name === '@validation-rules/core', 'Core package name must be @validation-rules/core.');
-  expect(angularPackage.name === '@validation-rules/angular', 'Angular package name must be @validation-rules/angular.');
-  expect(reactPackage.name === '@validation-rules/react', 'React package name must be @validation-rules/react.');
+  expect(corePackage.name === '@validation-rules-engine/core', 'Core package name must be @validation-rules-engine/core.');
+  expect(angularPackage.name === '@validation-rules-engine/angular', 'Angular package name must be @validation-rules-engine/angular.');
+  expect(reactPackage.name === '@validation-rules-engine/react', 'React package name must be @validation-rules-engine/react.');
   expect(
-    angularPackage.peerDependencies?.['@validation-rules/core'] === '^1.0.0',
-    'Angular adapter must declare @validation-rules/core as a peer dependency.'
+    angularPackage.peerDependencies?.['@validation-rules-engine/core'] === '^1.0.0',
+    'Angular adapter must declare @validation-rules-engine/core as a peer dependency.'
   );
   expect(
-    reactPackage.peerDependencies?.['@validation-rules/core'] === '^1.0.0',
-    'React adapter must declare @validation-rules/core as a peer dependency.'
+    reactPackage.peerDependencies?.['@validation-rules-engine/core'] === '^1.0.0',
+    'React adapter must declare @validation-rules-engine/core as a peer dependency.'
   );
   expect(typeof reactPackage.peerDependencies?.react === 'string', 'React adapter must declare React as a peer dependency.');
   expect(typeof reactPackage.peerDependencies?.['react-dom'] === 'string', 'React adapter must declare React DOM as a peer dependency.');
   expect(
-    angularShowcasePackage.dependencies?.['@validation-rules/angular'] === angularPackage.version,
+    angularShowcasePackage.dependencies?.['@validation-rules-engine/angular'] === angularPackage.version,
     'Angular showcase must depend on the local Angular adapter version.'
   );
   expect(
-    angularShowcasePackage.dependencies?.['@validation-rules/core'] === undefined,
-    'Angular showcase must consume framework-neutral APIs through @validation-rules/angular.'
+    angularShowcasePackage.dependencies?.['@validation-rules-engine/core'] === undefined,
+    'Angular showcase must consume framework-neutral APIs through @validation-rules-engine/angular.'
   );
   expect(reactShowcasePackage.private === true, 'React showcase must remain private.');
   expect(portalPackage.private === true, 'Portal must remain private.');
@@ -118,12 +118,12 @@ if (failures.length === 0) {
     );
   }
   expect(
-    reactShowcasePackage.dependencies?.['@validation-rules/react'] === reactPackage.version,
+    reactShowcasePackage.dependencies?.['@validation-rules-engine/react'] === reactPackage.version,
     'React showcase must depend on the local React adapter version.'
   );
   expect(
-    reactShowcasePackage.dependencies?.['@validation-rules/core'] === undefined,
-    'React showcase must consume core APIs through @validation-rules/react.'
+    reactShowcasePackage.dependencies?.['@validation-rules-engine/core'] === undefined,
+    'React showcase must consume core APIs through @validation-rules-engine/react.'
   );
 
   for (const dependency of Object.keys(coreDependencies)) {
@@ -132,31 +132,31 @@ if (failures.length === 0) {
 
   const forbiddenCoreFiles = findSourceMatches(
     coreRoot,
-    /(?:from\s+|import\s*\()(['"])(?:@angular\/|react(?:-dom)?(?:\/|\1)|@validation-rules\/(?:angular|react)|(?:\.\.\/)+(?:angular|react)(?:\/|\1))/
+    /(?:from\s+|import\s*\()(['"])(?:@angular\/|react(?:-dom)?(?:\/|\1)|@validation-rules-engine\/(?:angular|react)|(?:\.\.\/)+(?:angular|react)(?:\/|\1))/
   );
   for (const file of forbiddenCoreFiles) {
     failures.push(`Core source has a forbidden framework dependency: ${relative(file)}`);
   }
 
   expect(
-    findSourceMatches(angularRoot, /(['"])@validation-rules\/core\1/).length > 0,
-    'Angular adapter source must consume @validation-rules/core.'
+    findSourceMatches(angularRoot, /(['"])@validation-rules-engine\/core\1/).length > 0,
+    'Angular adapter source must consume @validation-rules-engine/core.'
   );
   expect(
-    findSourceMatches(reactRoot, /(['"])@validation-rules\/core\1/).length > 0,
-    'React adapter source must consume @validation-rules/core.'
+    findSourceMatches(reactRoot, /(['"])@validation-rules-engine\/core\1/).length > 0,
+    'React adapter source must consume @validation-rules-engine/core.'
   );
-  for (const file of findSourceMatches(angularRoot, /(['"])@validation-rules\/react\1/)) {
+  for (const file of findSourceMatches(angularRoot, /(['"])@validation-rules-engine\/react\1/)) {
     failures.push(`Angular adapter depends on React: ${relative(file)}`);
   }
-  for (const file of findSourceMatches(reactRoot, /(['"])@validation-rules\/angular\1/)) {
+  for (const file of findSourceMatches(reactRoot, /(['"])@validation-rules-engine\/angular\1/)) {
     failures.push(`React adapter depends on Angular: ${relative(file)}`);
   }
   expect(
-    findSourceMatches(angularShowcaseRoot, /(['"])@validation-rules\/angular\1/).length > 0,
-    'Angular showcase source must consume @validation-rules/angular.'
+    findSourceMatches(angularShowcaseRoot, /(['"])@validation-rules-engine\/angular\1/).length > 0,
+    'Angular showcase source must consume @validation-rules-engine/angular.'
   );
-  for (const file of findSourceMatches(angularShowcaseRoot, /(['"])@validation-rules\/core\1/)) {
+  for (const file of findSourceMatches(angularShowcaseRoot, /(['"])@validation-rules-engine\/core\1/)) {
     failures.push(`Angular showcase bypasses the adapter: ${relative(file)}`);
   }
   for (const [dependency, label] of [
@@ -172,14 +172,14 @@ if (failures.length === 0) {
     );
   }
   expect(
-    findSourceMatches(reactShowcaseRoot, /(['"])@validation-rules\/react\1/).length > 0,
-    'React showcase source must consume @validation-rules/react.'
+    findSourceMatches(reactShowcaseRoot, /(['"])@validation-rules-engine\/react\1/).length > 0,
+    'React showcase source must consume @validation-rules-engine/react.'
   );
-  for (const file of findSourceMatches(reactShowcaseRoot, /(['"])@validation-rules\/core\1/)) {
+  for (const file of findSourceMatches(reactShowcaseRoot, /(['"])@validation-rules-engine\/core\1/)) {
     failures.push(`React showcase bypasses the adapter: ${relative(file)}`);
   }
 
-  const angularImports = /(?:from\s+|import\s*\()(['"])(?:@angular\/|@ngrx\/|@validation-rules\/angular)\S*\1/;
+  const angularImports = /(?:from\s+|import\s*\()(['"])(?:@angular\/|@ngrx\/|@validation-rules-engine\/angular)\S*\1/;
   for (const root of [portalRoot, docsRoot]) {
     for (const file of findSourceMatches(root, angularImports)) {
       failures.push(`Framework-neutral Node application has an Angular-specific dependency: ${relative(file)}`);
@@ -253,6 +253,6 @@ if (failures.length > 0) {
   console.log('Verified dependency direction: Angular showcase -> angular adapter -> core engine.');
   console.log('Verified dependency direction: React showcase -> React adapter -> core engine.');
   console.log('Verified that the portal and documentation applications remain Angular-free.');
-  console.log('Verified that @validation-rules/core has no Angular dependency.');
+  console.log('Verified that @validation-rules-engine/core has no Angular dependency.');
   console.log('Verified that every application renders the shared platform shell.');
 }

@@ -2,7 +2,7 @@ const documentationSections = [
   {
     label: 'Introduction',
     items: [
-      ['What is Validation Rules?', '/docs/overview'],
+      ['What is Validation Rules Engine (VRE)?', '/docs/overview'],
       ['Installation & Quick Start', '/docs/getting-started']
     ]
   },
@@ -132,7 +132,7 @@ function normalizedBase(value, fallback) {
 }
 
 function configuredUrls() {
-  const config = globalThis.validationRulesPlatformConfig || {};
+  const config = globalThis.vrePlatformConfig || {};
   return config.urls || config;
 }
 
@@ -190,7 +190,7 @@ class ValidationPlatformShell extends HTMLElement {
     const activeApplication = this.getAttribute('active-application') || '';
     const applicationName = this.getAttribute('application-name') || 'Platform';
     const version = this.getAttribute('version') || '0.0.0';
-    const brandMarkUrl = this.getAttribute('brand-mark-url') || '/validation-rules-mark.svg';
+    const brandMarkUrl = this.getAttribute('brand-mark-url') || '/vre-mark.svg';
     const defaultPortalUrl = currentOriginWhen(activeApplication, ['portal', 'reports'], 'http://127.0.0.1:4200');
     const urls = {
       portal: configuredBase('portal', this.getAttribute('portal-url'), defaultPortalUrl),
@@ -223,9 +223,9 @@ class ValidationPlatformShell extends HTMLElement {
     root.innerHTML = `
       ${injectedStyles ? `<style>${injectedStyles}</style>` : '<link rel="stylesheet" href="/platform-shell.css">'}
       <header class="platform-header" part="header">
-        <a class="platform-brand" href="${urls.portal}" aria-label="Validation Rules home">
+        <a class="platform-brand" href="${urls.portal}" aria-label="Validation Rules Engine home">
           <img class="platform-mark" src="${brandMarkUrl}" width="38" height="38" alt="">
-          <span class="platform-brand-copy"><strong>Validation Rules</strong><small>${applicationName}</small></span>
+          <span class="platform-brand-copy"><strong>Validation Rules Engine</strong><small>${applicationName}</small></span>
         </a>
         <span class="platform-version" data-version title="Workspace version">v${version}</span>
         <button class="platform-menu" type="button" aria-expanded="false" aria-controls="platform-navigation">Menu</button>
@@ -243,16 +243,16 @@ class ValidationPlatformShell extends HTMLElement {
             <summary>Reports<span aria-hidden="true"></span></summary>
             <div class="platform-dropdown">${reportsNavigation}</div>
           </details>
-          <a class="platform-nav-link" href="https://github.com/kalyan-k/validation-rules">GitHub</a>
+          <a class="platform-nav-link" href="https://github.com/kalyan-k/validation-rules-engine">GitHub</a>
         </nav>
       </header>
       <div class="platform-content"><slot></slot></div>
       <footer class="platform-footer" part="footer">
         <div class="platform-footer-brand">
           <img class="platform-footer-mark" src="${brandMarkUrl}" width="30" height="30" alt="">
-          <div><strong>Validation Rules</strong><span>Reusable policy validation for Angular, React, and framework-neutral TypeScript.</span></div>
+          <div><strong>Validation Rules Engine</strong><span>Reusable policy validation for Angular, React, and framework-neutral TypeScript.</span></div>
         </div>
-        <div class="platform-footer-meta"><span data-version>v${version}</span><span>MIT License</span><a href="${urls.docs}/docs/overview">Docs</a><a href="${urls.portal}/reports/index.html">Reports</a><a href="https://github.com/kalyan-k/validation-rules">GitHub</a></div>
+        <div class="platform-footer-meta"><span data-version>v${version}</span><span>MIT License</span><a href="${urls.docs}/docs/overview">Docs</a><a href="${urls.portal}/reports/index.html">Reports</a><a href="https://github.com/kalyan-k/validation-rules-engine">GitHub</a></div>
       </footer>`;
 
     const button = root.querySelector('.platform-menu');

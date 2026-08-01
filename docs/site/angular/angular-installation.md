@@ -3,7 +3,7 @@
 ## Install
 
 ```bash
-npm install @validation-rules/angular @validation-rules/core
+npm install @validation-rules-engine/angular @validation-rules-engine/core
 ```
 
 The Angular package depends on Core contracts. Keep their versions aligned.
@@ -11,7 +11,7 @@ The Angular package depends on Core contracts. Keep their versions aligned.
 ## Module setup
 
 ```ts
-import { ValidationModule } from '@validation-rules/angular';
+import { ValidationModule } from '@validation-rules-engine/angular';
 
 @NgModule({
   imports: [

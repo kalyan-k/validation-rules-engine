@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, SimpleChange } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { getValidationMeta } from '@validation-rules/core';
+import { getValidationMeta } from '@validation-rules-engine/core';
 import { ValidationProviderService } from '../services/validation-provider.service';
 import { ValidationGroupStatusComponent } from './validation-group-status.component';
 import { ValidationGroupSummaryComponent } from './validation-group-summary.component';

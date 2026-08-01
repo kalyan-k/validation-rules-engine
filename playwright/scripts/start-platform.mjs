@@ -5,23 +5,23 @@ const urls = applicationBaseUrls(process.env);
 const npmExecPath = process.env.npm_execpath;
 
 if (!npmExecPath) {
-  console.error('Unable to start the Validation Rules platform: npm_execpath is not available. Run Playwright through npm scripts.');
+  console.error('Unable to start the Validation Rules Engine platform: npm_execpath is not available. Run Playwright through npm scripts.');
   process.exit(1);
 }
 
 const childEnv = {
   ...process.env,
-  VALIDATION_RULES_NO_OPEN: '1',
+  VRE_NO_OPEN: '1',
   DEMO_NO_OPEN: '1',
-  VALIDATION_RULES_PORTAL_PORT: portFromUrl(urls.portal),
-  VALIDATION_RULES_DOCS_PORT: portFromUrl(urls.docs),
-  VALIDATION_RULES_ANGULAR_SHOWCASE_PORT: portFromUrl(urls.angular),
-  VALIDATION_RULES_REACT_SHOWCASE_PORT: portFromUrl(urls.react),
-  VALIDATION_RULES_PORTAL_URL: urls.portal,
-  VALIDATION_RULES_DOCS_URL: urls.docs,
-  VALIDATION_RULES_ANGULAR_SHOWCASE_URL: urls.angular,
-  VALIDATION_RULES_REACT_SHOWCASE_URL: urls.react,
-  VALIDATION_RULES_STATIC_SHOWCASES: '1'
+  VRE_PORTAL_PORT: portFromUrl(urls.portal),
+  VRE_DOCS_PORT: portFromUrl(urls.docs),
+  VRE_ANGULAR_SHOWCASE_PORT: portFromUrl(urls.angular),
+  VRE_REACT_SHOWCASE_PORT: portFromUrl(urls.react),
+  VRE_PORTAL_URL: urls.portal,
+  VRE_DOCS_URL: urls.docs,
+  VRE_ANGULAR_SHOWCASE_URL: urls.angular,
+  VRE_REACT_SHOWCASE_URL: urls.react,
+  VRE_STATIC_SHOWCASES: '1'
 };
 
 if (process.env.PLAYWRIGHT_SKIP_PLATFORM_BUILD !== '1') {

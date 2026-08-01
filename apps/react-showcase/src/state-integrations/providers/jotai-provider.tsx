@@ -1,6 +1,6 @@
 import { useMemo, useState, type PropsWithChildren } from 'react';
 import { atom, createStore, Provider, useAtom, useAtomValue, type PrimitiveAtom, type Atom } from 'jotai';
-import type { ValidationTarget } from '@validation-rules/react';
+import type { ValidationTarget } from '@validation-rules-engine/react';
 import { cloneModel, countPopulatedValues, ShowcaseStateContext, type StateProviderProps } from '../types';
 
 interface ShowcaseAtoms {

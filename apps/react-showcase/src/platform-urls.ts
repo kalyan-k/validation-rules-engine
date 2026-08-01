@@ -1,6 +1,6 @@
 type PlatformUrlKey = 'portal' | 'docs' | 'angular' | 'react';
 
-interface ValidationRulesPlatformConfig {
+interface VrePlatformConfig {
   urls?: Partial<Record<PlatformUrlKey, string>>;
   portalUrl?: string;
   docsUrl?: string;
@@ -10,7 +10,7 @@ interface ValidationRulesPlatformConfig {
 
 declare global {
   interface Window {
-    validationRulesPlatformConfig?: ValidationRulesPlatformConfig;
+    vrePlatformConfig?: VrePlatformConfig;
   }
 }
 
@@ -22,8 +22,8 @@ const defaults: Record<PlatformUrlKey, string> = {
 };
 
 export function platformUrl(key: PlatformUrlKey, path = ''): string {
-  const config = window.validationRulesPlatformConfig ?? {};
-  const configured = config.urls?.[key] ?? config[`${key}Url` as keyof ValidationRulesPlatformConfig];
+  const config = window.vrePlatformConfig ?? {};
+  const configured = config.urls?.[key] ?? config[`${key}Url` as keyof VrePlatformConfig];
   const base = String(configured || defaults[key]).replace(/\/$/, '');
   return `${base}${path}`;
 }

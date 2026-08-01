@@ -1,4 +1,4 @@
-# NgRx with @validation-rules/angular
+# NgRx with @validation-rules-engine/angular
 
 NgRx is a Redux-inspired Angular state library built around actions, reducers, selectors, and immutable snapshots.
 
@@ -10,11 +10,11 @@ NgRx is a Redux-inspired Angular state library built around actions, reducers, s
 
 ## Why choose it
 
-Choose NgRx when explicit events and reducer tests are more important than minimizing boilerplate. Validation Rules fits this model because policies validate a plain draft model, then the validated model and result metadata can be committed through an action.
+Choose NgRx when explicit events and reducer tests are more important than minimizing boilerplate. Validation Rules Engine fits this model because policies validate a plain draft model, then the validated model and result metadata can be committed through an action.
 
 ## Integration pattern
 
-The unified Angular showcase stores the form snapshot through NgRx actions and reducers while `@validation-rules/angular` evaluates the same model paths used by every other Angular state showcase.
+The unified Angular showcase stores the form snapshot through NgRx actions and reducers while `@validation-rules-engine/angular` evaluates the same model paths used by every other Angular state showcase.
 
 ## Showcase pages
 
@@ -23,16 +23,16 @@ The unified Angular showcase stores the form snapshot through NgRx actions and r
 - [Complex Form](http://127.0.0.1:4202/state/ngrx/complex)
 - [Performance Form](http://127.0.0.1:4202/state/ngrx/performance)
 
-## Using @validation-rules/angular
+## Using @validation-rules-engine/angular
 
-In NgRx applications, keep reducers responsible for immutable draft state and let `@validation-rules/angular` validate the selected draft before dispatching save or validation-result actions.
+In NgRx applications, keep reducers responsible for immutable draft state and let `@validation-rules-engine/angular` validate the selected draft before dispatching save or validation-result actions.
 
 ### Step 1 — Install Package
 
 Install the Angular adapter, Core package, Angular Forms, and NgRx Store.
 
 ```bash
-npm install @validation-rules/angular @validation-rules/core @ngrx/store @angular/forms
+npm install @validation-rules-engine/angular @validation-rules-engine/core @ngrx/store @angular/forms
 ```
 
 Keep NgRx aligned to the Angular major version used by the app.
@@ -42,20 +42,20 @@ Keep NgRx aligned to the Angular major version used by the app.
   "dependencies": {
     "@angular/forms": "^20.0.0",
     "@ngrx/store": "^20.0.0",
-    "@validation-rules/angular": "^1.0.0"
+    "@validation-rules-engine/angular": "^1.0.0"
   }
 }
 ```
 
 ### Step 2 — Configure Project
 
-Register Angular Forms, Validation Rules, and the feature reducer.
+Register Angular Forms, Validation Rules Engine, and the feature reducer.
 
 ```ts
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
-import { ValidationModule, provideBootstrapValidationDisplay } from '@validation-rules/angular';
+import { ValidationModule, provideBootstrapValidationDisplay } from '@validation-rules-engine/angular';
 import { profileReducer } from './state/profile.reducer';
 
 @NgModule({
@@ -74,7 +74,7 @@ export class ProfileFeatureModule {}
 The policy validates the serializable draft model stored by NgRx.
 
 ```ts
-import { ValidationModel, ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules/angular';
+import { ValidationModel, ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules-engine/angular';
 
 export interface ProfileDraft extends ValidationModel {
   firstName: string;
@@ -210,7 +210,7 @@ Prefer feature-scoped reducers, stable policy names, selectors for derived valid
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { ValidationProviderService } from '@validation-rules/angular';
+import { ValidationProviderService } from '@validation-rules-engine/angular';
 import { ProfileDraft, ProfileDraftPolicy } from './profile.policy';
 import { profileFieldChanged, profileReset, profileValidated, selectProfileDraft } from './state/profile.reducer';
 

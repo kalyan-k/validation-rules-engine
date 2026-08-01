@@ -4,7 +4,7 @@ import {
   ValidationSummary,
   useValidationField,
   type FormGroupStatus
-} from '@validation-rules/react';
+} from '@validation-rules-engine/react';
 import { FormField } from '../../components/form-field';
 import { createAddressPolicy, createContactPolicy, personalPolicy } from '../../policies/complex-policies';
 import {

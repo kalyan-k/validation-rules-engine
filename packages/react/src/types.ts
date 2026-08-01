@@ -1,4 +1,4 @@
-import type { PolicyGroupConfig, RequiredResult, ValidationModel, ValidationPolicy, ValidationResult } from '@validation-rules/core';
+import type { PolicyGroupConfig, RequiredResult, ValidationModel, ValidationPolicy, ValidationResult } from '@validation-rules-engine/core';
 
 export type ValidationTarget = ValidationModel & Record<string, unknown>;
 

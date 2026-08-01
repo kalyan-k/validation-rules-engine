@@ -1,11 +1,11 @@
-# Validation Rules for Angular
+# Validation Rules Engine (VRE) for Angular
 
-`@validation-rules/angular` connects policy-driven validation to Angular template-driven forms. Policies keep rules reusable and testable, while directives, services, components, and display strategies integrate them with the view.
+`@validation-rules-engine/angular` connects policy-driven validation to Angular template-driven forms. Policies keep rules reusable and testable, while directives, services, components, and display strategies integrate them with the view.
 
 ## Installation
 
 ```bash
-npm install @validation-rules/core @validation-rules/angular underscore
+npm install @validation-rules-engine/core @validation-rules-engine/angular underscore
 ```
 
 The core package, Angular framework packages, RxJS, and Underscore are peer dependencies.
@@ -15,7 +15,7 @@ Add the optional default stylesheet:
 ```json
 {
   "styles": [
-    "node_modules/@validation-rules/angular/styles/policy-validation.css"
+    "node_modules/@validation-rules-engine/angular/styles/policy-validation.css"
   ]
 }
 ```
@@ -41,7 +41,7 @@ import {
   ValidationProviderService,
   Validator,
   ValidatorHelper
-} from '@validation-rules/angular';
+} from '@validation-rules-engine/angular';
 
 class UserFormPolicy implements ValidationPolicy {
   addValidations(v: ValidatorHelper): Validator[] {

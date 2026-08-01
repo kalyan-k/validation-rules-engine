@@ -1,5 +1,5 @@
 import { Renderer2 } from '@angular/core';
-import { ControlType, RequiredResult, ValidationResult } from '@validation-rules/core';
+import { ControlType, RequiredResult, ValidationResult } from '@validation-rules-engine/core';
 import { AbstractValidationDisplayStrategy } from '../display/abstract-validation-display.strategy';
 import {
   POLICY_VALIDATION_DOM,

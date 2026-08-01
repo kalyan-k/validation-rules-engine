@@ -32,7 +32,7 @@ The adapter exports `ValidationModule`, `ValidatorDirective`, display configurat
 
 ## React UI surface
 
-The React adapter exports `ValidationRulesProvider`, `useValidationRules`, `useValidationForm`, `useValidationField`, `ValidationMessage`, `ValidationSummary`, testing helpers, controlled-field props, and React-specific validation result types. React applications should import these APIs from `@validation-rules/react`.
+The React adapter exports `ValidationRulesProvider`, `useValidationRules`, `useValidationForm`, `useValidationField`, `ValidationMessage`, `ValidationSummary`, testing helpers, controlled-field props, and React-specific validation result types. React applications should import these APIs from `@validation-rules-engine/react`.
 
 ## Compatibility
 

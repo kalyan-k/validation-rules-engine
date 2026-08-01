@@ -11,17 +11,17 @@ const workspaceRoot = path.resolve(sourceDirectory, '..', '..', '..');
 const contentRoot = path.join(workspaceRoot, 'docs', 'site');
 const publicRoot = path.join(workspaceRoot, 'apps', 'docs', 'public');
 const shellRoot = path.join(workspaceRoot, 'tools', 'platform-shell');
-const docsPort = configuredPort('VALIDATION_RULES_DOCS_PORT', 4201);
-const docsUrl = configuredBaseUrl('VALIDATION_RULES_DOCS_URL', `http://127.0.0.1:${docsPort}`);
-const portalUrl = configuredBaseUrl('VALIDATION_RULES_PORTAL_URL', 'http://127.0.0.1:4200');
-const angularShowcaseUrl = configuredBaseUrl('VALIDATION_RULES_ANGULAR_SHOWCASE_URL', 'http://127.0.0.1:4202');
-const reactShowcaseUrl = configuredBaseUrl('VALIDATION_RULES_REACT_SHOWCASE_URL', 'http://127.0.0.1:4204');
+const docsPort = configuredPort('VRE_DOCS_PORT', 4201);
+const docsUrl = configuredBaseUrl('VRE_DOCS_URL', `http://127.0.0.1:${docsPort}`);
+const portalUrl = configuredBaseUrl('VRE_PORTAL_URL', 'http://127.0.0.1:4200');
+const angularShowcaseUrl = configuredBaseUrl('VRE_ANGULAR_SHOWCASE_URL', 'http://127.0.0.1:4202');
+const reactShowcaseUrl = configuredBaseUrl('VRE_REACT_SHOWCASE_URL', 'http://127.0.0.1:4204');
 const workspacePackage = JSON.parse(readFileSync(path.join(workspaceRoot, 'package.json'), 'utf8')) as { version?: string };
 const assetVersion = encodeURIComponent(workspacePackage.version ?? '0.0.0');
 const platformAssets = new Set([
   'favicon.ico', 'platform-shell.css', 'platform-shell.js', 'platform-theme.css', 'site.webmanifest',
-  'validation-rules-mark.svg',
-  ...[16, 32, 64, 180, 192, 512].map((size) => `validation-rules-icon-${size}.png`)
+  'vre-mark.svg',
+  ...[16, 32, 64, 180, 192, 512].map((size) => `vre-icon-${size}.png`)
 ]);
 const platformContentTypes: Record<string, string> = {
   '.css': 'text/css; charset=utf-8', '.ico': 'image/x-icon', '.js': 'text/javascript; charset=utf-8',
@@ -105,7 +105,7 @@ function renderPage(entry: DocumentationEntry | undefined, content: string): str
     ? `<a class="showcase-link" href="${portalUrl}"><strong>Open Portal</strong><span>Choose Angular or React showcases that all use Core policies &rarr;</span></a>`
     : `<a class="showcase-link" href="${angularShowcaseUrl}${entry?.showcasePath ?? ''}"><strong>Open Angular Showcase</strong><span>See the concepts running in a real application &rarr;</span></a>`;
 
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${escapeHtml(entry?.summary ?? 'Validation Rules documentation')}"><meta name="theme-color" content="#10243e"><title>${escapeHtml(entry?.title ?? 'Not found')} &middot; Validation Rules</title><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/validation-rules-mark.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/validation-rules-icon-180.png"><link rel="manifest" href="/site.webmanifest"><link rel="preload" href="/platform-shell.css" as="style"><link rel="stylesheet" href="/platform-shell.css"><link rel="stylesheet" href="/platform-theme.css"><link rel="stylesheet" href="/styles.css"><script src="/platform-config.js?v=${assetVersion}"></script><script src="/platform-shell.js?v=${assetVersion}"></script><script src="/search.js?v=${assetVersion}" defer></script></head>
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${escapeHtml(entry?.summary ?? 'Validation Rules Engine documentation')}"><meta name="theme-color" content="#10243e"><title>${escapeHtml(entry?.title ?? 'Not found')} &middot; Validation Rules Engine</title><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/vre-mark.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/vre-icon-180.png"><link rel="manifest" href="/site.webmanifest"><link rel="preload" href="/platform-shell.css" as="style"><link rel="stylesheet" href="/platform-shell.css"><link rel="stylesheet" href="/platform-theme.css"><link rel="stylesheet" href="/styles.css"><script src="/platform-config.js?v=${assetVersion}"></script><script src="/platform-shell.js?v=${assetVersion}"></script><script src="/search.js?v=${assetVersion}" defer></script></head>
   <body><validation-platform-shell active-application="documentation" application-name="Documentation" version="${escapeHtml(workspacePackage.version ?? '0.0.0')}" portal-url="${portalUrl}" docs-url="${docsUrl}" angular-url="${angularShowcaseUrl}" react-url="${reactShowcaseUrl}">
   <div class="docs-layout"><aside><div class="docs-search"><label for="docs-search">Search documentation</label><div class="docs-search-control"><input id="docs-search" type="search" role="combobox" placeholder="Search docs..." autocomplete="off" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false"><button id="docs-search-clear" class="docs-search-clear" type="button" aria-label="Clear documentation search" title="Clear search" hidden>&times;</button></div><div id="docs-search-results" class="search-results" role="listbox" hidden></div></div><div class="docs-navigation">${groupedNavigation}</div></aside>
   <main><div class="vr-breadcrumb"><a href="${portalUrl}">Home</a><span>/</span><a href="/docs/overview">Documentation</a><span>/</span><span>${escapeHtml(entry?.section ?? 'Documentation')}</span></div><article id="docs-content">${content}</article>
@@ -184,7 +184,7 @@ function sendJavaScript(response: ServerResponse, value: string): void {
 }
 
 function platformConfigScript(): string {
-  return `globalThis.validationRulesPlatformConfig = ${JSON.stringify({
+  return `globalThis.vrePlatformConfig = ${JSON.stringify({
     urls: {
       portal: portalUrl,
       docs: docsUrl,
@@ -200,6 +200,6 @@ function escapeHtml(value: string): string {
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   createDocumentationServer().listen(docsPort, '127.0.0.1', () => {
-    console.log(`Validation Rules Documentation: ${docsUrl}`);
+    console.log(`Validation Rules Engine Documentation: ${docsUrl}`);
   });
 }

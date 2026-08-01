@@ -2,20 +2,20 @@
 
 ## Overview
 
-Local state is the baseline integration. The form model stays in the route subtree, while `@validation-rules/react` handles policy lifecycle, field state, messages, summaries, groups, and submission.
+Local state is the baseline integration. The form model stays in the route subtree, while `@validation-rules-engine/react` handles policy lifecycle, field state, messages, summaries, groups, and submission.
 
 [Open Live Showcase](http://127.0.0.1:4204/state/local-state)
 
-## Using @validation-rules/react
+## Using @validation-rules-engine/react
 
-Local state is the reference consumption pattern for `@validation-rules/react`: React owns a controlled model, while Validation Rules owns policy registration, focused field state, summaries, group validation, submit validation, and cleanup.
+Local state is the reference consumption pattern for `@validation-rules-engine/react`: React owns a controlled model, while Validation Rules Engine owns policy registration, focused field state, summaries, group validation, submit validation, and cleanup.
 
 ### Step 1 — Install Package
 
 Install the React adapter and Core package.
 
 ```bash
-npm install @validation-rules/react @validation-rules/core
+npm install @validation-rules-engine/react @validation-rules-engine/core
 ```
 
 The adapter expects React to be supplied by your application.
@@ -25,7 +25,7 @@ The adapter expects React to be supplied by your application.
   "dependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "@validation-rules/react": "^1.0.0"
+    "@validation-rules-engine/react": "^1.0.0"
   }
 }
 ```
@@ -35,7 +35,7 @@ The adapter expects React to be supplied by your application.
 Wrap the route or application with `ValidationRulesProvider`.
 
 ```tsx
-import { ValidationRulesProvider } from '@validation-rules/react';
+import { ValidationRulesProvider } from '@validation-rules-engine/react';
 import { ProfileForm } from './ProfileForm';
 
 export function ProfileRoute() {
@@ -52,7 +52,7 @@ export function ProfileRoute() {
 Define a typed model and policy with Core paths.
 
 ```tsx
-import type { ValidationPolicy, ValidationTarget } from '@validation-rules/react';
+import type { ValidationPolicy, ValidationTarget } from '@validation-rules-engine/react';
 
 export type ProfileModel = ValidationTarget & {
   firstName: string;
@@ -159,7 +159,7 @@ Prefer route-local state for drafts, immutable updates through `setFieldValue`, 
 
 ```tsx
 import { useMemo } from 'react';
-import { ValidationMessage, ValidationRulesProvider, ValidationSummary, useValidationField, useValidationForm } from '@validation-rules/react';
+import { ValidationMessage, ValidationRulesProvider, ValidationSummary, useValidationField, useValidationForm } from '@validation-rules-engine/react';
 import { ProfileModel, profilePolicy } from './profile.policy';
 
 const initialModel: ProfileModel = { firstName: '', lastName: '', email: '', acceptedTerms: false };
@@ -200,14 +200,14 @@ async function saveProfile(model: ProfileModel): Promise<void> {
 Local State needs only React and the adapter:
 
 ```bash
-npm install @validation-rules/react @validation-rules/core
+npm install @validation-rules-engine/react @validation-rules-engine/core
 ```
 
 ## Package imports
 
 ```tsx
 import { useMemo, useReducer, useState } from 'react';
-import { ValidationRulesProvider, useValidationForm, useValidationField, ValidationSummary } from '@validation-rules/react';
+import { ValidationRulesProvider, useValidationForm, useValidationField, ValidationSummary } from '@validation-rules-engine/react';
 ```
 
 ## Provider setup
@@ -309,7 +309,7 @@ Form controls → useState model → React validation hooks → core policies
 
 Choose local state for forms whose data is owned by one component tree, does not need cross-route persistence, and benefits from the smallest dependency surface.
 
-## How Validation Rules integrates
+## How Validation Rules Engine integrates
 
 Pass the current model to the validation hooks and publish each immutable field update back to local state. Policy and group definitions remain stable and independent of state ownership.
 

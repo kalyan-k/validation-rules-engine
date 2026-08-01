@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { createStore } from 'zustand/vanilla';
 import { useStore } from 'zustand';
-import type { ValidationTarget } from '@validation-rules/react';
+import type { ValidationTarget } from '@validation-rules-engine/react';
 import { cloneModel, countPopulatedValues, ShowcaseStateContext, type StateProviderProps } from '../types';
 
 interface ZustandShowcaseState {

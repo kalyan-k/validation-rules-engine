@@ -13,12 +13,12 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     resolve: {
       alias: {
-        '@validation-rules/react': testing
+        '@validation-rules-engine/react': testing
           ? resolve(__dirname, '../../packages/react/src/index.ts')
           : resolve(__dirname, '../../dist/packages/react/index.js'),
-        '@validation-rules/core': testing
+        '@validation-rules-engine/core': testing
           ? resolve(__dirname, '../../packages/core/src/public-api.ts')
-          : resolve(__dirname, '../../dist/packages/core/fesm2022/validation-rules-core.mjs')
+          : resolve(__dirname, '../../dist/packages/core/fesm2022/validation-rules-engine-core.mjs')
       }
     },
   build: {

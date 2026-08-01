@@ -1,5 +1,5 @@
 import { useMemo, type ChangeEvent, type FocusEvent } from 'react';
-import { getValidationMeta, shouldShowFieldErrors } from '@validation-rules/core';
+import { getValidationMeta, shouldShowFieldErrors } from '@validation-rules-engine/core';
 import { useValidationRulesContext } from '../context/validation-rules-context';
 import type { ValidationFieldOptions, ValidationTarget } from '../types';
 import { fieldId, getPropertyValue } from '../utilities/paths';

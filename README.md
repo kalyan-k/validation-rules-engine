@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="tools/platform-shell/validation-rules-mark.svg" width="88" height="88" alt="Validation Rules logo">
+  <img src="tools/platform-shell/vre-mark.svg" width="88" height="88" alt="Validation Rules Engine logo">
 </p>
 
-# Validation Rules
+# Validation Rules Engine (VRE)
 
-Validation Rules is an extendable monorepo for policy-driven model and form validation. It separates a framework-independent rules engine from framework adapters, so validation behavior can stay reusable and testable while each UI integration owns its lifecycle and rendering concerns.
+Validation Rules Engine (VRE) is an extensible monorepo for policy-driven model and form validation. It separates a framework-independent rules engine from framework adapters, so validation behavior can stay reusable and testable while each UI integration owns its lifecycle and rendering concerns.
 
 The repository ships a core engine plus production Angular and React adapters inside a multi-application developer platform. A framework-neutral portal launches the documentation site, Angular showcases, and a hooks-first React showcase from one command.
 
@@ -23,9 +23,9 @@ The repository ships a core engine plus production Angular and React adapters in
 - Independent tests, 90% coverage gates, and browsable reports for every package and showcase project
 - Enforced dependency direction from Angular/React showcases to their adapters to core
 
-## Why Validation Rules?
+## Why Validation Rules Engine?
 
-Validation logic often becomes scattered across templates, components, event handlers, and backend-shaped models. Validation Rules gives that behavior an explicit home. A policy describes what a model requires; an adapter connects that policy to a framework; display strategies decide how errors appear.
+Validation logic often becomes scattered across templates, components, event handlers, and backend-shaped models. Validation Rules Engine gives that behavior an explicit home. A policy describes what a model requires; an adapter connects that policy to a framework; display strategies decide how errors appear.
 
 This separation makes rules easier to reuse, test, review, and evolve without tying the engine to a particular UI framework. Existing Angular behavior remains intact while React receives an isolated hooks-first integration.
 
@@ -38,8 +38,8 @@ apps/portal (launcher) ----URLs----> apps/docs
          |
          +---- application registry and health status
 
-Angular showcase --> @validation-rules/angular --> @validation-rules/core
-React showcase ----> @validation-rules/react -----> @validation-rules/core
+Angular showcase --> @validation-rules-engine/angular --> @validation-rules-engine/core
+React showcase ----> @validation-rules-engine/react -----> @validation-rules-engine/core
 ```
 
 Dependencies flow in one direction. Each private showcase consumes its framework adapter, each adapter consumes the core public entry point, and core has no Angular or React dependency. `npm run architecture:verify` enforces these boundaries and rejects speculative Vue placeholders.
@@ -49,16 +49,16 @@ See [Architecture](docs/architecture.md) for ownership decisions and extension g
 ## Repository structure
 
 ```text
-validation-rules/
+validation-rules-engine/
 |-- apps/
 |   |-- portal/                # framework-neutral launcher, health dashboard, and report gateway
 |   |-- docs/                  # Markdown-backed documentation website
 |   |-- angular-showcase/      # Angular UI framework and state-management showcases
 |   `-- react-showcase/        # hooks-first controlled React forms
 |-- packages/
-|   |-- angular/               # @validation-rules/angular and Angular CLI workspace
-|   |-- core/                  # @validation-rules/core and core Karma config
-|   `-- react/                 # @validation-rules/react ESM package
+|   |-- angular/               # @validation-rules-engine/angular and Angular CLI workspace
+|   |-- core/                  # @validation-rules-engine/core and core Karma config
+|   `-- react/                 # @validation-rules-engine/react ESM package
 |-- docs/
 |   |-- site/                  # documentation website source pages
 |   |-- architecture.md
@@ -77,25 +77,25 @@ validation-rules/
 Angular consumers install the core engine, Angular adapter, and Underscore peer dependency together:
 
 ```bash
-npm install @validation-rules/core @validation-rules/angular underscore
+npm install @validation-rules-engine/core @validation-rules-engine/angular underscore
 ```
 
-Angular framework packages are peer dependencies of `@validation-rules/angular`.
+Angular framework packages are peer dependencies of `@validation-rules-engine/angular`.
 
 React consumers install the core and React packages with the tested React 19.2 peers:
 
 ```bash
-npm install @validation-rules/core @validation-rules/react react react-dom
+npm install @validation-rules-engine/core @validation-rules-engine/react react react-dom
 ```
 
-See the [React quick start](docs/site/react-quick-start.md) for provider, policy, field hook, native input, summary, and submit examples.
+See the [React quick start](docs/site/react/react-quick-start.md) for provider, policy, field hook, native input, summary, and submit examples.
 
 To use the optional default stylesheet, add its stable package entry point to the Angular workspace configuration:
 
 ```json
 {
   "styles": [
-    "node_modules/@validation-rules/angular/styles/policy-validation.css"
+    "node_modules/@validation-rules-engine/angular/styles/policy-validation.css"
   ]
 }
 ```
@@ -111,7 +111,7 @@ import {
   ValidationPolicy,
   Validator,
   ValidatorHelper
-} from '@validation-rules/angular';
+} from '@validation-rules-engine/angular';
 
 export class UserFormPolicy implements ValidationPolicy {
   addValidations(v: ValidatorHelper): Validator[] {
@@ -131,7 +131,7 @@ import { NgModule } from '@angular/core';
 import {
   ValidationModule,
   ValidationProviderService
-} from '@validation-rules/angular';
+} from '@validation-rules-engine/angular';
 
 @NgModule({
   imports: [ValidationModule.forRoot({ preset: 'bootstrap' })]
@@ -197,9 +197,9 @@ Form groups aggregate field status for one portion of a view. Policy groups aggr
 
 | Workspace | Package | Responsibility |
 | --- | --- | --- |
-| `packages/core` | `@validation-rules/core` | Framework-neutral contracts, rules, validators, results, and model-state utilities |
-| `packages/angular` | `@validation-rules/angular` | Angular policy execution, forms integration, directives, services, components, and display strategies |
-| `packages/react` | `@validation-rules/react` | React validation engine, provider, hooks, controlled-field helpers, and accessible messages |
+| `packages/core` | `@validation-rules-engine/core` | Framework-neutral contracts, rules, validators, results, and model-state utilities |
+| `packages/angular` | `@validation-rules-engine/angular` | Angular policy execution, forms integration, directives, services, components, and display strategies |
+| `packages/react` | `@validation-rules-engine/react` | React validation engine, provider, hooks, controlled-field helpers, and accessible messages |
 | `apps/angular-showcase` | private | Browser showcase, Angular UI framework examples, and Angular state-management integrations |
 | `apps/react-showcase` | private | Home, simple, complex, and performance React examples |
 | `apps/docs` | private | Search-ready Markdown documentation server and site shell |
@@ -217,7 +217,7 @@ npm start
 
 The command builds the packages and Node applications, starts the portal at `http://127.0.0.1:4200`, documentation at `4201`, the Angular showcase at `4202`, and React at `4204`, then opens the portal in the default browser. The portal polls every registered application and shows startup, healthy, or failed state without coupling their runtimes.
 
-Deployment URLs are runtime configurable. Set `VALIDATION_RULES_PORTAL_URL`, `VALIDATION_RULES_DOCS_URL`, `VALIDATION_RULES_ANGULAR_SHOWCASE_URL`, and `VALIDATION_RULES_REACT_SHOWCASE_URL` for the Node portal/docs servers. Static Angular and React showcase deployments can replace the copied `platform-config.js` with `globalThis.validationRulesPlatformConfig = { urls: { portal, docs, angular, react } };`.
+Deployment URLs are runtime configurable. Set `VRE_PORTAL_URL`, `VRE_DOCS_URL`, `VRE_ANGULAR_SHOWCASE_URL`, and `VRE_REACT_SHOWCASE_URL` for the Node portal/docs servers. Static Angular and React showcase deployments can replace the copied `platform-config.js` with `globalThis.vrePlatformConfig = { urls: { portal, docs, angular, react } };`.
 
 The application registry in `apps/portal/src/applications.ts` is the single place to add a future showcase application. Each application remains independently runnable and communicates through stable local URLs.
 

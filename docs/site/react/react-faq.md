@@ -6,7 +6,7 @@ Yes. The duplicate baseline routes were removed. Local State is the canonical ba
 
 ## Does the React adapter require a state library?
 
-No. `@validation-rules/react` works with Local State and can also bridge to Redux Toolkit, Zustand, Jotai, Recoil, MobX, and Context when an application already uses those tools.
+No. `@validation-rules-engine/react` works with Local State and can also bridge to Redux Toolkit, Zustand, Jotai, Recoil, MobX, and Context when an application already uses those tools.
 
 ## Can policies be shared with Angular?
 

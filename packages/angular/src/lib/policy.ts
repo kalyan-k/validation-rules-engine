@@ -2,7 +2,7 @@
 import { Observable, Subject, forkJoin as observableForkJoin, of as observableOf } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import * as _ from 'underscore';
-import { getValidationMeta, isValidationFailure, Validator } from '@validation-rules/core';
+import { getValidationMeta, isValidationFailure, Validator } from '@validation-rules-engine/core';
 import { $parse } from './parser/expression-parser';
 
 export class Policy {

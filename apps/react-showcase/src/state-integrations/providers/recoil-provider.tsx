@@ -1,6 +1,6 @@
 import React, { useMemo, type PropsWithChildren } from 'react';
 import { atom, RecoilRoot, selector, useRecoilState, useRecoilValue } from 'recoil';
-import type { ValidationTarget } from '@validation-rules/react';
+import type { ValidationTarget } from '@validation-rules-engine/react';
 import { cloneModel, countPopulatedValues, ShowcaseStateContext, type StateProviderProps } from '../types';
 
 // Recoil 0.7 reads the React 18 dispatcher alias when deciding whether
@@ -26,16 +26,16 @@ if (!reactRuntime.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED) {
 }
 
 const modelState = atom<ValidationTarget>({
-  key: 'validationRulesShowcaseModel',
+  key: 'vreShowcaseModel',
   default: {},
   dangerouslyAllowMutability: true
 });
 const revisionState = atom({
-  key: 'validationRulesShowcaseRevision',
+  key: 'vreShowcaseRevision',
   default: 0
 });
 const populatedState = selector({
-  key: 'validationRulesShowcasePopulatedValues',
+  key: 'vreShowcasePopulatedValues',
   get: ({ get }) => countPopulatedValues(get(modelState))
 });
 

@@ -3,6 +3,7 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/angular-lib",
+    "rootDir": "./src",
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,

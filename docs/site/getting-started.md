@@ -5,15 +5,15 @@ Install the framework-neutral engine plus the adapter for your application frame
 Angular consumers install the Angular adapter and its peer dependency used by the current validator implementation:
 
 ```bash
-npm install @validation-rules/core @validation-rules/angular underscore
+npm install @validation-rules-engine/core @validation-rules-engine/angular underscore
 ```
 
-Angular framework packages are peer dependencies of `@validation-rules/angular`.
+Angular framework packages are peer dependencies of `@validation-rules-engine/angular`.
 
 React consumers install the React adapter and React peer packages:
 
 ```bash
-npm install @validation-rules/core @validation-rules/react react react-dom
+npm install @validation-rules-engine/core @validation-rules-engine/react react react-dom
 ```
 
 ## Define a policy
@@ -21,7 +21,7 @@ npm install @validation-rules/core @validation-rules/react react react-dom
 A policy returns validators for model paths. Keep messages close to the rule so a policy remains easy to inspect and test.
 
 ```ts
-import { ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules/angular';
+import { ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules-engine/angular';
 
 export class AccountPolicy implements ValidationPolicy {
   addValidations(v: ValidatorHelper): Validator[] {
@@ -64,7 +64,7 @@ validation.validateAll(model, 'Account', {
 ```json
 {
   "styles": [
-    "node_modules/@validation-rules/angular/styles/policy-validation.css"
+    "node_modules/@validation-rules-engine/angular/styles/policy-validation.css"
   ]
 }
 ```

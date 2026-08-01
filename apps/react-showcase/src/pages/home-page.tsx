@@ -19,7 +19,7 @@ export function HomePage({ navigate }: HomePageProps) {
       <div className="vr-showcase-home__grid">
         <article className="vr-showcase-home__card">
           <h2>One dependency direction</h2>
-          <p><code>React application -&gt; @validation-rules/react -&gt; @validation-rules/core</code></p>
+          <p><code>React application -&gt; @validation-rules-engine/react -&gt; @validation-rules-engine/core</code></p>
           <p>Policies stay reusable and React owns lifecycle, rendering, touch state, and native-control binding.</p>
         </article>
         <article className="vr-showcase-home__card">

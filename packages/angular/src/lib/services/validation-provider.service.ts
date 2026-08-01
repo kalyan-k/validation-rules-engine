@@ -8,7 +8,7 @@ import {
 	ValidationPolicy,
 	Validator,
 	ValidatorHelper
-} from '@validation-rules/core';
+} from '@validation-rules-engine/core';
 import { Policy } from '../policy';
 import * as _ from 'underscore';
 

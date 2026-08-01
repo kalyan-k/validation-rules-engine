@@ -4,14 +4,14 @@ The current architecture separates a framework-neutral core from Angular integra
 
 ## Package imports
 
-Framework-neutral consumers should import from `@validation-rules/core`. Existing Angular consumers may continue importing historically re-exported neutral symbols from `@validation-rules/angular`.
+Framework-neutral consumers should import from `@validation-rules-engine/core`. Existing Angular consumers may continue importing historically re-exported neutral symbols from `@validation-rules-engine/angular`.
 
 ## Styles
 
 Use the stable stylesheet export:
 
 ```text
-@validation-rules/angular/styles/policy-validation.css
+@validation-rules-engine/angular/styles/policy-validation.css
 ```
 
 ## Repository development

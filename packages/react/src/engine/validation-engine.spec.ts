@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { type ValidationPolicy, type ValidatorHelper } from '@validation-rules/core';
+import { type ValidationPolicy, type ValidatorHelper } from '@validation-rules-engine/core';
 import { ValidationEngine } from './validation-engine';
 import type { ValidationTarget } from '../types';
 

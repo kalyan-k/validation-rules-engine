@@ -48,7 +48,7 @@ import {
   markFieldTouched,
   resetValidationMeta,
   shouldShowFieldErrors
-} from '@validation-rules/core';
+} from '@validation-rules-engine/core';
 ```
 
 Most applications use these indirectly through Angular directives or React hooks.

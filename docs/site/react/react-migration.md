@@ -1,6 +1,6 @@
 # Migration and Compatibility
 
-`@validation-rules/react` 1.0 is tested with React and React DOM 19.2, TypeScript 5.8, and `@validation-rules/core` 1.x.
+`@validation-rules-engine/react` 1.0 is tested with React and React DOM 19.2, TypeScript 5.8, and `@validation-rules-engine/core` 1.x.
 
 ## From direct core orchestration
 

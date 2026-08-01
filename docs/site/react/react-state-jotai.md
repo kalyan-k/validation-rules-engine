@@ -6,16 +6,16 @@ The Jotai showcase models form state as atoms and uses a derived atom for live p
 
 [Open Live Showcase](http://127.0.0.1:4204/state/jotai)
 
-## Using @validation-rules/react
+## Using @validation-rules-engine/react
 
-Jotai works well when form state is naturally atomic. Keep atoms responsible for draft transitions, and run `@validation-rules/react` hooks in components that read the current model.
+Jotai works well when form state is naturally atomic. Keep atoms responsible for draft transitions, and run `@validation-rules-engine/react` hooks in components that read the current model.
 
 ### Step 1 — Install Package
 
 Install the React adapter, Core package, and Jotai.
 
 ```bash
-npm install @validation-rules/react @validation-rules/core jotai
+npm install @validation-rules-engine/react @validation-rules-engine/core jotai
 ```
 
 Jotai does not need any adapter-specific setup.
@@ -24,7 +24,7 @@ Jotai does not need any adapter-specific setup.
 {
   "dependencies": {
     "jotai": "^2.0.0",
-    "@validation-rules/react": "^1.0.0"
+    "@validation-rules-engine/react": "^1.0.0"
   }
 }
 ```
@@ -35,7 +35,7 @@ Wrap the route with `ValidationRulesProvider`. Add a Jotai `Provider` when you n
 
 ```tsx
 import { Provider as JotaiProvider } from 'jotai';
-import { ValidationRulesProvider } from '@validation-rules/react';
+import { ValidationRulesProvider } from '@validation-rules-engine/react';
 
 export function ProfileRoute() {
   return (
@@ -53,7 +53,7 @@ export function ProfileRoute() {
 Policies validate the full model atom value.
 
 ```tsx
-import type { ValidationPolicy, ValidationTarget } from '@validation-rules/react';
+import type { ValidationPolicy, ValidationTarget } from '@validation-rules-engine/react';
 
 export type ProfileModel = ValidationTarget & {
   firstName: string;
@@ -136,7 +136,7 @@ await validation.validateGroup('profileGroup');
 
 ### Step 8 — Reset
 
-Clear Validation Rules state, then dispatch the reset atom.
+Clear Validation Rules Engine state, then dispatch the reset atom.
 
 ```tsx
 function reset() {
@@ -169,7 +169,7 @@ Do not store the validation engine in atoms. Store plain draft data and let adap
 ```tsx
 import { FormEvent, useMemo } from 'react';
 import { useAtom } from 'jotai';
-import { ValidationMessage, ValidationSummary, useValidationRules } from '@validation-rules/react';
+import { ValidationMessage, ValidationSummary, useValidationRules } from '@validation-rules-engine/react';
 import { ProfileModel, profilePolicy } from './profilePolicy';
 import { profileFieldChangedAtom, profileModelAtom, profileResetAtom } from './profileAtoms';
 
@@ -204,14 +204,14 @@ export function JotaiProfileForm() {
 ## Installation
 
 ```bash
-npm install @validation-rules/react jotai
+npm install @validation-rules-engine/react jotai
 ```
 
 ## Package imports
 
 ```tsx
 import { atom, Provider, useAtom, useAtomValue } from 'jotai';
-import { useValidationRules, useValidationField, ValidationSummary } from '@validation-rules/react';
+import { useValidationRules, useValidationField, ValidationSummary } from '@validation-rules-engine/react';
 ```
 
 ## Provider setup
@@ -301,7 +301,7 @@ Controls → model atom → derived atoms → validation hooks → core policies
 
 Choose Jotai when state is naturally atomic, derived dependencies are important, or components need focused subscriptions composed from small units.
 
-## How Validation Rules integrates
+## How Validation Rules Engine integrates
 
 Atom writes publish immutable model transitions. The validation hooks register policies and evaluate the current atom value without putting the engine or policies into atoms.
 

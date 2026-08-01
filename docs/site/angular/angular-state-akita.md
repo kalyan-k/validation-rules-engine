@@ -1,4 +1,4 @@
-# Akita with @validation-rules/angular
+# Akita with @validation-rules-engine/angular
 
 Akita models state as stores and queries. Stores own updates; queries expose read models for components and services.
 
@@ -10,11 +10,11 @@ Akita models state as stores and queries. Stores own updates; queries expose rea
 
 ## Why choose it
 
-Choose Akita when Store + Query separation keeps feature state readable. Validation Rules integrates by validating the plain model and writing validation results back to the store snapshot.
+Choose Akita when Store + Query separation keeps feature state readable. Validation Rules Engine integrates by validating the plain model and writing validation results back to the store snapshot.
 
 ## Integration pattern
 
-The unified Angular showcase updates an Akita store for the selected strategy and keeps `@validation-rules/angular` policies identical to every other state implementation.
+The unified Angular showcase updates an Akita store for the selected strategy and keeps `@validation-rules-engine/angular` policies identical to every other state implementation.
 
 ## Showcase pages
 
@@ -23,38 +23,38 @@ The unified Angular showcase updates an Akita store for the selected strategy an
 - [Complex Form](http://127.0.0.1:4202/state/akita/complex)
 - [Performance Form](http://127.0.0.1:4202/state/akita/performance)
 
-## Using @validation-rules/angular
+## Using @validation-rules-engine/angular
 
-In Akita applications, use stores for updates, queries for reads, and `@validation-rules/angular` for model validation and UI-facing validation metadata.
+In Akita applications, use stores for updates, queries for reads, and `@validation-rules-engine/angular` for model validation and UI-facing validation metadata.
 
 ### Step 1 — Install Package
 
-Install Validation Rules, Angular Forms, and Akita.
+Install Validation Rules Engine, Angular Forms, and Akita.
 
 ```bash
-npm install @validation-rules/angular @validation-rules/core @datorama/akita @angular/forms
+npm install @validation-rules-engine/angular @validation-rules-engine/core @datorama/akita @angular/forms
 ```
 
-Keep Akita as an application dependency; the Validation Rules adapter does not require Akita unless your feature uses it.
+Keep Akita as an application dependency; the Validation Rules Engine adapter does not require Akita unless your feature uses it.
 
 ```json
 {
   "dependencies": {
     "@angular/forms": "^20.0.0",
     "@datorama/akita": "^7.1.0",
-    "@validation-rules/angular": "^1.0.0"
+    "@validation-rules-engine/angular": "^1.0.0"
   }
 }
 ```
 
 ### Step 2 — Configure Project
 
-Import forms and Validation Rules normally. Akita feature stores are services, so no feature module registration is required.
+Import forms and Validation Rules Engine normally. Akita feature stores are services, so no feature module registration is required.
 
 ```ts
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ValidationModule, provideBootstrapValidationDisplay } from '@validation-rules/angular';
+import { ValidationModule, provideBootstrapValidationDisplay } from '@validation-rules-engine/angular';
 import { ProfileStore, ProfileQuery } from './state/profile.store';
 
 @NgModule({
@@ -69,7 +69,7 @@ export class ProfileFeatureModule {}
 The Akita state is a plain object, so policies look the same as they do for local state.
 
 ```ts
-import { ValidationModel, ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules/angular';
+import { ValidationModel, ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules-engine/angular';
 
 export interface ProfileStoreState extends ValidationModel {
   firstName: string;
@@ -203,7 +203,7 @@ Use queries for read-only projections, store methods for writes, and component l
 ```ts
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ValidationProviderService } from '@validation-rules/angular';
+import { ValidationProviderService } from '@validation-rules-engine/angular';
 import { ProfileStoreState, ProfileStorePolicy } from './profile.policy';
 import { ProfileQuery, ProfileStore } from './state/profile.store';
 

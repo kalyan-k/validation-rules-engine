@@ -3,14 +3,14 @@
 Install the adapter with the core package and its tested React peers.
 
 ```bash
-npm install @validation-rules/core @validation-rules/react react react-dom
+npm install @validation-rules-engine/core @validation-rules-engine/react react react-dom
 ```
 
 ## Peer dependencies
 
 The 1.0 adapter line is tested with:
 
-- `@validation-rules/core` 1.x
+- `@validation-rules-engine/core` 1.x
 - React 19.2
 - React DOM 19.2
 
@@ -26,7 +26,7 @@ npm run test:react
 npm run test:coverage:react
 ```
 
-The React showcase consumes the workspace package through `@validation-rules/react`; it does not copy adapter source into the application.
+The React showcase consumes the workspace package through `@validation-rules-engine/react`; it does not copy adapter source into the application.
 
 ## TypeScript
 

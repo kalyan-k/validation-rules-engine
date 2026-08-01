@@ -1,11 +1,11 @@
-# Validation Rules Core
+# Validation Rules Engine Core
 
-`@validation-rules/core` is the framework-independent engine for Validation Rules. It contains validation contracts, fluent validators, built-in rules, results, and model-state utilities without importing Angular or another UI framework.
+`@validation-rules-engine/core` is the framework-independent core of Validation Rules Engine (VRE). It contains validation contracts, fluent validators, built-in rules, results, and model-state utilities without importing Angular or another UI framework.
 
 ## Installation
 
 ```bash
-npm install @validation-rules/core underscore
+npm install @validation-rules-engine/core underscore
 ```
 
 `underscore` is a peer dependency retained for validator compatibility.
@@ -26,7 +26,7 @@ import {
   ValidationPolicy,
   Validator,
   ValidatorHelper
-} from '@validation-rules/core';
+} from '@validation-rules-engine/core';
 
 export class AccountPolicy implements ValidationPolicy {
   addValidations(v: ValidatorHelper): Validator[] {
@@ -47,7 +47,7 @@ export class AccountPolicy implements ValidationPolicy {
 - `FormGroupStatus`, `PolicyGroupConfig`, and `ControlType`
 - validation metadata, touched-state, reset, and failure-shape utilities
 
-The Angular expression-based policy executor remains in `@validation-rules/angular` because it relies on Angular's expression parser. Extracting it requires a separately tested parser abstraction.
+The Angular expression-based policy executor remains in `@validation-rules-engine/angular` because it relies on Angular's expression parser. Extracting it requires a separately tested parser abstraction.
 
 ## Architecture
 

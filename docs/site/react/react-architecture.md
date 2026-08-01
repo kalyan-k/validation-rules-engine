@@ -14,7 +14,7 @@ ValidationEngine registration and subscriptions
 Core Validator, ValidatorHelper, policy contracts, and metadata
 ```
 
-`@validation-rules/core` defines `ValidationPolicy`, `Validator`, rules, result shapes, required-state metadata, touch state, and group status contracts. `@validation-rules/react` executes those validators, handles asynchronous results, owns registrations, and publishes model-specific revisions to React.
+`@validation-rules-engine/core` defines `ValidationPolicy`, `Validator`, rules, result shapes, required-state metadata, touch state, and group status contracts. `@validation-rules-engine/react` executes those validators, handles asynchronous results, owns registrations, and publishes model-specific revisions to React.
 
 ## Engine state
 

@@ -2,11 +2,11 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "paths": {
-      "@validation-rules/core": [
+      "@validation-rules-engine/core": [
         "../../dist/packages/core",
         "../core/src/public-api.ts"
       ],
-      "@validation-rules/angular": [
+      "@validation-rules-engine/angular": [
         "../../dist/packages/angular",
         "./src/public-api.ts"
       ]

@@ -66,7 +66,7 @@ export function StatePageFrame({
         <div className="state-showcase-runtime__body">
           <div>
             <strong>State mechanism in this route</strong>
-            <p>{strategy.label} owns the form model while the shared Validation Rules hook evaluates the current state snapshot.</p>
+            <p>{strategy.label} owns the form model while the shared Validation Rules Engine hook evaluates the current state snapshot.</p>
           </div>
           <StateReadout />
         </div>

@@ -13,7 +13,7 @@ export function StateHomePage({ strategy, navigate }: { strategy: StrategyDefini
       strategy={strategy}
       page="home"
       pageLabel="Overview"
-      title={`${strategy.label} + Validation Rules`}
+      title={`${strategy.label} + Validation Rules Engine`}
       description={strategy.shortDescription}
       navigate={navigate}
     >

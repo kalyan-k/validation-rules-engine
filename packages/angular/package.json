@@ -1,7 +1,7 @@
 {
-  "name": "@validation-rules/angular",
+  "name": "@validation-rules-engine/angular",
   "version": "1.0.0",
-  "description": "Angular adapter for policy-based validation and pluggable form-error display",
+  "description": "Angular adapter for Validation Rules Engine (VRE) with pluggable form-error display",
   "keywords": [
     "angular",
     "validation",
@@ -9,20 +9,22 @@
     "forms",
     "validator",
     "form-validation",
-    "validation-rules"
+    "validation-rules-engine",
+    "vre",
+    "policy-validation"
   ],
   "license": "MIT",
   "author": "Kalyan K <kalyan411@gmail.com>",
-  "homepage": "https://github.com/kalyan-k/validation-rules#readme",
+  "homepage": "https://github.com/kalyan-k/validation-rules-engine#readme",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/kalyan-k/validation-rules.git"
+    "url": "git+ssh://git@github.com/kalyan-k/validation-rules-engine.git"
   },
   "bugs": {
-    "url": "https://github.com/kalyan-k/validation-rules/issues"
+    "url": "https://github.com/kalyan-k/validation-rules-engine/issues"
   },
   "peerDependencies": {
-    "@validation-rules/core": "^1.0.0",
+    "@validation-rules-engine/core": "^1.0.0",
     "@angular/common": "^20.3.0",
     "@angular/compiler": "^20.3.0",
     "@angular/core": "^20.3.0",

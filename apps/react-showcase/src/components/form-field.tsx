@@ -1,4 +1,4 @@
-import { ValidationMessage, useValidationField, type UseValidationFormResult, type ValidationTarget } from '@validation-rules/react';
+import { ValidationMessage, useValidationField, type UseValidationFormResult, type ValidationTarget } from '@validation-rules-engine/react';
 
 interface FormFieldProps<TModel extends ValidationTarget> {
   form: UseValidationFormResult<TModel>;

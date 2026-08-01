@@ -1,6 +1,6 @@
 # React Overview
 
-`@validation-rules/react` is the first-class React adapter for the Validation Rules core engine. It turns core policies into provider-scoped hooks and accessible, style-neutral error components while preserving core rule semantics.
+`@validation-rules-engine/react` is the first-class React adapter for Validation Rules Engine (VRE). It turns framework-neutral core policies into provider-scoped hooks and accessible, style-neutral error components while preserving core rule semantics.
 
 ## What the adapter provides
 
@@ -16,9 +16,9 @@
 ```text
 React application
         ↓
-@validation-rules/react
+@validation-rules-engine/react
         ↓
-@validation-rules/core
+@validation-rules-engine/core
 ```
 
 Core contains rules and framework-independent metadata. The React package owns hooks, context, lifecycle, subscriptions, controlled-state helpers, and rendering. Core never imports React, and the Angular adapter remains independent.

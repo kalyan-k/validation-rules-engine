@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useMemo, useReducer, type PropsWithChildren } from 'react';
-import type { ValidationTarget } from '@validation-rules/react';
+import type { ValidationTarget } from '@validation-rules-engine/react';
 import { cloneModel, countPopulatedValues, ShowcaseStateContext, type StateProviderProps } from '../types';
 
 interface ContextState { model: ValidationTarget; revision: number; }

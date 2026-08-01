@@ -107,7 +107,7 @@ export function App() {
           </nav>
           <div className="vr-showcase-sidebar__footer">
             <a href={platformUrl('docs', '/docs/react-overview')}>React documentation &rarr;</a>
-            <span>@validation-rules/react - hooks-first policy validation</span>
+            <span>@validation-rules-engine/react - hooks-first policy validation</span>
           </div>
         </aside>
         <main className="vr-showcase-main">{page}</main>

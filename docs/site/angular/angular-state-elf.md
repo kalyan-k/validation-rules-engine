@@ -1,4 +1,4 @@
-# Elf with @validation-rules/angular
+# Elf with @validation-rules-engine/angular
 
 Elf is a small reactive store toolkit that uses composable stores and immutable update reducers.
 
@@ -10,11 +10,11 @@ Elf is a small reactive store toolkit that uses composable stores and immutable 
 
 ## Why choose it
 
-Choose Elf when you want store discipline with minimal ceremony. Validation Rules policies remain framework-neutral, while Elf commits the validated snapshot through store reducers.
+Choose Elf when you want store discipline with minimal ceremony. Validation Rules Engine policies remain framework-neutral, while Elf commits the validated snapshot through store reducers.
 
 ## Integration pattern
 
-The unified Angular showcase uses an Elf store for state snapshots and the same `@validation-rules/angular` policy registration, validation groups, summaries, and performance generator as every other implementation.
+The unified Angular showcase uses an Elf store for state snapshots and the same `@validation-rules-engine/angular` policy registration, validation groups, summaries, and performance generator as every other implementation.
 
 ## Showcase pages
 
@@ -23,16 +23,16 @@ The unified Angular showcase uses an Elf store for state snapshots and the same 
 - [Complex Form](http://127.0.0.1:4202/state/elf/complex)
 - [Performance Form](http://127.0.0.1:4202/state/elf/performance)
 
-## Using @validation-rules/angular
+## Using @validation-rules-engine/angular
 
-Elf works best with Validation Rules when the store owns immutable draft snapshots and the Angular adapter decorates those snapshots with validation metadata before they are committed.
+Elf works best with Validation Rules Engine when the store owns immutable draft snapshots and the Angular adapter decorates those snapshots with validation metadata before they are committed.
 
 ### Step 1 — Install Package
 
-Install Validation Rules, Angular Forms, and Elf.
+Install Validation Rules Engine, Angular Forms, and Elf.
 
 ```bash
-npm install @validation-rules/angular @validation-rules/core @ngneat/elf @angular/forms
+npm install @validation-rules-engine/angular @validation-rules-engine/core @ngneat/elf @angular/forms
 ```
 
 Elf is an application-level state dependency; the Angular adapter remains state-library agnostic.
@@ -42,7 +42,7 @@ Elf is an application-level state dependency; the Angular adapter remains state-
   "dependencies": {
     "@angular/forms": "^20.0.0",
     "@ngneat/elf": "^2.5.0",
-    "@validation-rules/angular": "^1.0.0"
+    "@validation-rules-engine/angular": "^1.0.0"
   }
 }
 ```
@@ -54,7 +54,7 @@ Import the Angular validation module and provide the feature store service.
 ```ts
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ValidationModule, provideBootstrapValidationDisplay } from '@validation-rules/angular';
+import { ValidationModule, provideBootstrapValidationDisplay } from '@validation-rules-engine/angular';
 import { ProfileElfStore } from './state/profile-elf.store';
 
 @NgModule({
@@ -69,7 +69,7 @@ export class ProfileFeatureModule {}
 Define the form state as a plain object and validate the same paths that the Elf store writes.
 
 ```ts
-import { ValidationModel, ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules/angular';
+import { ValidationModel, ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules-engine/angular';
 
 export interface ProfileElfState extends ValidationModel {
   firstName: string;
@@ -194,14 +194,14 @@ Keep the Elf store thin and make the validation policy the only place where busi
 export const profileElfGroupFields = ['firstName', 'lastName', 'email', 'country', 'notificationFrequency'] as const;
 ```
 
-Avoid mutating the object returned from the store outside Validation Rules execution. Commit cloned validated snapshots so subscribers receive predictable immutable updates.
+Avoid mutating the object returned from the store outside Validation Rules Engine execution. Commit cloned validated snapshots so subscribers receive predictable immutable updates.
 
 ### Step 10 — Complete Working Example
 
 ```ts
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ValidationProviderService } from '@validation-rules/angular';
+import { ValidationProviderService } from '@validation-rules-engine/angular';
 import { ProfileElfState, ProfileElfPolicy } from './profile.policy';
 import { ProfileElfStore } from './state/profile-elf.store';
 

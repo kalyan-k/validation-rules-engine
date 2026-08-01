@@ -3,7 +3,7 @@ import {
   provideBootstrapValidationDisplay,
   provideMaterialValidationDisplay,
   provideTailwindValidationDisplay
-} from '@validation-rules/angular';
+} from '@validation-rules-engine/angular';
 import { ShowcaseFramework } from './showcase-framework.model';
 
 export function provideShowcaseFrameworkDisplay(framework: ShowcaseFramework): Provider[] {

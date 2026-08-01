@@ -1,4 +1,4 @@
-# Angular Signals with @validation-rules/angular
+# Angular Signals with @validation-rules-engine/angular
 
 Angular Signals are fine-grained reactive primitives for synchronous state reads, updates, and computed values.
 
@@ -10,7 +10,7 @@ Angular Signals are fine-grained reactive primitives for synchronous state reads
 
 ## Why choose it
 
-Choose Signals when local or shared state should be simple, synchronous, and fine-grained. Validation Rules validates the object represented by the signal snapshot and writes result metadata back into that snapshot.
+Choose Signals when local or shared state should be simple, synchronous, and fine-grained. Validation Rules Engine (VRE) validates the object represented by the signal snapshot and writes result metadata back into that snapshot.
 
 ## Integration pattern
 
@@ -23,16 +23,16 @@ The unified Angular showcase keeps the same policies and page layout while the S
 - [Complex Form](http://127.0.0.1:4202/state/signals/complex)
 - [Performance Form](http://127.0.0.1:4202/state/signals/performance)
 
-## Using @validation-rules/angular
+## Using @validation-rules-engine/angular
 
-Signals keep form state synchronous and fine-grained. Use `@validation-rules/angular` to validate the current signal snapshot, then write the decorated model back into the signal.
+Signals keep form state synchronous and fine-grained. Use `@validation-rules-engine/angular` to validate the current signal snapshot, then write the decorated model back into the signal.
 
 ### Step 1 — Install Package
 
-Install Validation Rules and Angular Forms. Signals are built into modern Angular.
+Install VRE and Angular Forms. Signals are built into modern Angular.
 
 ```bash
-npm install @validation-rules/angular @validation-rules/core @angular/forms
+npm install @validation-rules-engine/angular @validation-rules-engine/core @angular/forms
 ```
 
 Use Angular versions that include stable Signals support.
@@ -42,19 +42,19 @@ Use Angular versions that include stable Signals support.
   "dependencies": {
     "@angular/core": "^20.0.0",
     "@angular/forms": "^20.0.0",
-    "@validation-rules/angular": "^1.0.0"
+    "@validation-rules-engine/angular": "^1.0.0"
   }
 }
 ```
 
 ### Step 2 — Configure Project
 
-Import Validation Rules and forms as usual.
+Import VRE and forms as usual.
 
 ```ts
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ValidationModule, provideBootstrapValidationDisplay } from '@validation-rules/angular';
+import { ValidationModule, provideBootstrapValidationDisplay } from '@validation-rules-engine/angular';
 
 @NgModule({
   imports: [FormsModule, ValidationModule],
@@ -68,7 +68,7 @@ export class ProfileModule {}
 Signals store plain values, so policy paths point directly at the signal model properties.
 
 ```ts
-import { ValidationModel, ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules/angular';
+import { ValidationModel, ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules-engine/angular';
 
 export interface SignalProfile extends ValidationModel {
   firstName: string;
@@ -192,7 +192,7 @@ Use signals for local or shared synchronous state, computed values for summaries
 
 ```ts
 import { Component, OnDestroy, OnInit, computed, signal } from '@angular/core';
-import { ValidationProviderService } from '@validation-rules/angular';
+import { ValidationProviderService } from '@validation-rules-engine/angular';
 import { SignalProfile, SignalProfilePolicy } from './profile.policy';
 
 const emptySignalProfile = (): SignalProfile => ({ firstName: '', lastName: '', email: '', country: '', acceptedTerms: false });

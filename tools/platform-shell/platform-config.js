@@ -1,7 +1,7 @@
-// Runtime deployment configuration for the Validation Rules platform.
+// Runtime deployment configuration for the Validation Rules Engine platform.
 // Replace or inject this file in deployed environments to point the shell,
 // docs, portal, and showcases at production URLs without rebuilding application code.
-globalThis.validationRulesPlatformConfig = globalThis.validationRulesPlatformConfig || {
+globalThis.vrePlatformConfig = globalThis.vrePlatformConfig || {
   urls: {
     portal: '',
     docs: '',

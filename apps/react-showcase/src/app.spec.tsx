@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
-import { ValidationRulesProvider } from '@validation-rules/react';
+import { ValidationRulesProvider } from '@validation-rules-engine/react';
 import { App } from './app';
 
 function renderApp() {
@@ -17,7 +17,7 @@ describe('React showcase application', () => {
     renderApp();
     expect(screen.getByRole('navigation', { name: 'React showcase pages' })).toBeTruthy();
     expect(screen.getByRole('heading', { name: 'Policy validation that fits React.' })).toBeTruthy();
-    expect(screen.getByText(/React application -> @validation-rules\/react/)).toBeTruthy();
+    expect(screen.getByText(/React application -> @validation-rules-engine\/react/)).toBeTruthy();
     expect(screen.getByRole('link', { name: 'React documentation →' }).getAttribute('href')).toContain('/docs/react-overview');
     expect(document.querySelector('validation-platform-shell')?.getAttribute('active-application')).toBe('react-showcase');
   });

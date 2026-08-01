@@ -17,7 +17,7 @@ import {
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import * as _ from 'underscore';
-import { markFieldTouched, RequiredResult, shouldShowFieldErrors } from '@validation-rules/core';
+import { markFieldTouched, RequiredResult, shouldShowFieldErrors } from '@validation-rules-engine/core';
 import { ValidationDisplayConfig, ValidationDisplayContext, ValidationDisplayStrategy } from '../interfaces/validation-display.interface';
 import { ValidationProviderService } from '../services/validation-provider.service';
 import { DefaultValidationDisplayStrategy } from '../strategies/default-validation-display.strategy';

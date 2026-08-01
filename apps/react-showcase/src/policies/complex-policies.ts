@@ -1,4 +1,4 @@
-import { type ValidationPolicy, type Validator, type ValidatorHelper } from '@validation-rules/react';
+import { type ValidationPolicy, type Validator, type ValidatorHelper } from '@validation-rules-engine/react';
 
 export const personalPolicy: ValidationPolicy = {
   addValidations(helper: ValidatorHelper): Validator[] {

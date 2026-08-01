@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title description">
+  <title id="title">Validation Rules Engine</title>
+  <desc id="description">Neutral data flows into the Validation Rules Engine, red errors flow upward, and green validated data flows out.</desc>
+  <defs>
+    <linearGradient id="input-flow" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="16" y2="0">
+      <stop offset="0" stop-color="#7895aa"/>
+      <stop offset="1" stop-color="#c2d3de"/>
+    </linearGradient>
+    <linearGradient id="error-flow" gradientUnits="userSpaceOnUse" x1="0" y1="20" x2="0" y2="4">
+      <stop offset="0" stop-color="#ff4f5e"/>
+      <stop offset="1" stop-color="#ff8a78"/>
+    </linearGradient>
+    <linearGradient id="success-flow" gradientUnits="userSpaceOnUse" x1="48" y1="0" x2="64" y2="0">
+      <stop offset="0" stop-color="#38c77b"/>
+      <stop offset="1" stop-color="#73efa4"/>
+    </linearGradient>
+  </defs>
+
+  <g fill="#0d8f82" stroke="#65d6ca" stroke-linejoin="round">
+    <path d="M28 3.5h17v7H28z" stroke-width="1.4"/>
+    <path d="M33 10.5h7v5h-7z" stroke-width="1.4"/>
+    <path d="M14 22h7l7-7h21a5 5 0 0 1 5 5v22a5 5 0 0 1-1.5 3.5L43 56H28a4.5 4.5 0 0 1-3.3-1.5L20 49h-6a4 4 0 0 1-4-4V26a4 4 0 0 1 4-4Z" stroke-width="1.5"/>
+    <path d="M3 29h7v11H3zM.5 24h4v21h-4zm53.5 5h7v11h-7zm6 0h3.5v11H60z" stroke-width="1.4"/>
+  </g>
+
+  <g fill="none" stroke-linecap="round">
+    <path d="M1.5 34.5H16" stroke="url(#input-flow)" stroke-width="3.4"/>
+    <path d="M36.5 20V5.5" stroke="url(#error-flow)" stroke-width="3.4"/>
+    <path d="M48 34.5h14.5" stroke="url(#success-flow)" stroke-width="3.4"/>
+  </g>
+
+  <rect x="14" y="19" width="36" height="28" rx="6" fill="#102f49" stroke="#65d6ca" stroke-width="1.4"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="16.5" y="21" width="31" height="7" rx="3.5" stroke="#b8cad6" stroke-opacity=".35"/>
+    <circle cx="20.5" cy="24.5" r="1.4" stroke="#b8cad6" stroke-width="1.3"/>
+    <path d="M24.5 24.5h7m3.5 0h9" stroke="#b8cad6" stroke-width="1.9"/>
+    <path d="M33.3 23.4v2.2" stroke="#b8cad6" stroke-width="1.2"/>
+
+    <rect x="16.5" y="29.5" width="31" height="7" rx="3.5" stroke="#ff6868" stroke-opacity=".4"/>
+    <path d="m18.5 31.2 4 4m0-4-4 4" stroke="#ff6868" stroke-width="1.9"/>
+    <path d="M25 33h6.5m3.5 0h9" stroke="#ff6868" stroke-width="1.9"/>
+    <path d="M33.3 31.9v2.2" stroke="#ff6868" stroke-width="1.2"/>
+
+    <rect x="16.5" y="38" width="31" height="7" rx="3.5" stroke="#56df8e" stroke-opacity=".42"/>
+    <path d="m18 41.5 2.1 2 3.8-4.2" stroke="#56df8e" stroke-width="2.1"/>
+    <path d="M26 41.5h5.5m3.5 0h9" stroke="#56df8e" stroke-width="1.9"/>
+    <path d="M33.3 40.4v2.2" stroke="#56df8e" stroke-width="1.2"/>
+  </g>
+
+  <g fill="#c2d3de">
+    <circle cx="2.1" cy="34.5" r="1.25"/>
+    <circle cx="6.5" cy="34.5" r="1.05"/>
+    <circle cx="10.4" cy="34.5" r=".85"/>
+  </g>
+  <g fill="#ff766e">
+    <circle cx="36.5" cy="13.5" r="1.2"/>
+    <circle cx="36.5" cy="9.3" r="1"/>
+    <circle cx="36.5" cy="5.6" r=".8"/>
+  </g>
+  <g fill="#64e99b">
+    <circle cx="54.5" cy="34.5" r=".85"/>
+    <circle cx="58.3" cy="34.5" r="1.05"/>
+    <circle cx="62" cy="34.5" r="1.25"/>
+  </g>
+</svg>

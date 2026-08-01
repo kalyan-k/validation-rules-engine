@@ -1,7 +1,7 @@
 {
-  "name": "@validation-rules/docs",
+  "name": "@validation-rules-engine/docs",
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Documentation website for the Validation Rules platform"
+  "description": "Documentation website for the Validation Rules Engine platform"
 }

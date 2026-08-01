@@ -1,6 +1,6 @@
 # FAQ
 
-## Does Validation Rules require Angular Forms?
+## Does Validation Rules Engine require Angular Forms?
 
 No. The engine evaluates models. The pure NgRx showcase validates store state without `FormGroup` or `ngModel`.
 

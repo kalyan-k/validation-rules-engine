@@ -1,6 +1,6 @@
 import { convertToParamMap } from '@angular/router';
 import { BehaviorSubject, firstValueFrom, of } from 'rxjs';
-import { ValidationProviderService } from '@validation-rules/angular';
+import { ValidationProviderService } from '@validation-rules-engine/angular';
 import {
   ANGULAR_STATE_PAGES,
   ANGULAR_STATE_STRATEGIES,

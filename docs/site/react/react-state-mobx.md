@@ -6,16 +6,16 @@ The MobX showcase uses observable state, computed data, actions, and an observer
 
 [Open Live Showcase](http://127.0.0.1:4204/state/mobx)
 
-## Using @validation-rules/react
+## Using @validation-rules-engine/react
 
-MobX stores can own observable draft state, while `@validation-rules/react` stays in the observer component that reads the current model and performs validation.
+MobX stores can own observable draft state, while `@validation-rules-engine/react` stays in the observer component that reads the current model and performs validation.
 
 ### Step 1 — Install Package
 
 Install the React adapter, Core package, MobX, and MobX React bindings.
 
 ```bash
-npm install @validation-rules/react @validation-rules/core mobx mobx-react-lite
+npm install @validation-rules-engine/react @validation-rules-engine/core mobx mobx-react-lite
 ```
 
 Keep MobX bindings aligned with your React version.
@@ -25,18 +25,18 @@ Keep MobX bindings aligned with your React version.
   "dependencies": {
     "mobx": "^6.0.0",
     "mobx-react-lite": "^4.0.0",
-    "@validation-rules/react": "^1.0.0"
+    "@validation-rules-engine/react": "^1.0.0"
   }
 }
 ```
 
 ### Step 2 — Configure Project
 
-Provide Validation Rules and a route-scoped MobX store.
+Provide Validation Rules Engine and a route-scoped MobX store.
 
 ```tsx
 import { createContext, useContext, useMemo } from 'react';
-import { ValidationRulesProvider } from '@validation-rules/react';
+import { ValidationRulesProvider } from '@validation-rules-engine/react';
 import { ProfileStore } from './ProfileStore';
 
 const ProfileStoreContext = createContext<ProfileStore | null>(null);
@@ -58,7 +58,7 @@ export function ProfileRoute() {
 Policies validate the observable model shape, not the store class itself.
 
 ```tsx
-import type { ValidationPolicy, ValidationTarget } from '@validation-rules/react';
+import type { ValidationPolicy, ValidationTarget } from '@validation-rules-engine/react';
 
 export type ProfileModel = ValidationTarget & {
   firstName: string;
@@ -188,7 +188,7 @@ Use `observable.ref` when replacing draft models as a unit, keep store methods s
 ```tsx
 import { FormEvent, useMemo } from 'react';
 import { observer } from 'mobx-react-lite';
-import { ValidationMessage, ValidationSummary, useValidationRules } from '@validation-rules/react';
+import { ValidationMessage, ValidationSummary, useValidationRules } from '@validation-rules-engine/react';
 import { ProfileModel, profilePolicy } from './profilePolicy';
 
 export const MobxProfileForm = observer(function MobxProfileForm() {
@@ -226,7 +226,7 @@ function useProfileStore(): ProfileStore {
 ## Installation
 
 ```bash
-npm install @validation-rules/react mobx mobx-react-lite
+npm install @validation-rules-engine/react mobx mobx-react-lite
 ```
 
 ## Package imports
@@ -234,7 +234,7 @@ npm install @validation-rules/react mobx mobx-react-lite
 ```tsx
 import { makeAutoObservable } from 'mobx';
 import { observer } from 'mobx-react-lite';
-import { useValidationRules, useValidationField, ValidationSummary } from '@validation-rules/react';
+import { useValidationRules, useValidationField, ValidationSummary } from '@validation-rules-engine/react';
 ```
 
 ## Provider setup
@@ -327,7 +327,7 @@ Controls → MobX actions → observable store → observer → validation hooks
 
 Choose MobX when an application favors observable domain models, computed values, and action-oriented object design.
 
-## How Validation Rules integrates
+## How Validation Rules Engine integrates
 
 MobX owns reactive model transitions. The bridge exposes the current plain model to validation hooks; policy registration stays in the React lifecycle.
 

@@ -1,4 +1,4 @@
-/* Framework-agnostic Validation Rules styles. Override via ValidationModule.forRoot() class config. */
+/* Framework-agnostic Validation Rules Engine styles. Override via ValidationModule.forRoot() class config. */
 
 .policy-validation-invalid,
 input.policy-validation-invalid,

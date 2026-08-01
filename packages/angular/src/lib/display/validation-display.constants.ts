@@ -1,6 +1,6 @@
 import { CompleteValidationDisplayClassMap } from '../interfaces/validation-display.interface';
 
-/** DOM attributes used by Validation Rules display strategies (stable contract for custom implementations). */
+/** DOM attributes used by Validation Rules Engine display strategies (stable contract for custom implementations). */
 export const POLICY_VALIDATION_DOM = {
   error: 'data-policy-validation-error',
   errorContainer: 'data-policy-validation-error-container',

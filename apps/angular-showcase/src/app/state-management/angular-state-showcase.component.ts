@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ValidationProviderService } from '@validation-rules/angular';
+import { ValidationProviderService } from '@validation-rules-engine/angular';
 import { RxState } from '@rx-angular/state';
 import { combineLatest, Subscription } from 'rxjs';
 import { platformUrl } from '../platform-urls';

@@ -7,7 +7,7 @@ import {
   type ValidationSnapshot,
   type ValidationSubmitHandler,
   type ValidationTarget
-} from '@validation-rules/react';
+} from '@validation-rules-engine/react';
 import { cloneModel, useShowcaseState } from './types';
 
 type ManagedValidationFormOptions<TModel extends ValidationTarget> =

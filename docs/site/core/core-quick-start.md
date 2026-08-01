@@ -15,7 +15,7 @@ interface AccountModel {
 ## Policy
 
 ```ts
-import type { ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules/core';
+import type { ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules-engine/core';
 
 class AccountPolicy implements ValidationPolicy {
   addValidations(helper: ValidatorHelper): Validator[] {

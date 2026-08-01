@@ -1,12 +1,12 @@
 # Architecture
 
-The platform separates publishable validation packages from private documentation and showcase applications. `@validation-rules/core`, `@validation-rules/angular`, and `@validation-rules/react` are publishable packages; the portal, docs, Angular showcase, and React showcase are private applications.
+Validation Rules Engine (VRE) separates publishable validation packages from private documentation and showcase applications. `@validation-rules-engine/core`, `@validation-rules-engine/angular`, and `@validation-rules-engine/react` are publishable packages; the portal, docs, Angular showcase, and React showcase are private applications.
 
 ## Dependency direction
 
 ```text
-Angular showcase → @validation-rules/angular → @validation-rules/core
-React showcase → @validation-rules/react → @validation-rules/core
+Angular showcase → @validation-rules-engine/angular → @validation-rules-engine/core
+React showcase → @validation-rules-engine/react → @validation-rules-engine/core
 ```
 
 Core cannot import Angular. The Angular adapter consumes core through its public entry point. Showcase applications consume their adapter package rather than source files.
@@ -42,9 +42,9 @@ Applications communicate through URLs, not shared runtime state. One showcase ca
 
 ## Build order
 
-1. Build `@validation-rules/core`.
-2. Build `@validation-rules/angular`.
-3. Build `@validation-rules/react`.
+1. Build `@validation-rules-engine/core`.
+2. Build `@validation-rules-engine/angular`.
+3. Build `@validation-rules-engine/react`.
 4. Build Node portal and documentation applications.
 5. Build Angular and React showcase applications.
 

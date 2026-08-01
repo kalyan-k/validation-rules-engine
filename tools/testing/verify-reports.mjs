@@ -131,15 +131,15 @@ function verifyProject(projectName, failures) {
   requireText(testHtml, 'data-filter="skipped"', testHtmlPath, failures);
   requireText(testHtml, 'Source:', testHtmlPath, failures);
   requireText(testHtml, 'aria-label="Platform navigation"', testHtmlPath, failures);
-  requireText(testHtml, 'Validation Rules', testHtmlPath, failures);
+  requireText(testHtml, 'Validation Rules Engine', testHtmlPath, failures);
   requireText(testHtml, 'data-report-summary', testHtmlPath, failures);
-  requireText(testHtml, 'validation-rules:report-summary', testHtmlPath, failures);
+  requireText(testHtml, 'vre:report-summary', testHtmlPath, failures);
   requireText(testHtml, 'data:image/svg+xml;base64', testHtmlPath, failures);
   requireText(testHtml, '<validation-platform-shell active-application="reports"', testHtmlPath, failures);
   requireText(coverageWrapper, 'aria-label="Platform navigation"', coverageWrapperPath, failures);
   requireText(coverageWrapper, 'src="./coverage/index.html"', coverageWrapperPath, failures);
   requireText(coverageWrapper, 'data-report-summary', coverageWrapperPath, failures);
-  requireText(coverageWrapper, 'validation-rules:report-summary', coverageWrapperPath, failures);
+  requireText(coverageWrapper, 'vre:report-summary', coverageWrapperPath, failures);
   requireText(coverageWrapper, 'data:image/svg+xml;base64', coverageWrapperPath, failures);
   requireText(coverageWrapper, '<validation-platform-shell active-application="reports"', coverageWrapperPath, failures);
   requireText(junit, '<testsuites ', junitPath, failures);

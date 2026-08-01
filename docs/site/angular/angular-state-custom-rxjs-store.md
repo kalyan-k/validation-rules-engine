@@ -1,4 +1,4 @@
-# Custom RxJS Store with @validation-rules/angular
+# Custom RxJS Store with @validation-rules-engine/angular
 
 A custom RxJS store uses a `BehaviorSubject` and small update functions to manage feature state without adopting a store framework.
 
@@ -10,11 +10,11 @@ A custom RxJS store uses a `BehaviorSubject` and small update functions to manag
 
 ## Why choose it
 
-Choose a custom RxJS store when transparency and minimal dependencies matter. Validation Rules keeps policies separate from stream plumbing, so the store only commits form and validation snapshots.
+Choose a custom RxJS store when transparency and minimal dependencies matter. Validation Rules Engine keeps policies separate from stream plumbing, so the store only commits form and validation snapshots.
 
 ## Integration pattern
 
-The unified Angular showcase commits state through a BehaviorSubject-backed store while reusing the same `@validation-rules/angular` policies, groups, summaries, and performance generator.
+The unified Angular showcase commits state through a BehaviorSubject-backed store while reusing the same `@validation-rules-engine/angular` policies, groups, summaries, and performance generator.
 
 ## Showcase pages
 
@@ -23,16 +23,16 @@ The unified Angular showcase commits state through a BehaviorSubject-backed stor
 - [Complex Form](http://127.0.0.1:4202/state/custom-rxjs-store/complex)
 - [Performance Form](http://127.0.0.1:4202/state/custom-rxjs-store/performance)
 
-## Using @validation-rules/angular
+## Using @validation-rules-engine/angular
 
-A custom RxJS store is a good fit when a feature needs predictable observable state without adopting a formal store library. Validation Rules validates the current `BehaviorSubject` snapshot and the store publishes the decorated result.
+A custom RxJS store is a good fit when a feature needs predictable observable state without adopting a formal store library. Validation Rules Engine validates the current `BehaviorSubject` snapshot and the store publishes the decorated result.
 
 ### Step 1 — Install Package
 
-Install Validation Rules, Angular Forms, and RxJS.
+Install Validation Rules Engine, Angular Forms, and RxJS.
 
 ```bash
-npm install @validation-rules/angular @validation-rules/core @angular/forms rxjs
+npm install @validation-rules-engine/angular @validation-rules-engine/core @angular/forms rxjs
 ```
 
 RxJS is already part of Angular applications, so no additional state framework is required.
@@ -42,19 +42,19 @@ RxJS is already part of Angular applications, so no additional state framework i
   "dependencies": {
     "@angular/forms": "^20.0.0",
     "rxjs": "^7.8.0",
-    "@validation-rules/angular": "^1.0.0"
+    "@validation-rules-engine/angular": "^1.0.0"
   }
 }
 ```
 
 ### Step 2 — Configure Project
 
-Import forms and Validation Rules, then provide the feature store service.
+Import forms and Validation Rules Engine, then provide the feature store service.
 
 ```ts
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ValidationModule, provideBootstrapValidationDisplay } from '@validation-rules/angular';
+import { ValidationModule, provideBootstrapValidationDisplay } from '@validation-rules-engine/angular';
 import { ProfileRxjsStore } from './state/profile-rxjs.store';
 
 @NgModule({
@@ -69,7 +69,7 @@ export class ProfileFeatureModule {}
 Define a serializable model and policy.
 
 ```ts
-import { ValidationModel, ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules/angular';
+import { ValidationModel, ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules-engine/angular';
 
 export interface RxjsProfile extends ValidationModel {
   firstName: string;
@@ -206,7 +206,7 @@ Avoid exposing the subject directly, clone validated snapshots before publishing
 ```ts
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ValidationProviderService } from '@validation-rules/angular';
+import { ValidationProviderService } from '@validation-rules-engine/angular';
 import { RxjsProfile, RxjsProfilePolicy } from './profile.policy';
 import { ProfileRxjsStore } from './state/profile-rxjs.store';
 
