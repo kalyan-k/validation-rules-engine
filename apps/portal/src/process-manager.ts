@@ -27,17 +27,23 @@ export class ApplicationProcessManager {
   constructor(
     definitions: ApplicationDefinition[],
     private readonly workspaceRoot: string,
-    private readonly npmExecPath = process.env['npm_execpath']
+    private readonly npmExecPath = process.env['npm_execpath'],
+    private readonly embedded = false
   ) {
     definitions.forEach((definition) => {
       this.applications.set(definition.id, {
         definition,
-        status: { ...definition, state: 'stopped', detail: 'Waiting to start' }
+        status: embedded
+          ? { ...definition, state: 'healthy', detail: 'Served by the unified host' }
+          : { ...definition, state: 'stopped', detail: 'Waiting to start' }
       });
     });
   }
 
   startAll(): void {
+    if (this.embedded) {
+      return;
+    }
     for (const application of this.applications.values()) {
       this.start(application);
     }
@@ -50,6 +56,9 @@ export class ApplicationProcessManager {
   }
 
   async refreshHealth(): Promise<void> {
+    if (this.embedded) {
+      return;
+    }
     await Promise.all([...this.applications.values()].map(async (application) => {
       if (application.status.state === 'failed' || application.status.state === 'stopped') {
         return;

@@ -14,16 +14,23 @@ declare global {
   }
 }
 
+function developmentUrl(port: number): string {
+  const url = new URL(window.location.origin);
+  url.port = String(port);
+  return url.origin;
+}
+
 const defaults: Record<PlatformUrlKey, string> = {
-  portal: 'http://127.0.0.1:4200',
-  docs: 'http://127.0.0.1:4201',
-  angular: 'http://127.0.0.1:4202',
-  react: 'http://127.0.0.1:4204'
+  portal: developmentUrl(4200),
+  docs: developmentUrl(4201),
+  angular: developmentUrl(4202),
+  react: developmentUrl(4204)
 };
 
 export function platformUrl(key: PlatformUrlKey, path = ''): string {
   const config = window.vrePlatformConfig ?? {};
   const configured = config.urls?.[key] ?? config[`${key}Url` as keyof VrePlatformConfig];
-  const base = String(configured || defaults[key]).replace(/\/$/, '');
-  return `${base}${path}`;
+  const configuredValue = typeof configured === 'string' && configured.trim() ? configured : undefined;
+  const base = String(configuredValue ?? defaults[key]).replace(/\/$/, '');
+  return `${base}${path}` || '/';
 }

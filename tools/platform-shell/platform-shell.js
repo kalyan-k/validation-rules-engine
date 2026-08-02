@@ -128,7 +128,7 @@ const showcaseItems = [
 ];
 
 function normalizedBase(value, fallback) {
-  return String(value || fallback).replace(/\/$/, '');
+  return String(value ?? fallback).replace(/\/$/, '');
 }
 
 function configuredUrls() {
@@ -140,8 +140,8 @@ function configuredBase(key, attributeValue, fallback) {
   const urls = configuredUrls();
   return normalizedBase(
     attributeValue
-      || urls[key]
-      || urls[`${key}Url`],
+      ?? urls[key]
+      ?? urls[`${key}Url`],
     fallback
   );
 }
@@ -150,6 +150,15 @@ function currentOriginWhen(activeApplication, applications, fallback) {
   return applications.includes(activeApplication) && /^https?:$/u.test(location.protocol)
     ? location.origin
     : fallback;
+}
+
+function developmentOrigin(port) {
+  if (!/^https?:$/u.test(location.protocol)) {
+    return '';
+  }
+  const url = new URL(location.origin);
+  url.port = String(port);
+  return url.origin;
 }
 
 function flattenDocsItems(items) {
@@ -191,12 +200,12 @@ class ValidationPlatformShell extends HTMLElement {
     const applicationName = this.getAttribute('application-name') || 'Platform';
     const version = this.getAttribute('version') || '0.0.0';
     const brandMarkUrl = this.getAttribute('brand-mark-url') || '/vre-mark.svg';
-    const defaultPortalUrl = currentOriginWhen(activeApplication, ['portal', 'reports'], 'http://127.0.0.1:4200');
+    const defaultPortalUrl = currentOriginWhen(activeApplication, ['portal', 'reports'], developmentOrigin(4200));
     const urls = {
       portal: configuredBase('portal', this.getAttribute('portal-url'), defaultPortalUrl),
-      docs: configuredBase('docs', this.getAttribute('docs-url'), currentOriginWhen(activeApplication, ['documentation'], 'http://127.0.0.1:4201')),
-      angular: configuredBase('angular', this.getAttribute('angular-url'), currentOriginWhen(activeApplication, ['angular-showcase'], 'http://127.0.0.1:4202')),
-      react: configuredBase('react', this.getAttribute('react-url'), currentOriginWhen(activeApplication, ['react-showcase'], 'http://127.0.0.1:4204'))
+      docs: configuredBase('docs', this.getAttribute('docs-url'), currentOriginWhen(activeApplication, ['documentation'], developmentOrigin(4201))),
+      angular: configuredBase('angular', this.getAttribute('angular-url'), currentOriginWhen(activeApplication, ['angular-showcase'], developmentOrigin(4202))),
+      react: configuredBase('react', this.getAttribute('react-url'), currentOriginWhen(activeApplication, ['react-showcase'], developmentOrigin(4204)))
     };
     const docsActive = activeApplication === 'documentation';
     const showcasesActive = activeApplication === 'angular-showcase' || activeApplication === 'react-showcase';
@@ -212,7 +221,7 @@ class ValidationPlatformShell extends HTMLElement {
     }).join('');
     const reportsNavigation = [
       ['Tests & Coverage', '/reports/index.html'],
-      ['Automation Testing', '/reports/playwright.html']
+      ['Automation Testing', '/automation/']
     ].map(([label, pathname]) => {
       const active = reportsActive && isPathActive(pathname);
       return `<a href="${urls.portal}${pathname}"${active ? ' aria-current="page" class="active"' : ''}>${label}</a>`;
@@ -223,7 +232,7 @@ class ValidationPlatformShell extends HTMLElement {
     root.innerHTML = `
       ${injectedStyles ? `<style>${injectedStyles}</style>` : '<link rel="stylesheet" href="/platform-shell.css">'}
       <header class="platform-header" part="header">
-        <a class="platform-brand" href="${urls.portal}" aria-label="Validation Rules Engine home">
+        <a class="platform-brand" href="${urls.portal || '/'}" aria-label="Validation Rules Engine home">
           <img class="platform-mark" src="${brandMarkUrl}" width="38" height="38" alt="">
           <span class="platform-brand-copy"><strong>Validation Rules Engine</strong><small>${applicationName}</small></span>
         </a>

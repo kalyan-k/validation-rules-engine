@@ -12,7 +12,7 @@ A future evaluator abstraction could allow policy execution to move beyond the A
 
 ## Developer experience
 
-Potential improvements include an interactive playground, larger performance scenarios, package-release coordination, and richer migration tooling. New applications join the Showcases menu and central launcher registry only when their implementations are complete.
+Potential improvements include an interactive playground, larger performance scenarios, and richer migration tooling. Package releases already use synchronized version checks and a tagged publishing workflow. New applications join the Showcases menu and central launcher registry only when their implementations are complete.
 
 ## Compatibility commitment
 

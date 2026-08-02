@@ -136,12 +136,14 @@ function verifyProject(projectName, failures) {
   requireText(testHtml, 'vre:report-summary', testHtmlPath, failures);
   requireText(testHtml, 'data:image/svg+xml;base64', testHtmlPath, failures);
   requireText(testHtml, '<validation-platform-shell active-application="reports"', testHtmlPath, failures);
+  requireText(testHtml, '<script src="/platform-config.js"></script>', testHtmlPath, failures);
   requireText(coverageWrapper, 'aria-label="Platform navigation"', coverageWrapperPath, failures);
   requireText(coverageWrapper, 'src="./coverage/index.html"', coverageWrapperPath, failures);
   requireText(coverageWrapper, 'data-report-summary', coverageWrapperPath, failures);
   requireText(coverageWrapper, 'vre:report-summary', coverageWrapperPath, failures);
   requireText(coverageWrapper, 'data:image/svg+xml;base64', coverageWrapperPath, failures);
   requireText(coverageWrapper, '<validation-platform-shell active-application="reports"', coverageWrapperPath, failures);
+  requireText(coverageWrapper, '<script src="/platform-config.js"></script>', coverageWrapperPath, failures);
   requireText(junit, '<testsuites ', junitPath, failures);
   requireText(junit, '<testcase ', junitPath, failures);
 

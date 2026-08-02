@@ -9,7 +9,7 @@ function syncClearButton() {
 }
 
 function loadDocuments() {
-  documentsPromise ??= fetch('/search-index.json', { cache: 'force-cache' })
+  documentsPromise ??= fetch('/docs/search-index.json', { cache: 'force-cache' })
     .then((response) => {
       if (!response.ok) throw new Error(`Search index returned ${response.status}`);
       return response.json();

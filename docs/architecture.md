@@ -130,5 +130,5 @@ If two or more adapters later share non-engine infrastructure, evaluate a shared
 
 - The Angular expression parser still anchors policy execution to the adapter.
 - `underscore` remains a core peer dependency to preserve validator semantics.
-- Package versions and compatibility are aligned manually; publishing and release automation are outside this repository milestone.
+- Public package versions are synchronized and verified automatically; tagged releases pass the complete quality gate before npm trusted publishing.
 - Compatibility identifiers retain their historic names and require clear documentation for new consumers.

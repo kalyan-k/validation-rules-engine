@@ -33,20 +33,29 @@ export const portalPort = configuredPort('VRE_PORTAL_PORT', 4200);
 const docsPort = configuredPort('VRE_DOCS_PORT', 4201);
 const angularShowcasePort = configuredPort('VRE_ANGULAR_SHOWCASE_PORT', 4202);
 const reactShowcasePort = configuredPort('VRE_REACT_SHOWCASE_PORT', 4204);
+export const singleHost = process.env['VRE_SINGLE_HOST'] === '1' || process.argv.includes('--single-host');
 const useStaticShowcases = process.env['VRE_STATIC_SHOWCASES'] === '1';
-export const platformUrls = {
-  portal: configuredBaseUrl('VRE_PORTAL_URL', `http://127.0.0.1:${portalPort}`),
-  docs: configuredBaseUrl('VRE_DOCS_URL', `http://127.0.0.1:${docsPort}`),
-  angular: configuredBaseUrl('VRE_ANGULAR_SHOWCASE_URL', `http://127.0.0.1:${angularShowcasePort}`),
-  react: configuredBaseUrl('VRE_REACT_SHOWCASE_URL', `http://127.0.0.1:${reactShowcasePort}`)
-};
+const publicBaseUrl = configuredBaseUrl('VRE_PUBLIC_URL', '');
+export const platformUrls = singleHost
+  ? {
+      portal: publicBaseUrl,
+      docs: publicBaseUrl,
+      angular: `${publicBaseUrl}/showcases/angular`,
+      react: `${publicBaseUrl}/showcases/react`
+    }
+  : {
+      portal: configuredBaseUrl('VRE_PORTAL_URL', `http://127.0.0.1:${portalPort}`),
+      docs: configuredBaseUrl('VRE_DOCS_URL', `http://127.0.0.1:${docsPort}`),
+      angular: configuredBaseUrl('VRE_ANGULAR_SHOWCASE_URL', `http://127.0.0.1:${angularShowcasePort}`),
+      react: configuredBaseUrl('VRE_REACT_SHOWCASE_URL', `http://127.0.0.1:${reactShowcasePort}`)
+    };
 
 function showcaseStartScript(defaultScript: string): string {
   return useStaticShowcases ? 'serve:static' : defaultScript;
 }
 
 function showcaseHealthUrl(url: string): string {
-  return useStaticShowcases ? `${url}/health` : url;
+  return singleHost || useStaticShowcases ? `${url}/health` : url;
 }
 
 function staticShowcaseArgs(root: string, port: number, name: string): string[] {
@@ -60,8 +69,8 @@ export const applicationDefinitions: ApplicationDefinition[] = [
     shortTitle: 'Docs',
     description: 'Concepts, guides, public APIs, architecture, testing, and migration guidance.',
     kind: 'documentation',
-    url: platformUrls.docs,
-    healthUrl: `${platformUrls.docs}/health`,
+    url: `${platformUrls.docs}/docs/overview`,
+    healthUrl: singleHost ? '/docs/health' : `${platformUrls.docs}/health`,
     startScript: 'serve:docs:portal',
     documentationUrl: `${platformUrls.docs}/docs/overview`,
     tags: ['Guides', 'API', 'Architecture']

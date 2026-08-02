@@ -104,7 +104,7 @@ function renderPlaywrightResults(payload) {
           <p>${escapeHtml(payload.startTime || 'Unknown start time')} &middot; ${formatDuration(payload.durationMs)} &middot; ${escapeHtml(execution.scope || 'unknown')} run</p>
           ${execution.configuredTotal ? `<p class="playwright-run-scope">Executed ${escapeHtml(execution.executedTotal ?? totals.total ?? 0)} of ${escapeHtml(execution.configuredTotal)} configured tests.</p>` : ''}
         </div>
-        <a href="/playwright/${escapeHtml(payload.artifacts?.htmlReport || 'html-report/index.html')}">Open full HTML report</a>
+        <a href="/automation/artifacts/${escapeHtml(payload.artifacts?.htmlReport || 'html-report/index.html')}">Open full HTML report</a>
       </div>
       ${renderScopeNotice(execution)}
       <div class="playwright-metrics">
@@ -124,9 +124,9 @@ function renderPlaywrightResults(payload) {
       </div>
       ${failures.length ? `<div class="playwright-failures"><h4>Failure summary</h4>${failures.map((failure) => `<p><strong>${escapeHtml(failure.application || 'application')}</strong> ${escapeHtml(failure.title || '')}</p>`).join('')}</div>` : ''}
       <div class="playwright-links">
-        <a href="/playwright/${escapeHtml(payload.artifacts?.jsonReport || 'json/results.json')}">JSON</a>
-        <a href="/playwright/${escapeHtml(payload.artifacts?.junitReport || 'junit/test-results.xml')}">JUnit</a>
-        <a href="/playwright/${escapeHtml(payload.artifacts?.visualDiffs || 'visual-diffs')}">Visual diffs</a>
+        <a href="/automation/artifacts/${escapeHtml(payload.artifacts?.jsonReport || 'json/results.json')}">JSON</a>
+        <a href="/automation/artifacts/${escapeHtml(payload.artifacts?.junitReport || 'junit/test-results.xml')}">JUnit</a>
+        <a href="/automation/artifacts/${escapeHtml(payload.artifacts?.visualDiffs || 'visual-diffs')}">Visual diffs</a>
         ${payload.ci?.url ? `<a href="${escapeHtml(payload.ci.url)}">CI run</a>` : ''}
       </div>
     </article>
@@ -167,9 +167,9 @@ function renderEnterpriseReportPack(payload) {
     <section class="playwright-enterprise-card">
       <h4>Enterprise reporting pack</h4>
       <ul>
-        <li><a href="/playwright/${escapeHtml(payload.artifacts?.htmlReport || 'html-report/index.html')}">HTML report</a> for human triage and debugging.</li>
-        <li><a href="/playwright/${escapeHtml(payload.artifacts?.jsonReport || 'json/results.json')}">JSON results</a> for dashboards and APIs.</li>
-        <li><a href="/playwright/${escapeHtml(payload.artifacts?.junitReport || 'junit/test-results.xml')}">JUnit XML</a> for CI systems and quality gates.</li>
+        <li><a href="/automation/artifacts/${escapeHtml(payload.artifacts?.htmlReport || 'html-report/index.html')}">HTML report</a> for human triage and debugging.</li>
+        <li><a href="/automation/artifacts/${escapeHtml(payload.artifacts?.jsonReport || 'json/results.json')}">JSON results</a> for dashboards and APIs.</li>
+        <li><a href="/automation/artifacts/${escapeHtml(payload.artifacts?.junitReport || 'junit/test-results.xml')}">JUnit XML</a> for CI systems and quality gates.</li>
         <li>Failure screenshots, videos, and traces are retained under <code>artifacts/playwright/test-results</code>.</li>
         <li>Visual regression diffs are retained under <code>artifacts/playwright/visual-diffs</code>.</li>
       </ul>

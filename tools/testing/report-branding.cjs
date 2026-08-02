@@ -19,6 +19,7 @@ function escapeHtml(value) {
 function reportHeadAssets() {
   const serializedStyles = JSON.stringify(shellStyles).replaceAll('<', '\\u003c');
   return `<meta name="theme-color" content="#10243e"><link rel="icon" href="${logoDataUri}" type="image/svg+xml">
+  <script src="/platform-config.js"></script>
   <style>${shellStyles}</style>
   <script>globalThis.validationPlatformShellStyles=${serializedStyles};${shellScript}</script>`;
 }

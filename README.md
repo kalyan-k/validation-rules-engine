@@ -205,7 +205,7 @@ Form groups aggregate field status for one portion of a view. Policy groups aggr
 | `apps/docs` | private | Search-ready Markdown documentation server and site shell |
 | `apps/portal` | private | Application launcher, status API, report gateway, and product dashboard |
 
-Build artifacts are written beneath `dist/`, with publishable packages in `dist/packages/*`, browser showcases in `dist/showcases/*`, and Node platform applications in `dist/apps/*`.
+Build artifacts are written beneath `dist/`, with publishable packages in `dist/packages/*`, browser showcases in `dist/showcases/*`, Node platform applications in `dist/apps/*`, and the assembled production website in `dist/site/*`.
 
 ## Portal and showcase platform
 
@@ -215,9 +215,9 @@ Start the complete local experience with one command:
 npm start
 ```
 
-The command builds the packages and Node applications, starts the portal at `http://127.0.0.1:4200`, documentation at `4201`, the Angular showcase at `4202`, and React at `4204`, then opens the portal in the default browser. The portal polls every registered application and shows startup, healthy, or failed state without coupling their runtimes.
+The command builds and verifies one production host at `http://127.0.0.1:4200`. Documentation is served from `/docs/`, Angular from `/showcases/angular/`, React from `/showcases/react/`, tests and coverage from `/reports/`, and Playwright automation from `/automation/`. No secondary application ports or child processes are required.
 
-Deployment URLs are runtime configurable. Set `VRE_PORTAL_URL`, `VRE_DOCS_URL`, `VRE_ANGULAR_SHOWCASE_URL`, and `VRE_REACT_SHOWCASE_URL` for the Node portal/docs servers. Static Angular and React showcase deployments can replace the copied `platform-config.js` with `globalThis.vrePlatformConfig = { urls: { portal, docs, angular, react } };`.
+Use `npm run portal` for the multi-process local development model on ports `4200`, `4201`, `4202`, and `4204`. Production uses `npm run build:site` followed by `npm run serve:host`; `VRE_PORTAL_PORT`, `VRE_HOST`, `VRE_NO_OPEN`, and `VRE_BUILD_TIME` configure the single Node process without rebuilding browser code.
 
 The application registry in `apps/portal/src/applications.ts` is the single place to add a future showcase application. Each application remains independently runnable and communicates through stable local URLs.
 
@@ -229,7 +229,7 @@ Documentation search is performed from a browser-cached index and returns highli
 
 - Continue strengthening the framework-neutral engine and adapter contract
 - Evaluate a parser abstraction that could move expression execution out of Angular without changing behavior
-- Improve package release coordination and consumer migration tooling after package names are approved
+- Maintain synchronized Semantic Versioning, changelogs, provenance, and consumer migration guidance
 - Add Vue or other adapters only with complete implementations, tests, documentation, and real consumer showcases
 
 React is implemented and verified; no Vue or other framework placeholder exists in this repository.
@@ -247,7 +247,10 @@ npm run build:all
 
 | Command | Purpose |
 | --- | --- |
-| `npm start` / `npm run portal` | Launch the portal, docs, Angular showcase, and React showcase |
+| `npm start` | Build and launch the single-origin production host |
+| `npm run portal` | Launch the multi-process local development platform |
+| `npm run build:site` | Assemble all hosted applications under `dist/site` |
+| `npm run site:verify` | Verify production routes, base paths, assets, and embedded application health |
 | `npm run serve:angular-showcase` | Serve only the Angular showcase |
 | `npm run serve:docs` | Build and serve only the documentation site |
 | `npm run build` | Build core plus Angular and React adapters in dependency order |
@@ -261,8 +264,11 @@ npm run build:all
 | `npm run test:e2e` | Run repository-level Playwright E2E tests in Chromium |
 | `npm run reports:open` | Open the generated report dashboard |
 | `npm run lint:all` | Lint every configured project |
+| `npm run version:check` | Verify synchronized package versions and Core peer compatibility |
+| `npm run pack:packages:dry-run` | Inspect all three npm package payloads without publishing |
+| `npm run release:verify` | Run every release quality gate before tagging or publishing |
 
-See [Testing and reports](docs/site/testing.md) and [Playwright E2E Testing](docs/site/playwright.md) for report locations, coverage scope, CI behavior, browser automation, and troubleshooting.
+See [Single-host deployment](docs/site/single-host-deployment.md), [Release and versioning](docs/site/release-versioning.md), [Testing and reports](docs/site/testing.md), and [Playwright E2E Testing](docs/site/playwright.md) for deployment, publishing, report locations, coverage scope, CI behavior, browser automation, and troubleshooting.
 
 ## Contributing
 
@@ -270,13 +276,15 @@ Keep changes within the established dependency direction and preserve public beh
 
 ```bash
 npm ci
+npm run version:check
 npm run architecture:verify
 npm run test:reports
-npm run build:all
+npm run build:site
+npm run site:verify
 npm run lint:all
 ```
 
-Add behavior-focused tests with production changes, do not exclude executable code to raise coverage, and do not scaffold future-framework packages without an implementation. The root and showcase packages are private. CI validates the repository but does not publish packages.
+Add behavior-focused tests with production changes, do not exclude executable code to raise coverage, and do not scaffold future-framework packages without an implementation. The root and showcase packages are private. The release workflow publishes only synchronized, tagged, quality-gated package artifacts through npm trusted publishing.
 
 ## License
 

@@ -7,8 +7,10 @@ const reportsRoot = resolve(workspaceRoot, 'reports/showcases/react');
 
 export default defineConfig(({ mode }) => {
   const testing = mode === 'test';
+  const hosted = mode === 'single-host';
   return {
     root: __dirname,
+    base: hosted ? '/showcases/react/' : '/',
     publicDir: resolve(__dirname, '../../tools/platform-shell'),
     plugins: [react()],
     resolve: {

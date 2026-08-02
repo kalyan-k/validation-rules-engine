@@ -1,0 +1,45 @@
+name: Publish synchronized npm packages
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    environment: npm
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js and npm registry
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Verify synchronized version and release tag
+        run: node tools/release/verify-versions.mjs --tag
+
+      - name: Run release quality gates
+        run: npm run release:verify
+
+      - name: Publish Core with provenance
+        run: npm publish ./dist/packages/core --access public --provenance
+
+      - name: Publish Angular adapter with provenance
+        run: npm publish ./dist/packages/angular --access public --provenance
+
+      - name: Publish React adapter with provenance
+        run: npm publish ./dist/packages/react --access public --provenance

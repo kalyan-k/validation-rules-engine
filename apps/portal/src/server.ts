@@ -3,15 +3,22 @@ import { createReadStream, existsSync, readFileSync, statSync } from 'node:fs';
 import http, { type IncomingMessage, type ServerResponse } from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { applicationDefinitions, platformUrls, portalPort } from './applications.js';
+import { applicationDefinitions, platformUrls, portalPort, singleHost } from './applications.js';
 import { ApplicationProcessManager } from './process-manager.js';
 
 const sourceDirectory = path.dirname(fileURLToPath(import.meta.url));
 const workspaceRoot = path.resolve(sourceDirectory, '..', '..', '..');
-const publicRoot = path.join(workspaceRoot, 'apps', 'portal', 'public');
+const siteRoot = path.join(workspaceRoot, 'dist', 'site');
+const publicRoot = singleHost ? siteRoot : path.join(workspaceRoot, 'apps', 'portal', 'public');
 const shellRoot = path.join(workspaceRoot, 'tools', 'platform-shell');
-const reportsRoot = path.join(workspaceRoot, 'reports');
-const playwrightArtifactsRoot = path.join(workspaceRoot, 'artifacts', 'playwright');
+const platformAssetsRoot = singleHost ? siteRoot : shellRoot;
+const documentationRoot = path.join(siteRoot, 'docs');
+const angularShowcaseRoot = path.join(siteRoot, 'showcases', 'angular');
+const reactShowcaseRoot = path.join(siteRoot, 'showcases', 'react');
+const reportsRoot = singleHost ? path.join(siteRoot, 'reports') : path.join(workspaceRoot, 'reports');
+const playwrightArtifactsRoot = singleHost
+  ? path.join(siteRoot, 'automation', 'artifacts')
+  : path.join(workspaceRoot, 'artifacts', 'playwright');
 const playwrightPortalDataPath = path.join(playwrightArtifactsRoot, 'portal-data', 'latest-run.json');
 const rootPackage = JSON.parse(readFileSync(path.join(workspaceRoot, 'package.json'), 'utf8')) as { version?: string };
 
@@ -24,7 +31,10 @@ const contentTypes: Record<string, string> = {
   '.map': 'application/json; charset=utf-8',
   '.png': 'image/png',
   '.svg': 'image/svg+xml',
+  '.txt': 'text/plain; charset=utf-8',
   '.webmanifest': 'application/manifest+json',
+  '.woff': 'font/woff',
+  '.woff2': 'font/woff2',
   '.xml': 'application/xml; charset=utf-8'
 };
 
@@ -92,8 +102,33 @@ async function handleRequest(
     serveFile(response, path.dirname(playwrightPortalDataPath), path.basename(playwrightPortalDataPath));
     return;
   }
-  if (requestUrl.pathname === '/platform-config.js') {
+  if (requestUrl.pathname === '/platform-config.js'
+    || (singleHost && requestUrl.pathname === '/showcases/angular/platform-config.js')
+    || (singleHost && requestUrl.pathname === '/showcases/react/platform-config.js')) {
     sendJavaScript(response, platformConfigScript());
+    return;
+  }
+  if (singleHost && requestUrl.pathname === '/docs/health') {
+    sendJson(response, 200, { status: 'healthy', service: 'documentation' });
+    return;
+  }
+  if (singleHost && (requestUrl.pathname === '/showcases/angular/health' || requestUrl.pathname === '/showcases/react/health')) {
+    sendJson(response, 200, {
+      status: 'healthy',
+      service: requestUrl.pathname.includes('/angular/') ? 'angular-showcase' : 'react-showcase'
+    });
+    return;
+  }
+  if (requestUrl.pathname === '/automation' || requestUrl.pathname === '/automation/') {
+    serveFile(
+      response,
+      singleHost ? path.join(siteRoot, 'automation') : publicRoot,
+      singleHost ? 'index.html' : 'playwright.html'
+    );
+    return;
+  }
+  if (requestUrl.pathname.startsWith('/automation/artifacts/')) {
+    serveFile(response, playwrightArtifactsRoot, requestUrl.pathname.slice('/automation/artifacts/'.length));
     return;
   }
   if (requestUrl.pathname.startsWith('/playwright/')) {
@@ -101,7 +136,31 @@ async function handleRequest(
     return;
   }
   if (requestUrl.pathname === '/reports/playwright.html') {
-    serveFile(response, publicRoot, 'playwright.html');
+    redirect(response, '/automation/');
+    return;
+  }
+  if (singleHost && (requestUrl.pathname === '/docs' || requestUrl.pathname === '/docs/')) {
+    redirect(response, '/docs/overview');
+    return;
+  }
+  if (singleHost && requestUrl.pathname.startsWith('/docs/')) {
+    serveHostedRoute(response, documentationRoot, requestUrl.pathname, '/docs/', false);
+    return;
+  }
+  if (singleHost && (requestUrl.pathname === '/showcases/angular' || requestUrl.pathname === '/showcases/angular/')) {
+    redirect(response, '/showcases/angular/showcases/bootstrap');
+    return;
+  }
+  if (singleHost && requestUrl.pathname.startsWith('/showcases/angular/')) {
+    serveHostedRoute(response, angularShowcaseRoot, requestUrl.pathname, '/showcases/angular/', true);
+    return;
+  }
+  if (singleHost && (requestUrl.pathname === '/showcases/react' || requestUrl.pathname === '/showcases/react/')) {
+    redirect(response, '/showcases/react/showcases/bootstrap');
+    return;
+  }
+  if (singleHost && requestUrl.pathname.startsWith('/showcases/react/')) {
+    serveHostedRoute(response, reactShowcaseRoot, requestUrl.pathname, '/showcases/react/', true);
     return;
   }
   if (requestUrl.pathname.startsWith('/reports/')) {
@@ -110,11 +169,11 @@ async function handleRequest(
       sendHtml(response, missingReportsHtml());
       return;
     }
-    serveFile(response, reportsRoot, requestUrl.pathname.slice('/reports/'.length));
+    serveFile(response, reportsRoot, requestUrl.pathname.slice('/reports/'.length) || 'index.html');
     return;
   }
   if (platformAssets.has(requestUrl.pathname.slice(1))) {
-    serveFile(response, shellRoot, requestUrl.pathname.slice(1));
+    serveFile(response, platformAssetsRoot, requestUrl.pathname.slice(1));
     return;
   }
   const relativePath = requestUrl.pathname === '/' ? 'index.html' : requestUrl.pathname.slice(1);
@@ -129,7 +188,7 @@ function serveFile(response: ServerResponse, root: string, requestedPath: string
     return;
   }
   if ((!existsSync(filePath) || !statSync(filePath).isFile()) && fallbackToIndex) {
-    filePath = path.join(publicRoot, 'index.html');
+    filePath = path.join(root, 'index.html');
   }
   if (!existsSync(filePath) || !statSync(filePath).isFile()) {
     sendText(response, 404, 'Not found');
@@ -142,9 +201,28 @@ function serveFile(response: ServerResponse, root: string, requestedPath: string
   }
   response.writeHead(200, {
     'Content-Type': contentTypes[path.extname(filePath)] ?? 'application/octet-stream',
-    'Cache-Control': root === shellRoot ? 'public, max-age=3600' : 'no-store'
+    'Cache-Control': root === shellRoot || root === platformAssetsRoot ? 'public, max-age=3600' : 'no-store'
   });
   createReadStream(filePath).pipe(response);
+}
+
+function serveHostedRoute(
+  response: ServerResponse,
+  root: string,
+  pathname: string,
+  routePrefix: string,
+  spaFallback: boolean
+): void {
+  let relativePath = pathname.slice(routePrefix.length);
+  if (!relativePath) {
+    relativePath = 'index.html';
+  } else if (!path.extname(relativePath)) {
+    const nestedIndex = path.join(root, relativePath, 'index.html');
+    if (existsSync(nestedIndex)) {
+      relativePath = path.join(relativePath, 'index.html');
+    }
+  }
+  serveFile(response, root, relativePath, spaFallback);
 }
 
 function sendJson(response: ServerResponse, status: number, value: unknown): void {
@@ -162,6 +240,11 @@ function sendHtml(response: ServerResponse, value: string): void {
   response.end(value);
 }
 
+function redirect(response: ServerResponse, location: string): void {
+  response.writeHead(302, { Location: location, 'Cache-Control': 'no-store' });
+  response.end();
+}
+
 function sendJavaScript(response: ServerResponse, value: string): void {
   response.writeHead(200, { 'Content-Type': 'text/javascript; charset=utf-8', 'Cache-Control': 'no-store' });
   response.end(value);
@@ -177,7 +260,14 @@ function escapeHtml(value: string): string {
 }
 
 function platformConfigScript(): string {
-  return `globalThis.vrePlatformConfig = ${JSON.stringify({ urls: platformUrls })};`;
+  return `(() => {
+  const configured = ${JSON.stringify(platformUrls)};
+  const currentOrigin = globalThis.location?.origin ?? '';
+  const resolveUrl = (value) => value ? new URL(value, currentOrigin + '/').href.replace(/\/$/, '') : currentOrigin;
+  globalThis.vrePlatformConfig = globalThis.vrePlatformConfig || {
+    urls: Object.fromEntries(Object.entries(configured).map(([key, value]) => [key, resolveUrl(value)]))
+  };
+})();`;
 }
 
 function rewriteConfiguredLinks(html: string): string {
@@ -241,12 +331,14 @@ function openPortal(url: string): void {
 }
 
 async function main(): Promise<void> {
-  const manager = new ApplicationProcessManager(applicationDefinitions, workspaceRoot);
+  const manager = new ApplicationProcessManager(applicationDefinitions, workspaceRoot, process.env['npm_execpath'], singleHost);
   const server = createPortalServer(manager);
-  server.listen(portalPort, '127.0.0.1', () => {
-    console.log(`Validation Rules Engine Portal: ${platformUrls.portal}`);
+  const listenHost = process.env['VRE_HOST'] ?? (singleHost ? '0.0.0.0' : '127.0.0.1');
+  const localPortalUrl = `http://127.0.0.1:${portalPort}`;
+  server.listen(portalPort, listenHost, () => {
+    console.log(`Validation Rules Engine ${singleHost ? 'Unified Host' : 'Portal'}: ${platformUrls.portal || localPortalUrl}`);
     manager.startAll();
-    openPortal(platformUrls.portal);
+    openPortal(platformUrls.portal || localPortalUrl);
   });
 
   let closing = false;

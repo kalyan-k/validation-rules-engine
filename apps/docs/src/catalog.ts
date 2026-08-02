@@ -80,6 +80,8 @@ export const documentationCatalog: DocumentationEntry[] = [
   { slug: 'advanced', title: 'Advanced Examples', section: 'Guides', summary: 'Conditional, asynchronous, nested, and dynamic workflows.', source: 'advanced.md', showcasePath: '/showcases/bootstrap' },
   { slug: 'public-api', title: 'Public API Reference', section: 'Reference', summary: 'Supported public types, services, and methods.', source: 'public-api.md' },
   { slug: 'architecture', title: 'Architecture', section: 'Project', summary: 'Dependency boundaries, application registry, and build order.', source: 'architecture.md' },
+  { slug: 'single-host-deployment', title: 'Single-Host Deployment', section: 'Project', summary: 'Build and deploy the portal, docs, showcases, reports, and automation under one origin.', source: 'single-host-deployment.md' },
+  { slug: 'release-versioning', title: 'Release & Versioning', section: 'Project', summary: 'Synchronized Semantic Versioning, quality gates, package previews, and npm publishing.', source: 'release-versioning.md' },
   { slug: 'testing', title: 'Testing, Coverage & Reports', section: 'Project', summary: 'Test commands, coverage gates, and persistent reports.', source: 'testing.md' },
   { slug: 'playwright', title: 'Playwright E2E Testing', section: 'Project', summary: 'Repository-level browser automation, reports, accessibility, visual checks, and portal integration.', source: 'playwright.md' },
   { slug: 'migration', title: 'Migration', section: 'Project', summary: 'Package boundaries and migration guidance.', source: 'migration.md' },

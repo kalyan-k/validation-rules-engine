@@ -182,7 +182,7 @@ After a Playwright run, `playwright/scripts/generate-portal-data.mjs` reads the 
 artifacts/playwright/portal-data/latest-run.json
 ```
 
-The portal reads this manifest through `/api/playwright/latest` and displays it under Reports -> Automation Testing at `/reports/playwright.html`. The page separates the full configured test catalog from the latest executed run, so a focused smoke run does not look like the repository only has a handful of tests. Missing report data shows an empty state with the command required to generate a local run.
+The portal reads this manifest through `/api/playwright/latest` and displays it under Reports -> Automation Testing at `/automation/`. Full report assets are available below `/automation/artifacts/` in the unified host. The page separates the full configured test catalog from the latest executed run, so a focused smoke run does not look like the repository only has a handful of tests. Missing report data shows an empty state with the command required to generate a local run.
 
 For an enterprise-style complete automation dashboard, run:
 

@@ -30,3 +30,10 @@ test('reports a useful failure when the portal is not launched through npm', () 
   manager.startAll();
   assert.ok(manager.getStatuses().every(({ state }) => state === 'failed'));
 });
+
+test('marks embedded applications healthy without spawning child processes', async () => {
+  const manager = new ApplicationProcessManager(applicationDefinitions, process.cwd(), '', true);
+  manager.startAll();
+  await manager.refreshHealth();
+  assert.ok(manager.getStatuses().every(({ state, detail }) => state === 'healthy' && detail === 'Served by the unified host'));
+});

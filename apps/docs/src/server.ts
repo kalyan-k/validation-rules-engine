@@ -11,11 +11,12 @@ const workspaceRoot = path.resolve(sourceDirectory, '..', '..', '..');
 const contentRoot = path.join(workspaceRoot, 'docs', 'site');
 const publicRoot = path.join(workspaceRoot, 'apps', 'docs', 'public');
 const shellRoot = path.join(workspaceRoot, 'tools', 'platform-shell');
+const singleHost = process.env['VRE_SINGLE_HOST'] === '1' || process.argv.includes('--single-host');
 const docsPort = configuredPort('VRE_DOCS_PORT', 4201);
-const docsUrl = configuredBaseUrl('VRE_DOCS_URL', `http://127.0.0.1:${docsPort}`);
-const portalUrl = configuredBaseUrl('VRE_PORTAL_URL', 'http://127.0.0.1:4200');
-const angularShowcaseUrl = configuredBaseUrl('VRE_ANGULAR_SHOWCASE_URL', 'http://127.0.0.1:4202');
-const reactShowcaseUrl = configuredBaseUrl('VRE_REACT_SHOWCASE_URL', 'http://127.0.0.1:4204');
+const docsUrl = singleHost ? '' : configuredBaseUrl('VRE_DOCS_URL', `http://127.0.0.1:${docsPort}`);
+const portalUrl = singleHost ? '' : configuredBaseUrl('VRE_PORTAL_URL', 'http://127.0.0.1:4200');
+const angularShowcaseUrl = singleHost ? '/showcases/angular' : configuredBaseUrl('VRE_ANGULAR_SHOWCASE_URL', 'http://127.0.0.1:4202');
+const reactShowcaseUrl = singleHost ? '/showcases/react' : configuredBaseUrl('VRE_REACT_SHOWCASE_URL', 'http://127.0.0.1:4204');
 const workspacePackage = JSON.parse(readFileSync(path.join(workspaceRoot, 'package.json'), 'utf8')) as { version?: string };
 const assetVersion = encodeURIComponent(workspacePackage.version ?? '0.0.0');
 const platformAssets = new Set([
@@ -36,26 +37,42 @@ export function createDocumentationServer(): http.Server {
   return http.createServer((request, response) => handleRequest(request, response));
 }
 
+export interface StaticDocumentationPage {
+  path: string;
+  html: string;
+}
+
+export function staticDocumentationPages(): StaticDocumentationPage[] {
+  return documentationCatalog.map((entry) => ({
+    path: `docs/${entry.slug}/index.html`,
+    html: renderDocumentationEntry(entry)
+  }));
+}
+
+export function documentationSearchPayload(): { documents: typeof documentationSearchIndex } {
+  return { documents: documentationSearchIndex };
+}
+
 function handleRequest(request: IncomingMessage, response: ServerResponse): void {
   const requestUrl = new URL(request.url ?? '/', `http://${request.headers.host ?? '127.0.0.1'}`);
-  if (requestUrl.pathname === '/health') {
+  if (requestUrl.pathname === '/health' || requestUrl.pathname === '/docs/health') {
     sendJson(response, 200, { status: 'healthy', service: 'documentation' });
     return;
   }
-  if (requestUrl.pathname === '/api/search') {
+  if (requestUrl.pathname === '/api/search' || requestUrl.pathname === '/docs/api/search') {
     sendJson(response, 200, { results: searchDocumentation(documentationSearchIndex, requestUrl.searchParams.get('q') ?? '') });
     return;
   }
-  if (requestUrl.pathname === '/search-index.json') {
+  if (requestUrl.pathname === '/search-index.json' || requestUrl.pathname === '/docs/search-index.json') {
     sendJson(response, 200, { documents: documentationSearchIndex });
     return;
   }
-  if (requestUrl.pathname === '/search.js') {
+  if (requestUrl.pathname === '/search.js' || requestUrl.pathname === '/docs/search.js') {
     response.writeHead(200, { 'Content-Type': 'text/javascript; charset=utf-8', 'Cache-Control': 'public, max-age=3600' });
     createReadStream(path.join(publicRoot, 'search.js')).pipe(response);
     return;
   }
-  if (requestUrl.pathname === '/styles.css') {
+  if (requestUrl.pathname === '/styles.css' || requestUrl.pathname === '/docs/styles.css') {
     response.writeHead(200, { 'Content-Type': 'text/css; charset=utf-8', 'Cache-Control': 'no-store' });
     createReadStream(path.join(publicRoot, 'styles.css')).pipe(response);
     return;
@@ -72,7 +89,7 @@ function handleRequest(request: IncomingMessage, response: ServerResponse): void
     createReadStream(path.join(shellRoot, requestUrl.pathname.slice(1))).pipe(response);
     return;
   }
-  if (requestUrl.pathname === '/') {
+  if (requestUrl.pathname === '/' || requestUrl.pathname === '/docs' || requestUrl.pathname === '/docs/') {
     response.writeHead(302, { Location: '/docs/overview' });
     response.end();
     return;
@@ -84,9 +101,13 @@ function handleRequest(request: IncomingMessage, response: ServerResponse): void
     response.end(renderPage(undefined, '<h1>Page not found</h1><p>Choose a documentation topic from the navigation.</p>'));
     return;
   }
-  const markdown = readFileSync(path.join(contentRoot, entry.source), 'utf8');
   response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
-  response.end(renderPage(entry, rewriteConfiguredLinks(renderMarkdown(markdown))));
+  response.end(renderDocumentationEntry(entry));
+}
+
+function renderDocumentationEntry(entry: DocumentationEntry): string {
+  const markdown = readFileSync(path.join(contentRoot, entry.source), 'utf8');
+  return renderPage(entry, rewriteConfiguredLinks(renderMarkdown(markdown)));
 }
 
 function renderPage(entry: DocumentationEntry | undefined, content: string): string {
@@ -102,16 +123,16 @@ function renderPage(entry: DocumentationEntry | undefined, content: string): str
   const showcaseLinks = entry?.slug.startsWith('react-')
     ? `<a class="showcase-link" href="${reactShowcaseUrl}${entry.showcasePath ?? ''}"><strong>Open React Showcase</strong><span>Try the hooks and policies in a live React application &rarr;</span></a>`
     : entry?.section === 'Core Package'
-    ? `<a class="showcase-link" href="${portalUrl}"><strong>Open Portal</strong><span>Choose Angular or React showcases that all use Core policies &rarr;</span></a>`
+    ? `<a class="showcase-link" href="${platformHref(portalUrl)}"><strong>Open Portal</strong><span>Choose Angular or React showcases that all use Core policies &rarr;</span></a>`
     : `<a class="showcase-link" href="${angularShowcaseUrl}${entry?.showcasePath ?? ''}"><strong>Open Angular Showcase</strong><span>See the concepts running in a real application &rarr;</span></a>`;
 
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${escapeHtml(entry?.summary ?? 'Validation Rules Engine documentation')}"><meta name="theme-color" content="#10243e"><title>${escapeHtml(entry?.title ?? 'Not found')} &middot; Validation Rules Engine</title><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/vre-mark.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/vre-icon-180.png"><link rel="manifest" href="/site.webmanifest"><link rel="preload" href="/platform-shell.css" as="style"><link rel="stylesheet" href="/platform-shell.css"><link rel="stylesheet" href="/platform-theme.css"><link rel="stylesheet" href="/styles.css"><script src="/platform-config.js?v=${assetVersion}"></script><script src="/platform-shell.js?v=${assetVersion}"></script><script src="/search.js?v=${assetVersion}" defer></script></head>
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${escapeHtml(entry?.summary ?? 'Validation Rules Engine documentation')}"><meta name="theme-color" content="#10243e"><title>${escapeHtml(entry?.title ?? 'Not found')} &middot; Validation Rules Engine</title><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/vre-mark.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/vre-icon-180.png"><link rel="manifest" href="/site.webmanifest"><link rel="preload" href="/platform-shell.css" as="style"><link rel="stylesheet" href="/platform-shell.css"><link rel="stylesheet" href="/platform-theme.css"><link rel="stylesheet" href="/docs/styles.css"><script src="/platform-config.js?v=${assetVersion}"></script><script src="/platform-shell.js?v=${assetVersion}"></script><script src="/docs/search.js?v=${assetVersion}" defer></script></head>
   <body><validation-platform-shell active-application="documentation" application-name="Documentation" version="${escapeHtml(workspacePackage.version ?? '0.0.0')}" portal-url="${portalUrl}" docs-url="${docsUrl}" angular-url="${angularShowcaseUrl}" react-url="${reactShowcaseUrl}">
   <div class="docs-layout"><aside><div class="docs-search"><label for="docs-search">Search documentation</label><div class="docs-search-control"><input id="docs-search" type="search" role="combobox" placeholder="Search docs..." autocomplete="off" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false"><button id="docs-search-clear" class="docs-search-clear" type="button" aria-label="Clear documentation search" title="Clear search" hidden>&times;</button></div><div id="docs-search-results" class="search-results" role="listbox" hidden></div></div><div class="docs-navigation">${groupedNavigation}</div></aside>
-  <main><div class="vr-breadcrumb"><a href="${portalUrl}">Home</a><span>/</span><a href="/docs/overview">Documentation</a><span>/</span><span>${escapeHtml(entry?.section ?? 'Documentation')}</span></div><article id="docs-content">${content}</article>
+  <main><div class="vr-breadcrumb"><a href="${platformHref(portalUrl)}">Home</a><span>/</span><a href="/docs/overview">Documentation</a><span>/</span><span>${escapeHtml(entry?.section ?? 'Documentation')}</span></div><article id="docs-content">${content}</article>
   ${entry ? `<section class="live-example"><p>Continue in the live platform</p>${showcaseLinks}</section>` : ''}
   <nav class="pager" aria-label="Documentation pages">${previous ? `<a href="/docs/${previous.slug}"><small>Previous</small><strong>&larr; ${escapeHtml(previous.title)}</strong></a>` : '<span></span>'}${next ? `<a class="next" href="/docs/${next.slug}"><small>Next</small><strong>${escapeHtml(next.title)} &rarr;</strong></a>` : ''}</nav></main>
-  <aside class="on-page"><strong>On this page</strong><p>${escapeHtml(entry?.summary ?? '')}</p><a href="${portalUrl}">Back to Portal &rarr;</a><a href="${portalUrl}/reports/index.html">Test reports &rarr;</a></aside></div>
+  <aside class="on-page"><strong>On this page</strong><p>${escapeHtml(entry?.summary ?? '')}</p><a href="${platformHref(portalUrl)}">Back to Portal &rarr;</a><a href="${platformHref(portalUrl, '/reports/')}">Test reports &rarr;</a></aside></div>
   </validation-platform-shell></body></html>`;
 }
 
@@ -162,6 +183,10 @@ function configuredPort(names: string | string[], fallback: number): number {
 
 function configuredBaseUrl(names: string | string[], fallback: string): string {
   return (configuredValue(names) ?? fallback).replace(/\/$/, '');
+}
+
+function platformHref(baseUrl: string, pathname = ''): string {
+  return `${baseUrl}${pathname}` || '/';
 }
 
 function rewriteConfiguredLinks(html: string): string {
