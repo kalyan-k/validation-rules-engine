@@ -10,7 +10,10 @@ npm run test:coverage
 npm run test:reports
 npm run test:ci
 npm run test:e2e:smoke
+npm run test:hosting
 ```
+
+`test:hosting` launches the platform twice. The multi-host pass checks the configured portal, documentation, Angular, and React origins; the single-host pass checks the equivalent `/docs/`, `/showcases/angular/`, `/showcases/react/`, `/reports/`, and `/automation/` routes on one origin. Each pass renders Portal, Documentation, Angular Showcase, React Showcase, and Reports pages and asserts their complete shared top-menu URL matrix.
 
 ## Coverage gates
 

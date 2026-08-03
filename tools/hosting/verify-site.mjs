@@ -28,6 +28,9 @@ assert.deepEqual(manifest.routes, {
   automation: '/automation/'
 });
 
+const portalIndex = readFileSync(path.join(siteRoot, 'index.html'), 'utf8');
+assert.doesNotMatch(portalIndex, /http:\/\/127\.0\.0\.1:42(?:00|01|02|03|04)/u);
+
 const angularIndex = readFileSync(path.join(siteRoot, 'showcases', 'angular', 'index.html'), 'utf8');
 assert.match(angularIndex, /<base href="\/showcases\/angular\/">/u);
 const reactIndex = readFileSync(path.join(siteRoot, 'showcases', 'react', 'index.html'), 'utf8');
@@ -113,6 +116,15 @@ try {
 
   const portalHtml = await (await fetch(origin)).text();
   assert.doesNotMatch(portalHtml, /http:\/\/127\.0\.0\.1:42(?:00|01|02|03|04)/u);
+  const runtimeConfigDom = new JSDOM('<!doctype html>', { runScripts: 'dangerously', url: origin });
+  runtimeConfigDom.window.eval(await (await fetch(`${origin}/platform-config.js`)).text());
+  assert.deepEqual({ ...runtimeConfigDom.window.vrePlatformConfig.urls }, {
+    portal: origin,
+    docs: origin,
+    angular: `${origin}/showcases/angular`,
+    react: `${origin}/showcases/react`
+  });
+  runtimeConfigDom.window.close();
   const status = await (await fetch(`${origin}/api/status`)).json();
   assert.equal(status.applications.length, 3);
   assert.ok(status.applications.every(({ state }) => state === 'healthy'));

@@ -45,6 +45,8 @@ yarn-error.log
 /artifacts/playwright/visual-diffs/
 /artifacts/playwright/test-results/
 /artifacts/playwright/portal-data/
+/artifacts/playwright/hosting-multi-*
+/artifacts/playwright/hosting-single-*
 /test-results/
 /playwright-report/
 /libpeerconnection.log

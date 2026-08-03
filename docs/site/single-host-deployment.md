@@ -30,7 +30,21 @@ Start the complete hosted platform locally:
 npm start
 ```
 
-`npm start` builds the site and starts the unified host at `http://127.0.0.1:4200`. It does not spawn separate documentation or showcase processes. Use `npm run portal` when separate local development servers and health monitoring are preferred.
+`npm start` and `npm run start:single-host` build the site and start the unified host at `http://127.0.0.1:4200`. They do not spawn separate documentation or showcase processes.
+
+Run the separately served topology explicitly with:
+
+```bash
+npm run start:multi-host
+```
+
+`npm run portal` is an alias for this mode. It serves the portal, documentation, Angular Showcase, and React Showcase on ports `4200`, `4201`, `4202`, and `4204`. `npm run portal:dev` retains live framework development servers when that workflow is specifically needed.
+
+Verify that every top-menu link is correct in both topologies with:
+
+```bash
+npm run test:hosting
+```
 
 ## Runtime configuration
 

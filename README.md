@@ -217,7 +217,7 @@ npm start
 
 The command builds and verifies one production host at `http://127.0.0.1:4200`. Documentation is served from `/docs/`, Angular from `/showcases/angular/`, React from `/showcases/react/`, tests and coverage from `/reports/`, and Playwright automation from `/automation/`. No secondary application ports or child processes are required.
 
-Use `npm run portal` for the multi-process local development model on ports `4200`, `4201`, `4202`, and `4204`. Production uses `npm run build:site` followed by `npm run serve:host`; `VRE_PORTAL_PORT`, `VRE_HOST`, `VRE_NO_OPEN`, and `VRE_BUILD_TIME` configure the single Node process without rebuilding browser code.
+`npm run start:single-host` is the explicit equivalent of `npm start`. Use `npm run start:multi-host` (or its `npm run portal` alias) for the separately served local platform on ports `4200`, `4201`, `4202`, and `4204`. Use `npm run portal:dev` only when live Angular and React development servers are required. Production uses `npm run build:site` followed by `npm run serve:single-host`; `VRE_PORTAL_PORT`, `VRE_PUBLIC_URL`, `VRE_HOST`, `VRE_NO_OPEN`, and `VRE_BUILD_TIME` configure the single Node process without rebuilding browser code.
 
 The application registry in `apps/portal/src/applications.ts` is the single place to add a future showcase application. Each application remains independently runnable and communicates through stable local URLs.
 
@@ -247,8 +247,9 @@ npm run build:all
 
 | Command | Purpose |
 | --- | --- |
-| `npm start` | Build and launch the single-origin production host |
-| `npm run portal` | Launch the multi-process local development platform |
+| `npm start` / `npm run start:single-host` | Build and launch the single-origin production host |
+| `npm run start:multi-host` / `npm run portal` | Build and launch the separately served multi-host platform |
+| `npm run portal:dev` | Launch the multi-host platform with framework development servers |
 | `npm run build:site` | Assemble all hosted applications under `dist/site` |
 | `npm run site:verify` | Verify production routes, base paths, assets, and embedded application health |
 | `npm run serve:angular-showcase` | Serve only the Angular showcase |
@@ -262,6 +263,7 @@ npm run build:all
 | `npm run test:reports` | Generate and verify browsable reports for every project |
 | `npm run test:e2e:smoke` | Run the fast Playwright browser smoke suite |
 | `npm run test:e2e` | Run repository-level Playwright E2E tests in Chromium |
+| `npm run test:hosting` | Verify every shared top-menu URL in single-host and multi-host modes |
 | `npm run reports:open` | Open the generated report dashboard |
 | `npm run lint:all` | Lint every configured project |
 | `npm run version:check` | Verify synchronized package versions and Core peer compatibility |

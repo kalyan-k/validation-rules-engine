@@ -201,7 +201,11 @@ function serveFile(response: ServerResponse, root: string, requestedPath: string
   }
   response.writeHead(200, {
     'Content-Type': contentTypes[path.extname(filePath)] ?? 'application/octet-stream',
-    'Cache-Control': root === shellRoot || root === platformAssetsRoot ? 'public, max-age=3600' : 'no-store'
+    'Cache-Control': path.basename(filePath) === 'platform-shell.js'
+      ? 'no-store'
+      : root === shellRoot || root === platformAssetsRoot
+        ? 'public, max-age=3600'
+        : 'no-store'
   });
   createReadStream(filePath).pipe(response);
 }
@@ -260,7 +264,7 @@ function escapeHtml(value: string): string {
 }
 
 function platformConfigScript(): string {
-  return `(() => {
+  return String.raw`(() => {
   const configured = ${JSON.stringify(platformUrls)};
   const currentOrigin = globalThis.location?.origin ?? '';
   const resolveUrl = (value) => value ? new URL(value, currentOrigin + '/').href.replace(/\/$/, '') : currentOrigin;

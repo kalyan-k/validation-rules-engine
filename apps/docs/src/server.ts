@@ -84,7 +84,7 @@ function handleRequest(request: IncomingMessage, response: ServerResponse): void
   if (platformAssets.has(requestUrl.pathname.slice(1))) {
     response.writeHead(200, {
       'Content-Type': platformContentTypes[path.extname(requestUrl.pathname)] ?? 'application/octet-stream',
-      'Cache-Control': 'public, max-age=3600'
+      'Cache-Control': requestUrl.pathname === '/platform-shell.js' ? 'no-store' : 'public, max-age=3600'
     });
     createReadStream(path.join(shellRoot, requestUrl.pathname.slice(1))).pipe(response);
     return;

@@ -138,12 +138,9 @@ function configuredUrls() {
 
 function configuredBase(key, attributeValue, fallback) {
   const urls = configuredUrls();
-  return normalizedBase(
-    attributeValue
-      ?? urls[key]
-      ?? urls[`${key}Url`],
-    fallback
-  );
+  const configured = [attributeValue, urls[key], urls[`${key}Url`]]
+    .find((value) => typeof value === 'string' && value.trim());
+  return normalizedBase(configured, fallback);
 }
 
 function currentOriginWhen(activeApplication, applications, fallback) {

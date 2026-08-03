@@ -3,6 +3,19 @@ const applicationGrid = document.querySelector('#application-grid');
 const overallStatus = document.querySelector('#overall-status');
 const playwrightResults = document.querySelector('#playwright-results');
 
+function configureStaticNavigation() {
+  const urls = globalThis.vrePlatformConfig?.urls ?? {};
+  document.querySelectorAll('[data-vre-url-base][data-vre-url-path]').forEach((link) => {
+    const baseKey = link.getAttribute('data-vre-url-base');
+    const path = link.getAttribute('data-vre-url-path');
+    if (!(link instanceof HTMLAnchorElement) || !baseKey || !path) return;
+    const configuredBase = typeof urls[baseKey] === 'string' && urls[baseKey].trim()
+      ? urls[baseKey]
+      : globalThis.location.origin;
+    link.href = new URL(path.replace(/^\/+/, ''), `${configuredBase.replace(/\/$/, '')}/`).href;
+  });
+}
+
 function escapeHtml(value) {
   return String(value ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
 }
@@ -208,6 +221,7 @@ function formatDuration(value) {
   return `${(ms / 1000).toFixed(1)} s`;
 }
 
+configureStaticNavigation();
 void loadMeta();
 void loadPlaywrightResults();
 if (statusList && applicationGrid && overallStatus) {
