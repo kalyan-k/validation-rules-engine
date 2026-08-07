@@ -13,6 +13,7 @@ for (const relativePath of [
   'docs/search-index.json',
   'showcases/angular/index.html',
   'showcases/react/index.html',
+  'showcases/vanilla/index.html',
   'automation/index.html'
 ]) {
   assert.ok(existsSync(path.join(siteRoot, relativePath)), `Missing hosted output: ${relativePath}`);
@@ -24,17 +25,20 @@ assert.deepEqual(manifest.routes, {
   documentation: '/docs/',
   angularShowcase: '/showcases/angular/',
   reactShowcase: '/showcases/react/',
+  vanillaShowcase: '/showcases/vanilla/',
   reports: '/reports/',
   automation: '/automation/'
 });
 
 const portalIndex = readFileSync(path.join(siteRoot, 'index.html'), 'utf8');
-assert.doesNotMatch(portalIndex, /http:\/\/127\.0\.0\.1:42(?:00|01|02|03|04)/u);
+assert.doesNotMatch(portalIndex, /http:\/\/127\.0\.0\.1:42(?:00|01|02|03|04|05)/u);
 
 const angularIndex = readFileSync(path.join(siteRoot, 'showcases', 'angular', 'index.html'), 'utf8');
 assert.match(angularIndex, /<base href="\/showcases\/angular\/">/u);
 const reactIndex = readFileSync(path.join(siteRoot, 'showcases', 'react', 'index.html'), 'utf8');
 assert.match(reactIndex, /\/showcases\/react\/assets\//u);
+const vanillaIndex = readFileSync(path.join(siteRoot, 'showcases', 'vanilla', 'index.html'), 'utf8');
+assert.match(vanillaIndex, /\/showcases\/vanilla\/assets\//u);
 const docsIndex = readFileSync(path.join(siteRoot, 'docs', 'overview', 'index.html'), 'utf8');
 assert.match(docsIndex, /href="\/docs\/styles\.css"/u);
 assert.doesNotMatch(docsIndex, /127\.0\.0\.1/u);
@@ -46,6 +50,10 @@ assert.equal(
 );
 assert.equal(
   readFileSync(path.join(siteRoot, 'showcases', 'react', 'platform-config.js'), 'utf8'),
+  rootPlatformConfig
+);
+assert.equal(
+  readFileSync(path.join(siteRoot, 'showcases', 'vanilla', 'platform-config.js'), 'utf8'),
   rootPlatformConfig
 );
 const shellDom = new JSDOM('<!doctype html><body></body>', {
@@ -68,6 +76,7 @@ assert.equal(
 const showcaseLinks = [...shell.shadowRoot.querySelectorAll('.platform-nav-group')][1]
   .querySelectorAll('a');
 assert.deepEqual([...showcaseLinks].map((link) => link.getAttribute('href')), [
+  'https://validation-rules-engine.azurewebsites.net/showcases/vanilla/',
   'https://validation-rules-engine.azurewebsites.net/showcases/angular/',
   'https://validation-rules-engine.azurewebsites.net/showcases/react/'
 ]);
@@ -102,8 +111,10 @@ try {
     '/docs/overview',
     '/showcases/angular/state/akita',
     '/showcases/react/state/redux-toolkit',
+    '/showcases/vanilla/simple',
     '/showcases/angular/platform-config.js',
     '/showcases/react/platform-config.js',
+    '/showcases/vanilla/platform-config.js',
     '/reports/',
     '/automation/',
     '/health',
@@ -115,18 +126,19 @@ try {
   }
 
   const portalHtml = await (await fetch(origin)).text();
-  assert.doesNotMatch(portalHtml, /http:\/\/127\.0\.0\.1:42(?:00|01|02|03|04)/u);
+  assert.doesNotMatch(portalHtml, /http:\/\/127\.0\.0\.1:42(?:00|01|02|03|04|05)/u);
   const runtimeConfigDom = new JSDOM('<!doctype html>', { runScripts: 'dangerously', url: origin });
   runtimeConfigDom.window.eval(await (await fetch(`${origin}/platform-config.js`)).text());
   assert.deepEqual({ ...runtimeConfigDom.window.vrePlatformConfig.urls }, {
     portal: origin,
     docs: origin,
     angular: `${origin}/showcases/angular`,
-    react: `${origin}/showcases/react`
+    react: `${origin}/showcases/react`,
+    vanilla: `${origin}/showcases/vanilla`
   });
   runtimeConfigDom.window.close();
   const status = await (await fetch(`${origin}/api/status`)).json();
-  assert.equal(status.applications.length, 3);
+  assert.equal(status.applications.length, 4);
   assert.ok(status.applications.every(({ state }) => state === 'healthy'));
 } finally {
   await new Promise((resolve) => server.close(resolve));

@@ -14,6 +14,7 @@ test.describe('Platform navigation URLs @hosting-navigation @regression', () => 
       ['Documentation', `${baseUrls.docs}/docs/overview`],
       ['Angular Showcase', `${baseUrls.angular}/state/signals`],
       ['React Showcase', `${baseUrls.react}/state/zustand`],
+      ['Vanilla Showcase', `${baseUrls.vanilla}/simple`],
       ['Test & Coverage workspace', `${baseUrls.portal}/reports/index.html`],
       ['Automation report', `${baseUrls.portal}/automation/`]
     ] as const;
@@ -22,7 +23,7 @@ test.describe('Platform navigation URLs @hosting-navigation @regression', () => 
       home: `${baseUrls.portal}/`,
       docsOrigin: new URL(baseUrls.docs).origin,
       docsPrefix: `${baseUrls.docs}/docs/`,
-      showcases: [`${baseUrls.angular}/`, `${baseUrls.react}/`],
+      showcases: [`${baseUrls.vanilla}/`, `${baseUrls.angular}/`, `${baseUrls.react}/`],
       reports: [`${baseUrls.portal}/reports/index.html`, `${baseUrls.portal}/automation/`]
     };
 

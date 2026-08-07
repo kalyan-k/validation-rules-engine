@@ -41,7 +41,7 @@ React uses Vitest, jsdom, React Testing Library, and user-event. A normalization
 
 ## Playwright E2E testing
 
-Repository-level Playwright tests cover the portal, documentation, reports, Angular Showcase, React Showcase, accessibility, visual checks, and responsive behavior. The portal also displays the latest normalized Playwright execution manifest when available.
+Repository-level Playwright tests cover the portal, documentation, reports, Angular Showcase, React Showcase, Vanilla Showcase, accessibility, visual checks, and responsive behavior. The portal also displays the latest normalized Playwright execution manifest when available.
 
 Read the dedicated [Playwright E2E Testing](./playwright.md) guide for commands, tags, browser projects, artifact locations, portal integration, and contribution guidance.
 

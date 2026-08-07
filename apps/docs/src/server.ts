@@ -17,6 +17,7 @@ const docsUrl = singleHost ? '' : configuredBaseUrl('VRE_DOCS_URL', `http://127.
 const portalUrl = singleHost ? '' : configuredBaseUrl('VRE_PORTAL_URL', 'http://127.0.0.1:4200');
 const angularShowcaseUrl = singleHost ? '/showcases/angular' : configuredBaseUrl('VRE_ANGULAR_SHOWCASE_URL', 'http://127.0.0.1:4202');
 const reactShowcaseUrl = singleHost ? '/showcases/react' : configuredBaseUrl('VRE_REACT_SHOWCASE_URL', 'http://127.0.0.1:4204');
+const vanillaShowcaseUrl = singleHost ? '/showcases/vanilla' : configuredBaseUrl('VRE_VANILLA_SHOWCASE_URL', 'http://127.0.0.1:4205');
 const workspacePackage = JSON.parse(readFileSync(path.join(workspaceRoot, 'package.json'), 'utf8')) as { version?: string };
 const assetVersion = encodeURIComponent(workspacePackage.version ?? '0.0.0');
 const platformAssets = new Set([
@@ -123,11 +124,13 @@ function renderPage(entry: DocumentationEntry | undefined, content: string): str
   const showcaseLinks = entry?.slug.startsWith('react-')
     ? `<a class="showcase-link" href="${reactShowcaseUrl}${entry.showcasePath ?? ''}"><strong>Open React Showcase</strong><span>Try the hooks and policies in a live React application &rarr;</span></a>`
     : entry?.section === 'Core Package'
-    ? `<a class="showcase-link" href="${platformHref(portalUrl)}"><strong>Open Portal</strong><span>Choose Angular or React showcases that all use Core policies &rarr;</span></a>`
+    ? `<a class="showcase-link" href="${vanillaShowcaseUrl}${entry.showcasePath ?? ''}"><strong>Open Vanilla Showcase</strong><span>Run the same Core policies with framework-free TypeScript forms &rarr;</span></a><a class="showcase-link" href="${platformHref(portalUrl)}"><strong>Open Portal</strong><span>Launch documentation and every showcase from one place &rarr;</span></a>`
+    : entry?.section === 'Introduction'
+    ? `<a class="showcase-link" href="${platformHref(portalUrl)}"><strong>Open Portal</strong><span>Launch documentation and every showcase from one place &rarr;</span></a><a class="showcase-link" href="${vanillaShowcaseUrl}/"><strong>Open Vanilla Showcase</strong><span>See Core policies without Angular or React adapters &rarr;</span></a>`
     : `<a class="showcase-link" href="${angularShowcaseUrl}${entry?.showcasePath ?? ''}"><strong>Open Angular Showcase</strong><span>See the concepts running in a real application &rarr;</span></a>`;
 
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${escapeHtml(entry?.summary ?? 'Validation Rules Engine documentation')}"><meta name="theme-color" content="#10243e"><title>${escapeHtml(entry?.title ?? 'Not found')} &middot; Validation Rules Engine</title><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/vre-mark.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/vre-icon-180.png"><link rel="manifest" href="/site.webmanifest"><link rel="preload" href="/platform-shell.css" as="style"><link rel="stylesheet" href="/platform-shell.css"><link rel="stylesheet" href="/platform-theme.css"><link rel="stylesheet" href="/docs/styles.css"><script src="/platform-config.js?v=${assetVersion}"></script><script src="/platform-shell.js?v=${assetVersion}"></script><script src="/docs/search.js?v=${assetVersion}" defer></script></head>
-  <body><validation-platform-shell active-application="documentation" application-name="Documentation" version="${escapeHtml(workspacePackage.version ?? '0.0.0')}" portal-url="${portalUrl}" docs-url="${docsUrl}" angular-url="${angularShowcaseUrl}" react-url="${reactShowcaseUrl}">
+  <body><validation-platform-shell active-application="documentation" application-name="Documentation" version="${escapeHtml(workspacePackage.version ?? '0.0.0')}" portal-url="${portalUrl}" docs-url="${docsUrl}" angular-url="${angularShowcaseUrl}" react-url="${reactShowcaseUrl}" vanilla-url="${vanillaShowcaseUrl}">
   <div class="docs-layout"><aside><div class="docs-search"><label for="docs-search">Search documentation</label><div class="docs-search-control"><input id="docs-search" type="search" role="combobox" placeholder="Search docs..." autocomplete="off" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false"><button id="docs-search-clear" class="docs-search-clear" type="button" aria-label="Clear documentation search" title="Clear search" hidden>&times;</button></div><div id="docs-search-results" class="search-results" role="listbox" hidden></div></div><div class="docs-navigation">${groupedNavigation}</div></aside>
   <main><div class="vr-breadcrumb"><a href="${platformHref(portalUrl)}">Home</a><span>/</span><a href="/docs/overview">Documentation</a><span>/</span><span>${escapeHtml(entry?.section ?? 'Documentation')}</span></div><article id="docs-content">${content}</article>
   ${entry ? `<section class="live-example"><p>Continue in the live platform</p>${showcaseLinks}</section>` : ''}
@@ -195,7 +198,8 @@ function rewriteConfiguredLinks(html: string): string {
     .replaceAll('http://127.0.0.1:4201', docsUrl)
     .replaceAll('http://127.0.0.1:4202', angularShowcaseUrl)
     .replaceAll('http://127.0.0.1:4203', angularShowcaseUrl)
-    .replaceAll('http://127.0.0.1:4204', reactShowcaseUrl);
+    .replaceAll('http://127.0.0.1:4204', reactShowcaseUrl)
+    .replaceAll('http://127.0.0.1:4205', vanillaShowcaseUrl);
 }
 
 function sendJson(response: ServerResponse, status: number, value: unknown): void {
@@ -214,7 +218,8 @@ function platformConfigScript(): string {
       portal: portalUrl,
       docs: docsUrl,
       angular: angularShowcaseUrl,
-      react: reactShowcaseUrl
+      react: reactShowcaseUrl,
+      vanilla: vanillaShowcaseUrl
     }
   })};`;
 }

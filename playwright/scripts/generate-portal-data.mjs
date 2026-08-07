@@ -64,6 +64,7 @@ const manifest = {
   suiteTotals: summarizeBy(tests, (test) => test.suite),
   angularStateTotals: summarizeBy(tests.filter((test) => test.application === 'angular'), (test) => test.stateManagement ?? 'general'),
   reactStateTotals: summarizeBy(tests.filter((test) => test.application === 'react'), (test) => test.stateManagement ?? 'general'),
+  vanillaTotals: summarizeBy(tests.filter((test) => test.application === 'vanilla'), (test) => test.suite),
   accessibility: summarize(tests.filter((test) => test.tags.includes('@accessibility'))),
   visual: summarize(tests.filter((test) => test.tags.includes('@visual'))),
   failures: tests
@@ -102,12 +103,14 @@ fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 fs.writeFileSync(outputPath, `${JSON.stringify(manifest, null, 2)}\n`);
 console.log(`Wrote ${path.relative(workspaceRoot, outputPath)}`);
 
-function collectTests(suites, parents = [], options = {}) {
+function collectTests(suites, parents = [], options = {}, parentFile = '') {
   const tests = [];
   for (const suite of suites) {
+    const filePath = suite.file || suite.location?.file || parentFile || '';
     const nextParents = [...parents, suite.title].filter(Boolean);
     for (const spec of suite.specs ?? []) {
       const specTitle = [...nextParents, spec.title].filter(Boolean).join(' > ');
+      const specFile = spec.file || spec.location?.file || filePath;
       for (const test of spec.tests ?? []) {
         const projectName = test.projectName ?? 'unknown';
         const results = test.results ?? [];
@@ -125,7 +128,7 @@ function collectTests(suites, parents = [], options = {}) {
         tests.push({
           title: specTitle,
           browser: projectName,
-          application: applicationFromTags(tags, specTitle),
+          application: applicationFromTags(tags, specTitle, specFile),
           suite: suiteFromTags(tags, specTitle),
           stateManagement: stateFromTags(tags, specTitle),
           tags,
@@ -136,7 +139,7 @@ function collectTests(suites, parents = [], options = {}) {
         });
       }
     }
-    tests.push(...collectTests(suite.suites ?? [], nextParents, options));
+    tests.push(...collectTests(suite.suites ?? [], nextParents, options, filePath));
   }
   return tests;
 }
@@ -178,7 +181,8 @@ function summarizeCatalog(tests) {
     applicationTotals: countBy(tests, (test) => test.application),
     suiteTotals: countBy(tests, (test) => test.suite),
     angularStateTotals: countBy(tests.filter((test) => test.application === 'angular'), (test) => test.stateManagement ?? 'general'),
-    reactStateTotals: countBy(tests.filter((test) => test.application === 'react'), (test) => test.stateManagement ?? 'general')
+    reactStateTotals: countBy(tests.filter((test) => test.application === 'react'), (test) => test.stateManagement ?? 'general'),
+    vanillaTotals: countBy(tests.filter((test) => test.application === 'vanilla'), (test) => test.suite)
   };
 }
 
@@ -220,14 +224,20 @@ function relativeArtifactPath(artifactPath) {
   return relative.startsWith('..') ? undefined : relative.replaceAll(path.sep, '/');
 }
 
-function applicationFromTags(tags, title) {
-  const applicationTags = tags.filter((tag) => ['@angular', '@react', '@docs', '@portal', '@reports'].includes(tag));
+function applicationFromTags(tags, title, filePath = '') {
+  const normalizedPath = String(filePath).replaceAll('\\', '/');
+  if (normalizedPath.includes('/vanilla/')) return 'vanilla';
+  if (normalizedPath.includes('/angular/')) return 'angular';
+  if (normalizedPath.includes('/react/')) return 'react';
+  const applicationTags = tags.filter((tag) => ['@angular', '@react', '@vanilla', '@docs', '@portal', '@reports'].includes(tag));
   if (applicationTags.length > 1) return 'platform';
+  if (applicationTags.includes('@vanilla')) return 'vanilla';
   if (applicationTags.includes('@angular')) return 'angular';
   if (applicationTags.includes('@react')) return 'react';
   if (applicationTags.includes('@docs')) return 'documentation';
   if (applicationTags.includes('@portal')) return 'portal';
   if (applicationTags.includes('@reports')) return 'reports';
+  if (title.includes('Vanilla')) return 'vanilla';
   if (title.includes('Angular')) return 'angular';
   if (title.includes('React')) return 'react';
   return 'platform';

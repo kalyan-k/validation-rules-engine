@@ -21,11 +21,12 @@ const projectTitles = Object.freeze({
   angular: 'Angular Adapter',
   react: 'React Adapter',
   'angular-showcase': 'Angular Showcase',
-  'react-showcase': 'React Showcase'
+  'react-showcase': 'React Showcase',
+  'vanilla-showcase': 'Vanilla Showcase'
 });
 const reportGroups = Object.freeze([
   { label: 'Packages', projects: ['core', 'angular', 'react'] },
-  { label: 'Showcase Applications', projects: ['angular-showcase', 'react-showcase'] }
+  { label: 'Showcase Applications', projects: ['vanilla-showcase', 'angular-showcase', 'react-showcase'] }
 ]);
 
 function readJson(filePath) {

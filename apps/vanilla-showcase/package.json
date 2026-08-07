@@ -1,0 +1,16 @@
+{
+  "name": "@validation-rules-engine/vanilla-showcase",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Private vanilla TypeScript showcase application for @validation-rules-engine/core",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@validation-rules-engine/core": "1.0.0"
+  }
+}

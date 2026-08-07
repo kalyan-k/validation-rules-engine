@@ -13,7 +13,8 @@ validation-rules-engine/
 |   |-- portal/                 # framework-neutral launcher and status dashboard
 |   |-- docs/                 # Markdown documentation application
 |   |-- angular-showcase/         # private Angular forms and state-management consumer
-|   `-- react-showcase/           # private React adapter consumer
+|   |-- react-showcase/           # private React adapter consumer
+|   `-- vanilla-showcase/         # private core-only TypeScript + Vite consumer
 |-- tools/
 |   |-- architecture/         # dependency-boundary verification
 |   |-- platform-shell/       # framework-neutral product shell and layout theme
@@ -29,13 +30,14 @@ There is no `shared` package because the current code has no additional ownershi
 ```text
 apps/angular-showcase --> @validation-rules-engine/angular --> @validation-rules-engine/core
 apps/react-showcase ----> @validation-rules-engine/react -----> @validation-rules-engine/core
+apps/vanilla-showcase ---------------------------------------> @validation-rules-engine/core
 
 apps/portal ----URLs----> apps/docs and framework showcases
 ```
 
-The Angular showcase imports only `@validation-rules-engine/angular` plus showcase-only state libraries. The Angular adapter imports `@validation-rules-engine/core`. Core imports neither Angular nor an adapter. The Node portal and docs applications import no Angular or state-management runtime. npm workspaces link the local packages during repository development; Angular-owned TypeScript path mappings support tests and local compilation.
+The Angular showcase imports only `@validation-rules-engine/angular` plus showcase-only state libraries. The React showcase imports only `@validation-rules-engine/react`. The vanilla showcase imports `@validation-rules-engine/core` directly and must not depend on either adapter. The Angular and React adapters import `@validation-rules-engine/core`. Core imports neither Angular nor an adapter. The Node portal and docs applications import no Angular or state-management runtime. npm workspaces link the local packages during repository development; Angular-owned TypeScript path mappings support tests and local compilation.
 
-Run `npm run architecture:verify` to validate this direction. CI runs the same command before tests. The verifier rejects framework dependencies in core, reverse adapter imports, direct showcase-to-core imports, missing workspace relationships, and out-of-scope placeholder adapters.
+Run `npm run architecture:verify` to validate this direction. CI runs the same command before tests. The verifier rejects framework dependencies in core, reverse adapter imports, Angular/React showcase-to-core bypasses, missing workspace relationships, and out-of-scope placeholder adapters.
 
 ## Core engine boundary
 

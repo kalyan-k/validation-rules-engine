@@ -6,6 +6,7 @@ globalThis.vrePlatformConfig = globalThis.vrePlatformConfig || {
     portal: '',
     docs: '',
     angular: '',
-    react: ''
+    react: '',
+    vanilla: ''
   }
 };

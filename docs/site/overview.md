@@ -22,8 +22,16 @@ The repository contains three publishable packages and several private applicati
 - `@validation-rules-engine/angular` owns Angular policy execution, forms integration, directives, components, and display strategies.
 - `@validation-rules-engine/react` owns React provider scope, hooks, controlled-field helpers, lifecycle-safe policy registration, and accessible messages.
 - The Portal launches documentation and every complete showcase application.
+- The Vanilla showcase consumes `@validation-rules-engine/core` directly with TypeScript + Vite forms (simple, complex, and performance).
 - The Angular showcase covers ngModel, Reactive Forms, NgRx, NGXS, Akita, Elf, RxAngular State, Signals, custom RxJS store workflows, and multiple UI strategies.
 - The React showcase covers Local State, Redux Toolkit, Zustand, Jotai, Recoil, MobX, Context API, and generated performance forms.
+
+## Live demos
+
+- [Open Portal](http://127.0.0.1:4200/)
+- [Vanilla Showcase](http://127.0.0.1:4205/)
+- [Angular Showcase](http://127.0.0.1:4202/)
+- [React Showcase](http://127.0.0.1:4204/)
 
 ## Where to go next
 

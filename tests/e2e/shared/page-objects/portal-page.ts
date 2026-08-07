@@ -19,5 +19,6 @@ export class PortalPage {
     await expect(this.page.getByRole('heading', { name: 'Documentation' })).toBeVisible();
     await expect(this.page.getByRole('heading', { name: 'Angular Showcase' })).toBeVisible();
     await expect(this.page.getByRole('heading', { name: 'React Showcase' })).toBeVisible();
+    await expect(this.page.getByRole('heading', { name: 'Vanilla Showcase' })).toBeVisible();
   }
 }

@@ -6,20 +6,22 @@ const toolsDirectory = path.dirname(fileURLToPath(import.meta.url));
 
 export const workspaceRoot = path.resolve(toolsDirectory, '..', '..');
 export const reportsRoot = path.join(workspaceRoot, 'reports');
-export const projects = Object.freeze(['core', 'angular', 'react', 'angular-showcase', 'react-showcase']);
+export const projects = Object.freeze(['core', 'angular', 'react', 'angular-showcase', 'react-showcase', 'vanilla-showcase']);
 const projectReportPaths = Object.freeze({
   core: ['packages', 'core'],
   angular: ['packages', 'angular'],
   react: ['packages', 'react'],
   'angular-showcase': ['showcases', 'angular'],
-  'react-showcase': ['showcases', 'react']
+  'react-showcase': ['showcases', 'react'],
+  'vanilla-showcase': ['showcases', 'vanilla']
 });
 const projectScriptNames = Object.freeze({
   core: 'core',
   angular: 'angular',
   react: 'react',
   'angular-showcase': 'showcase:angular',
-  'react-showcase': 'showcase:react'
+  'react-showcase': 'showcase:react',
+  'vanilla-showcase': 'showcase:vanilla'
 });
 
 export function assertProject(projectName) {

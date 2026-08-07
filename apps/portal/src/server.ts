@@ -15,6 +15,7 @@ const platformAssetsRoot = singleHost ? siteRoot : shellRoot;
 const documentationRoot = path.join(siteRoot, 'docs');
 const angularShowcaseRoot = path.join(siteRoot, 'showcases', 'angular');
 const reactShowcaseRoot = path.join(siteRoot, 'showcases', 'react');
+const vanillaShowcaseRoot = path.join(siteRoot, 'showcases', 'vanilla');
 const reportsRoot = singleHost ? path.join(siteRoot, 'reports') : path.join(workspaceRoot, 'reports');
 const playwrightArtifactsRoot = singleHost
   ? path.join(siteRoot, 'automation', 'artifacts')
@@ -104,7 +105,8 @@ async function handleRequest(
   }
   if (requestUrl.pathname === '/platform-config.js'
     || (singleHost && requestUrl.pathname === '/showcases/angular/platform-config.js')
-    || (singleHost && requestUrl.pathname === '/showcases/react/platform-config.js')) {
+    || (singleHost && requestUrl.pathname === '/showcases/react/platform-config.js')
+    || (singleHost && requestUrl.pathname === '/showcases/vanilla/platform-config.js')) {
     sendJavaScript(response, platformConfigScript());
     return;
   }
@@ -112,11 +114,17 @@ async function handleRequest(
     sendJson(response, 200, { status: 'healthy', service: 'documentation' });
     return;
   }
-  if (singleHost && (requestUrl.pathname === '/showcases/angular/health' || requestUrl.pathname === '/showcases/react/health')) {
-    sendJson(response, 200, {
-      status: 'healthy',
-      service: requestUrl.pathname.includes('/angular/') ? 'angular-showcase' : 'react-showcase'
-    });
+  if (singleHost && (
+    requestUrl.pathname === '/showcases/angular/health'
+    || requestUrl.pathname === '/showcases/react/health'
+    || requestUrl.pathname === '/showcases/vanilla/health'
+  )) {
+    const service = requestUrl.pathname.includes('/angular/')
+      ? 'angular-showcase'
+      : requestUrl.pathname.includes('/react/')
+        ? 'react-showcase'
+        : 'vanilla-showcase';
+    sendJson(response, 200, { status: 'healthy', service });
     return;
   }
   if (requestUrl.pathname === '/automation' || requestUrl.pathname === '/automation/') {
@@ -161,6 +169,14 @@ async function handleRequest(
   }
   if (singleHost && requestUrl.pathname.startsWith('/showcases/react/')) {
     serveHostedRoute(response, reactShowcaseRoot, requestUrl.pathname, '/showcases/react/', true);
+    return;
+  }
+  if (singleHost && (requestUrl.pathname === '/showcases/vanilla' || requestUrl.pathname === '/showcases/vanilla/')) {
+    serveHostedRoute(response, vanillaShowcaseRoot, '/showcases/vanilla/', '/showcases/vanilla/', true);
+    return;
+  }
+  if (singleHost && requestUrl.pathname.startsWith('/showcases/vanilla/')) {
+    serveHostedRoute(response, vanillaShowcaseRoot, requestUrl.pathname, '/showcases/vanilla/', true);
     return;
   }
   if (requestUrl.pathname.startsWith('/reports/')) {
@@ -280,7 +296,8 @@ function rewriteConfiguredLinks(html: string): string {
     .replaceAll('http://127.0.0.1:4201', platformUrls.docs)
     .replaceAll('http://127.0.0.1:4202', platformUrls.angular)
     .replaceAll('http://127.0.0.1:4203', platformUrls.angular)
-    .replaceAll('http://127.0.0.1:4204', platformUrls.react);
+    .replaceAll('http://127.0.0.1:4204', platformUrls.react)
+    .replaceAll('http://127.0.0.1:4205', platformUrls.vanilla);
 }
 
 function repositoryRevision(): string {

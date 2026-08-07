@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "paths": {
+      "@validation-rules-engine/core": ["../../dist/packages/core", "../../packages/core/src/public-api.ts"]
+    },
+    "types": ["vite/client"]
+  },
+  "include": ["src/**/*.ts", "vite.config.ts"]
+}

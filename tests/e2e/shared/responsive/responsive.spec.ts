@@ -1,7 +1,7 @@
 import { expect, test } from '../fixtures/test';
 
 test.describe('Representative responsive behavior @responsive', () => {
-  test('portal, documentation, showcases, and reports render at narrow viewports @portal @docs @angular @react @reports', async ({ page, baseUrls }) => {
+  test('portal, documentation, showcases, and reports render at narrow viewports @portal @docs @angular @react @vanilla @reports', async ({ page, baseUrls }) => {
     await page.goto(baseUrls.portal);
     await expect(page.getByRole('heading', { name: /Validation behavior/i })).toBeVisible();
 
@@ -12,6 +12,9 @@ test.describe('Representative responsive behavior @responsive', () => {
     await expect(page.getByRole('heading', { name: 'Simple Form' })).toBeVisible();
 
     await page.goto(`${baseUrls.react}/state/local-state/simple`);
+    await expect(page.getByRole('heading', { name: 'Simple contact form' })).toBeVisible();
+
+    await page.goto(`${baseUrls.vanilla}/simple`);
     await expect(page.getByRole('heading', { name: 'Simple contact form' })).toBeVisible();
 
     await page.goto(`${baseUrls.portal}/reports/index.html`);

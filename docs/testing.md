@@ -75,6 +75,7 @@ npm run reports:verify     # validate output structure and local navigation
 | React adapter | `reports/packages/react/tests/index.html` | `reports/packages/react/coverage.html` | `reports/packages/react/junit/test-results.xml` |
 | Angular showcase | `reports/showcases/angular/tests/index.html` | `reports/showcases/angular/coverage.html` | `reports/showcases/angular/junit/test-results.xml` |
 | React showcase | `reports/showcases/react/tests/index.html` | `reports/showcases/react/coverage.html` | `reports/showcases/react/junit/test-results.xml` |
+| Vanilla showcase | `reports/showcases/vanilla/tests/index.html` | `reports/showcases/vanilla/coverage.html` | `reports/showcases/vanilla/junit/test-results.xml` |
 
 Each `tests/` directory also contains `summary.json`. Each `coverage/` directory contains the original Istanbul `index.html`, browsable source pages, `lcov.info`, and `coverage-summary.json`.
 

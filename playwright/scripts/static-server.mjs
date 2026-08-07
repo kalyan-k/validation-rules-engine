@@ -116,7 +116,8 @@ function platformConfigScript() {
       portal: process.env.VRE_PORTAL_URL ?? '',
       docs: process.env.VRE_DOCS_URL ?? '',
       angular: process.env.VRE_ANGULAR_SHOWCASE_URL ?? '',
-      react: process.env.VRE_REACT_SHOWCASE_URL ?? ''
+      react: process.env.VRE_REACT_SHOWCASE_URL ?? '',
+      vanilla: process.env.VRE_VANILLA_SHOWCASE_URL ?? ''
     }
   })};`;
 }
@@ -127,7 +128,8 @@ function rewriteConfiguredLinks(html) {
     .replaceAll('http://127.0.0.1:4201', process.env.VRE_DOCS_URL ?? 'http://127.0.0.1:4201')
     .replaceAll('http://127.0.0.1:4202', process.env.VRE_ANGULAR_SHOWCASE_URL ?? 'http://127.0.0.1:4202')
     .replaceAll('http://127.0.0.1:4203', process.env.VRE_ANGULAR_SHOWCASE_URL ?? 'http://127.0.0.1:4202')
-    .replaceAll('http://127.0.0.1:4204', process.env.VRE_REACT_SHOWCASE_URL ?? 'http://127.0.0.1:4204');
+    .replaceAll('http://127.0.0.1:4204', process.env.VRE_REACT_SHOWCASE_URL ?? 'http://127.0.0.1:4204')
+    .replaceAll('http://127.0.0.1:4205', process.env.VRE_VANILLA_SHOWCASE_URL ?? 'http://127.0.0.1:4205');
 }
 
 function sendJson(response, status, value) {

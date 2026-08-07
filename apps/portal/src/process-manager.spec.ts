@@ -6,13 +6,19 @@ import { ApplicationProcessManager } from './process-manager.js';
 test('initializes every registered application in a stopped state', () => {
   const manager = new ApplicationProcessManager(applicationDefinitions, process.cwd(), '');
   const statuses = manager.getStatuses();
-  assert.equal(statuses.length, 3);
+  assert.equal(statuses.length, 4);
   assert.deepEqual(statuses.map(({ id }) => id), [
     'docs',
+    'vanilla-showcase',
     'angular-showcase',
     'react-showcase'
   ]);
   assert.ok(statuses.every(({ state }) => state === 'stopped'));
+  const vanilla = statuses.find(({ id }) => id === 'vanilla-showcase');
+  assert.deepEqual(vanilla?.showcaseLinks?.map(({ label }) => label), [
+    'Simple Form', 'Complex Form', 'Performance Form'
+  ]);
+  assert.ok(vanilla?.showcaseLinks?.every(({ url }) => /\/(simple|complex|performance)$/u.test(url)));
   const angular = statuses.find(({ id }) => id === 'angular-showcase');
   assert.deepEqual(angular?.showcaseLinks?.map(({ label }) => label), [
     'Template Driven', 'Reactive Forms', 'NgRx', 'NGXS', 'Akita', 'Elf',

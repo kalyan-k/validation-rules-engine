@@ -8,6 +8,7 @@ const angularRoot = path.join(workspaceRoot, 'packages', 'angular');
 const reactRoot = path.join(workspaceRoot, 'packages', 'react');
 const angularShowcaseRoot = path.join(workspaceRoot, 'apps', 'angular-showcase');
 const reactShowcaseRoot = path.join(workspaceRoot, 'apps', 'react-showcase');
+const vanillaShowcaseRoot = path.join(workspaceRoot, 'apps', 'vanilla-showcase');
 const portalRoot = path.join(workspaceRoot, 'apps', 'portal');
 const docsRoot = path.join(workspaceRoot, 'apps', 'docs');
 const platformShellRoot = path.join(workspaceRoot, 'tools', 'platform-shell');
@@ -48,7 +49,7 @@ function expect(condition, message) {
   }
 }
 
-for (const root of [coreRoot, angularRoot, reactRoot, angularShowcaseRoot, reactShowcaseRoot, portalRoot, docsRoot]) {
+for (const root of [coreRoot, angularRoot, reactRoot, angularShowcaseRoot, reactShowcaseRoot, vanillaShowcaseRoot, portalRoot, docsRoot]) {
   expect(fs.existsSync(root), `Missing workspace project: ${relative(root)}`);
 }
 for (const file of [
@@ -73,6 +74,7 @@ if (failures.length === 0) {
   const reactPackage = readJson(path.join(reactRoot, 'package.json'));
   const angularShowcasePackage = readJson(path.join(angularShowcaseRoot, 'package.json'));
   const reactShowcasePackage = readJson(path.join(reactShowcaseRoot, 'package.json'));
+  const vanillaShowcasePackage = readJson(path.join(vanillaShowcaseRoot, 'package.json'));
   const portalPackage = readJson(path.join(portalRoot, 'package.json'));
   const docsPackage = readJson(path.join(docsRoot, 'package.json'));
   const coreDependencies = {
@@ -124,6 +126,19 @@ if (failures.length === 0) {
   expect(
     reactShowcasePackage.dependencies?.['@validation-rules-engine/core'] === undefined,
     'React showcase must consume core APIs through @validation-rules-engine/react.'
+  );
+  expect(vanillaShowcasePackage.private === true, 'Vanilla showcase must remain private.');
+  expect(
+    vanillaShowcasePackage.dependencies?.['@validation-rules-engine/core'] === corePackage.version,
+    'Vanilla showcase must depend on the local Core package version.'
+  );
+  expect(
+    vanillaShowcasePackage.dependencies?.['@validation-rules-engine/angular'] === undefined,
+    'Vanilla showcase must not depend on the Angular adapter.'
+  );
+  expect(
+    vanillaShowcasePackage.dependencies?.['@validation-rules-engine/react'] === undefined,
+    'Vanilla showcase must not depend on the React adapter.'
   );
 
   for (const dependency of Object.keys(coreDependencies)) {
@@ -178,6 +193,16 @@ if (failures.length === 0) {
   for (const file of findSourceMatches(reactShowcaseRoot, /(['"])@validation-rules-engine\/core\1/)) {
     failures.push(`React showcase bypasses the adapter: ${relative(file)}`);
   }
+  expect(
+    findSourceMatches(vanillaShowcaseRoot, /(['"])@validation-rules-engine\/core\1/).length > 0,
+    'Vanilla showcase source must consume @validation-rules-engine/core.'
+  );
+  for (const file of findSourceMatches(vanillaShowcaseRoot, /(['"])@validation-rules-engine\/(?:angular|react)\1/)) {
+    failures.push(`Vanilla showcase must not import framework adapters: ${relative(file)}`);
+  }
+  for (const file of findSourceMatches(vanillaShowcaseRoot, /(?:from\s+|import\s*\()(['"])(?:@angular\/|react(?:-dom)?(?:\/|\1))/)) {
+    failures.push(`Vanilla showcase has a forbidden framework dependency: ${relative(file)}`);
+  }
 
   const angularImports = /(?:from\s+|import\s*\()(['"])(?:@angular\/|@ngrx\/|@validation-rules-engine\/angular)\S*\1/;
   for (const root of [portalRoot, docsRoot]) {
@@ -190,7 +215,8 @@ if (failures.length === 0) {
     path.join(portalRoot, 'public', 'index.html'),
     path.join(docsRoot, 'src', 'server.ts'),
     path.join(angularShowcaseRoot, 'src', 'app', 'app.component.html'),
-    path.join(reactShowcaseRoot, 'src', 'app.tsx')
+    path.join(reactShowcaseRoot, 'src', 'app.tsx'),
+    path.join(vanillaShowcaseRoot, 'src', 'app.ts')
   ];
   for (const file of shellConsumers) {
     expect(
@@ -226,7 +252,8 @@ if (failures.length === 0) {
   );
   for (const file of [
     path.join(angularShowcaseRoot, 'src', 'app', 'layout', 'showcase-shell.component.html'),
-    path.join(reactShowcaseRoot, 'src', 'app.tsx')
+    path.join(reactShowcaseRoot, 'src', 'app.tsx'),
+    path.join(vanillaShowcaseRoot, 'src', 'app.ts')
   ]) {
     expect(fs.readFileSync(file, 'utf8').includes('vr-showcase-shell'), `${relative(file)} must use the shared showcase layout.`);
   }
@@ -234,6 +261,14 @@ if (failures.length === 0) {
   expect(
     fs.existsSync(path.join(workspaceRoot, 'docs', 'site', 'react', 'react-overview.md')),
     'Documentation application must contain the React overview.'
+  );
+  expect(
+    fs.existsSync(path.join(vanillaShowcaseRoot, 'src', 'pages', 'home.ts')),
+    'Vanilla showcase must provide a landing page parallel to the Angular and React showcases.'
+  );
+  expect(
+    shellSource.includes('Vanilla Showcase') && shellSource.includes('vanilla'),
+    'Shared application shell must expose the Vanilla Showcase navigation destination.'
   );
 
   for (const framework of ['vue']) {
@@ -252,6 +287,7 @@ if (failures.length > 0) {
 } else {
   console.log('Verified dependency direction: Angular showcase -> angular adapter -> core engine.');
   console.log('Verified dependency direction: React showcase -> React adapter -> core engine.');
+  console.log('Verified dependency direction: Vanilla showcase -> core engine.');
   console.log('Verified that the portal and documentation applications remain Angular-free.');
   console.log('Verified that @validation-rules-engine/core has no Angular dependency.');
   console.log('Verified that every application renders the shared platform shell.');

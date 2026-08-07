@@ -1,6 +1,6 @@
 # Playwright End-to-End Testing
 
-Validation Rules Engine (VRE) uses repository-level Playwright automation for browser-level confidence across the portal, documentation, existing reports, Angular Showcase, and React Showcase.
+Validation Rules Engine (VRE) uses repository-level Playwright automation for browser-level confidence across the portal, documentation, existing reports, Angular Showcase, React Showcase, and Vanilla Showcase.
 
 ## Purpose
 
@@ -91,6 +91,7 @@ Portal:            http://127.0.0.1:4300
 Documentation:     http://127.0.0.1:4301
 Angular Showcase:  http://127.0.0.1:4302
 React Showcase:    http://127.0.0.1:4304
+Vanilla Showcase:  http://127.0.0.1:4305
 ```
 
 Override them without changing source code:
@@ -100,6 +101,7 @@ PLAYWRIGHT_PORTAL_BASE_URL=http://127.0.0.1:4400 npm run test:e2e
 PLAYWRIGHT_DOCS_BASE_URL=https://docs.example.com npm run test:e2e:docs
 PLAYWRIGHT_ANGULAR_BASE_URL=https://angular.example.com npm run test:e2e:angular
 PLAYWRIGHT_REACT_BASE_URL=https://react.example.com npm run test:e2e:react
+PLAYWRIGHT_VANILLA_BASE_URL=https://vanilla.example.com npm run test:e2e:vanilla
 ```
 
 Set `PLAYWRIGHT_SKIP_PLATFORM_BUILD=1` when CI or a local workflow has already built `dist/`.

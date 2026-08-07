@@ -2,6 +2,7 @@ import { expect, test } from '../fixtures/test';
 import { expectKeyboardFocusable } from '../assertions/validation';
 import { AngularStateShowcasePage } from '../../angular/shared/angular-showcase';
 import { ReactStateShowcasePage } from '../../react/shared/react-showcase';
+import { VanillaShowcasePage } from '../../vanilla/shared/vanilla-showcase';
 
 test.describe('Representative accessibility checks @accessibility', () => {
   test('portal home has no critical WCAG violations @portal', async ({ page, baseUrls, checkA11y }) => {
@@ -27,6 +28,14 @@ test.describe('Representative accessibility checks @accessibility', () => {
     await react.goto('local-state', 'simple');
     await checkA11y();
     await react.goto('local-state', 'complex');
+    await checkA11y();
+  });
+
+  test('Vanilla simple and complex forms have no critical WCAG violations @vanilla', async ({ page, baseUrls, checkA11y }) => {
+    const vanilla = new VanillaShowcasePage(page, baseUrls);
+    await vanilla.goto('simple');
+    await checkA11y();
+    await vanilla.goto('complex');
     await checkA11y();
   });
 

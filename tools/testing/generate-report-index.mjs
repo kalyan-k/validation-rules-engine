@@ -47,7 +47,8 @@ function renderProject({ projectName, tests, coverage, missing }) {
     angular: 'Angular Adapter',
     react: 'React Adapter',
     'angular-showcase': 'Angular Showcase',
-    'react-showcase': 'React Showcase'
+    'react-showcase': 'React Showcase',
+    'vanilla-showcase': 'Vanilla Showcase'
   };
   const title = titles[projectName] || projectName;
   const summary = tests?.summary;

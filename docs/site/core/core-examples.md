@@ -1,5 +1,7 @@
 # Core Examples
 
+[Open Live Vanilla Showcase](http://127.0.0.1:4205/complex) · [Simple form](http://127.0.0.1:4205/simple) · [Performance form](http://127.0.0.1:4205/performance)
+
 ## Nested profile
 
 ```ts

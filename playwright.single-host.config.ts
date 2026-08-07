@@ -5,6 +5,7 @@ process.env['PLAYWRIGHT_PORTAL_BASE_URL'] = origin;
 process.env['PLAYWRIGHT_DOCS_BASE_URL'] = origin;
 process.env['PLAYWRIGHT_ANGULAR_BASE_URL'] = `${origin}/showcases/angular`;
 process.env['PLAYWRIGHT_REACT_BASE_URL'] = `${origin}/showcases/react`;
+process.env['PLAYWRIGHT_VANILLA_BASE_URL'] = `${origin}/showcases/vanilla`;
 
 export default defineConfig({
   testDir: './tests/e2e',

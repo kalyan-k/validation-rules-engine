@@ -194,12 +194,25 @@ function metric(label, value) {
   return `<div><span>${escapeHtml(label)}</span><strong>${escapeHtml(value ?? 0)}</strong></div>`;
 }
 
+function applicationLabel(name) {
+  const labels = {
+    vanilla: 'Vanilla Showcase',
+    angular: 'Angular Showcase',
+    react: 'React Showcase',
+    documentation: 'Documentation',
+    portal: 'Portal',
+    reports: 'Reports',
+    platform: 'Platform'
+  };
+  return labels[name] || name;
+}
+
 function breakdown(label, entries) {
   if (!entries.length) return '';
   return `
     <section>
       <h4>${escapeHtml(label)}</h4>
-      ${entries.map(([name, totals]) => `<p><span>${escapeHtml(name)}</span><strong>${escapeHtml(totals.passed || 0)}/${escapeHtml(totals.total || 0)} passed</strong></p>`).join('')}
+      ${entries.map(([name, totals]) => `<p><span>${escapeHtml(applicationLabel(name))}</span><strong>${escapeHtml(totals.passed || 0)}/${escapeHtml(totals.total || 0)} passed</strong></p>`).join('')}
     </section>
   `;
 }
@@ -209,7 +222,7 @@ function compactBreakdown(label, entries) {
   return `
     <div>
       <span>${escapeHtml(label)}</span>
-      ${entries.map(([name, totals]) => `<p><strong>${escapeHtml(name)}</strong> ${escapeHtml(totals.total || 0)}</p>`).join('')}
+      ${entries.map(([name, totals]) => `<p><strong>${escapeHtml(applicationLabel(name))}</strong> ${escapeHtml(totals.total || 0)}</p>`).join('')}
     </div>
   `;
 }

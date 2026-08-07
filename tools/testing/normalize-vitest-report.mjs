@@ -10,7 +10,11 @@ import {
 
 const require = createRequire(import.meta.url);
 const persistentReporter = require('./persistent-test-results-reporter.cjs');
-const displayNames = Object.freeze({ react: 'React Adapter', 'react-showcase': 'React Showcase' });
+const displayNames = Object.freeze({
+  react: 'React Adapter',
+  'react-showcase': 'React Showcase',
+  'vanilla-showcase': 'Vanilla Showcase'
+});
 const projectName = process.argv[2];
 
 assertProject(projectName);

@@ -123,6 +123,7 @@ const documentationSections = [
 ];
 
 const showcaseItems = [
+  ['Vanilla Showcase', 'vanilla'],
   ['Angular Showcase', 'angular'],
   ['React Showcase', 'react']
 ];
@@ -202,17 +203,20 @@ class ValidationPlatformShell extends HTMLElement {
       portal: configuredBase('portal', this.getAttribute('portal-url'), defaultPortalUrl),
       docs: configuredBase('docs', this.getAttribute('docs-url'), currentOriginWhen(activeApplication, ['documentation'], developmentOrigin(4201))),
       angular: configuredBase('angular', this.getAttribute('angular-url'), currentOriginWhen(activeApplication, ['angular-showcase'], developmentOrigin(4202))),
-      react: configuredBase('react', this.getAttribute('react-url'), currentOriginWhen(activeApplication, ['react-showcase'], developmentOrigin(4204)))
+      react: configuredBase('react', this.getAttribute('react-url'), currentOriginWhen(activeApplication, ['react-showcase'], developmentOrigin(4204))),
+      vanilla: configuredBase('vanilla', this.getAttribute('vanilla-url'), currentOriginWhen(activeApplication, ['vanilla-showcase'], developmentOrigin(4205)))
     };
     const docsActive = activeApplication === 'documentation';
-    const showcasesActive = activeApplication === 'angular-showcase' || activeApplication === 'react-showcase';
+    const showcasesActive = activeApplication === 'angular-showcase'
+      || activeApplication === 'react-showcase'
+      || activeApplication === 'vanilla-showcase';
     const reportsActive = activeApplication === 'reports';
     const docsNavigation = documentationSections.map((section) => {
       const active = docsActive && isDocsSectionActive(section);
       return `<a href="${urls.docs}${firstDocsPath(section)}"${active ? ' aria-current="page" class="active"' : ''}>${section.label}</a>`;
     }).join('');
     const showcasesNavigation = showcaseItems.map(([label, target]) => {
-      const applicationId = target === 'angular' ? 'angular-showcase' : 'react-showcase';
+      const applicationId = `${target}-showcase`;
       const active = activeApplication === applicationId;
       return `<a href="${urls[target]}/"${active ? ' aria-current="page" class="active"' : ''}>${label}</a>`;
     }).join('');

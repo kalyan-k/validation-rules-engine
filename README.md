@@ -6,7 +6,7 @@
 
 Validation Rules Engine (VRE) is an extensible monorepo for policy-driven model and form validation. It separates a framework-independent rules engine from framework adapters, so validation behavior can stay reusable and testable while each UI integration owns its lifecycle and rendering concerns.
 
-The repository ships a core engine plus production Angular and React adapters inside a multi-application developer platform. A framework-neutral portal launches the documentation site, Angular showcases, and a hooks-first React showcase from one command.
+The repository ships a core engine plus production Angular and React adapters inside a multi-application developer platform. A framework-neutral portal launches the documentation site, Angular showcases, a hooks-first React showcase, and a vanilla TypeScript core showcase from one command.
 
 ## Key features
 
@@ -21,7 +21,7 @@ The repository ships a core engine plus production Angular and React adapters in
 - One-command portal with application health monitoring and automatic browser launch
 - Instant documentation search across titles, headings, prose, and code with section deep links
 - Independent tests, 90% coverage gates, and browsable reports for every package and showcase project
-- Enforced dependency direction from Angular/React showcases to their adapters to core
+- Enforced dependency direction from Angular/React showcases to their adapters to core, and from the vanilla showcase directly to core
 
 ## Why Validation Rules Engine?
 
@@ -35,11 +35,13 @@ This separation makes rules easier to reuse, test, review, and evolve without ty
 apps/portal (launcher) ----URLs----> apps/docs
          |                         apps/angular-showcase
          |                         apps/react-showcase
+         |                         apps/vanilla-showcase
          |
          +---- application registry and health status
 
 Angular showcase --> @validation-rules-engine/angular --> @validation-rules-engine/core
 React showcase ----> @validation-rules-engine/react -----> @validation-rules-engine/core
+Vanilla showcase --------------------------------------> @validation-rules-engine/core
 ```
 
 Dependencies flow in one direction. Each private showcase consumes its framework adapter, each adapter consumes the core public entry point, and core has no Angular or React dependency. `npm run architecture:verify` enforces these boundaries and rejects speculative Vue placeholders.
@@ -54,7 +56,8 @@ validation-rules-engine/
 |   |-- portal/                # framework-neutral launcher, health dashboard, and report gateway
 |   |-- docs/                  # Markdown-backed documentation website
 |   |-- angular-showcase/      # Angular UI framework and state-management showcases
-|   `-- react-showcase/        # hooks-first controlled React forms
+|   |-- react-showcase/        # hooks-first controlled React forms
+|   `-- vanilla-showcase/      # core-only TypeScript + Vite forms
 |-- packages/
 |   |-- angular/               # @validation-rules-engine/angular and Angular CLI workspace
 |   |-- core/                  # @validation-rules-engine/core and core Karma config
@@ -202,6 +205,7 @@ Form groups aggregate field status for one portion of a view. Policy groups aggr
 | `packages/react` | `@validation-rules-engine/react` | React validation engine, provider, hooks, controlled-field helpers, and accessible messages |
 | `apps/angular-showcase` | private | Browser showcase, Angular UI framework examples, and Angular state-management integrations |
 | `apps/react-showcase` | private | Home, simple, complex, and performance React examples |
+| `apps/vanilla-showcase` | private | Core-only TypeScript + Vite simple, complex, and performance forms |
 | `apps/docs` | private | Search-ready Markdown documentation server and site shell |
 | `apps/portal` | private | Application launcher, status API, report gateway, and product dashboard |
 
@@ -215,7 +219,7 @@ Start the complete local experience with one command:
 npm start
 ```
 
-The command builds and verifies one production host at `http://127.0.0.1:4200`. Documentation is served from `/docs/`, Angular from `/showcases/angular/`, React from `/showcases/react/`, tests and coverage from `/reports/`, and Playwright automation from `/automation/`. No secondary application ports or child processes are required.
+The command builds and verifies one production host at `http://127.0.0.1:4200`. Documentation is served from `/docs/`, Angular from `/showcases/angular/`, React from `/showcases/react/`, Vanilla from `/showcases/vanilla/`, tests and coverage from `/reports/`, and Playwright automation from `/automation/`. No secondary application ports or child processes are required.
 
 `npm run start:single-host` is the explicit equivalent of `npm start`. Use `npm run start:multi-host` (or its `npm run portal` alias) for the separately served local platform on ports `4200`, `4201`, `4202`, and `4204`. Use `npm run portal:dev` only when live Angular and React development servers are required. Production uses `npm run build:site` followed by `npm run serve:single-host`; `VRE_PORTAL_PORT`, `VRE_PUBLIC_URL`, `VRE_HOST`, `VRE_NO_OPEN`, and `VRE_BUILD_TIME` configure the single Node process without rebuilding browser code.
 

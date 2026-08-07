@@ -56,7 +56,8 @@ const expectedPackages = new Map([
   ['apps/portal/package.json', '@validation-rules-engine/portal'],
   ['apps/docs/package.json', '@validation-rules-engine/docs'],
   ['apps/angular-showcase/package.json', '@validation-rules-engine/angular-showcase'],
-  ['apps/react-showcase/package.json', '@validation-rules-engine/react-showcase']
+  ['apps/react-showcase/package.json', '@validation-rules-engine/react-showcase'],
+  ['apps/vanilla-showcase/package.json', '@validation-rules-engine/vanilla-showcase']
 ]);
 
 for (const [packagePath, expectedName] of expectedPackages) {

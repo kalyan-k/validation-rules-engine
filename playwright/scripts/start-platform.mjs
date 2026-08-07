@@ -17,10 +17,12 @@ const childEnv = {
   VRE_DOCS_PORT: portFromUrl(urls.docs),
   VRE_ANGULAR_SHOWCASE_PORT: portFromUrl(urls.angular),
   VRE_REACT_SHOWCASE_PORT: portFromUrl(urls.react),
+  VRE_VANILLA_SHOWCASE_PORT: portFromUrl(urls.vanilla),
   VRE_PORTAL_URL: urls.portal,
   VRE_DOCS_URL: urls.docs,
   VRE_ANGULAR_SHOWCASE_URL: urls.angular,
   VRE_REACT_SHOWCASE_URL: urls.react,
+  VRE_VANILLA_SHOWCASE_URL: urls.vanilla,
   VRE_STATIC_SHOWCASES: '1'
 };
 

@@ -33,6 +33,7 @@ export const portalPort = configuredPort('VRE_PORTAL_PORT', 4200);
 const docsPort = configuredPort('VRE_DOCS_PORT', 4201);
 const angularShowcasePort = configuredPort('VRE_ANGULAR_SHOWCASE_PORT', 4202);
 const reactShowcasePort = configuredPort('VRE_REACT_SHOWCASE_PORT', 4204);
+const vanillaShowcasePort = configuredPort('VRE_VANILLA_SHOWCASE_PORT', 4205);
 export const singleHost = process.env['VRE_SINGLE_HOST'] === '1' || process.argv.includes('--single-host');
 const useStaticShowcases = process.env['VRE_STATIC_SHOWCASES'] === '1';
 const publicBaseUrl = configuredBaseUrl('VRE_PUBLIC_URL', '');
@@ -41,13 +42,15 @@ export const platformUrls = singleHost
       portal: publicBaseUrl,
       docs: publicBaseUrl,
       angular: `${publicBaseUrl}/showcases/angular`,
-      react: `${publicBaseUrl}/showcases/react`
+      react: `${publicBaseUrl}/showcases/react`,
+      vanilla: `${publicBaseUrl}/showcases/vanilla`
     }
   : {
       portal: configuredBaseUrl('VRE_PORTAL_URL', `http://127.0.0.1:${portalPort}`),
       docs: configuredBaseUrl('VRE_DOCS_URL', `http://127.0.0.1:${docsPort}`),
       angular: configuredBaseUrl('VRE_ANGULAR_SHOWCASE_URL', `http://127.0.0.1:${angularShowcasePort}`),
-      react: configuredBaseUrl('VRE_REACT_SHOWCASE_URL', `http://127.0.0.1:${reactShowcasePort}`)
+      react: configuredBaseUrl('VRE_REACT_SHOWCASE_URL', `http://127.0.0.1:${reactShowcasePort}`),
+      vanilla: configuredBaseUrl('VRE_VANILLA_SHOWCASE_URL', `http://127.0.0.1:${vanillaShowcasePort}`)
     };
 
 function showcaseStartScript(defaultScript: string): string {
@@ -74,6 +77,30 @@ export const applicationDefinitions: ApplicationDefinition[] = [
     startScript: 'serve:docs:portal',
     documentationUrl: `${platformUrls.docs}/docs/overview`,
     tags: ['Guides', 'API', 'Architecture']
+  },
+  {
+    id: 'vanilla-showcase',
+    title: 'Vanilla Showcase',
+    shortTitle: 'Vanilla',
+    description: 'Framework-free TypeScript forms that call @validation-rules-engine/core directly for simple, complex, and large-form validation.',
+    kind: 'showcase',
+    url: platformUrls.vanilla,
+    healthUrl: showcaseHealthUrl(platformUrls.vanilla),
+    startScript: showcaseStartScript('serve:vanilla-showcase'),
+    startArgs: useStaticShowcases
+      ? staticShowcaseArgs('dist/showcases/vanilla', vanillaShowcasePort, 'vanilla-showcase')
+      : ['--host', '127.0.0.1', '--port', String(vanillaShowcasePort)],
+    documentationUrl: `${platformUrls.docs}/docs/core-package`,
+    tags: ['TypeScript', 'Vite', 'Core API'],
+    showcaseLinks: [
+      ['Simple Form', 'simple'],
+      ['Complex Form', 'complex'],
+      ['Performance Form', 'performance']
+    ].map(([label, slug]) => ({
+      label: label!,
+      url: `${platformUrls.vanilla}/${slug}`,
+      documentationUrl: `${platformUrls.docs}/docs/core-examples`
+    }))
   },
   {
     id: 'angular-showcase',
