@@ -30,8 +30,20 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install Chrome for Karma
+        id: setup-chrome
+        uses: browser-actions/setup-chrome@v2
+        with:
+          chrome-version: stable
+          install-dependencies: true
+
       - name: Generate test and coverage reports
-        run: npm run test:ci
+        env:
+          NODE_OPTIONS: --max-old-space-size=8192
+          CHROME_BIN: ${{ steps.setup-chrome.outputs.chrome-path }}
+        run: |
+          echo "Using Chrome at: $CHROME_BIN"
+          npm run test:ci
 
       - name: Build packages and applications
         env:
@@ -57,6 +69,8 @@ jobs:
         run: |
           npm run site:verify
           test -f dist/site/reports/index.html
+          test -f dist/site/reports/showcases/angular/tests/index.html
+          test -f dist/site/reports/showcases/angular/coverage/index.html
           test -d dist/site/automation/artifacts
           test -f dist/site/api/playwright/latest.json
 

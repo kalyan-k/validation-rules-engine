@@ -13,6 +13,20 @@ import {
 const projectName = process.argv[2];
 const explicitCi = process.argv.includes('--ci');
 
+function childEnv() {
+  const options = new Set(
+    String(process.env.NODE_OPTIONS || '')
+      .split(/\s+/u)
+      .map((value) => value.trim())
+      .filter(Boolean)
+  );
+  options.add('--max-old-space-size=8192');
+  return {
+    ...process.env,
+    NODE_OPTIONS: [...options].join(' ')
+  };
+}
+
 try {
   assertProject(projectName);
   cleanReports(projectName);
@@ -22,7 +36,7 @@ try {
   const invocation = npmRunInvocation(scriptName);
   const result = spawnSync(invocation.command, invocation.args, {
     cwd: workspaceRoot,
-    env: process.env,
+    env: childEnv(),
     stdio: 'inherit',
     shell: false
   });

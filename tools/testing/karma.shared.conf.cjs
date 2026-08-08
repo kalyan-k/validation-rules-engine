@@ -99,9 +99,12 @@ function configureKarma(config, projectName) {
         flags: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage']
       }
     },
-    browserDisconnectTolerance: 2,
-    browserNoActivityTimeout: 30000,
-    captureTimeout: 120000,
+    browserDisconnectTolerance: 3,
+    // Angular showcase coverage compiles a large instrumented bundle; keep CI patient.
+    browserNoActivityTimeout: process.env.CI === 'true' ? 120000 : 60000,
+    browserDisconnectTimeout: process.env.CI === 'true' ? 20000 : 10000,
+    captureTimeout: process.env.CI === 'true' ? 300000 : 120000,
+    processKillTimeout: 10000,
     restartOnFileChange: true
   });
 }

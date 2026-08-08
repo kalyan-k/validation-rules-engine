@@ -30,4 +30,4 @@ Run `npm run test:reports`. Use `npm run reports:clean` only when stale generate
 
 ## Chrome cannot start in CI
 
-Use the CI test command so Karma selects the no-sandbox `ChromeHeadlessCI` launcher.
+Use the CI test command so Karma selects the no-sandbox `ChromeHeadlessCI` launcher. Large Angular showcase coverage also needs a larger Node heap (`NODE_OPTIONS=--max-old-space-size=8192`); without it the instrumented webpack build can exit before writing `reports/showcases/angular/**`.

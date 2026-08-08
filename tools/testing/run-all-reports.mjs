@@ -15,6 +15,20 @@ import {
 const useCiLauncher = process.argv.includes('--ci') || process.env.CI === 'true';
 let failed = false;
 
+function childEnv() {
+  const options = new Set(
+    String(process.env.NODE_OPTIONS || '')
+      .split(/\s+/u)
+      .map((value) => value.trim())
+      .filter(Boolean)
+  );
+  options.add('--max-old-space-size=8192');
+  return {
+    ...process.env,
+    NODE_OPTIONS: [...options].join(' ')
+  };
+}
+
 try {
   cleanReports();
 
@@ -24,7 +38,7 @@ try {
     console.log(`\nGenerating ${projectName} test and coverage reports...`);
     const result = spawnSync(invocation.command, invocation.args, {
       cwd: workspaceRoot,
-      env: process.env,
+      env: childEnv(),
       stdio: 'inherit',
       shell: false
     });
@@ -34,6 +48,7 @@ try {
       failed = true;
     } else if (result.status !== 0) {
       failed = true;
+      console.error(`${projectName} coverage command exited with status ${result.status}.`);
     }
 
     const missing = requiredProjectReports(projectName).filter((file) => !fs.existsSync(file));
