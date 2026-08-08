@@ -1,16 +1,6 @@
 {
   "routes": [
     {
-      "route": "/showcases/angular",
-      "redirect": "/showcases/angular/showcases/bootstrap",
-      "statusCode": 302
-    },
-    {
-      "route": "/showcases/angular/",
-      "redirect": "/showcases/angular/showcases/bootstrap",
-      "statusCode": 302
-    },
-    {
       "route": "/api/status",
       "rewrite": "/api/status.json"
     },
@@ -52,7 +42,32 @@
       "statusCode": 302
     },
     {
-      "route": "/showcases/angular/*",
+      "route": "/showcases/angular",
+      "redirect": "/showcases/angular/showcases/bootstrap",
+      "statusCode": 302
+    },
+    {
+      "route": "/showcases/angular/state/*",
+      "rewrite": "/showcases/angular/index.html"
+    },
+    {
+      "route": "/showcases/angular/showcases/*",
+      "rewrite": "/showcases/angular/index.html"
+    },
+    {
+      "route": "/showcases/angular/reactive-forms",
+      "rewrite": "/showcases/angular/index.html"
+    },
+    {
+      "route": "/showcases/angular/sample-form",
+      "rewrite": "/showcases/angular/index.html"
+    },
+    {
+      "route": "/showcases/angular/complex-form",
+      "rewrite": "/showcases/angular/index.html"
+    },
+    {
+      "route": "/showcases/angular/performance-form",
       "rewrite": "/showcases/angular/index.html"
     },
     {

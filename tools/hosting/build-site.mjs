@@ -150,6 +150,9 @@ writeStaticHostingApis({
 
 console.log(`Built the single-host site at ${siteRoot}`);
 console.log(`Generated ${pages.length} documentation pages.`);
+if (process.env.VRE_STATIC_WEB_APPS === '1' || process.env.VRE_HOSTED_EVIDENCE === '1') {
+  console.log('Included Azure Static Web Apps config and static API stubs for SWA hosting.');
+}
 
 function safeSitePath(relativePath) {
   const resolved = path.resolve(siteRoot, relativePath);

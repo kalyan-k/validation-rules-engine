@@ -79,12 +79,14 @@ git commit -m "Update hosted test and automation evidence"
 Workflow requirements:
 
 1. Install Node 22 and run `npm ci`
-2. Run `npm run build:site` with `VRE_HOSTED_EVIDENCE=1`
+2. Run `npm run build:site` with `VRE_HOSTED_EVIDENCE=1` and `VRE_STATIC_WEB_APPS=1`
 3. Deploy with `skip_app_build: true` and `app_location: dist/site`
+
+Those environment variables are Azure-workflow-only. Local `npm start`, `npm run start:single-host`, and `npm run start:multi-host` / `npm run portal` are unchanged: the Node portal still owns routing, health, and `/api/*`, and live `reports/` / Playwright artifacts are preferred when present.
 
 Do **not** point `app_location` at `./apps` or rely on Oryx to build this monorepo.
 
-`tools/hosting/build-site.mjs` also copies `staticwebapp.config.json` and static `/api/*.json` stubs so the portal works without the Node process. Avoid duplicate `/path` and `/path/` route rules in that config.
+`tools/hosting/build-site.mjs` copies `staticwebapp.config.json` for SWA validation. Do not define both `/showcases/angular` and `/showcases/angular/`, and do not use `/showcases/angular/*` (Azure treats the empty wildcard as `/showcases/angular/`). Use explicit Angular path prefixes for SPA rewrites instead.
 
 After connecting the repo in the Azure portal, push to `master` (or re-run the workflow).
 

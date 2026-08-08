@@ -26,9 +26,17 @@ for (const relativePath of [
 const staticStatus = JSON.parse(readFileSync(path.join(siteRoot, 'api', 'status.json'), 'utf8'));
 assert.equal(staticStatus.applications.length, 4);
 assert.ok(staticStatus.applications.every(({ state }) => state === 'healthy'));
-assert.match(
-  readFileSync(path.join(siteRoot, 'staticwebapp.config.json'), 'utf8'),
-  /"rewrite": "\/showcases\/vanilla\/index\.html"/u
+const staticWebAppConfig = readFileSync(path.join(siteRoot, 'staticwebapp.config.json'), 'utf8');
+assert.match(staticWebAppConfig, /"rewrite": "\/showcases\/vanilla\/index\.html"/u);
+assert.doesNotMatch(
+  staticWebAppConfig,
+  /"route": "\/showcases\/angular"[\s\S]*"route": "\/showcases\/angular\/"/u,
+  'Azure Static Web Apps rejects duplicate /showcases/angular and /showcases/angular/ routes'
+);
+assert.doesNotMatch(
+  staticWebAppConfig,
+  /"route": "\/showcases\/angular\/\*"/u,
+  'Use explicit Angular SPA path prefixes instead of /showcases/angular/* which collides with /showcases/angular/'
 );
 
 const manifest = JSON.parse(readFileSync(path.join(siteRoot, 'deployment-manifest.json'), 'utf8'));
