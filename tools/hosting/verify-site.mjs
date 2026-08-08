@@ -9,6 +9,10 @@ const siteRoot = path.join(workspaceRoot, 'dist', 'site');
 for (const relativePath of [
   'index.html',
   'deployment-manifest.json',
+  'staticwebapp.config.json',
+  'api/status.json',
+  'api/meta.json',
+  'api/playwright/latest.json',
   'docs/overview/index.html',
   'docs/search-index.json',
   'showcases/angular/index.html',
@@ -18,6 +22,14 @@ for (const relativePath of [
 ]) {
   assert.ok(existsSync(path.join(siteRoot, relativePath)), `Missing hosted output: ${relativePath}`);
 }
+
+const staticStatus = JSON.parse(readFileSync(path.join(siteRoot, 'api', 'status.json'), 'utf8'));
+assert.equal(staticStatus.applications.length, 4);
+assert.ok(staticStatus.applications.every(({ state }) => state === 'healthy'));
+assert.match(
+  readFileSync(path.join(siteRoot, 'staticwebapp.config.json'), 'utf8'),
+  /"rewrite": "\/showcases\/vanilla\/index\.html"/u
+);
 
 const manifest = JSON.parse(readFileSync(path.join(siteRoot, 'deployment-manifest.json'), 'utf8'));
 assert.deepEqual(manifest.routes, {

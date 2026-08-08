@@ -97,8 +97,10 @@ for (const configPath of [
   writeFileSync(configPath, platformConfigSource, 'utf8');
 }
 
+const packageVersion = JSON.parse(readFileSync(path.join(workspaceRoot, 'package.json'), 'utf8')).version;
+
 writeFileSync(path.join(siteRoot, 'deployment-manifest.json'), `${JSON.stringify({
-  version: JSON.parse(readFileSync(path.join(workspaceRoot, 'package.json'), 'utf8')).version,
+  version: packageVersion,
   routes: {
     portal: '/',
     documentation: '/docs/',
@@ -109,6 +111,17 @@ writeFileSync(path.join(siteRoot, 'deployment-manifest.json'), `${JSON.stringify
     automation: '/automation/'
   }
 }, null, 2)}\n`, 'utf8');
+
+copyFile(
+  path.join(workspaceRoot, 'tools', 'hosting', 'staticwebapp.config.json'),
+  path.join(siteRoot, 'staticwebapp.config.json')
+);
+
+writeStaticHostingApis({
+  version: packageVersion,
+  urls: configuredUrls,
+  publicBaseUrl
+});
 
 console.log(`Built the single-host site at ${siteRoot}`);
 console.log(`Generated ${pages.length} documentation pages.`);
@@ -155,5 +168,153 @@ function injectPlatformConfig(root) {
       continue;
     }
     writeFileSync(target, html.replace('<head>', '<head>\n  <script src="/platform-config.js"></script>'), 'utf8');
+  }
+}
+
+function writeJson(relativePath, data) {
+  const target = safeSitePath(relativePath);
+  mkdirSync(path.dirname(target), { recursive: true });
+  writeFileSync(target, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
+}
+
+function writeStaticHostingApis({ version, urls, publicBaseUrl }) {
+  const docsBase = publicBaseUrl || '';
+  const applications = [
+    {
+      id: 'docs',
+      title: 'Documentation',
+      shortTitle: 'Docs',
+      description: 'Concepts, guides, public APIs, architecture, testing, and migration guidance.',
+      kind: 'documentation',
+      url: `${docsBase}/docs/overview`,
+      healthUrl: '/docs/health',
+      startScript: 'serve:docs:portal',
+      documentationUrl: `${docsBase}/docs/overview`,
+      tags: ['Guides', 'API', 'Architecture'],
+      state: 'healthy',
+      detail: 'Served by the unified host'
+    },
+    {
+      id: 'vanilla-showcase',
+      title: 'Vanilla Showcase',
+      shortTitle: 'Vanilla',
+      description: 'Framework-free TypeScript forms that call @validation-rules-engine/core directly for simple, complex, and large-form validation.',
+      kind: 'showcase',
+      url: urls.vanilla,
+      healthUrl: `${urls.vanilla}/health`,
+      startScript: 'serve:static',
+      documentationUrl: `${docsBase}/docs/core-package`,
+      tags: ['TypeScript', 'Vite', 'Core API'],
+      showcaseLinks: [
+        ['Simple Form', 'simple'],
+        ['Complex Form', 'complex'],
+        ['Performance Form', 'performance']
+      ].map(([label, slug]) => ({
+        label,
+        url: `${urls.vanilla}/${slug}`,
+        documentationUrl: `${docsBase}/docs/core-examples`
+      })),
+      state: 'healthy',
+      detail: 'Served by the unified host'
+    },
+    {
+      id: 'angular-showcase',
+      title: 'Angular Showcase',
+      shortTitle: 'Angular',
+      description: 'Angular validation showcases with UI framework examples and comparable state management implementations.',
+      kind: 'showcase',
+      url: urls.angular,
+      healthUrl: `${urls.angular}/health`,
+      startScript: 'serve:static',
+      documentationUrl: `${docsBase}/docs/angular`,
+      tags: ['ngModel', 'Reactive Forms', 'NgRx', 'NGXS', 'Signals'],
+      showcaseLinks: [
+        ['Template Driven', 'template-driven', 'angular-ngmodel'],
+        ['Reactive Forms', 'reactive-forms', 'angular-reactive-forms'],
+        ['NgRx', 'ngrx', 'angular-state-ngrx'],
+        ['NGXS', 'ngxs', 'angular-state-ngxs'],
+        ['Akita', 'akita', 'angular-state-akita'],
+        ['Elf', 'elf', 'angular-state-elf'],
+        ['RxAngular State', 'rx-angular-state', 'angular-state-rx-angular'],
+        ['Signals', 'signals', 'angular-state-signals'],
+        ['Custom RxJS Store', 'custom-rxjs-store', 'angular-state-custom-rxjs-store']
+      ].map(([label, slug, docSlug]) => ({
+        label,
+        url: `${urls.angular}/state/${slug}`,
+        documentationUrl: `${docsBase}/docs/${docSlug}`
+      })),
+      state: 'healthy',
+      detail: 'Served by the unified host'
+    },
+    {
+      id: 'react-showcase',
+      title: 'React Showcase',
+      shortTitle: 'React',
+      description: 'Hooks-first controlled forms with nested policies, dynamic groups, accessibility, and measured large-form behavior.',
+      kind: 'showcase',
+      url: urls.react,
+      healthUrl: `${urls.react}/health`,
+      startScript: 'serve:static',
+      documentationUrl: `${docsBase}/docs/react-overview`,
+      tags: ['React', 'Hooks', 'Seven state integrations'],
+      showcaseLinks: [
+        ['Local State', 'local-state'],
+        ['Redux Toolkit', 'redux-toolkit'],
+        ['Zustand', 'zustand'],
+        ['Jotai', 'jotai'],
+        ['Recoil', 'recoil'],
+        ['MobX', 'mobx'],
+        ['Context API', 'context']
+      ].map(([label, slug]) => ({
+        label,
+        url: `${urls.react}/state/${slug}`,
+        documentationUrl: `${docsBase}/docs/react-state-${slug}`
+      })),
+      state: 'healthy',
+      detail: 'Served by the unified host'
+    }
+  ];
+
+  const revision = (process.env.GITHUB_SHA ?? process.env.VRE_REVISION ?? '').slice(0, 7) || 'local';
+  const builtAt = process.env.VRE_BUILD_TIME ?? new Date().toISOString();
+
+  writeJson('api/status.json', { applications });
+  writeJson('api/meta.json', {
+    version,
+    revision,
+    builtAt,
+    repository: 'https://github.com/kalyan-k/validation-rules-engine',
+    urls
+  });
+  writeJson('api/health.json', {
+    status: 'healthy',
+    service: 'portal',
+    applications
+  });
+  writeJson('api/health-ready.json', {
+    status: 'healthy',
+    service: 'portal',
+    applications
+  });
+  writeJson('api/docs-health.json', { status: 'healthy', service: 'documentation' });
+  writeJson('api/angular-health.json', { status: 'healthy', service: 'angular-showcase' });
+  writeJson('api/react-health.json', { status: 'healthy', service: 'react-showcase' });
+  writeJson('api/vanilla-health.json', { status: 'healthy', service: 'vanilla-showcase' });
+
+  const playwrightLatestSource = path.join(
+    workspaceRoot,
+    'artifacts',
+    'playwright',
+    'portal-data',
+    'latest-run.json'
+  );
+  if (existsSync(playwrightLatestSource)) {
+    copyFile(playwrightLatestSource, path.join(siteRoot, 'api', 'playwright', 'latest.json'));
+  } else {
+    writeJson('api/playwright/latest.json', {
+      available: false,
+      message: 'No Playwright report data is available yet.',
+      command: 'npm run test:e2e:smoke'
+    });
   }
 }

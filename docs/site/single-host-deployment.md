@@ -58,9 +58,23 @@ The production server accepts:
 
 No Azure hostname is hardcoded. By default, `platform-config.js` derives the active origin from `window.location` and maps every application to its hosted subpath. The same generated configuration is available at the root and within both framework build directories, so direct Angular and React deep links remain correctly configured. Set `VRE_PUBLIC_URL` only when navigation must use a specific canonical domain instead of the incoming request origin.
 
-## Azure deployment
+## Azure Static Web Apps (free static hosting)
 
-The container can be deployed to Azure Container Apps, Azure App Service for Containers, or Azure Kubernetes Service. Configure the public container port as `8080` and use `/health/ready` for readiness checks. TLS can terminate at Azure because the application derives its public origin in the browser.
+Azure Static Web Apps can host the assembled `dist/site` artifact as a single-origin static website. The GitHub workflow `.github/workflows/azure-static-web-apps-*.yml` must:
+
+1. Install Node 22 and run `npm ci`
+2. Run `npm run build:site` (and optionally `npm run site:verify`)
+3. Deploy with `skip_app_build: true` and `app_location: dist/site`
+
+Do **not** point `app_location` at `./apps` or rely on Oryx to build this monorepo. Oryx cannot detect a single app under `apps/`, so deploy fails looking for `index.html` in the wrong folder.
+
+`tools/hosting/build-site.mjs` copies `staticwebapp.config.json` into `dist/site` and writes static `/api/*.json` stubs so the portal status panel and health routes work without the Node portal process. Showcase deep links use SPA rewrites under `/showcases/angular|react|vanilla/*`.
+
+After connecting the repo in the Azure portal, push to `master` (or re-run the workflow). The default Azure-generated paths (`./apps` + `build`) will fail until the workflow matches the settings above.
+
+## Azure container deployment
+
+For the full Node unified host (dynamic `/api/*`, process health, optional live tooling), deploy the container to Azure Container Apps, Azure App Service for Containers, or Azure Kubernetes Service. Configure the public container port as `8080` and use `/health/ready` for readiness checks. TLS can terminate at Azure because the application derives its public origin in the browser.
 
 For an App Service custom container, set `WEBSITES_PORT=8080`. An optional canonical-domain configuration looks like:
 

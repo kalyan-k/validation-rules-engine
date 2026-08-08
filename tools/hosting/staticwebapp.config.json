@@ -1,0 +1,97 @@
+{
+  "trailingSlash": "auto",
+  "routes": [
+    {
+      "route": "/showcases/angular",
+      "redirect": "/showcases/angular/showcases/bootstrap",
+      "statusCode": 302
+    },
+    {
+      "route": "/showcases/angular/",
+      "redirect": "/showcases/angular/showcases/bootstrap",
+      "statusCode": 302
+    },
+    {
+      "route": "/api/status",
+      "rewrite": "/api/status.json"
+    },
+    {
+      "route": "/api/meta",
+      "rewrite": "/api/meta.json"
+    },
+    {
+      "route": "/api/playwright/latest",
+      "rewrite": "/api/playwright/latest.json"
+    },
+    {
+      "route": "/health",
+      "rewrite": "/api/health.json"
+    },
+    {
+      "route": "/health/ready",
+      "rewrite": "/api/health-ready.json"
+    },
+    {
+      "route": "/docs/health",
+      "rewrite": "/api/docs-health.json"
+    },
+    {
+      "route": "/showcases/angular/health",
+      "rewrite": "/api/angular-health.json"
+    },
+    {
+      "route": "/showcases/react/health",
+      "rewrite": "/api/react-health.json"
+    },
+    {
+      "route": "/showcases/vanilla/health",
+      "rewrite": "/api/vanilla-health.json"
+    },
+    {
+      "route": "/docs",
+      "redirect": "/docs/overview/",
+      "statusCode": 302
+    },
+    {
+      "route": "/docs/",
+      "redirect": "/docs/overview/",
+      "statusCode": 302
+    },
+    {
+      "route": "/automation",
+      "redirect": "/automation/",
+      "statusCode": 301
+    },
+    {
+      "route": "/reports",
+      "redirect": "/reports/",
+      "statusCode": 301
+    },
+    {
+      "route": "/showcases/angular/*",
+      "rewrite": "/showcases/angular/index.html"
+    },
+    {
+      "route": "/showcases/react/*",
+      "rewrite": "/showcases/react/index.html"
+    },
+    {
+      "route": "/showcases/vanilla/*",
+      "rewrite": "/showcases/vanilla/index.html"
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": [
+      "/docs/*",
+      "/showcases/*",
+      "/reports/*",
+      "/automation/*",
+      "/api/*",
+      "/*.{css,js,mjs,map,json,png,jpg,jpeg,gif,ico,svg,webp,woff,woff2,txt,xml,webmanifest}"
+    ]
+  },
+  "mimeTypes": {
+    ".json": "application/json"
+  }
+}
