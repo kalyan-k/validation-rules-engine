@@ -14,7 +14,7 @@ jobs:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
-    timeout-minutes: 45
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
         with:
@@ -30,14 +30,35 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Generate test and coverage reports
+        run: npm run test:ci
+
+      - name: Build packages and applications
+        env:
+          NODE_OPTIONS: --max-old-space-size=8192
+        run: npm run build:all
+
+      - name: Install Playwright Chromium browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Playwright Chromium suite
+        run: npm run test:e2e:chromium
+        env:
+          PLAYWRIGHT_HEADLESS: '1'
+          PLAYWRIGHT_SKIP_PLATFORM_BUILD: '1'
+
       - name: Build single-host static site
         env:
           NODE_OPTIONS: --max-old-space-size=8192
           VRE_BUILD_TIME: ${{ github.event.head_commit.timestamp || github.event.pull_request.updated_at || github.run_started_at }}
         run: npm run build:site
 
-      - name: Verify assembled site
-        run: npm run site:verify
+      - name: Verify assembled site includes reports and automation
+        run: |
+          npm run site:verify
+          test -f dist/site/reports/index.html
+          test -d dist/site/automation/artifacts
+          test -f dist/site/api/playwright/latest.json
 
       - name: Deploy to Azure Static Web Apps
         id: builddeploy
@@ -46,7 +67,7 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BRAVE_OCEAN_037D7AD10 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: upload
-          # Pre-built artifact from npm run build:site (portal + docs + showcases).
+          # Pre-built artifact from npm run build:site (portal + docs + showcases + reports).
           app_location: dist/site
           api_location: ''
           output_location: ''

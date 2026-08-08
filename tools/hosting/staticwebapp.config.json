@@ -1,5 +1,4 @@
 {
-  "trailingSlash": "auto",
   "routes": [
     {
       "route": "/showcases/angular",
@@ -51,21 +50,6 @@
       "route": "/docs",
       "redirect": "/docs/overview/",
       "statusCode": 302
-    },
-    {
-      "route": "/docs/",
-      "redirect": "/docs/overview/",
-      "statusCode": 302
-    },
-    {
-      "route": "/automation",
-      "redirect": "/automation/",
-      "statusCode": 301
-    },
-    {
-      "route": "/reports",
-      "redirect": "/reports/",
-      "statusCode": 301
     },
     {
       "route": "/showcases/angular/*",

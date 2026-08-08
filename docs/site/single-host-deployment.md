@@ -63,12 +63,13 @@ No Azure hostname is hardcoded. By default, `platform-config.js` derives the act
 Azure Static Web Apps can host the assembled `dist/site` artifact as a single-origin static website. The GitHub workflow `.github/workflows/azure-static-web-apps-*.yml` must:
 
 1. Install Node 22 and run `npm ci`
-2. Run `npm run build:site` (and optionally `npm run site:verify`)
-3. Deploy with `skip_app_build: true` and `app_location: dist/site`
+2. Run `npm run test:ci` so coverage and the reports dashboard land in `reports/`
+3. Build apps, run Playwright (Chromium), then `npm run build:site` so `reports/` and `artifacts/playwright/` are copied into `dist/site`
+4. Deploy with `skip_app_build: true` and `app_location: dist/site`
 
 Do **not** point `app_location` at `./apps` or rely on Oryx to build this monorepo. Oryx cannot detect a single app under `apps/`, so deploy fails looking for `index.html` in the wrong folder.
 
-`tools/hosting/build-site.mjs` copies `staticwebapp.config.json` into `dist/site` and writes static `/api/*.json` stubs so the portal status panel and health routes work without the Node portal process. Showcase deep links use SPA rewrites under `/showcases/angular|react|vanilla/*`.
+`tools/hosting/build-site.mjs` copies `staticwebapp.config.json` into `dist/site` and writes static `/api/*.json` stubs so the portal status panel and health routes work without the Node portal process. Showcase deep links use SPA rewrites under `/showcases/angular|react|vanilla/*`. Avoid defining both `/path` and `/path/` route rules (with or without `trailingSlash`), which Azure rejects as duplicates.
 
 After connecting the repo in the Azure portal, push to `master` (or re-run the workflow). The default Azure-generated paths (`./apps` + `build`) will fail until the workflow matches the settings above.
 
