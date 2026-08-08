@@ -138,6 +138,8 @@
     "reports:index": "node tools/testing/generate-report-platform.mjs",
     "reports:verify": "node tools/testing/verify-reports.mjs",
     "reports:open": "node tools/testing/open-reports.mjs",
+    "evidence:publish": "node tools/hosting/publish-evidence.mjs",
+    "evidence:refresh": "npm run test:ci && npm run test:e2e:chromium && npm run evidence:publish",
     "lint": "npm run ng -- lint angular",
     "lint:all": "npm run ng -- lint"
   },

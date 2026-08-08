@@ -1,0 +1,137 @@
+import {
+  cpSync,
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  rmSync,
+  statSync,
+  writeFileSync
+} from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const workspaceRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+const evidenceRoot = path.join(workspaceRoot, 'hosted', 'evidence');
+const reportsSource = path.join(workspaceRoot, 'reports');
+const playwrightSource = path.join(workspaceRoot, 'artifacts', 'playwright');
+const evidenceReports = path.join(evidenceRoot, 'reports');
+const evidencePlaywright = path.join(evidenceRoot, 'playwright');
+
+/** Heavy / ephemeral Playwright folders stay local; summaries are published for hosting. */
+const playwrightInclude = Object.freeze([
+  'portal-data',
+  'html-report',
+  'json',
+  'junit',
+  'catalog'
+]);
+
+function assertWorkspace() {
+  const packageJson = JSON.parse(readFileSync(path.join(workspaceRoot, 'package.json'), 'utf8'));
+  if (packageJson.name !== 'validation-rules-engine-workspace') {
+    throw new Error(`Refusing to publish evidence outside the VRE workspace: ${workspaceRoot}`);
+  }
+}
+
+function resetDirectory(target) {
+  rmSync(target, { recursive: true, force: true });
+  mkdirSync(target, { recursive: true });
+}
+
+function copyDirectory(source, target) {
+  mkdirSync(path.dirname(target), { recursive: true });
+  cpSync(source, target, { recursive: true, force: true });
+}
+
+function directorySizeBytes(root) {
+  if (!existsSync(root)) {
+    return 0;
+  }
+  let total = 0;
+  for (const entry of readdirSync(root, { withFileTypes: true })) {
+    const fullPath = path.join(root, entry.name);
+    if (entry.isDirectory()) {
+      total += directorySizeBytes(fullPath);
+    } else if (entry.isFile()) {
+      total += statSync(fullPath).size;
+    }
+  }
+  return total;
+}
+
+function formatBytes(bytes) {
+  if (bytes < 1024) {
+    return `${bytes} B`;
+  }
+  if (bytes < 1024 * 1024) {
+    return `${(bytes / 1024).toFixed(1)} KB`;
+  }
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+assertWorkspace();
+mkdirSync(evidenceRoot, { recursive: true });
+
+const included = {
+  reports: false,
+  playwright: []
+};
+
+resetDirectory(evidenceReports);
+if (existsSync(path.join(reportsSource, 'index.html'))) {
+  copyDirectory(reportsSource, evidenceReports);
+  included.reports = true;
+} else {
+  writeFileSync(
+    path.join(evidenceReports, 'README.md'),
+    [
+      '# Reports evidence unavailable',
+      '',
+      'Run `npm run test:ci` (or `npm run test:reports`) locally, then `npm run evidence:publish`.',
+      ''
+    ].join('\n'),
+    'utf8'
+  );
+}
+
+resetDirectory(evidencePlaywright);
+for (const folder of playwrightInclude) {
+  const source = path.join(playwrightSource, folder);
+  if (!existsSync(source)) {
+    continue;
+  }
+  copyDirectory(source, path.join(evidencePlaywright, folder));
+  included.playwright.push(folder);
+}
+
+const packageVersion = JSON.parse(readFileSync(path.join(workspaceRoot, 'package.json'), 'utf8')).version;
+const manifest = {
+  version: packageVersion,
+  publishedAt: new Date().toISOString(),
+  source: {
+    reports: included.reports ? 'reports/' : null,
+    playwright: included.playwright.map((folder) => `artifacts/playwright/${folder}/`)
+  },
+  sizes: {
+    reports: formatBytes(directorySizeBytes(evidenceReports)),
+    playwright: formatBytes(directorySizeBytes(evidencePlaywright)),
+    total: formatBytes(directorySizeBytes(evidenceRoot))
+  },
+  notes: [
+    'Commit hosted/evidence after publishing so Azure Static Web Apps can ship reports without running tests in CI.',
+    'Videos, traces, screenshots, and visual diffs are intentionally excluded to keep the repository deployable.'
+  ]
+};
+
+writeFileSync(path.join(evidenceRoot, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`, 'utf8');
+
+console.log(`Published hosting evidence to ${path.relative(workspaceRoot, evidenceRoot)}`);
+console.log(`- reports: ${included.reports ? 'yes' : 'missing (run tests first)'}`);
+console.log(`- playwright: ${included.playwright.length > 0 ? included.playwright.join(', ') : 'missing (run Playwright first)'}`);
+console.log(`- size: ${manifest.sizes.total}`);
+
+if (!included.reports && included.playwright.length === 0) {
+  console.warn('No local reports or Playwright summaries were found. The published evidence folder is a placeholder only.');
+  process.exitCode = 1;
+}

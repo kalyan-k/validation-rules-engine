@@ -59,13 +59,38 @@ writeFileSync(path.join(docsRoot, 'index.html'), overview.html, 'utf8');
 writeFileSync(path.join(docsRoot, 'search-index.json'), `${JSON.stringify(documentationSearchPayload())}\n`, 'utf8');
 
 const hostedReportsRoot = path.join(siteRoot, 'reports');
-copyOptionalDirectory(path.join(workspaceRoot, 'reports'), hostedReportsRoot);
-injectPlatformConfig(hostedReportsRoot);
+const preferHostedEvidence = process.env.VRE_HOSTED_EVIDENCE === '1';
+const reportsSource = resolveEvidenceSource({
+  liveRoot: path.join(workspaceRoot, 'reports'),
+  evidenceRoot: path.join(workspaceRoot, 'hosted', 'evidence', 'reports'),
+  marker: 'index.html',
+  preferEvidence: preferHostedEvidence
+});
+if (reportsSource) {
+  copyDirectory(reportsSource, hostedReportsRoot);
+  injectPlatformConfig(hostedReportsRoot);
+  console.log(`Included reports from ${path.relative(workspaceRoot, reportsSource)}`);
+} else {
+  writeEmptyReportsPlaceholder(hostedReportsRoot);
+  console.log('No reports evidence found; wrote an empty /reports placeholder. Run npm run evidence:publish locally to ship coverage.');
+}
 
 const automationRoot = path.join(siteRoot, 'automation');
 mkdirSync(automationRoot, { recursive: true });
 copyFile(path.join(workspaceRoot, 'apps', 'portal', 'public', 'playwright.html'), path.join(automationRoot, 'index.html'));
-copyOptionalDirectory(path.join(workspaceRoot, 'artifacts', 'playwright'), path.join(automationRoot, 'artifacts'));
+const playwrightSource = resolveEvidenceSource({
+  liveRoot: path.join(workspaceRoot, 'artifacts', 'playwright'),
+  evidenceRoot: path.join(workspaceRoot, 'hosted', 'evidence', 'playwright'),
+  marker: path.join('portal-data', 'latest-run.json'),
+  fallbackMarkers: ['html-report', 'json', 'junit', 'catalog'],
+  preferEvidence: preferHostedEvidence
+});
+if (playwrightSource) {
+  copyDirectory(playwrightSource, path.join(automationRoot, 'artifacts'));
+  console.log(`Included Playwright artifacts from ${path.relative(workspaceRoot, playwrightSource)}`);
+} else {
+  console.log('No Playwright evidence found; /automation will show an empty state until npm run evidence:publish.');
+}
 
 const publicBaseUrl = (process.env.VRE_PUBLIC_URL ?? '').replace(/\/$/, '');
 const configuredUrls = {
@@ -143,6 +168,54 @@ function copyOptionalDirectory(source, target) {
   if (existsSync(source)) {
     copyDirectory(source, target);
   }
+}
+
+function resolveEvidenceSource({ liveRoot, evidenceRoot, marker, fallbackMarkers = [], preferEvidence = false }) {
+  const candidates = preferEvidence ? [evidenceRoot, liveRoot] : [liveRoot, evidenceRoot];
+  for (const root of candidates) {
+    if (!existsSync(root)) {
+      continue;
+    }
+    if (existsSync(path.join(root, marker))) {
+      return root;
+    }
+    if (fallbackMarkers.some((relativePath) => existsSync(path.join(root, relativePath)))) {
+      return root;
+    }
+  }
+  return null;
+}
+
+function writeEmptyReportsPlaceholder(targetRoot) {
+  mkdirSync(targetRoot, { recursive: true });
+  writeFileSync(
+    path.join(targetRoot, 'index.html'),
+    `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reports unavailable</title>
+  <link rel="stylesheet" href="/platform-theme.css">
+  <script src="/platform-config.js"></script>
+  <script src="/platform-shell.js" defer></script>
+</head>
+<body>
+  <validation-platform-shell active-application="reports"></validation-platform-shell>
+  <main style="max-width:720px;margin:2rem auto;padding:0 1.25rem;font-family:Segoe UI,sans-serif;">
+    <h1>Test reports are not published yet</h1>
+    <p>Generate coverage locally, publish evidence, and commit <code>hosted/evidence</code>:</p>
+    <pre style="padding:1rem;background:#f4f6f8;border-radius:8px;overflow:auto;">npm run test:ci
+npm run test:e2e:chromium
+npm run evidence:publish
+git add hosted/evidence
+git commit -m "Update hosted test and automation evidence"</pre>
+  </main>
+</body>
+</html>
+`,
+    'utf8'
+  );
 }
 
 function copyFile(source, target) {
@@ -301,20 +374,18 @@ function writeStaticHostingApis({ version, urls, publicBaseUrl }) {
   writeJson('api/react-health.json', { status: 'healthy', service: 'react-showcase' });
   writeJson('api/vanilla-health.json', { status: 'healthy', service: 'vanilla-showcase' });
 
-  const playwrightLatestSource = path.join(
-    workspaceRoot,
-    'artifacts',
-    'playwright',
-    'portal-data',
-    'latest-run.json'
-  );
-  if (existsSync(playwrightLatestSource)) {
+  const playwrightLatestCandidates = [
+    path.join(workspaceRoot, 'artifacts', 'playwright', 'portal-data', 'latest-run.json'),
+    path.join(workspaceRoot, 'hosted', 'evidence', 'playwright', 'portal-data', 'latest-run.json')
+  ];
+  const playwrightLatestSource = playwrightLatestCandidates.find((candidate) => existsSync(candidate));
+  if (playwrightLatestSource) {
     copyFile(playwrightLatestSource, path.join(siteRoot, 'api', 'playwright', 'latest.json'));
   } else {
     writeJson('api/playwright/latest.json', {
       available: false,
-      message: 'No Playwright report data is available yet.',
-      command: 'npm run test:e2e:smoke'
+      message: 'No Playwright report data is available yet. Publish local evidence with npm run evidence:publish.',
+      command: 'npm run test:e2e:chromium && npm run evidence:publish'
     });
   }
 }

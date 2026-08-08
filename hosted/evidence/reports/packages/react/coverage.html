@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="report-project" content="react">
+  <meta name="theme-color" content="#10243e"><link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InRpdGxlIGRlc2NyaXB0aW9uIj4NCiAgPHRpdGxlIGlkPSJ0aXRsZSI+VmFsaWRhdGlvbiBSdWxlcyBFbmdpbmU8L3RpdGxlPg0KICA8ZGVzYyBpZD0iZGVzY3JpcHRpb24iPk5ldXRyYWwgZGF0YSBmbG93cyBpbnRvIHRoZSBWYWxpZGF0aW9uIFJ1bGVzIEVuZ2luZSwgcmVkIGVycm9ycyBmbG93IHVwd2FyZCwgYW5kIGdyZWVuIHZhbGlkYXRlZCBkYXRhIGZsb3dzIG91dC48L2Rlc2M+DQogIDxkZWZzPg0KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iaW5wdXQtZmxvdyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwIiB5MT0iMCIgeDI9IjE2IiB5Mj0iMCI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM3ODk1YWEiLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2MyZDNkZSIvPg0KICAgIDwvbGluZWFyR3JhZGllbnQ+DQogICAgPGxpbmVhckdyYWRpZW50IGlkPSJlcnJvci1mbG93IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAiIHkxPSIyMCIgeDI9IjAiIHkyPSI0Ij4NCiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZmNGY1ZSIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmY4YTc4Ii8+DQogICAgPC9saW5lYXJHcmFkaWVudD4NCiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InN1Y2Nlc3MtZmxvdyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSI0OCIgeTE9IjAiIHgyPSI2NCIgeTI9IjAiPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMzhjNzdiIi8+DQogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM3M2VmYTQiLz4NCiAgICA8L2xpbmVhckdyYWRpZW50Pg0KICA8L2RlZnM+DQoNCiAgPGcgZmlsbD0iIzBkOGY4MiIgc3Ryb2tlPSIjNjVkNmNhIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4NCiAgICA8cGF0aCBkPSJNMjggMy41aDE3djdIMjh6IiBzdHJva2Utd2lkdGg9IjEuNCIvPg0KICAgIDxwYXRoIGQ9Ik0zMyAxMC41aDd2NWgtN3oiIHN0cm9rZS13aWR0aD0iMS40Ii8+DQogICAgPHBhdGggZD0iTTE0IDIyaDdsNy03aDIxYTUgNSAwIDAgMSA1IDV2MjJhNSA1IDAgMCAxLTEuNSAzLjVMNDMgNTZIMjhhNC41IDQuNSAwIDAgMS0zLjMtMS41TDIwIDQ5aC02YTQgNCAwIDAgMS00LTRWMjZhNCA0IDAgMCAxIDQtNFoiIHN0cm9rZS13aWR0aD0iMS41Ii8+DQogICAgPHBhdGggZD0iTTMgMjloN3YxMUgzek0uNSAyNGg0djIxaC00em01My41IDVoN3YxMWgtN3ptNiAwaDMuNXYxMUg2MHoiIHN0cm9rZS13aWR0aD0iMS40Ii8+DQogIDwvZz4NCg0KICA8ZyBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiPg0KICAgIDxwYXRoIGQ9Ik0xLjUgMzQuNUgxNiIgc3Ryb2tlPSJ1cmwoI2lucHV0LWZsb3cpIiBzdHJva2Utd2lkdGg9IjMuNCIvPg0KICAgIDxwYXRoIGQ9Ik0zNi41IDIwVjUuNSIgc3Ryb2tlPSJ1cmwoI2Vycm9yLWZsb3cpIiBzdHJva2Utd2lkdGg9IjMuNCIvPg0KICAgIDxwYXRoIGQ9Ik00OCAzNC41aDE0LjUiIHN0cm9rZT0idXJsKCNzdWNjZXNzLWZsb3cpIiBzdHJva2Utd2lkdGg9IjMuNCIvPg0KICA8L2c+DQoNCiAgPHJlY3QgeD0iMTQiIHk9IjE5IiB3aWR0aD0iMzYiIGhlaWdodD0iMjgiIHJ4PSI2IiBmaWxsPSIjMTAyZjQ5IiBzdHJva2U9IiM2NWQ2Y2EiIHN0cm9rZS13aWR0aD0iMS40Ii8+DQogIDxnIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+DQogICAgPHJlY3QgeD0iMTYuNSIgeT0iMjEiIHdpZHRoPSIzMSIgaGVpZ2h0PSI3IiByeD0iMy41IiBzdHJva2U9IiNiOGNhZDYiIHN0cm9rZS1vcGFjaXR5PSIuMzUiLz4NCiAgICA8Y2lyY2xlIGN4PSIyMC41IiBjeT0iMjQuNSIgcj0iMS40IiBzdHJva2U9IiNiOGNhZDYiIHN0cm9rZS13aWR0aD0iMS4zIi8+DQogICAgPHBhdGggZD0iTTI0LjUgMjQuNWg3bTMuNSAwaDkiIHN0cm9rZT0iI2I4Y2FkNiIgc3Ryb2tlLXdpZHRoPSIxLjkiLz4NCiAgICA8cGF0aCBkPSJNMzMuMyAyMy40djIuMiIgc3Ryb2tlPSIjYjhjYWQ2IiBzdHJva2Utd2lkdGg9IjEuMiIvPg0KDQogICAgPHJlY3QgeD0iMTYuNSIgeT0iMjkuNSIgd2lkdGg9IjMxIiBoZWlnaHQ9IjciIHJ4PSIzLjUiIHN0cm9rZT0iI2ZmNjg2OCIgc3Ryb2tlLW9wYWNpdHk9Ii40Ii8+DQogICAgPHBhdGggZD0ibTE4LjUgMzEuMiA0IDRtMC00LTQgNCIgc3Ryb2tlPSIjZmY2ODY4IiBzdHJva2Utd2lkdGg9IjEuOSIvPg0KICAgIDxwYXRoIGQ9Ik0yNSAzM2g2LjVtMy41IDBoOSIgc3Ryb2tlPSIjZmY2ODY4IiBzdHJva2Utd2lkdGg9IjEuOSIvPg0KICAgIDxwYXRoIGQ9Ik0zMy4zIDMxLjl2Mi4yIiBzdHJva2U9IiNmZjY4NjgiIHN0cm9rZS13aWR0aD0iMS4yIi8+DQoNCiAgICA8cmVjdCB4PSIxNi41IiB5PSIzOCIgd2lkdGg9IjMxIiBoZWlnaHQ9IjciIHJ4PSIzLjUiIHN0cm9rZT0iIzU2ZGY4ZSIgc3Ryb2tlLW9wYWNpdHk9Ii40MiIvPg0KICAgIDxwYXRoIGQ9Im0xOCA0MS41IDIuMSAyIDMuOC00LjIiIHN0cm9rZT0iIzU2ZGY4ZSIgc3Ryb2tlLXdpZHRoPSIyLjEiLz4NCiAgICA8cGF0aCBkPSJNMjYgNDEuNWg1LjVtMy41IDBoOSIgc3Ryb2tlPSIjNTZkZjhlIiBzdHJva2Utd2lkdGg9IjEuOSIvPg0KICAgIDxwYXRoIGQ9Ik0zMy4zIDQwLjR2Mi4yIiBzdHJva2U9IiM1NmRmOGUiIHN0cm9rZS13aWR0aD0iMS4yIi8+DQogIDwvZz4NCg0KICA8ZyBmaWxsPSIjYzJkM2RlIj4NCiAgICA8Y2lyY2xlIGN4PSIyLjEiIGN5PSIzNC41IiByPSIxLjI1Ii8+DQogICAgPGNpcmNsZSBjeD0iNi41IiBjeT0iMzQuNSIgcj0iMS4wNSIvPg0KICAgIDxjaXJjbGUgY3g9IjEwLjQiIGN5PSIzNC41IiByPSIuODUiLz4NCiAgPC9nPg0KICA8ZyBmaWxsPSIjZmY3NjZlIj4NCiAgICA8Y2lyY2xlIGN4PSIzNi41IiBjeT0iMTMuNSIgcj0iMS4yIi8+DQogICAgPGNpcmNsZSBjeD0iMzYuNSIgY3k9IjkuMyIgcj0iMSIvPg0KICAgIDxjaXJjbGUgY3g9IjM2LjUiIGN5PSI1LjYiIHI9Ii44Ii8+DQogIDwvZz4NCiAgPGcgZmlsbD0iIzY0ZTk5YiI+DQogICAgPGNpcmNsZSBjeD0iNTQuNSIgY3k9IjM0LjUiIHI9Ii44NSIvPg0KICAgIDxjaXJjbGUgY3g9IjU4LjMiIGN5PSIzNC41IiByPSIxLjA1Ii8+DQogICAgPGNpcmNsZSBjeD0iNjIiIGN5PSIzNC41IiByPSIxLjI1Ii8+DQogIDwvZz4NCjwvc3ZnPg0K" type="image/svg+xml">
+  <script src="/platform-config.js"></script>
+  <style>:host {
+  --vr-navy: #10243e;
+  --vr-navy-deep: #091725;
+  --vr-teal: #08736a;
+  --vr-text-on-dark: #eef6fb;
+  --vr-muted-on-dark: #9db1c5;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  color: #17273c;
+  background: #f4f7fa;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+.platform-header { position: sticky; top: 0; z-index: 1000; display: grid; grid-template-columns: auto auto minmax(0, 1fr); align-items: center; min-height: 72px; padding: 0 clamp(1rem, 4vw, 4rem); color: var(--vr-text-on-dark); border-bottom: 1px solid rgba(255,255,255,.11); background: rgba(16,36,62,.98); box-shadow: 0 8px 24px rgba(3,16,29,.14); backdrop-filter: blur(14px); }
+.platform-brand { display: flex; align-items: center; gap: .75rem; min-width: max-content; color: #fff; text-decoration: none; }
+.platform-mark { display: block; width: 38px; height: 38px; object-fit: contain; }
+.platform-brand-copy strong,.platform-brand-copy small { display: block; }
+.platform-brand-copy strong { font-size: .94rem; line-height: 1.2; }
+.platform-brand-copy small { margin-top: .12rem; color: var(--vr-muted-on-dark); font-size: .69rem; }
+.platform-version { margin-left: .75rem; padding: .24rem .46rem; border: 1px solid rgba(255,255,255,.13); border-radius: 999px; color: #b6c8d8; background: rgba(255,255,255,.05); font-size: .63rem; font-weight: 750; }
+.platform-navigation { display: flex; justify-content: flex-end; align-items: stretch; gap: .25rem; min-width: 0; }
+.platform-nav-link,.platform-nav-group>summary { position: relative; display: flex; align-items: center; min-height: 71px; padding: 0 .78rem; color: #c7d4e0; text-decoration: none; white-space: nowrap; font-size: .78rem; font-weight: 680; cursor: pointer; }
+.platform-nav-link:hover,.platform-nav-link.active,.platform-nav-group>summary:hover,.platform-nav-group.active>summary,.platform-nav-group[open]>summary { color: #fff; }
+.platform-nav-link.active::after,.platform-nav-group.active>summary::after { position: absolute; right: .75rem; bottom: 0; left: .75rem; height: 3px; border-radius: 3px 3px 0 0; background: #43c1b5; content: ""; }
+.platform-nav-group { position: relative; }
+.platform-nav-group>summary { list-style: none; }
+.platform-nav-group>summary::-webkit-details-marker { display: none; }
+.platform-nav-group>summary span { width: .42rem; height: .42rem; margin: -.2rem 0 0 .5rem; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); transition: transform .18s ease; }
+.platform-nav-group[open]>summary span { margin-top: .18rem; transform: rotate(225deg); }
+.platform-dropdown { position: absolute; top: calc(100% - 4px); left: 50%; z-index: 20; display: grid; min-width: 218px; padding: .55rem; border: 1px solid #d8e1e9; border-radius: 10px; background: #fff; box-shadow: 0 18px 38px rgba(3,16,29,.22); transform: translateX(-50%); }
+.platform-docs-dropdown { grid-template-columns:1fr; min-width:240px; }
+.platform-dropdown a { padding: .58rem .7rem; border-radius: 6px; color: #40556b; text-decoration: none; white-space: nowrap; font-size: .76rem; font-weight: 650; }
+.platform-dropdown a:hover,.platform-dropdown a.active { color: #075f59; background: #e5f3f1; }
+.platform-menu { display: none; justify-self: end; padding: .45rem .7rem; border: 1px solid rgba(255,255,255,.2); border-radius: 7px; color: #fff; background: rgba(255,255,255,.06); font: inherit; font-size: .74rem; font-weight: 750; cursor: pointer; }
+.platform-content { flex: 1; min-width: 0; }
+.platform-footer { display: flex; justify-content: space-between; align-items: center; gap: 2rem; padding: 1.75rem clamp(1rem, 4vw, 4rem); color: #91a4b8; background: linear-gradient(135deg,#091725,#10243e); font-size: .73rem; }
+.platform-footer-brand { display:flex; align-items:center; gap:.8rem; min-width:0; }
+.platform-footer-mark { flex:0 0 auto; width:30px; height:30px; object-fit:contain; }
+.platform-footer strong,.platform-footer-brand span { display: block; }
+.platform-footer strong { color: #fff; font-size: .86rem; }
+.platform-footer-brand span { max-width:560px; margin-top:.15rem; line-height:1.5; }
+.platform-footer-meta { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .65rem 1rem; }
+.platform-footer-meta a { color: #c9d6e1; text-decoration: none; }
+.platform-footer-meta a:hover { color: #fff; }
+
+@media (max-width: 1180px) {
+  .platform-header { grid-template-columns: auto 1fr auto; }
+  .platform-version { justify-self: start; }
+  .platform-menu { display: inline-flex; }
+  .platform-navigation { position: absolute; top: 72px; right: 0; left: 0; display: none; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .2rem; padding: .75rem 1rem 1rem; border-bottom: 1px solid rgba(255,255,255,.1); background: #10243e; box-shadow: 0 18px 30px rgba(3,16,29,.2); }
+  .platform-navigation.open { display: grid; }
+  .platform-nav-link,.platform-nav-group>summary { min-height:auto; padding: .72rem .8rem; border-radius: 6px; }
+  .platform-nav-link.active,.platform-nav-group.active>summary { background: rgba(67,193,181,.14); }
+  .platform-nav-link.active::after,.platform-nav-group.active>summary::after { display: none; }
+  .platform-dropdown { position: static; min-width:0; margin: 0 .45rem .5rem; border-color: rgba(255,255,255,.08); background:#0b1e33; box-shadow:none; transform:none; }
+  .platform-docs-dropdown { grid-template-columns:1fr; width:auto; max-height:none; overflow:visible; }
+  .platform-dropdown a { color:#c7d4e0; }
+  .platform-dropdown a:hover,.platform-dropdown a.active { color:#fff; background:rgba(67,193,181,.14); }
+}
+
+@media (max-width: 660px) {
+  .platform-header { grid-template-columns: 1fr auto; }
+  .platform-version { display: none; }
+  .platform-brand-copy small { max-width: 165px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .platform-navigation { grid-template-columns: 1fr; max-height: calc(100vh - 72px); overflow: auto; }
+  .platform-docs-dropdown { grid-template-columns: 1fr; }
+  .platform-footer { align-items: flex-start; flex-direction: column; gap: 1rem; }
+  .platform-footer-brand { align-items:flex-start; }
+  .platform-footer-meta { justify-content: flex-start; }
+}
+
+validation-platform-shell:not(:defined) { display:block; min-height:100vh; color:#17273c; background:#f4f7fa; }
+validation-platform-shell:not(:defined)::before { display:block; height:72px; background:#10243e; box-shadow:0 8px 24px rgba(3,16,29,.14); content:""; }
+validation-platform-shell:not(:defined)>* { visibility:hidden; }
+</style>
+  <script>globalThis.validationPlatformShellStyles=":host {\r\n  --vr-navy: #10243e;\r\n  --vr-navy-deep: #091725;\r\n  --vr-teal: #08736a;\r\n  --vr-text-on-dark: #eef6fb;\r\n  --vr-muted-on-dark: #9db1c5;\r\n  display: flex;\r\n  min-height: 100vh;\r\n  flex-direction: column;\r\n  color: #17273c;\r\n  background: #f4f7fa;\r\n  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif;\r\n}\r\n\r\n* { box-sizing: border-box; }\r\n.platform-header { position: sticky; top: 0; z-index: 1000; display: grid; grid-template-columns: auto auto minmax(0, 1fr); align-items: center; min-height: 72px; padding: 0 clamp(1rem, 4vw, 4rem); color: var(--vr-text-on-dark); border-bottom: 1px solid rgba(255,255,255,.11); background: rgba(16,36,62,.98); box-shadow: 0 8px 24px rgba(3,16,29,.14); backdrop-filter: blur(14px); }\r\n.platform-brand { display: flex; align-items: center; gap: .75rem; min-width: max-content; color: #fff; text-decoration: none; }\r\n.platform-mark { display: block; width: 38px; height: 38px; object-fit: contain; }\r\n.platform-brand-copy strong,.platform-brand-copy small { display: block; }\r\n.platform-brand-copy strong { font-size: .94rem; line-height: 1.2; }\r\n.platform-brand-copy small { margin-top: .12rem; color: var(--vr-muted-on-dark); font-size: .69rem; }\r\n.platform-version { margin-left: .75rem; padding: .24rem .46rem; border: 1px solid rgba(255,255,255,.13); border-radius: 999px; color: #b6c8d8; background: rgba(255,255,255,.05); font-size: .63rem; font-weight: 750; }\r\n.platform-navigation { display: flex; justify-content: flex-end; align-items: stretch; gap: .25rem; min-width: 0; }\r\n.platform-nav-link,.platform-nav-group>summary { position: relative; display: flex; align-items: center; min-height: 71px; padding: 0 .78rem; color: #c7d4e0; text-decoration: none; white-space: nowrap; font-size: .78rem; font-weight: 680; cursor: pointer; }\r\n.platform-nav-link:hover,.platform-nav-link.active,.platform-nav-group>summary:hover,.platform-nav-group.active>summary,.platform-nav-group[open]>summary { color: #fff; }\r\n.platform-nav-link.active::after,.platform-nav-group.active>summary::after { position: absolute; right: .75rem; bottom: 0; left: .75rem; height: 3px; border-radius: 3px 3px 0 0; background: #43c1b5; content: \"\"; }\r\n.platform-nav-group { position: relative; }\r\n.platform-nav-group>summary { list-style: none; }\r\n.platform-nav-group>summary::-webkit-details-marker { display: none; }\r\n.platform-nav-group>summary span { width: .42rem; height: .42rem; margin: -.2rem 0 0 .5rem; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); transition: transform .18s ease; }\r\n.platform-nav-group[open]>summary span { margin-top: .18rem; transform: rotate(225deg); }\r\n.platform-dropdown { position: absolute; top: calc(100% - 4px); left: 50%; z-index: 20; display: grid; min-width: 218px; padding: .55rem; border: 1px solid #d8e1e9; border-radius: 10px; background: #fff; box-shadow: 0 18px 38px rgba(3,16,29,.22); transform: translateX(-50%); }\r\n.platform-docs-dropdown { grid-template-columns:1fr; min-width:240px; }\r\n.platform-dropdown a { padding: .58rem .7rem; border-radius: 6px; color: #40556b; text-decoration: none; white-space: nowrap; font-size: .76rem; font-weight: 650; }\r\n.platform-dropdown a:hover,.platform-dropdown a.active { color: #075f59; background: #e5f3f1; }\r\n.platform-menu { display: none; justify-self: end; padding: .45rem .7rem; border: 1px solid rgba(255,255,255,.2); border-radius: 7px; color: #fff; background: rgba(255,255,255,.06); font: inherit; font-size: .74rem; font-weight: 750; cursor: pointer; }\r\n.platform-content { flex: 1; min-width: 0; }\r\n.platform-footer { display: flex; justify-content: space-between; align-items: center; gap: 2rem; padding: 1.75rem clamp(1rem, 4vw, 4rem); color: #91a4b8; background: linear-gradient(135deg,#091725,#10243e); font-size: .73rem; }\r\n.platform-footer-brand { display:flex; align-items:center; gap:.8rem; min-width:0; }\r\n.platform-footer-mark { flex:0 0 auto; width:30px; height:30px; object-fit:contain; }\r\n.platform-footer strong,.platform-footer-brand span { display: block; }\r\n.platform-footer strong { color: #fff; font-size: .86rem; }\r\n.platform-footer-brand span { max-width:560px; margin-top:.15rem; line-height:1.5; }\r\n.platform-footer-meta { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .65rem 1rem; }\r\n.platform-footer-meta a { color: #c9d6e1; text-decoration: none; }\r\n.platform-footer-meta a:hover { color: #fff; }\r\n\r\n@media (max-width: 1180px) {\r\n  .platform-header { grid-template-columns: auto 1fr auto; }\r\n  .platform-version { justify-self: start; }\r\n  .platform-menu { display: inline-flex; }\r\n  .platform-navigation { position: absolute; top: 72px; right: 0; left: 0; display: none; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .2rem; padding: .75rem 1rem 1rem; border-bottom: 1px solid rgba(255,255,255,.1); background: #10243e; box-shadow: 0 18px 30px rgba(3,16,29,.2); }\r\n  .platform-navigation.open { display: grid; }\r\n  .platform-nav-link,.platform-nav-group>summary { min-height:auto; padding: .72rem .8rem; border-radius: 6px; }\r\n  .platform-nav-link.active,.platform-nav-group.active>summary { background: rgba(67,193,181,.14); }\r\n  .platform-nav-link.active::after,.platform-nav-group.active>summary::after { display: none; }\r\n  .platform-dropdown { position: static; min-width:0; margin: 0 .45rem .5rem; border-color: rgba(255,255,255,.08); background:#0b1e33; box-shadow:none; transform:none; }\r\n  .platform-docs-dropdown { grid-template-columns:1fr; width:auto; max-height:none; overflow:visible; }\r\n  .platform-dropdown a { color:#c7d4e0; }\r\n  .platform-dropdown a:hover,.platform-dropdown a.active { color:#fff; background:rgba(67,193,181,.14); }\r\n}\r\n\r\n@media (max-width: 660px) {\r\n  .platform-header { grid-template-columns: 1fr auto; }\r\n  .platform-version { display: none; }\r\n  .platform-brand-copy small { max-width: 165px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }\r\n  .platform-navigation { grid-template-columns: 1fr; max-height: calc(100vh - 72px); overflow: auto; }\r\n  .platform-docs-dropdown { grid-template-columns: 1fr; }\r\n  .platform-footer { align-items: flex-start; flex-direction: column; gap: 1rem; }\r\n  .platform-footer-brand { align-items:flex-start; }\r\n  .platform-footer-meta { justify-content: flex-start; }\r\n}\r\n\r\nvalidation-platform-shell:not(:defined) { display:block; min-height:100vh; color:#17273c; background:#f4f7fa; }\r\nvalidation-platform-shell:not(:defined)::before { display:block; height:72px; background:#10243e; box-shadow:0 8px 24px rgba(3,16,29,.14); content:\"\"; }\r\nvalidation-platform-shell:not(:defined)>* { visibility:hidden; }\r\n";const documentationSections = [
+  {
+    label: 'Introduction',
+    items: [
+      ['What is Validation Rules Engine (VRE)?', '/docs/overview'],
+      ['Installation & Quick Start', '/docs/getting-started']
+    ]
+  },
+  {
+    label: 'Core Package',
+    items: [
+      ['Overview', '/docs/core-package'],
+      ['Installation', '/docs/core-installation'],
+      ['Quick Start', '/docs/core-quick-start'],
+      ['Architecture', '/docs/core-architecture'],
+      ['Validation Policies', '/docs/core-validation-policies'],
+      ['Validation Rules', '/docs/core-validation-rules'],
+      ['Validation Groups', '/docs/core-validation-groups'],
+      ['Public API', '/docs/core-public-api'],
+      ['Examples', '/docs/core-examples'],
+      ['Best Practices', '/docs/core-best-practices'],
+      ['Troubleshooting', '/docs/core-troubleshooting'],
+      ['FAQ', '/docs/core-faq']
+    ]
+  },
+  {
+    label: 'Angular Package',
+    items: [
+      ['Overview', '/docs/angular'],
+      ['Installation', '/docs/angular-installation'],
+      ['Quick Start', '/docs/angular-quick-start'],
+      ['Architecture', '/docs/angular-architecture'],
+      ['Services', '/docs/angular-services'],
+      ['Components', '/docs/angular-components'],
+      ['Directives', '/docs/angular-directives'],
+      ['Validation Policies', '/docs/angular-validation-policies'],
+      ['Validation Groups', '/docs/angular-validation-groups'],
+      {
+        label: 'State Management',
+        items: [
+          ['Template Driven Forms', '/docs/angular-ngmodel'],
+          ['Reactive Forms', '/docs/angular-reactive-forms'],
+          ['NgRx', '/docs/angular-state-ngrx'],
+          ['NGXS', '/docs/angular-state-ngxs'],
+          ['Akita', '/docs/angular-state-akita'],
+          ['Elf', '/docs/angular-state-elf'],
+          ['RxAngular State', '/docs/angular-state-rx-angular'],
+          ['Signals', '/docs/angular-state-signals'],
+          ['Custom RxJS Store', '/docs/angular-state-custom-rxjs-store']
+        ]
+      },
+      ['Examples', '/docs/angular-examples'],
+      ['Best Practices', '/docs/angular-best-practices'],
+      ['Troubleshooting', '/docs/angular-troubleshooting'],
+      ['FAQ', '/docs/angular-faq']
+    ]
+  },
+  {
+    label: 'React Package',
+    items: [
+      ['Overview', '/docs/react-overview'],
+      ['Installation', '/docs/react-installation'],
+      ['Quick Start', '/docs/react-quick-start'],
+      ['Architecture', '/docs/react-architecture'],
+      ['Provider', '/docs/react-provider'],
+      ['Core Hooks', '/docs/react-hooks'],
+      ['Field Validation', '/docs/react-field-validation'],
+      ['Form Validation', '/docs/react-form-validation'],
+      ['Validation Policies', '/docs/react-policies'],
+      ['Validation Groups', '/docs/react-groups'],
+      {
+        label: 'State Management',
+        items: [
+          ['Local State', '/docs/react-state-local-state'],
+          ['Redux Toolkit', '/docs/react-state-redux-toolkit'],
+          ['Zustand', '/docs/react-state-zustand'],
+          ['Jotai', '/docs/react-state-jotai'],
+          ['Recoil', '/docs/react-state-recoil'],
+          ['MobX', '/docs/react-state-mobx'],
+          ['Context API', '/docs/react-state-context']
+        ]
+      },
+      ['Controlled Inputs', '/docs/react-controlled-inputs'],
+      ['Custom Inputs', '/docs/react-custom-components'],
+      ['Dynamic Fields', '/docs/react-dynamic-fields'],
+      ['Multiple Forms', '/docs/react-multiple-forms'],
+      ['Performance', '/docs/react-performance'],
+      ['Strict Mode', '/docs/react-strict-mode'],
+      ['Testing', '/docs/react-testing'],
+      ['Public API', '/docs/react-api'],
+      ['Migration and Compatibility', '/docs/react-migration'],
+      ['Examples', '/docs/react-examples'],
+      ['Best Practices', '/docs/react-best-practices'],
+      ['Troubleshooting', '/docs/react-troubleshooting'],
+      ['FAQ', '/docs/react-faq']
+    ]
+  },
+  {
+    label: 'Guides',
+    items: [
+      ['Policies & Rules', '/docs/policies-and-rules'],
+      ['Validation Groups', '/docs/validation-groups'],
+      ['Advanced Examples', '/docs/advanced']
+    ]
+  },
+  {
+    label: 'Reference',
+    items: [
+      ['Public API Reference', '/docs/public-api']
+    ]
+  },
+  {
+    label: 'Project',
+    items: [
+      ['Architecture', '/docs/architecture'],
+      ['Testing, Coverage & Reports', '/docs/testing'],
+      ['Migration', '/docs/migration'],
+      ['Roadmap', '/docs/roadmap'],
+      ['Troubleshooting', '/docs/troubleshooting'],
+      ['FAQ', '/docs/faq']
+    ]
+  }
+];
+
+const showcaseItems = [
+  ['Vanilla Showcase', 'vanilla'],
+  ['Angular Showcase', 'angular'],
+  ['React Showcase', 'react']
+];
+
+function normalizedBase(value, fallback) {
+  return String(value ?? fallback).replace(/\/$/, '');
+}
+
+function configuredUrls() {
+  const config = globalThis.vrePlatformConfig || {};
+  return config.urls || config;
+}
+
+function configuredBase(key, attributeValue, fallback) {
+  const urls = configuredUrls();
+  const configured = [attributeValue, urls[key], urls[`${key}Url`]]
+    .find((value) => typeof value === 'string' && value.trim());
+  return normalizedBase(configured, fallback);
+}
+
+function currentOriginWhen(activeApplication, applications, fallback) {
+  return applications.includes(activeApplication) && /^https?:$/u.test(location.protocol)
+    ? location.origin
+    : fallback;
+}
+
+function developmentOrigin(port) {
+  if (!/^https?:$/u.test(location.protocol)) {
+    return '';
+  }
+  const url = new URL(location.origin);
+  url.port = String(port);
+  return url.origin;
+}
+
+function flattenDocsItems(items) {
+  return items.flatMap((item) => (Array.isArray(item) ? [item] : flattenDocsItems(item.items)));
+}
+
+function isDocsItemActive(item) {
+  if (Array.isArray(item)) {
+    return location.pathname === item[1];
+  }
+  return item.items.some((child) => isDocsItemActive(child));
+}
+
+function firstDocsPath(section) {
+  return flattenDocsItems(section.items)[0]?.[1] || '/docs/overview';
+}
+
+function isDocsSectionActive(section) {
+  return section.items.some((item) => isDocsItemActive(item));
+}
+
+function isPathActive(pathname) {
+  return location.pathname === pathname
+    || (pathname.endsWith('/index.html') && location.pathname === pathname.replace(/index\.html$/u, ''))
+    || (pathname.endsWith('/index.html') && location.pathname === pathname.replace(/\/index\.html$/u, ''));
+}
+
+class ValidationPlatformShell extends HTMLElement {
+  static get observedAttributes() {
+    return ['version'];
+  }
+
+  connectedCallback() {
+    if (this.shadowRoot) {
+      return;
+    }
+
+    const activeApplication = this.getAttribute('active-application') || '';
+    const applicationName = this.getAttribute('application-name') || 'Platform';
+    const version = this.getAttribute('version') || '0.0.0';
+    const brandMarkUrl = this.getAttribute('brand-mark-url') || '/vre-mark.svg';
+    const defaultPortalUrl = currentOriginWhen(activeApplication, ['portal', 'reports'], developmentOrigin(4200));
+    const urls = {
+      portal: configuredBase('portal', this.getAttribute('portal-url'), defaultPortalUrl),
+      docs: configuredBase('docs', this.getAttribute('docs-url'), currentOriginWhen(activeApplication, ['documentation'], developmentOrigin(4201))),
+      angular: configuredBase('angular', this.getAttribute('angular-url'), currentOriginWhen(activeApplication, ['angular-showcase'], developmentOrigin(4202))),
+      react: configuredBase('react', this.getAttribute('react-url'), currentOriginWhen(activeApplication, ['react-showcase'], developmentOrigin(4204))),
+      vanilla: configuredBase('vanilla', this.getAttribute('vanilla-url'), currentOriginWhen(activeApplication, ['vanilla-showcase'], developmentOrigin(4205)))
+    };
+    const docsActive = activeApplication === 'documentation';
+    const showcasesActive = activeApplication === 'angular-showcase'
+      || activeApplication === 'react-showcase'
+      || activeApplication === 'vanilla-showcase';
+    const reportsActive = activeApplication === 'reports';
+    const docsNavigation = documentationSections.map((section) => {
+      const active = docsActive && isDocsSectionActive(section);
+      return `<a href="${urls.docs}${firstDocsPath(section)}"${active ? ' aria-current="page" class="active"' : ''}>${section.label}</a>`;
+    }).join('');
+    const showcasesNavigation = showcaseItems.map(([label, target]) => {
+      const applicationId = `${target}-showcase`;
+      const active = activeApplication === applicationId;
+      return `<a href="${urls[target]}/"${active ? ' aria-current="page" class="active"' : ''}>${label}</a>`;
+    }).join('');
+    const reportsNavigation = [
+      ['Tests & Coverage', '/reports/index.html'],
+      ['Automation Testing', '/automation/']
+    ].map(([label, pathname]) => {
+      const active = reportsActive && isPathActive(pathname);
+      return `<a href="${urls.portal}${pathname}"${active ? ' aria-current="page" class="active"' : ''}>${label}</a>`;
+    }).join('');
+
+    const root = this.attachShadow({ mode: 'open' });
+    const injectedStyles = globalThis.validationPlatformShellStyles;
+    root.innerHTML = `
+      ${injectedStyles ? `<style>${injectedStyles}</style>` : '<link rel="stylesheet" href="/platform-shell.css">'}
+      <header class="platform-header" part="header">
+        <a class="platform-brand" href="${urls.portal || '/'}" aria-label="Validation Rules Engine home">
+          <img class="platform-mark" src="${brandMarkUrl}" width="38" height="38" alt="">
+          <span class="platform-brand-copy"><strong>Validation Rules Engine</strong><small>${applicationName}</small></span>
+        </a>
+        <span class="platform-version" data-version title="Workspace version">v${version}</span>
+        <button class="platform-menu" type="button" aria-expanded="false" aria-controls="platform-navigation">Menu</button>
+        <nav id="platform-navigation" class="platform-navigation" aria-label="Platform navigation">
+          <a class="platform-nav-link ${activeApplication === 'portal' ? 'active' : ''}" href="${urls.portal}/"${activeApplication === 'portal' ? ' aria-current="page"' : ''}>Home</a>
+          <details class="platform-nav-group ${docsActive ? 'active' : ''}">
+            <summary>Docs<span aria-hidden="true"></span></summary>
+            <div class="platform-dropdown platform-docs-dropdown">${docsNavigation}</div>
+          </details>
+          <details class="platform-nav-group ${showcasesActive ? 'active' : ''}">
+            <summary>Showcases<span aria-hidden="true"></span></summary>
+            <div class="platform-dropdown">${showcasesNavigation}</div>
+          </details>
+          <details class="platform-nav-group ${reportsActive ? 'active' : ''}">
+            <summary>Reports<span aria-hidden="true"></span></summary>
+            <div class="platform-dropdown">${reportsNavigation}</div>
+          </details>
+          <a class="platform-nav-link" href="https://github.com/kalyan-k/validation-rules-engine">GitHub</a>
+        </nav>
+      </header>
+      <div class="platform-content"><slot></slot></div>
+      <footer class="platform-footer" part="footer">
+        <div class="platform-footer-brand">
+          <img class="platform-footer-mark" src="${brandMarkUrl}" width="30" height="30" alt="">
+          <div><strong>Validation Rules Engine</strong><span>Reusable policy validation for Angular, React, and framework-neutral TypeScript.</span></div>
+        </div>
+        <div class="platform-footer-meta"><span data-version>v${version}</span><span>MIT License</span><a href="${urls.docs}/docs/overview">Docs</a><a href="${urls.portal}/reports/index.html">Reports</a><a href="https://github.com/kalyan-k/validation-rules-engine">GitHub</a></div>
+      </footer>`;
+
+    const button = root.querySelector('.platform-menu');
+    const nav = root.querySelector('.platform-navigation');
+    button.addEventListener('click', () => {
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!expanded));
+      nav.classList.toggle('open', !expanded);
+    });
+
+    const groups = [...root.querySelectorAll('.platform-nav-group')];
+    groups.forEach((group) => group.addEventListener('toggle', () => {
+      if (group.open) {
+        groups.filter((candidate) => candidate !== group).forEach((candidate) => { candidate.open = false; });
+      }
+    }));
+    root.querySelectorAll('.platform-dropdown a').forEach((link) => link.addEventListener('click', () => {
+      groups.forEach((group) => { group.open = false; });
+      button.setAttribute('aria-expanded', 'false');
+      nav.classList.remove('open');
+    }));
+    root.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        const openGroup = groups.find((group) => group.open);
+        groups.forEach((group) => { group.open = false; });
+        if (nav.classList.contains('open')) {
+          nav.classList.remove('open');
+          button.setAttribute('aria-expanded', 'false');
+          button.focus();
+        } else {
+          openGroup?.querySelector('summary')?.focus();
+        }
+      }
+    });
+    document.addEventListener('click', (event) => {
+      const path = event.composedPath();
+      if (!groups.some((group) => path.includes(group))) {
+        groups.forEach((group) => { group.open = false; });
+      }
+    });
+  }
+
+  attributeChangedCallback(name, _previous, current) {
+    if (name === 'version' && this.shadowRoot) {
+      this.shadowRoot.querySelectorAll('[data-version]').forEach((element) => {
+        element.textContent = `v${current || '0.0.0'}`;
+      });
+    }
+  }
+}
+
+if (!customElements.get('validation-platform-shell')) {
+  customElements.define('validation-platform-shell', ValidationPlatformShell);
+}
+</script>
+  <title>React Adapter coverage report</title>
+  <style>
+    :root { color-scheme:light; --vr-ink:#17273c; --vr-muted:#52657a; --vr-line:#dbe3eb; --vr-panel:#fff; --vr-bg:#eef2f8; --vr-accent:#08736a; --vr-pass:#087443; --vr-warn:#b54708; --vr-fail:#b42318; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--vr-ink); background:var(--vr-bg); font:15px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif; }
+    .vr-report-summary { box-sizing:border-box; max-width:1600px; margin:0 auto; padding:24px 28px; border-bottom:1px solid var(--vr-line); background:#fff; }
+    .vr-report-summary__heading { display:flex; align-items:center; justify-content:space-between; gap:24px; }
+    .vr-report-summary__heading button { display:flex; align-items:center; gap:8px; padding:7px 10px; border:1px solid #c8d5df; border-radius:8px; color:#40556b; background:#f7fafb; font:inherit; font-size:11px; cursor:pointer; }
+    .vr-report-summary__heading button:hover { color:#075f59; border-color:#8bc7c1; background:#eaf5f3; }
+    .vr-report-summary__heading button i { width:7px; height:7px; border-right:1px solid; border-bottom:1px solid; transform:rotate(225deg); transition:transform .22s ease; }
+    .vr-report-summary.collapsed .vr-report-summary__heading button i { transform:rotate(45deg); }
+    .vr-report-summary__details { max-height:100px; overflow:hidden; opacity:1; transition:max-height .3s ease,opacity .22s ease,margin .3s ease; }
+    .vr-report-summary.collapsed .vr-report-summary__details { max-height:0; margin:0; opacity:0; }
+    .vr-report-eyebrow { color:#075f59; font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+    .vr-report-summary h1 { margin:5px 0 0; color:var(--vr-ink); font-size:30px; line-height:1.15; }
+    .vr-report-metadata { display:grid; grid-template-columns:repeat(4,minmax(120px,1fr)); gap:8px 24px; margin:18px 0 0; }
+    .vr-report-metadata div { min-width:0; }
+    .vr-report-metadata dt { color:#52657a; font-size:10px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
+    .vr-report-metadata dd { margin:1px 0 0; color:#40556b; font-size:12px; overflow-wrap:anywhere; }
+    .vr-report-subnav { display:flex; flex-wrap:wrap; gap:7px; max-width:1500px; margin:0 auto; padding:14px 28px; border-bottom:1px solid var(--vr-line); background:#fff; }
+    .vr-report-subnav a { padding:7px 11px; border:1px solid #cbd9df; border-radius:8px; color:#08736a; background:#f8fbfb; font-size:13px; font-weight:700; text-decoration:none; }
+    .vr-report-subnav a:hover { border-color:#8bc7c1; background:#eaf5f3; }
+    @media (max-width:660px) { .vr-report-summary,.vr-report-subnav { padding-left:16px; padding-right:16px; } .vr-report-summary h1 { font-size:25px; } .vr-report-summary__heading button span { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); } .vr-report-metadata { grid-template-columns:1fr 1fr; } }
+  
+    html,body { min-height:100%; }
+    .coverage-frame { display:block; width:100%; height:calc(100vh - 250px); min-height:720px; border:0; background:#fff; }
+  </style>
+</head>
+<body>
+  <validation-platform-shell active-application="reports" application-name="Reports" version="1.0.0" brand-mark-url="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InRpdGxlIGRlc2NyaXB0aW9uIj4NCiAgPHRpdGxlIGlkPSJ0aXRsZSI+VmFsaWRhdGlvbiBSdWxlcyBFbmdpbmU8L3RpdGxlPg0KICA8ZGVzYyBpZD0iZGVzY3JpcHRpb24iPk5ldXRyYWwgZGF0YSBmbG93cyBpbnRvIHRoZSBWYWxpZGF0aW9uIFJ1bGVzIEVuZ2luZSwgcmVkIGVycm9ycyBmbG93IHVwd2FyZCwgYW5kIGdyZWVuIHZhbGlkYXRlZCBkYXRhIGZsb3dzIG91dC48L2Rlc2M+DQogIDxkZWZzPg0KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iaW5wdXQtZmxvdyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwIiB5MT0iMCIgeDI9IjE2IiB5Mj0iMCI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM3ODk1YWEiLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2MyZDNkZSIvPg0KICAgIDwvbGluZWFyR3JhZGllbnQ+DQogICAgPGxpbmVhckdyYWRpZW50IGlkPSJlcnJvci1mbG93IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAiIHkxPSIyMCIgeDI9IjAiIHkyPSI0Ij4NCiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZmNGY1ZSIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmY4YTc4Ii8+DQogICAgPC9saW5lYXJHcmFkaWVudD4NCiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InN1Y2Nlc3MtZmxvdyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSI0OCIgeTE9IjAiIHgyPSI2NCIgeTI9IjAiPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMzhjNzdiIi8+DQogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM3M2VmYTQiLz4NCiAgICA8L2xpbmVhckdyYWRpZW50Pg0KICA8L2RlZnM+DQoNCiAgPGcgZmlsbD0iIzBkOGY4MiIgc3Ryb2tlPSIjNjVkNmNhIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4NCiAgICA8cGF0aCBkPSJNMjggMy41aDE3djdIMjh6IiBzdHJva2Utd2lkdGg9IjEuNCIvPg0KICAgIDxwYXRoIGQ9Ik0zMyAxMC41aDd2NWgtN3oiIHN0cm9rZS13aWR0aD0iMS40Ii8+DQogICAgPHBhdGggZD0iTTE0IDIyaDdsNy03aDIxYTUgNSAwIDAgMSA1IDV2MjJhNSA1IDAgMCAxLTEuNSAzLjVMNDMgNTZIMjhhNC41IDQuNSAwIDAgMS0zLjMtMS41TDIwIDQ5aC02YTQgNCAwIDAgMS00LTRWMjZhNCA0IDAgMCAxIDQtNFoiIHN0cm9rZS13aWR0aD0iMS41Ii8+DQogICAgPHBhdGggZD0iTTMgMjloN3YxMUgzek0uNSAyNGg0djIxaC00em01My41IDVoN3YxMWgtN3ptNiAwaDMuNXYxMUg2MHoiIHN0cm9rZS13aWR0aD0iMS40Ii8+DQogIDwvZz4NCg0KICA8ZyBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiPg0KICAgIDxwYXRoIGQ9Ik0xLjUgMzQuNUgxNiIgc3Ryb2tlPSJ1cmwoI2lucHV0LWZsb3cpIiBzdHJva2Utd2lkdGg9IjMuNCIvPg0KICAgIDxwYXRoIGQ9Ik0zNi41IDIwVjUuNSIgc3Ryb2tlPSJ1cmwoI2Vycm9yLWZsb3cpIiBzdHJva2Utd2lkdGg9IjMuNCIvPg0KICAgIDxwYXRoIGQ9Ik00OCAzNC41aDE0LjUiIHN0cm9rZT0idXJsKCNzdWNjZXNzLWZsb3cpIiBzdHJva2Utd2lkdGg9IjMuNCIvPg0KICA8L2c+DQoNCiAgPHJlY3QgeD0iMTQiIHk9IjE5IiB3aWR0aD0iMzYiIGhlaWdodD0iMjgiIHJ4PSI2IiBmaWxsPSIjMTAyZjQ5IiBzdHJva2U9IiM2NWQ2Y2EiIHN0cm9rZS13aWR0aD0iMS40Ii8+DQogIDxnIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+DQogICAgPHJlY3QgeD0iMTYuNSIgeT0iMjEiIHdpZHRoPSIzMSIgaGVpZ2h0PSI3IiByeD0iMy41IiBzdHJva2U9IiNiOGNhZDYiIHN0cm9rZS1vcGFjaXR5PSIuMzUiLz4NCiAgICA8Y2lyY2xlIGN4PSIyMC41IiBjeT0iMjQuNSIgcj0iMS40IiBzdHJva2U9IiNiOGNhZDYiIHN0cm9rZS13aWR0aD0iMS4zIi8+DQogICAgPHBhdGggZD0iTTI0LjUgMjQuNWg3bTMuNSAwaDkiIHN0cm9rZT0iI2I4Y2FkNiIgc3Ryb2tlLXdpZHRoPSIxLjkiLz4NCiAgICA8cGF0aCBkPSJNMzMuMyAyMy40djIuMiIgc3Ryb2tlPSIjYjhjYWQ2IiBzdHJva2Utd2lkdGg9IjEuMiIvPg0KDQogICAgPHJlY3QgeD0iMTYuNSIgeT0iMjkuNSIgd2lkdGg9IjMxIiBoZWlnaHQ9IjciIHJ4PSIzLjUiIHN0cm9rZT0iI2ZmNjg2OCIgc3Ryb2tlLW9wYWNpdHk9Ii40Ii8+DQogICAgPHBhdGggZD0ibTE4LjUgMzEuMiA0IDRtMC00LTQgNCIgc3Ryb2tlPSIjZmY2ODY4IiBzdHJva2Utd2lkdGg9IjEuOSIvPg0KICAgIDxwYXRoIGQ9Ik0yNSAzM2g2LjVtMy41IDBoOSIgc3Ryb2tlPSIjZmY2ODY4IiBzdHJva2Utd2lkdGg9IjEuOSIvPg0KICAgIDxwYXRoIGQ9Ik0zMy4zIDMxLjl2Mi4yIiBzdHJva2U9IiNmZjY4NjgiIHN0cm9rZS13aWR0aD0iMS4yIi8+DQoNCiAgICA8cmVjdCB4PSIxNi41IiB5PSIzOCIgd2lkdGg9IjMxIiBoZWlnaHQ9IjciIHJ4PSIzLjUiIHN0cm9rZT0iIzU2ZGY4ZSIgc3Ryb2tlLW9wYWNpdHk9Ii40MiIvPg0KICAgIDxwYXRoIGQ9Im0xOCA0MS41IDIuMSAyIDMuOC00LjIiIHN0cm9rZT0iIzU2ZGY4ZSIgc3Ryb2tlLXdpZHRoPSIyLjEiLz4NCiAgICA8cGF0aCBkPSJNMjYgNDEuNWg1LjVtMy41IDBoOSIgc3Ryb2tlPSIjNTZkZjhlIiBzdHJva2Utd2lkdGg9IjEuOSIvPg0KICAgIDxwYXRoIGQ9Ik0zMy4zIDQwLjR2Mi4yIiBzdHJva2U9IiM1NmRmOGUiIHN0cm9rZS13aWR0aD0iMS4yIi8+DQogIDwvZz4NCg0KICA8ZyBmaWxsPSIjYzJkM2RlIj4NCiAgICA8Y2lyY2xlIGN4PSIyLjEiIGN5PSIzNC41IiByPSIxLjI1Ii8+DQogICAgPGNpcmNsZSBjeD0iNi41IiBjeT0iMzQuNSIgcj0iMS4wNSIvPg0KICAgIDxjaXJjbGUgY3g9IjEwLjQiIGN5PSIzNC41IiByPSIuODUiLz4NCiAgPC9nPg0KICA8ZyBmaWxsPSIjZmY3NjZlIj4NCiAgICA8Y2lyY2xlIGN4PSIzNi41IiBjeT0iMTMuNSIgcj0iMS4yIi8+DQogICAgPGNpcmNsZSBjeD0iMzYuNSIgY3k9IjkuMyIgcj0iMSIvPg0KICAgIDxjaXJjbGUgY3g9IjM2LjUiIGN5PSI1LjYiIHI9Ii44Ii8+DQogIDwvZz4NCiAgPGcgZmlsbD0iIzY0ZTk5YiI+DQogICAgPGNpcmNsZSBjeD0iNTQuNSIgY3k9IjM0LjUiIHI9Ii44NSIvPg0KICAgIDxjaXJjbGUgY3g9IjU4LjMiIGN5PSIzNC41IiByPSIxLjA1Ii8+DQogICAgPGNpcmNsZSBjeD0iNjIiIGN5PSIzNC41IiByPSIxLjI1Ii8+DQogIDwvZz4NCjwvc3ZnPg0K">
+    <section class="vr-report-summary" data-report-summary>
+      <div class="vr-report-summary__heading">
+        <div><span class="vr-report-eyebrow">React Adapter</span><h1>Code coverage report</h1></div>
+        <button type="button" aria-expanded="true" aria-controls="report-summary-react-adapter"><span>Collapse details</span><i aria-hidden="true"></i></button>
+      </div>
+      <div class="vr-report-summary__details" id="report-summary-react-adapter"><dl class="vr-report-metadata">
+        <div><dt>Application</dt><dd>React Adapter</dd></div>
+        <div><dt>Report</dt><dd>Code coverage report</dd></div>
+        <div><dt>Version</dt><dd>1.0.0</dd></div>
+        <div><dt>Generated</dt><dd>2026-08-07T02:24:45.194Z</dd></div>
+      </dl></div>
+    </section>
+    <script>(()=>{const root=document.currentScript.previousElementSibling;const button=root.querySelector('button');const key='vre:report-summary';const preference=sessionStorage.getItem(key);const setExpanded=(expanded,persist)=>{root.classList.toggle('collapsed',!expanded);button.setAttribute('aria-expanded',String(expanded));button.querySelector('span').textContent=expanded?'Collapse details':'Expand details';if(persist)sessionStorage.setItem(key,expanded?'expanded':'collapsed');};setExpanded(preference!=='collapsed',false);button.addEventListener('click',()=>setExpanded(button.getAttribute('aria-expanded')!=='true',true));if(preference===null)setTimeout(()=>setExpanded(false,false),10000);})();</script>
+  <nav class="vr-report-subnav" aria-label="Report navigation"><a href="../../index.html#react/summary">Summary</a><a href="./tests/index.html">Tests</a><a href="./coverage.html">Coverage</a><a href="./junit/test-results.xml">JUnit XML</a></nav>
+  <iframe class="coverage-frame" src="./coverage/index.html" title="React Adapter Istanbul coverage details"></iframe>
+  </validation-platform-shell>
+</body>
+</html>

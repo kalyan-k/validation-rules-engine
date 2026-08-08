@@ -1,0 +1,1135 @@
+{
+  "projectName": "angular",
+  "displayName": "Angular Adapter",
+  "version": "1.0.0",
+  "startedAt": "2026-08-07T01:51:11.401Z",
+  "finishedAt": "2026-08-07T01:51:14.117Z",
+  "durationMs": 2716,
+  "summary": {
+    "total": 91,
+    "passed": 91,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browsers": [
+    "Chrome Headless 151.0.0.0 (Windows 10)"
+  ],
+  "runError": false,
+  "dashboardHref": "../../../index.html",
+  "summaryHref": "../../../index.html#angular/summary",
+  "specs": [
+    {
+      "suite": [
+        "ValidatorDirective"
+      ],
+      "description": "falls back to the default display strategy when no strategy is injected",
+      "status": "passed",
+      "durationMs": 67,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/directives/validator.directive.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidatorDirective"
+      ],
+      "description": "parses simple and dotted binding paths",
+      "status": "passed",
+      "durationMs": 3,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/directives/validator.directive.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidatorDirective"
+      ],
+      "description": "binds a policy, detects the control, and registers a field once per form group",
+      "status": "passed",
+      "durationMs": 4,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/directives/validator.directive.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidatorDirective"
+      ],
+      "description": "synchronizes iterable changes and avoids duplicate UI writes",
+      "status": "passed",
+      "durationMs": 4,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/directives/validator.directive.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidatorDirective"
+      ],
+      "description": "does not initialize display behavior for an unknown policy",
+      "status": "passed",
+      "durationMs": 4,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/directives/validator.directive.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidatorDirective"
+      ],
+      "description": "stops listeners and refresh subscriptions on destroy",
+      "status": "passed",
+      "durationMs": 5,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/directives/validator.directive.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidatorDirective"
+      ],
+      "description": "validates on blur, marks the field touched, renders errors, and evaluates its group",
+      "status": "passed",
+      "durationMs": 6,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/directives/validator.directive.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidatorDirective"
+      ],
+      "description": "initializes required markers after view init and marks for check",
+      "status": "passed",
+      "durationMs": 3,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/directives/validator.directive.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidatorDirective"
+      ],
+      "description": "honors a custom validation event and updates conditional required state on input",
+      "status": "passed",
+      "durationMs": 4,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/directives/validator.directive.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidatorDirective"
+      ],
+      "description": "delays checkbox validation and also listens for blur",
+      "status": "passed",
+      "durationMs": 4,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/directives/validator.directive.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidatorDirective"
+      ],
+      "description": "discovers native event targets inside Material-style hosts",
+      "status": "passed",
+      "durationMs": 2,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/directives/validator.directive.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidatorDirective"
+      ],
+      "description": "clears hidden or removed field errors and renders forced refreshes",
+      "status": "passed",
+      "durationMs": 2,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/directives/validator.directive.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidatorDirective"
+      ],
+      "description": "binds every native radio in a radio-group host",
+      "status": "passed",
+      "durationMs": 2,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/directives/validator.directive.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation status and summary components"
+      ],
+      "description": "renders policy-group summaries only for evaluated errors",
+      "status": "passed",
+      "durationMs": 18,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/components/validation-components.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation status and summary components"
+      ],
+      "description": "renders pending and evaluated policy-group badges",
+      "status": "passed",
+      "durationMs": 6,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/components/validation-components.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation status and summary components"
+      ],
+      "description": "subscribes policy-group badges to refresh and unsubscribes on rebind and destroy",
+      "status": "passed",
+      "durationMs": 2,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/components/validation-components.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation status and summary components"
+      ],
+      "description": "renders a form-group summary only for evaluated groups with errors",
+      "status": "passed",
+      "durationMs": 3,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/components/validation-components.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation status and summary components"
+      ],
+      "description": "renders pending, valid, and invalid form-group badges",
+      "status": "passed",
+      "durationMs": 3,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/components/validation-components.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation status and summary components"
+      ],
+      "description": "subscribes form-group badges to model refresh and rebinds or cleans up safely",
+      "status": "passed",
+      "durationMs": 0,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/components/validation-components.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation status and summary components"
+      ],
+      "description": "returns an empty global error list when validation results are absent",
+      "status": "passed",
+      "durationMs": 0,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/components/validation-components.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation status and summary components"
+      ],
+      "description": "shows the global summary only after show-all and lists all messages",
+      "status": "passed",
+      "durationMs": 2,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/components/validation-components.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display configuration"
+      ],
+      "description": "normalizes full configuration while preserving custom strategies",
+      "status": "passed",
+      "durationMs": 0,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/display/validation-display-config.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display configuration"
+      ],
+      "description": "resolves required-indicator modern, legacy, fallback, and tooltip fields",
+      "status": "passed",
+      "durationMs": 0,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/display/validation-display-config.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display configuration"
+      ],
+      "description": "creates the configured built-in or custom strategy",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/display/validation-display-config.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display configuration"
+      ],
+      "description": "merges non-empty overrides and returns a copy without overrides",
+      "status": "passed",
+      "durationMs": 0,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/display/validation-display-config.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display configuration"
+      ],
+      "description": "resolves explicit and legacy presets",
+      "status": "passed",
+      "durationMs": 0,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/display/validation-display-config.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display configuration"
+      ],
+      "description": "maps legacy class fields and lets typed classes take precedence",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/display/validation-display-config.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display configuration"
+      ],
+      "description": "defines immutable complete class maps",
+      "status": "passed",
+      "durationMs": 0,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/display/validation-display-config.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "$parse"
+      ],
+      "description": "evaluates unary, binary, short-circuit, and conditional expressions",
+      "status": "passed",
+      "durationMs": 2,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/parser/expression-parser.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "$parse"
+      ],
+      "description": "returns a no-op for non-string, empty, and malformed expressions",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/parser/expression-parser.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "$parse"
+      ],
+      "description": "reads nested properties safely and lets locals override context",
+      "status": "passed",
+      "durationMs": 0,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/parser/expression-parser.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "$parse"
+      ],
+      "description": "evaluates arrays, maps, and keyed reads",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/parser/expression-parser.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "$parse"
+      ],
+      "description": "calls methods and caches the compiled function",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/parser/expression-parser.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationProviderService"
+      ],
+      "description": "resets form-group registrations and clears all validation state",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/services/validation-provider.service.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationProviderService"
+      ],
+      "description": "uses validateAll defaults without forcing show-all or group evaluation",
+      "status": "passed",
+      "durationMs": 0,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/services/validation-provider.service.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationProviderService"
+      ],
+      "description": "uses show-all to mark a policy group evaluated even when a section is pending",
+      "status": "passed",
+      "durationMs": 0,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/services/validation-provider.service.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationProviderService"
+      ],
+      "description": "registers policies case-insensitively and skips duplicates",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/services/validation-provider.service.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationProviderService"
+      ],
+      "description": "falls back safely when a mapped policy has no active or registered paths",
+      "status": "passed",
+      "durationMs": 0,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/services/validation-provider.service.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationProviderService"
+      ],
+      "description": "replaces, unregisters, and reports missing policies",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/services/validation-provider.service.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationProviderService"
+      ],
+      "description": "updates policy groups using registered paths when no form-group policy mapping exists",
+      "status": "passed",
+      "durationMs": 0,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/services/validation-provider.service.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationProviderService"
+      ],
+      "description": "returns a policy facade with validation and grouping operations",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/services/validation-provider.service.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationProviderService"
+      ],
+      "description": "evaluates multiple policies sequentially and updates a policy group",
+      "status": "passed",
+      "durationMs": 2,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/services/validation-provider.service.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationProviderService"
+      ],
+      "description": "registers and unregisters form-group and policy-group mappings",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/services/validation-provider.service.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationProviderService"
+      ],
+      "description": "evaluates all groups belonging to one policy",
+      "status": "passed",
+      "durationMs": 0,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/services/validation-provider.service.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationProviderService"
+      ],
+      "description": "notifies only subscribers bound to the exact model and supports unsubscribe",
+      "status": "passed",
+      "durationMs": 0,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/services/validation-provider.service.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationProviderService"
+      ],
+      "description": "evaluates a mapped form group and ignores missing mappings or policies",
+      "status": "passed",
+      "durationMs": 0,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/services/validation-provider.service.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationProviderService"
+      ],
+      "description": "validates all, exposes errors, required state, groups, and refresh notification",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/services/validation-provider.service.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display providers and module"
+      ],
+      "description": "provides every preset helper",
+      "status": "passed",
+      "durationMs": 5,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/display/validation-display-config.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display providers and module"
+      ],
+      "description": "provides custom strategy instances and classes",
+      "status": "passed",
+      "durationMs": 2,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/display/validation-display-config.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display providers and module"
+      ],
+      "description": "configures ValidationModule.forRoot with display providers",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/display/validation-display-config.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display providers and module"
+      ],
+      "description": "provides the default display configuration when no options are supplied",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/display/validation-display-config.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display providers and module"
+      ],
+      "description": "provides resolved configuration and a factory-created strategy",
+      "status": "passed",
+      "durationMs": 2,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/display/validation-display-config.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display strategies",
+        "MaterialValidationDisplayStrategy"
+      ],
+      "description": "detects Material hosts, descendants, and native controls",
+      "status": "passed",
+      "durationMs": 2,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/strategies/validation-display-strategies.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display strategies",
+        "MaterialValidationDisplayStrategy"
+      ],
+      "description": "creates a Material form-field error wrapper, renders mat-error, and clears it",
+      "status": "passed",
+      "durationMs": 2,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/strategies/validation-display-strategies.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display strategies",
+        "MaterialValidationDisplayStrategy"
+      ],
+      "description": "reuses modern and legacy form-field wrappers",
+      "status": "passed",
+      "durationMs": 2,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/strategies/validation-display-strategies.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display strategies",
+        "MaterialValidationDisplayStrategy"
+      ],
+      "description": "renders standalone checkbox errors, deduplicates containers, labels required state, and clears wrappers",
+      "status": "passed",
+      "durationMs": 2,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/strategies/validation-display-strategies.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display strategies",
+        "MaterialValidationDisplayStrategy"
+      ],
+      "description": "renders standalone radio errors and group labels",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/strategies/validation-display-strategies.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display strategies",
+        "MaterialValidationDisplayStrategy"
+      ],
+      "description": "does nothing when no matching Material target exists",
+      "status": "passed",
+      "durationMs": 2,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/strategies/validation-display-strategies.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display strategies",
+        "TailwindValidationDisplayStrategy"
+      ],
+      "description": "deduplicates containers, avoids rewriting identical messages, and clears state",
+      "status": "passed",
+      "durationMs": 2,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/strategies/validation-display-strategies.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display strategies",
+        "TailwindValidationDisplayStrategy"
+      ],
+      "description": "handles checkbox and radio-group state plus idempotent required markers",
+      "status": "passed",
+      "durationMs": 2,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/strategies/validation-display-strategies.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display strategies",
+        "TailwindValidationDisplayStrategy"
+      ],
+      "description": "returns null for detached controls",
+      "status": "passed",
+      "durationMs": 2,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/strategies/validation-display-strategies.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display strategies",
+        "TailwindValidationDisplayStrategy"
+      ],
+      "description": "detects native controls",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/strategies/validation-display-strategies.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display strategies",
+        "BootstrapValidationDisplayStrategy"
+      ],
+      "description": "detects native controls",
+      "status": "passed",
+      "durationMs": 2,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/strategies/validation-display-strategies.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display strategies",
+        "BootstrapValidationDisplayStrategy"
+      ],
+      "description": "handles radio groups and missing display roots and labels",
+      "status": "passed",
+      "durationMs": 2,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/strategies/validation-display-strategies.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display strategies",
+        "BootstrapValidationDisplayStrategy"
+      ],
+      "description": "renders current messages once, applies invalid state, and clears them",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/strategies/validation-display-strategies.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display strategies",
+        "BootstrapValidationDisplayStrategy"
+      ],
+      "description": "renders all required-indicator modes and removes stale title/markers",
+      "status": "passed",
+      "durationMs": 2,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/strategies/validation-display-strategies.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display strategies",
+        "GenericValidationDisplayStrategy"
+      ],
+      "description": "supports radio inputs by name, custom classes, parent labels, and detached hosts",
+      "status": "passed",
+      "durationMs": 3,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/strategies/validation-display-strategies.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display strategies",
+        "GenericValidationDisplayStrategy"
+      ],
+      "description": "detects native control types",
+      "status": "passed",
+      "durationMs": 2,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/strategies/validation-display-strategies.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display strategies",
+        "GenericValidationDisplayStrategy"
+      ],
+      "description": "renders, replaces, and clears input errors and required markers",
+      "status": "passed",
+      "durationMs": 2,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/strategies/validation-display-strategies.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display strategies",
+        "GenericValidationDisplayStrategy"
+      ],
+      "description": "handles checkbox and radio-group invalid state and label discovery",
+      "status": "passed",
+      "durationMs": 3,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/strategies/validation-display-strategies.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display strategies",
+        "Default and example strategies"
+      ],
+      "description": "routes generic and Material elements to the matching strategy",
+      "status": "passed",
+      "durationMs": 3,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/strategies/validation-display-strategies.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display strategies",
+        "Default and example strategies"
+      ],
+      "description": "honors forced Material mode and detects Material ancestors within the search limit",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/strategies/validation-display-strategies.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation display strategies",
+        "Default and example strategies"
+      ],
+      "description": "exposes a usable immutable PrimeNG example class map",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/strategies/validation-display-strategies.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation DOM utilities"
+      ],
+      "description": "finds exact attribute values without selector interpolation",
+      "status": "passed",
+      "durationMs": 3,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/utils/validation-utils.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "validation DOM utilities"
+      ],
+      "description": "adds and removes whitespace-delimited class lists",
+      "status": "passed",
+      "durationMs": 2,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/utils/validation-utils.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Policy"
+      ],
+      "description": "removes empty required state when no required rule exists",
+      "status": "passed",
+      "durationMs": 2,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/policy.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Policy"
+      ],
+      "description": "updates conditional required markers as dependencies change",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/policy.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Policy"
+      ],
+      "description": "validates all registered fields, collects failures, and removes success sentinels",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/policy.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Policy"
+      ],
+      "description": "clears only this policy fields during full validation and preserves other-policy errors",
+      "status": "passed",
+      "durationMs": 0,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/policy.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Policy"
+      ],
+      "description": "checks every supplied form group",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/policy.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Policy"
+      ],
+      "description": "resolves nested paths and string dependencies",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/policy.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Policy"
+      ],
+      "description": "uses registered paths when a policy has no active paths and handles empty groups",
+      "status": "passed",
+      "durationMs": 0,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/policy.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Policy"
+      ],
+      "description": "skips optional empty values but runs optional rules for zero and non-empty values",
+      "status": "passed",
+      "durationMs": 0,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/policy.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Policy"
+      ],
+      "description": "skips optional chained rules for empty values after a dependency is satisfied",
+      "status": "passed",
+      "durationMs": 0,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/policy.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Policy"
+      ],
+      "description": "returns unique active property paths",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/policy.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Policy"
+      ],
+      "description": "evaluates form groups using active policy paths, touched state, and show-all state",
+      "status": "passed",
+      "durationMs": 0,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/policy.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Policy"
+      ],
+      "description": "records required state, updates existing entries, and limits property checks",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/policy.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Policy"
+      ],
+      "description": "waits for Subject-based rules and ignores duplicate asynchronous errors",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/policy.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Policy"
+      ],
+      "description": "deletes empty validation state and handles an unknown property selection",
+      "status": "passed",
+      "durationMs": 0,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/policy.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Policy"
+      ],
+      "description": "validates one property and clears only that property previous errors",
+      "status": "passed",
+      "durationMs": 1,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/policy.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Policy"
+      ],
+      "description": "supports functional dependencies and missing nested values",
+      "status": "passed",
+      "durationMs": 0,
+      "logs": [],
+      "sourceFiles": [
+        "packages/angular/src/lib/policy.spec.ts"
+      ]
+    }
+  ]
+}

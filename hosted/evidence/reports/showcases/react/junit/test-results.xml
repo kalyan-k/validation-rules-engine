@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="37" failures="0" errors="0" time="26.3808088">
+    <testsuite name="src/app.spec.tsx" timestamp="2026-08-07T02:25:27.894Z" hostname="karthikk" tests="9" failures="0" errors="0" skipped="0" time="4.000007">
+        <testcase classname="src/app.spec.tsx" name="React showcase application &gt; renders the shared layout, home content, navigation, and documentation links" time="0.127815">
+        </testcase>
+        <testcase classname="src/app.spec.tsx" name="React showcase application &gt; navigates among Home, Simple, Complex, and Performance routes with active state" time="0.3578652">
+        </testcase>
+        <testcase classname="src/app.spec.tsx" name="React showcase application &gt; uses home example links as client-side navigation" time="0.0758704">
+        </testcase>
+        <testcase classname="src/app.spec.tsx" name="React showcase application &gt; blocks an invalid simple submission and exposes inline accessible messages" time="0.1270033">
+        </testcase>
+        <testcase classname="src/app.spec.tsx" name="React showcase application &gt; accepts and resets a valid simple form" time="0.165821">
+        </testcase>
+        <testcase classname="src/app.spec.tsx" name="React showcase application &gt; validates simple email on change and links to field documentation" time="0.0973081">
+        </testcase>
+        <testcase classname="src/app.spec.tsx" name="React showcase application &gt; manages complex dynamic sections, conditional fields, and group validation" time="0.4331861">
+        </testcase>
+        <testcase classname="src/app.spec.tsx" name="React showcase application &gt; populates, validates, saves, and resets the complex form" time="0.339456">
+        </testcase>
+        <testcase classname="src/app.spec.tsx" name="React showcase application &gt; measures validation and supports performance sample/reset/group actions" time="2.2740843">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/state-integrations/state-integrations.spec.tsx" timestamp="2026-08-07T02:25:27.898Z" hostname="karthikk" tests="28" failures="0" errors="0" skipped="0" time="22.3808018">
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;Local State&apos; state integration &gt; renders its home, active navigation, architecture, derived state, and client-side links" time="0.2850441">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;Local State&apos; state integration &gt; validates, submits, and resets the simple form with messages and summary" time="0.1819308">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;Local State&apos; state integration &gt; handles nested data, dynamic sections, conditional fields, groups, submit, and reset" time="0.6721205">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;Local State&apos; state integration &gt; runs the large-form performance lifecycle and reports live metrics" time="2.3613315">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;Redux Toolkit&apos; state integration &gt; renders its home, active navigation, architecture, derived state, and client-side links" time="0.1428081">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;Redux Toolkit&apos; state integration &gt; validates, submits, and resets the simple form with messages and summary" time="0.1852134">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;Redux Toolkit&apos; state integration &gt; handles nested data, dynamic sections, conditional fields, groups, submit, and reset" time="0.6744753">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;Redux Toolkit&apos; state integration &gt; runs the large-form performance lifecycle and reports live metrics" time="2.1047042">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;Zustand&apos; state integration &gt; renders its home, active navigation, architecture, derived state, and client-side links" time="0.1618543">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;Zustand&apos; state integration &gt; validates, submits, and resets the simple form with messages and summary" time="0.2153037">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;Zustand&apos; state integration &gt; handles nested data, dynamic sections, conditional fields, groups, submit, and reset" time="0.9720984">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;Zustand&apos; state integration &gt; runs the large-form performance lifecycle and reports live metrics" time="2.2158032">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;Jotai&apos; state integration &gt; renders its home, active navigation, architecture, derived state, and client-side links" time="0.1434705">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;Jotai&apos; state integration &gt; validates, submits, and resets the simple form with messages and summary" time="0.2009279">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;Jotai&apos; state integration &gt; handles nested data, dynamic sections, conditional fields, groups, submit, and reset" time="0.631871">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;Jotai&apos; state integration &gt; runs the large-form performance lifecycle and reports live metrics" time="1.9870434">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;Recoil&apos; state integration &gt; renders its home, active navigation, architecture, derived state, and client-side links" time="0.1424825">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;Recoil&apos; state integration &gt; validates, submits, and resets the simple form with messages and summary" time="0.2022291">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;Recoil&apos; state integration &gt; handles nested data, dynamic sections, conditional fields, groups, submit, and reset" time="0.5607811">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;Recoil&apos; state integration &gt; runs the large-form performance lifecycle and reports live metrics" time="2.0040004">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;MobX&apos; state integration &gt; renders its home, active navigation, architecture, derived state, and client-side links" time="0.1102181">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;MobX&apos; state integration &gt; validates, submits, and resets the simple form with messages and summary" time="0.1853106">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;MobX&apos; state integration &gt; handles nested data, dynamic sections, conditional fields, groups, submit, and reset" time="0.6575466">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;MobX&apos; state integration &gt; runs the large-form performance lifecycle and reports live metrics" time="2.1019576">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;Context API&apos; state integration &gt; renders its home, active navigation, architecture, derived state, and client-side links" time="0.1588467">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;Context API&apos; state integration &gt; validates, submits, and resets the simple form with messages and summary" time="0.2040741">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;Context API&apos; state integration &gt; handles nested data, dynamic sections, conditional fields, groups, submit, and reset" time="0.6009985">
+        </testcase>
+        <testcase classname="src/state-integrations/state-integrations.spec.tsx" name="&apos;Context API&apos; state integration &gt; runs the large-form performance lifecycle and reports live metrics" time="2.3141326">
+        </testcase>
+    </testsuite>
+</testsuites>

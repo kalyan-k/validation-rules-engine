@@ -1,0 +1,821 @@
+<testsuites id="" name="" tests="255" failures="3" skipped="0" errors="0" time="510.61872600000004">
+<testsuite name="angular\akita\akita.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="chromium" tests="4" failures="0" skipped="0" time="28.453" errors="0">
+<testcase name="Akita @akita @angular @regression › loads overview and documentation links @akita" classname="angular\akita\akita.spec.ts" time="7.744">
+</testcase>
+<testcase name="Akita @akita @angular @regression › validates simple form behavior @akita" classname="angular\akita\akita.spec.ts" time="6.58">
+</testcase>
+<testcase name="Akita @akita @angular @regression › validates complex policy and dynamic behavior @akita" classname="angular\akita\akita.spec.ts" time="8.082">
+</testcase>
+<testcase name="Akita @akita @angular @regression › validates performance generator behavior @akita @performance-form" classname="angular\akita\akita.spec.ts" time="6.047">
+</testcase>
+</testsuite>
+<testsuite name="angular\custom-rxjs\custom-rxjs-store.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="chromium" tests="4" failures="0" skipped="0" time="20.749" errors="0">
+<testcase name="Custom RxJS Store @custom-rxjs-store @angular @regression › loads overview and documentation links @custom-rxjs-store" classname="angular\custom-rxjs\custom-rxjs-store.spec.ts" time="2.013">
+</testcase>
+<testcase name="Custom RxJS Store @custom-rxjs-store @angular @regression › validates simple form behavior @custom-rxjs-store" classname="angular\custom-rxjs\custom-rxjs-store.spec.ts" time="6.736">
+</testcase>
+<testcase name="Custom RxJS Store @custom-rxjs-store @angular @regression › validates complex policy and dynamic behavior @custom-rxjs-store" classname="angular\custom-rxjs\custom-rxjs-store.spec.ts" time="6.184">
+</testcase>
+<testcase name="Custom RxJS Store @custom-rxjs-store @angular @regression › validates performance generator behavior @custom-rxjs-store @performance-form" classname="angular\custom-rxjs\custom-rxjs-store.spec.ts" time="5.816">
+</testcase>
+</testsuite>
+<testsuite name="angular\elf\elf.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="chromium" tests="4" failures="0" skipped="0" time="24.349" errors="0">
+<testcase name="Elf @elf @angular @regression › loads overview and documentation links @elf" classname="angular\elf\elf.spec.ts" time="4.718">
+</testcase>
+<testcase name="Elf @elf @angular @regression › validates simple form behavior @elf" classname="angular\elf\elf.spec.ts" time="5.251">
+</testcase>
+<testcase name="Elf @elf @angular @regression › validates complex policy and dynamic behavior @elf" classname="angular\elf\elf.spec.ts" time="9.808">
+</testcase>
+<testcase name="Elf @elf @angular @regression › validates performance generator behavior @elf @performance-form" classname="angular\elf\elf.spec.ts" time="4.572">
+</testcase>
+</testsuite>
+<testsuite name="angular\ngrx\ngrx.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="chromium" tests="4" failures="0" skipped="0" time="20.973" errors="0">
+<testcase name="NgRx @ngrx @angular @regression › loads overview and documentation links @ngrx" classname="angular\ngrx\ngrx.spec.ts" time="4.218">
+</testcase>
+<testcase name="NgRx @ngrx @angular @regression › validates simple form behavior @ngrx" classname="angular\ngrx\ngrx.spec.ts" time="4.89">
+</testcase>
+<testcase name="NgRx @ngrx @angular @regression › validates complex policy and dynamic behavior @ngrx" classname="angular\ngrx\ngrx.spec.ts" time="6.123">
+</testcase>
+<testcase name="NgRx @ngrx @angular @regression › validates performance generator behavior @ngrx @performance-form" classname="angular\ngrx\ngrx.spec.ts" time="5.742">
+</testcase>
+</testsuite>
+<testsuite name="angular\ngxs\ngxs.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="chromium" tests="4" failures="0" skipped="0" time="20.014" errors="0">
+<testcase name="NGXS @ngxs @angular @regression › loads overview and documentation links @ngxs" classname="angular\ngxs\ngxs.spec.ts" time="1.98">
+</testcase>
+<testcase name="NGXS @ngxs @angular @regression › validates simple form behavior @ngxs" classname="angular\ngxs\ngxs.spec.ts" time="5.423">
+</testcase>
+<testcase name="NGXS @ngxs @angular @regression › validates complex policy and dynamic behavior @ngxs" classname="angular\ngxs\ngxs.spec.ts" time="7.975">
+</testcase>
+<testcase name="NGXS @ngxs @angular @regression › validates performance generator behavior @ngxs @performance-form" classname="angular\ngxs\ngxs.spec.ts" time="4.636">
+</testcase>
+</testsuite>
+<testsuite name="angular\reactive-forms\reactive-forms.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="chromium" tests="4" failures="0" skipped="0" time="22.613" errors="0">
+<testcase name="Reactive Forms @reactive-forms @angular @regression › loads overview and documentation links @reactive-forms" classname="angular\reactive-forms\reactive-forms.spec.ts" time="4.796">
+</testcase>
+<testcase name="Reactive Forms @reactive-forms @angular @regression › validates simple form behavior @reactive-forms" classname="angular\reactive-forms\reactive-forms.spec.ts" time="6.499">
+</testcase>
+<testcase name="Reactive Forms @reactive-forms @angular @regression › validates complex policy and dynamic behavior @reactive-forms" classname="angular\reactive-forms\reactive-forms.spec.ts" time="6.262">
+</testcase>
+<testcase name="Reactive Forms @reactive-forms @angular @regression › validates performance generator behavior @reactive-forms @performance-form" classname="angular\reactive-forms\reactive-forms.spec.ts" time="5.056">
+</testcase>
+</testsuite>
+<testsuite name="angular\rx-angular-state\rx-angular-state.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="chromium" tests="4" failures="0" skipped="0" time="17.979" errors="0">
+<testcase name="RxAngular State @rx-angular-state @angular @regression › loads overview and documentation links @rx-angular-state" classname="angular\rx-angular-state\rx-angular-state.spec.ts" time="2.446">
+</testcase>
+<testcase name="RxAngular State @rx-angular-state @angular @regression › validates simple form behavior @rx-angular-state" classname="angular\rx-angular-state\rx-angular-state.spec.ts" time="5.379">
+</testcase>
+<testcase name="RxAngular State @rx-angular-state @angular @regression › validates complex policy and dynamic behavior @rx-angular-state" classname="angular\rx-angular-state\rx-angular-state.spec.ts" time="5.263">
+</testcase>
+<testcase name="RxAngular State @rx-angular-state @angular @regression › validates performance generator behavior @rx-angular-state @performance-form" classname="angular\rx-angular-state\rx-angular-state.spec.ts" time="4.891">
+</testcase>
+</testsuite>
+<testsuite name="angular\signals\signals.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="chromium" tests="4" failures="0" skipped="0" time="20.357" errors="0">
+<testcase name="Signals @signals @angular @regression › loads overview and documentation links @signals" classname="angular\signals\signals.spec.ts" time="4.45">
+</testcase>
+<testcase name="Signals @signals @angular @regression › validates simple form behavior @signals" classname="angular\signals\signals.spec.ts" time="5.249">
+</testcase>
+<testcase name="Signals @signals @angular @regression › validates complex policy and dynamic behavior @signals" classname="angular\signals\signals.spec.ts" time="5.455">
+</testcase>
+<testcase name="Signals @signals @angular @regression › validates performance generator behavior @signals @performance-form" classname="angular\signals\signals.spec.ts" time="5.203">
+</testcase>
+</testsuite>
+<testsuite name="angular\template-driven\template-driven.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="chromium" tests="4" failures="0" skipped="0" time="20.97" errors="0">
+<testcase name="Template Driven Forms (ngModel) @template-driven @angular @regression › loads overview and documentation links @template-driven" classname="angular\template-driven\template-driven.spec.ts" time="5.137">
+</testcase>
+<testcase name="Template Driven Forms (ngModel) @template-driven @angular @regression › validates simple form behavior @template-driven" classname="angular\template-driven\template-driven.spec.ts" time="5.038">
+</testcase>
+<testcase name="Template Driven Forms (ngModel) @template-driven @angular @regression › validates complex policy and dynamic behavior @template-driven" classname="angular\template-driven\template-driven.spec.ts" time="6.014">
+</testcase>
+<testcase name="Template Driven Forms (ngModel) @template-driven @angular @regression › validates performance generator behavior @template-driven @performance-form" classname="angular\template-driven\template-driven.spec.ts" time="4.781">
+</testcase>
+</testsuite>
+<testsuite name="demo-portal\portal.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="chromium" tests="2" failures="0" skipped="0" time="9.669" errors="0">
+<testcase name="Demo portal @portal @regression › loads application cards and launch links @smoke" classname="demo-portal\portal.spec.ts" time="6.205">
+</testcase>
+<testcase name="Demo portal @portal @regression › opens integration lists without testing Playwright results" classname="demo-portal\portal.spec.ts" time="3.464">
+</testcase>
+</testsuite>
+<testsuite name="documentation\docs.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="chromium" tests="4" failures="0" skipped="0" time="8.953" errors="0">
+<testcase name="Documentation application @docs @regression › loads documentation, navigates packages, and supports deep links @smoke" classname="documentation\docs.spec.ts" time="3.014">
+</testcase>
+<testcase name="Documentation application @docs @regression › search finds state management and package consumption guides" classname="documentation\docs.spec.ts" time="2.08">
+</testcase>
+<testcase name="Documentation application @docs @regression › code blocks and copy-code behavior work when available" classname="documentation\docs.spec.ts" time="1.946">
+</testcase>
+<testcase name="Documentation application @docs @regression › previous and next navigation works where available" classname="documentation\docs.spec.ts" time="1.913">
+</testcase>
+</testsuite>
+<testsuite name="react\context-api\context-api.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="chromium" tests="4" failures="0" skipped="0" time="10.806" errors="0">
+<testcase name="Context API @context @react @regression › loads overview and documentation links @context" classname="react\context-api\context-api.spec.ts" time="1.932">
+</testcase>
+<testcase name="Context API @context @react @regression › validates simple form behavior @context" classname="react\context-api\context-api.spec.ts" time="3.155">
+</testcase>
+<testcase name="Context API @context @react @regression › validates complex policy and dynamic behavior @context" classname="react\context-api\context-api.spec.ts" time="2.896">
+</testcase>
+<testcase name="Context API @context @react @regression › validates performance generator behavior @context @performance-form" classname="react\context-api\context-api.spec.ts" time="2.823">
+</testcase>
+</testsuite>
+<testsuite name="react\jotai\jotai.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="chromium" tests="4" failures="0" skipped="0" time="8.908" errors="0">
+<testcase name="Jotai @jotai @react @regression › loads overview and documentation links @jotai" classname="react\jotai\jotai.spec.ts" time="1.865">
+</testcase>
+<testcase name="Jotai @jotai @react @regression › validates simple form behavior @jotai" classname="react\jotai\jotai.spec.ts" time="1.872">
+</testcase>
+<testcase name="Jotai @jotai @react @regression › validates complex policy and dynamic behavior @jotai" classname="react\jotai\jotai.spec.ts" time="2.708">
+</testcase>
+<testcase name="Jotai @jotai @react @regression › validates performance generator behavior @jotai @performance-form" classname="react\jotai\jotai.spec.ts" time="2.463">
+</testcase>
+</testsuite>
+<testsuite name="react\local-state\local-state.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="chromium" tests="4" failures="0" skipped="0" time="9.135" errors="0">
+<testcase name="Local State @local-state @react @regression › loads overview and documentation links @local-state" classname="react\local-state\local-state.spec.ts" time="1.536">
+</testcase>
+<testcase name="Local State @local-state @react @regression › validates simple form behavior @local-state" classname="react\local-state\local-state.spec.ts" time="2.682">
+</testcase>
+<testcase name="Local State @local-state @react @regression › validates complex policy and dynamic behavior @local-state" classname="react\local-state\local-state.spec.ts" time="2.62">
+</testcase>
+<testcase name="Local State @local-state @react @regression › validates performance generator behavior @local-state @performance-form" classname="react\local-state\local-state.spec.ts" time="2.297">
+</testcase>
+</testsuite>
+<testsuite name="react\mobx\mobx.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="chromium" tests="4" failures="0" skipped="0" time="9.505" errors="0">
+<testcase name="MobX @mobx @react @regression › loads overview and documentation links @mobx" classname="react\mobx\mobx.spec.ts" time="2.055">
+</testcase>
+<testcase name="MobX @mobx @react @regression › validates simple form behavior @mobx" classname="react\mobx\mobx.spec.ts" time="2.745">
+</testcase>
+<testcase name="MobX @mobx @react @regression › validates complex policy and dynamic behavior @mobx" classname="react\mobx\mobx.spec.ts" time="2.41">
+</testcase>
+<testcase name="MobX @mobx @react @regression › validates performance generator behavior @mobx @performance-form" classname="react\mobx\mobx.spec.ts" time="2.295">
+</testcase>
+</testsuite>
+<testsuite name="react\recoil\recoil.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="chromium" tests="4" failures="0" skipped="0" time="9.228" errors="0">
+<testcase name="Recoil @recoil @react @regression › loads overview and documentation links @recoil" classname="react\recoil\recoil.spec.ts" time="1.714">
+</testcase>
+<testcase name="Recoil @recoil @react @regression › validates simple form behavior @recoil" classname="react\recoil\recoil.spec.ts" time="2.479">
+</testcase>
+<testcase name="Recoil @recoil @react @regression › validates complex policy and dynamic behavior @recoil" classname="react\recoil\recoil.spec.ts" time="2.366">
+</testcase>
+<testcase name="Recoil @recoil @react @regression › validates performance generator behavior @recoil @performance-form" classname="react\recoil\recoil.spec.ts" time="2.669">
+</testcase>
+</testsuite>
+<testsuite name="react\redux-toolkit\redux-toolkit.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="chromium" tests="4" failures="0" skipped="0" time="9.442" errors="0">
+<testcase name="Redux Toolkit @redux-toolkit @react @regression › loads overview and documentation links @redux-toolkit" classname="react\redux-toolkit\redux-toolkit.spec.ts" time="2.25">
+</testcase>
+<testcase name="Redux Toolkit @redux-toolkit @react @regression › validates simple form behavior @redux-toolkit" classname="react\redux-toolkit\redux-toolkit.spec.ts" time="2.109">
+</testcase>
+<testcase name="Redux Toolkit @redux-toolkit @react @regression › validates complex policy and dynamic behavior @redux-toolkit" classname="react\redux-toolkit\redux-toolkit.spec.ts" time="2.318">
+</testcase>
+<testcase name="Redux Toolkit @redux-toolkit @react @regression › validates performance generator behavior @redux-toolkit @performance-form" classname="react\redux-toolkit\redux-toolkit.spec.ts" time="2.765">
+</testcase>
+</testsuite>
+<testsuite name="react\zustand\zustand.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="chromium" tests="4" failures="0" skipped="0" time="10.075" errors="0">
+<testcase name="Zustand @zustand @react @regression › loads overview and documentation links @zustand" classname="react\zustand\zustand.spec.ts" time="2.717">
+</testcase>
+<testcase name="Zustand @zustand @react @regression › validates simple form behavior @zustand" classname="react\zustand\zustand.spec.ts" time="2.382">
+</testcase>
+<testcase name="Zustand @zustand @react @regression › validates complex policy and dynamic behavior @zustand" classname="react\zustand\zustand.spec.ts" time="2.658">
+</testcase>
+<testcase name="Zustand @zustand @react @regression › validates performance generator behavior @zustand @performance-form" classname="react\zustand\zustand.spec.ts" time="2.318">
+</testcase>
+</testsuite>
+<testsuite name="reports\reports.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="chromium" tests="5" failures="0" skipped="0" time="6.062" errors="0">
+<testcase name="Existing reports application @reports @regression › Reports menu exposes tests coverage and automation destinations" classname="reports\reports.spec.ts" time="1.751">
+</testcase>
+<testcase name="Existing reports application @reports @regression › Reports menu remains available inside the tests and coverage workspace" classname="reports\reports.spec.ts" time="1.283">
+</testcase>
+<testcase name="Existing reports application @reports @regression › loads the canonical automation summary route" classname="reports\reports.spec.ts" time="0.855">
+</testcase>
+<testcase name="Existing reports application @reports @regression › loads generated report dashboard or useful empty state @smoke" classname="reports\reports.spec.ts" time="1.165">
+</testcase>
+<testcase name="Existing reports application @reports @regression › report links remain local when dashboard exists" classname="reports\reports.spec.ts" time="1.008">
+</testcase>
+</testsuite>
+<testsuite name="shared\cross-framework\cross-framework.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="chromium" tests="3" failures="0" skipped="0" time="8.555" errors="0">
+<testcase name="Cross-framework consistency @regression › Angular, React, and Vanilla simple examples block invalid submit @angular @react @vanilla" classname="shared\cross-framework\cross-framework.spec.ts" time="3.063">
+</testcase>
+<testcase name="Cross-framework consistency @regression › Angular, React, and Vanilla complex examples expose nested sections @angular @react @vanilla" classname="shared\cross-framework\cross-framework.spec.ts" time="2.862">
+</testcase>
+<testcase name="Cross-framework consistency @regression › Angular, React, and Vanilla performance examples expose the same generator inputs @angular @react @vanilla @performance-form" classname="shared\cross-framework\cross-framework.spec.ts" time="2.63">
+</testcase>
+</testsuite>
+<testsuite name="shared\navigation\platform-navigation.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="chromium" tests="1" failures="1" skipped="0" time="2.873" errors="0">
+<testcase name="Platform navigation URLs @hosting-navigation @regression › uses the configured host topology from every application surface" classname="shared\navigation\platform-navigation.spec.ts" time="2.873">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\test-results\shared-navigation-platform-07191-m-every-application-surface-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|..\test-results\shared-navigation-platform-07191-m-every-application-surface-chromium\video.webm]]
+
+[[ATTACHMENT|..\test-results\shared-navigation-platform-07191-m-every-application-surface-chromium\error-context.md]]
+
+[[ATTACHMENT|..\test-results\shared-navigation-platform-07191-m-every-application-surface-chromium\trace.zip]]
+]]>
+</system-out>
+<failure message="Documentation Showcase URLs" type="expect.toEqual">
+<![CDATA[  [chromium] › shared\navigation\platform-navigation.spec.ts:11:3 › Platform navigation URLs @hosting-navigation @regression › uses the configured host topology from every application surface › Documentation 
+
+    Error: Documentation Showcase URLs
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+      Array [
+        "http://127.0.0.1:4302/",
+        "http://127.0.0.1:4304/",
+    -   "http://127.0.0.1:4305/",
+    +   "http://127.0.0.1:4205/",
+      ]
+
+      48 |         expect(links.docs.every((href) => href.startsWith(expected.docsPrefix)), `${surface} Docs URLs`).toBe(true);
+      49 |         expect(new Set(links.docs.map((href) => new URL(href).origin)), `${surface} Docs origins`).toEqual(new Set([expected.docsOrigin]));
+    > 50 |         expect(links.showcases, `${surface} Showcase URLs`).toEqual(expected.showcases);
+         |                                                             ^
+      51 |         expect(links.reports, `${surface} Reports URLs`).toEqual(expected.reports);
+      52 |       });
+      53 |     }
+        at C:\Kalyan\Learning\validation-rules-engine\tests\e2e\shared\navigation\platform-navigation.spec.ts:50:61
+        at C:\Kalyan\Learning\validation-rules-engine\tests\e2e\shared\navigation\platform-navigation.spec.ts:31:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\artifacts\playwright\test-results\shared-navigation-platform-07191-m-every-application-surface-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\artifacts\playwright\test-results\shared-navigation-platform-07191-m-every-application-surface-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\artifacts\playwright\test-results\shared-navigation-platform-07191-m-every-application-surface-chromium\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\artifacts\playwright\test-results\shared-navigation-platform-07191-m-every-application-surface-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\artifacts\playwright\test-results\shared-navigation-platform-07191-m-every-application-surface-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="smoke\smoke.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="chromium" tests="2" failures="0" skipped="0" time="9.586" errors="0">
+<testcase name="Repository smoke suite @smoke › loads the portal, documentation, reports, and all showcases @portal @docs @reports @angular @react @vanilla" classname="smoke\smoke.spec.ts" time="3.201">
+</testcase>
+<testcase name="Repository smoke suite @smoke › validates Angular, React, and Vanilla simple forms @angular @react @vanilla" classname="smoke\smoke.spec.ts" time="6.385">
+</testcase>
+</testsuite>
+<testsuite name="vanilla\core\core-forms.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="chromium" tests="4" failures="0" skipped="0" time="8.368" errors="0">
+<testcase name="Vanilla core showcase @vanilla @regression › home page introduces the core-only dependency path @vanilla @smoke" classname="vanilla\core\core-forms.spec.ts" time="1.263">
+</testcase>
+<testcase name="Vanilla core showcase @vanilla @regression › simple form blocks invalid submit and accepts valid data @vanilla @smoke" classname="vanilla\core\core-forms.spec.ts" time="2.245">
+</testcase>
+<testcase name="Vanilla core showcase @vanilla @regression › complex form covers groups, conditionals, and dynamic collections @vanilla" classname="vanilla\core\core-forms.spec.ts" time="2.73">
+</testcase>
+<testcase name="Vanilla core showcase @vanilla @regression › performance form generates controls and measures validation @vanilla @performance-form" classname="vanilla\core\core-forms.spec.ts" time="2.13">
+</testcase>
+</testsuite>
+<testsuite name="angular\akita\akita.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="firefox" tests="4" failures="0" skipped="0" time="61.693" errors="0">
+<testcase name="Akita @akita @angular @regression › loads overview and documentation links @akita" classname="angular\akita\akita.spec.ts" time="8.916">
+</testcase>
+<testcase name="Akita @akita @angular @regression › validates simple form behavior @akita" classname="angular\akita\akita.spec.ts" time="15.547">
+</testcase>
+<testcase name="Akita @akita @angular @regression › validates complex policy and dynamic behavior @akita" classname="angular\akita\akita.spec.ts" time="22.947">
+</testcase>
+<testcase name="Akita @akita @angular @regression › validates performance generator behavior @akita @performance-form" classname="angular\akita\akita.spec.ts" time="14.283">
+</testcase>
+</testsuite>
+<testsuite name="angular\custom-rxjs\custom-rxjs-store.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="firefox" tests="4" failures="0" skipped="0" time="36.318" errors="0">
+<testcase name="Custom RxJS Store @custom-rxjs-store @angular @regression › loads overview and documentation links @custom-rxjs-store" classname="angular\custom-rxjs\custom-rxjs-store.spec.ts" time="3.493">
+</testcase>
+<testcase name="Custom RxJS Store @custom-rxjs-store @angular @regression › validates simple form behavior @custom-rxjs-store" classname="angular\custom-rxjs\custom-rxjs-store.spec.ts" time="8.984">
+</testcase>
+<testcase name="Custom RxJS Store @custom-rxjs-store @angular @regression › validates complex policy and dynamic behavior @custom-rxjs-store" classname="angular\custom-rxjs\custom-rxjs-store.spec.ts" time="15.759">
+</testcase>
+<testcase name="Custom RxJS Store @custom-rxjs-store @angular @regression › validates performance generator behavior @custom-rxjs-store @performance-form" classname="angular\custom-rxjs\custom-rxjs-store.spec.ts" time="8.082">
+</testcase>
+</testsuite>
+<testsuite name="angular\elf\elf.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="firefox" tests="4" failures="0" skipped="0" time="37.013" errors="0">
+<testcase name="Elf @elf @angular @regression › loads overview and documentation links @elf" classname="angular\elf\elf.spec.ts" time="3.602">
+</testcase>
+<testcase name="Elf @elf @angular @regression › validates simple form behavior @elf" classname="angular\elf\elf.spec.ts" time="7.335">
+</testcase>
+<testcase name="Elf @elf @angular @regression › validates complex policy and dynamic behavior @elf" classname="angular\elf\elf.spec.ts" time="16.121">
+</testcase>
+<testcase name="Elf @elf @angular @regression › validates performance generator behavior @elf @performance-form" classname="angular\elf\elf.spec.ts" time="9.955">
+</testcase>
+</testsuite>
+<testsuite name="angular\ngrx\ngrx.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="firefox" tests="4" failures="0" skipped="0" time="30.904" errors="0">
+<testcase name="NgRx @ngrx @angular @regression › loads overview and documentation links @ngrx" classname="angular\ngrx\ngrx.spec.ts" time="4.289">
+</testcase>
+<testcase name="NgRx @ngrx @angular @regression › validates simple form behavior @ngrx" classname="angular\ngrx\ngrx.spec.ts" time="6.976">
+</testcase>
+<testcase name="NgRx @ngrx @angular @regression › validates complex policy and dynamic behavior @ngrx" classname="angular\ngrx\ngrx.spec.ts" time="11.485">
+</testcase>
+<testcase name="NgRx @ngrx @angular @regression › validates performance generator behavior @ngrx @performance-form" classname="angular\ngrx\ngrx.spec.ts" time="8.154">
+</testcase>
+</testsuite>
+<testsuite name="angular\ngxs\ngxs.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="firefox" tests="4" failures="0" skipped="0" time="36.858" errors="0">
+<testcase name="NGXS @ngxs @angular @regression › loads overview and documentation links @ngxs" classname="angular\ngxs\ngxs.spec.ts" time="4.494">
+</testcase>
+<testcase name="NGXS @ngxs @angular @regression › validates simple form behavior @ngxs" classname="angular\ngxs\ngxs.spec.ts" time="10.202">
+</testcase>
+<testcase name="NGXS @ngxs @angular @regression › validates complex policy and dynamic behavior @ngxs" classname="angular\ngxs\ngxs.spec.ts" time="15.985">
+</testcase>
+<testcase name="NGXS @ngxs @angular @regression › validates performance generator behavior @ngxs @performance-form" classname="angular\ngxs\ngxs.spec.ts" time="6.177">
+</testcase>
+</testsuite>
+<testsuite name="angular\reactive-forms\reactive-forms.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="firefox" tests="4" failures="0" skipped="0" time="47.846" errors="0">
+<testcase name="Reactive Forms @reactive-forms @angular @regression › loads overview and documentation links @reactive-forms" classname="angular\reactive-forms\reactive-forms.spec.ts" time="5.306">
+</testcase>
+<testcase name="Reactive Forms @reactive-forms @angular @regression › validates simple form behavior @reactive-forms" classname="angular\reactive-forms\reactive-forms.spec.ts" time="10.38">
+</testcase>
+<testcase name="Reactive Forms @reactive-forms @angular @regression › validates complex policy and dynamic behavior @reactive-forms" classname="angular\reactive-forms\reactive-forms.spec.ts" time="23.277">
+</testcase>
+<testcase name="Reactive Forms @reactive-forms @angular @regression › validates performance generator behavior @reactive-forms @performance-form" classname="angular\reactive-forms\reactive-forms.spec.ts" time="8.883">
+</testcase>
+</testsuite>
+<testsuite name="angular\rx-angular-state\rx-angular-state.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="firefox" tests="4" failures="0" skipped="0" time="52.161" errors="0">
+<testcase name="RxAngular State @rx-angular-state @angular @regression › loads overview and documentation links @rx-angular-state" classname="angular\rx-angular-state\rx-angular-state.spec.ts" time="8.52">
+</testcase>
+<testcase name="RxAngular State @rx-angular-state @angular @regression › validates simple form behavior @rx-angular-state" classname="angular\rx-angular-state\rx-angular-state.spec.ts" time="13.42">
+</testcase>
+<testcase name="RxAngular State @rx-angular-state @angular @regression › validates complex policy and dynamic behavior @rx-angular-state" classname="angular\rx-angular-state\rx-angular-state.spec.ts" time="19.872">
+</testcase>
+<testcase name="RxAngular State @rx-angular-state @angular @regression › validates performance generator behavior @rx-angular-state @performance-form" classname="angular\rx-angular-state\rx-angular-state.spec.ts" time="10.349">
+</testcase>
+</testsuite>
+<testsuite name="angular\signals\signals.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="firefox" tests="4" failures="0" skipped="0" time="30.229" errors="0">
+<testcase name="Signals @signals @angular @regression › loads overview and documentation links @signals" classname="angular\signals\signals.spec.ts" time="3.832">
+</testcase>
+<testcase name="Signals @signals @angular @regression › validates simple form behavior @signals" classname="angular\signals\signals.spec.ts" time="6.556">
+</testcase>
+<testcase name="Signals @signals @angular @regression › validates complex policy and dynamic behavior @signals" classname="angular\signals\signals.spec.ts" time="11.243">
+</testcase>
+<testcase name="Signals @signals @angular @regression › validates performance generator behavior @signals @performance-form" classname="angular\signals\signals.spec.ts" time="8.598">
+</testcase>
+</testsuite>
+<testsuite name="angular\template-driven\template-driven.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="firefox" tests="4" failures="0" skipped="0" time="37.292" errors="0">
+<testcase name="Template Driven Forms (ngModel) @template-driven @angular @regression › loads overview and documentation links @template-driven" classname="angular\template-driven\template-driven.spec.ts" time="5.795">
+</testcase>
+<testcase name="Template Driven Forms (ngModel) @template-driven @angular @regression › validates simple form behavior @template-driven" classname="angular\template-driven\template-driven.spec.ts" time="9.338">
+</testcase>
+<testcase name="Template Driven Forms (ngModel) @template-driven @angular @regression › validates complex policy and dynamic behavior @template-driven" classname="angular\template-driven\template-driven.spec.ts" time="13.147">
+</testcase>
+<testcase name="Template Driven Forms (ngModel) @template-driven @angular @regression › validates performance generator behavior @template-driven @performance-form" classname="angular\template-driven\template-driven.spec.ts" time="9.012">
+</testcase>
+</testsuite>
+<testsuite name="demo-portal\portal.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="firefox" tests="2" failures="0" skipped="0" time="8.123" errors="0">
+<testcase name="Demo portal @portal @regression › loads application cards and launch links @smoke" classname="demo-portal\portal.spec.ts" time="5.116">
+</testcase>
+<testcase name="Demo portal @portal @regression › opens integration lists without testing Playwright results" classname="demo-portal\portal.spec.ts" time="3.007">
+</testcase>
+</testsuite>
+<testsuite name="documentation\docs.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="firefox" tests="4" failures="0" skipped="0" time="18.487" errors="0">
+<testcase name="Documentation application @docs @regression › loads documentation, navigates packages, and supports deep links @smoke" classname="documentation\docs.spec.ts" time="5.897">
+</testcase>
+<testcase name="Documentation application @docs @regression › search finds state management and package consumption guides" classname="documentation\docs.spec.ts" time="5.909">
+</testcase>
+<testcase name="Documentation application @docs @regression › code blocks and copy-code behavior work when available" classname="documentation\docs.spec.ts" time="4.1">
+</testcase>
+<testcase name="Documentation application @docs @regression › previous and next navigation works where available" classname="documentation\docs.spec.ts" time="2.581">
+</testcase>
+</testsuite>
+<testsuite name="react\context-api\context-api.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="firefox" tests="4" failures="0" skipped="0" time="23.269" errors="0">
+<testcase name="Context API @context @react @regression › loads overview and documentation links @context" classname="react\context-api\context-api.spec.ts" time="2.917">
+</testcase>
+<testcase name="Context API @context @react @regression › validates simple form behavior @context" classname="react\context-api\context-api.spec.ts" time="5.043">
+</testcase>
+<testcase name="Context API @context @react @regression › validates complex policy and dynamic behavior @context" classname="react\context-api\context-api.spec.ts" time="7.84">
+</testcase>
+<testcase name="Context API @context @react @regression › validates performance generator behavior @context @performance-form" classname="react\context-api\context-api.spec.ts" time="7.469">
+</testcase>
+</testsuite>
+<testsuite name="react\jotai\jotai.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="firefox" tests="4" failures="0" skipped="0" time="18.871" errors="0">
+<testcase name="Jotai @jotai @react @regression › loads overview and documentation links @jotai" classname="react\jotai\jotai.spec.ts" time="2.718">
+</testcase>
+<testcase name="Jotai @jotai @react @regression › validates simple form behavior @jotai" classname="react\jotai\jotai.spec.ts" time="4.785">
+</testcase>
+<testcase name="Jotai @jotai @react @regression › validates complex policy and dynamic behavior @jotai" classname="react\jotai\jotai.spec.ts" time="4.779">
+</testcase>
+<testcase name="Jotai @jotai @react @regression › validates performance generator behavior @jotai @performance-form" classname="react\jotai\jotai.spec.ts" time="6.589">
+</testcase>
+</testsuite>
+<testsuite name="react\local-state\local-state.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="firefox" tests="4" failures="0" skipped="0" time="20.104" errors="0">
+<testcase name="Local State @local-state @react @regression › loads overview and documentation links @local-state" classname="react\local-state\local-state.spec.ts" time="4.756">
+</testcase>
+<testcase name="Local State @local-state @react @regression › validates simple form behavior @local-state" classname="react\local-state\local-state.spec.ts" time="4.783">
+</testcase>
+<testcase name="Local State @local-state @react @regression › validates complex policy and dynamic behavior @local-state" classname="react\local-state\local-state.spec.ts" time="5.853">
+</testcase>
+<testcase name="Local State @local-state @react @regression › validates performance generator behavior @local-state @performance-form" classname="react\local-state\local-state.spec.ts" time="4.712">
+</testcase>
+</testsuite>
+<testsuite name="react\mobx\mobx.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="firefox" tests="4" failures="0" skipped="0" time="20.069" errors="0">
+<testcase name="MobX @mobx @react @regression › loads overview and documentation links @mobx" classname="react\mobx\mobx.spec.ts" time="2.659">
+</testcase>
+<testcase name="MobX @mobx @react @regression › validates simple form behavior @mobx" classname="react\mobx\mobx.spec.ts" time="3.357">
+</testcase>
+<testcase name="MobX @mobx @react @regression › validates complex policy and dynamic behavior @mobx" classname="react\mobx\mobx.spec.ts" time="7.228">
+</testcase>
+<testcase name="MobX @mobx @react @regression › validates performance generator behavior @mobx @performance-form" classname="react\mobx\mobx.spec.ts" time="6.825">
+</testcase>
+</testsuite>
+<testsuite name="react\recoil\recoil.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="firefox" tests="4" failures="0" skipped="0" time="20.636" errors="0">
+<testcase name="Recoil @recoil @react @regression › loads overview and documentation links @recoil" classname="react\recoil\recoil.spec.ts" time="4.153">
+</testcase>
+<testcase name="Recoil @recoil @react @regression › validates simple form behavior @recoil" classname="react\recoil\recoil.spec.ts" time="7.515">
+</testcase>
+<testcase name="Recoil @recoil @react @regression › validates complex policy and dynamic behavior @recoil" classname="react\recoil\recoil.spec.ts" time="4.821">
+</testcase>
+<testcase name="Recoil @recoil @react @regression › validates performance generator behavior @recoil @performance-form" classname="react\recoil\recoil.spec.ts" time="4.147">
+</testcase>
+</testsuite>
+<testsuite name="react\redux-toolkit\redux-toolkit.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="firefox" tests="4" failures="0" skipped="0" time="20.733" errors="0">
+<testcase name="Redux Toolkit @redux-toolkit @react @regression › loads overview and documentation links @redux-toolkit" classname="react\redux-toolkit\redux-toolkit.spec.ts" time="2.786">
+</testcase>
+<testcase name="Redux Toolkit @redux-toolkit @react @regression › validates simple form behavior @redux-toolkit" classname="react\redux-toolkit\redux-toolkit.spec.ts" time="5.54">
+</testcase>
+<testcase name="Redux Toolkit @redux-toolkit @react @regression › validates complex policy and dynamic behavior @redux-toolkit" classname="react\redux-toolkit\redux-toolkit.spec.ts" time="6.41">
+</testcase>
+<testcase name="Redux Toolkit @redux-toolkit @react @regression › validates performance generator behavior @redux-toolkit @performance-form" classname="react\redux-toolkit\redux-toolkit.spec.ts" time="5.997">
+</testcase>
+</testsuite>
+<testsuite name="react\zustand\zustand.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="firefox" tests="4" failures="0" skipped="0" time="21.088" errors="0">
+<testcase name="Zustand @zustand @react @regression › loads overview and documentation links @zustand" classname="react\zustand\zustand.spec.ts" time="4.297">
+</testcase>
+<testcase name="Zustand @zustand @react @regression › validates simple form behavior @zustand" classname="react\zustand\zustand.spec.ts" time="6.133">
+</testcase>
+<testcase name="Zustand @zustand @react @regression › validates complex policy and dynamic behavior @zustand" classname="react\zustand\zustand.spec.ts" time="6.359">
+</testcase>
+<testcase name="Zustand @zustand @react @regression › validates performance generator behavior @zustand @performance-form" classname="react\zustand\zustand.spec.ts" time="4.299">
+</testcase>
+</testsuite>
+<testsuite name="reports\reports.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="firefox" tests="5" failures="0" skipped="0" time="14.85" errors="0">
+<testcase name="Existing reports application @reports @regression › Reports menu exposes tests coverage and automation destinations" classname="reports\reports.spec.ts" time="4.105">
+</testcase>
+<testcase name="Existing reports application @reports @regression › Reports menu remains available inside the tests and coverage workspace" classname="reports\reports.spec.ts" time="4.955">
+</testcase>
+<testcase name="Existing reports application @reports @regression › loads the canonical automation summary route" classname="reports\reports.spec.ts" time="1.759">
+</testcase>
+<testcase name="Existing reports application @reports @regression › loads generated report dashboard or useful empty state @smoke" classname="reports\reports.spec.ts" time="1.802">
+</testcase>
+<testcase name="Existing reports application @reports @regression › report links remain local when dashboard exists" classname="reports\reports.spec.ts" time="2.229">
+</testcase>
+</testsuite>
+<testsuite name="shared\cross-framework\cross-framework.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="firefox" tests="3" failures="0" skipped="0" time="14.961" errors="0">
+<testcase name="Cross-framework consistency @regression › Angular, React, and Vanilla simple examples block invalid submit @angular @react @vanilla" classname="shared\cross-framework\cross-framework.spec.ts" time="6.067">
+</testcase>
+<testcase name="Cross-framework consistency @regression › Angular, React, and Vanilla complex examples expose nested sections @angular @react @vanilla" classname="shared\cross-framework\cross-framework.spec.ts" time="4.723">
+</testcase>
+<testcase name="Cross-framework consistency @regression › Angular, React, and Vanilla performance examples expose the same generator inputs @angular @react @vanilla @performance-form" classname="shared\cross-framework\cross-framework.spec.ts" time="4.171">
+</testcase>
+</testsuite>
+<testsuite name="shared\navigation\platform-navigation.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="firefox" tests="1" failures="1" skipped="0" time="4.115" errors="0">
+<testcase name="Platform navigation URLs @hosting-navigation @regression › uses the configured host topology from every application surface" classname="shared\navigation\platform-navigation.spec.ts" time="4.115">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\test-results\shared-navigation-platform-07191-m-every-application-surface-firefox\test-failed-1.png]]
+
+[[ATTACHMENT|..\test-results\shared-navigation-platform-07191-m-every-application-surface-firefox\video.webm]]
+
+[[ATTACHMENT|..\test-results\shared-navigation-platform-07191-m-every-application-surface-firefox\error-context.md]]
+
+[[ATTACHMENT|..\test-results\shared-navigation-platform-07191-m-every-application-surface-firefox\trace.zip]]
+]]>
+</system-out>
+<failure message="Documentation Showcase URLs" type="expect.toEqual">
+<![CDATA[  [firefox] › shared\navigation\platform-navigation.spec.ts:11:3 › Platform navigation URLs @hosting-navigation @regression › uses the configured host topology from every application surface › Documentation 
+
+    Error: Documentation Showcase URLs
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+      Array [
+        "http://127.0.0.1:4302/",
+        "http://127.0.0.1:4304/",
+    -   "http://127.0.0.1:4305/",
+    +   "http://127.0.0.1:4205/",
+      ]
+
+      48 |         expect(links.docs.every((href) => href.startsWith(expected.docsPrefix)), `${surface} Docs URLs`).toBe(true);
+      49 |         expect(new Set(links.docs.map((href) => new URL(href).origin)), `${surface} Docs origins`).toEqual(new Set([expected.docsOrigin]));
+    > 50 |         expect(links.showcases, `${surface} Showcase URLs`).toEqual(expected.showcases);
+         |                                                             ^
+      51 |         expect(links.reports, `${surface} Reports URLs`).toEqual(expected.reports);
+      52 |       });
+      53 |     }
+        at C:\Kalyan\Learning\validation-rules-engine\tests\e2e\shared\navigation\platform-navigation.spec.ts:50:61
+        at C:\Kalyan\Learning\validation-rules-engine\tests\e2e\shared\navigation\platform-navigation.spec.ts:31:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\artifacts\playwright\test-results\shared-navigation-platform-07191-m-every-application-surface-firefox\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\artifacts\playwright\test-results\shared-navigation-platform-07191-m-every-application-surface-firefox\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\artifacts\playwright\test-results\shared-navigation-platform-07191-m-every-application-surface-firefox\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\artifacts\playwright\test-results\shared-navigation-platform-07191-m-every-application-surface-firefox\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\artifacts\playwright\test-results\shared-navigation-platform-07191-m-every-application-surface-firefox\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="smoke\smoke.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="firefox" tests="2" failures="0" skipped="0" time="13.927" errors="0">
+<testcase name="Repository smoke suite @smoke › loads the portal, documentation, reports, and all showcases @portal @docs @reports @angular @react @vanilla" classname="smoke\smoke.spec.ts" time="4.58">
+</testcase>
+<testcase name="Repository smoke suite @smoke › validates Angular, React, and Vanilla simple forms @angular @react @vanilla" classname="smoke\smoke.spec.ts" time="9.347">
+</testcase>
+</testsuite>
+<testsuite name="vanilla\core\core-forms.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="firefox" tests="4" failures="0" skipped="0" time="19.516" errors="0">
+<testcase name="Vanilla core showcase @vanilla @regression › home page introduces the core-only dependency path @vanilla @smoke" classname="vanilla\core\core-forms.spec.ts" time="5.112">
+</testcase>
+<testcase name="Vanilla core showcase @vanilla @regression › simple form blocks invalid submit and accepts valid data @vanilla @smoke" classname="vanilla\core\core-forms.spec.ts" time="4.714">
+</testcase>
+<testcase name="Vanilla core showcase @vanilla @regression › complex form covers groups, conditionals, and dynamic collections @vanilla" classname="vanilla\core\core-forms.spec.ts" time="5.044">
+</testcase>
+<testcase name="Vanilla core showcase @vanilla @regression › performance form generates controls and measures validation @vanilla @performance-form" classname="vanilla\core\core-forms.spec.ts" time="4.646">
+</testcase>
+</testsuite>
+<testsuite name="angular\akita\akita.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="webkit" tests="4" failures="0" skipped="0" time="56.962" errors="0">
+<testcase name="Akita @akita @angular @regression › loads overview and documentation links @akita" classname="angular\akita\akita.spec.ts" time="6.449">
+</testcase>
+<testcase name="Akita @akita @angular @regression › validates simple form behavior @akita" classname="angular\akita\akita.spec.ts" time="15.911">
+</testcase>
+<testcase name="Akita @akita @angular @regression › validates complex policy and dynamic behavior @akita" classname="angular\akita\akita.spec.ts" time="22.737">
+</testcase>
+<testcase name="Akita @akita @angular @regression › validates performance generator behavior @akita @performance-form" classname="angular\akita\akita.spec.ts" time="11.865">
+</testcase>
+</testsuite>
+<testsuite name="angular\custom-rxjs\custom-rxjs-store.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="webkit" tests="4" failures="0" skipped="0" time="53.196" errors="0">
+<testcase name="Custom RxJS Store @custom-rxjs-store @angular @regression › loads overview and documentation links @custom-rxjs-store" classname="angular\custom-rxjs\custom-rxjs-store.spec.ts" time="6.065">
+</testcase>
+<testcase name="Custom RxJS Store @custom-rxjs-store @angular @regression › validates simple form behavior @custom-rxjs-store" classname="angular\custom-rxjs\custom-rxjs-store.spec.ts" time="15.058">
+</testcase>
+<testcase name="Custom RxJS Store @custom-rxjs-store @angular @regression › validates complex policy and dynamic behavior @custom-rxjs-store" classname="angular\custom-rxjs\custom-rxjs-store.spec.ts" time="21.156">
+</testcase>
+<testcase name="Custom RxJS Store @custom-rxjs-store @angular @regression › validates performance generator behavior @custom-rxjs-store @performance-form" classname="angular\custom-rxjs\custom-rxjs-store.spec.ts" time="10.917">
+</testcase>
+</testsuite>
+<testsuite name="angular\elf\elf.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="webkit" tests="4" failures="0" skipped="0" time="56.143" errors="0">
+<testcase name="Elf @elf @angular @regression › loads overview and documentation links @elf" classname="angular\elf\elf.spec.ts" time="5.088">
+</testcase>
+<testcase name="Elf @elf @angular @regression › validates simple form behavior @elf" classname="angular\elf\elf.spec.ts" time="15.656">
+</testcase>
+<testcase name="Elf @elf @angular @regression › validates complex policy and dynamic behavior @elf" classname="angular\elf\elf.spec.ts" time="22.396">
+</testcase>
+<testcase name="Elf @elf @angular @regression › validates performance generator behavior @elf @performance-form" classname="angular\elf\elf.spec.ts" time="13.003">
+</testcase>
+</testsuite>
+<testsuite name="angular\ngrx\ngrx.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="webkit" tests="4" failures="0" skipped="0" time="53.872" errors="0">
+<testcase name="NgRx @ngrx @angular @regression › loads overview and documentation links @ngrx" classname="angular\ngrx\ngrx.spec.ts" time="5.534">
+</testcase>
+<testcase name="NgRx @ngrx @angular @regression › validates simple form behavior @ngrx" classname="angular\ngrx\ngrx.spec.ts" time="14.868">
+</testcase>
+<testcase name="NgRx @ngrx @angular @regression › validates complex policy and dynamic behavior @ngrx" classname="angular\ngrx\ngrx.spec.ts" time="21.533">
+</testcase>
+<testcase name="NgRx @ngrx @angular @regression › validates performance generator behavior @ngrx @performance-form" classname="angular\ngrx\ngrx.spec.ts" time="11.937">
+</testcase>
+</testsuite>
+<testsuite name="angular\ngxs\ngxs.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="webkit" tests="4" failures="0" skipped="0" time="52.794" errors="0">
+<testcase name="NGXS @ngxs @angular @regression › loads overview and documentation links @ngxs" classname="angular\ngxs\ngxs.spec.ts" time="5.554">
+</testcase>
+<testcase name="NGXS @ngxs @angular @regression › validates simple form behavior @ngxs" classname="angular\ngxs\ngxs.spec.ts" time="14.594">
+</testcase>
+<testcase name="NGXS @ngxs @angular @regression › validates complex policy and dynamic behavior @ngxs" classname="angular\ngxs\ngxs.spec.ts" time="19.937">
+</testcase>
+<testcase name="NGXS @ngxs @angular @regression › validates performance generator behavior @ngxs @performance-form" classname="angular\ngxs\ngxs.spec.ts" time="12.709">
+</testcase>
+</testsuite>
+<testsuite name="angular\reactive-forms\reactive-forms.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="webkit" tests="4" failures="0" skipped="0" time="54.168" errors="0">
+<testcase name="Reactive Forms @reactive-forms @angular @regression › loads overview and documentation links @reactive-forms" classname="angular\reactive-forms\reactive-forms.spec.ts" time="5.374">
+</testcase>
+<testcase name="Reactive Forms @reactive-forms @angular @regression › validates simple form behavior @reactive-forms" classname="angular\reactive-forms\reactive-forms.spec.ts" time="14.778">
+</testcase>
+<testcase name="Reactive Forms @reactive-forms @angular @regression › validates complex policy and dynamic behavior @reactive-forms" classname="angular\reactive-forms\reactive-forms.spec.ts" time="21.586">
+</testcase>
+<testcase name="Reactive Forms @reactive-forms @angular @regression › validates performance generator behavior @reactive-forms @performance-form" classname="angular\reactive-forms\reactive-forms.spec.ts" time="12.43">
+</testcase>
+</testsuite>
+<testsuite name="angular\rx-angular-state\rx-angular-state.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="webkit" tests="4" failures="0" skipped="0" time="55.365" errors="0">
+<testcase name="RxAngular State @rx-angular-state @angular @regression › loads overview and documentation links @rx-angular-state" classname="angular\rx-angular-state\rx-angular-state.spec.ts" time="5.658">
+</testcase>
+<testcase name="RxAngular State @rx-angular-state @angular @regression › validates simple form behavior @rx-angular-state" classname="angular\rx-angular-state\rx-angular-state.spec.ts" time="15.693">
+</testcase>
+<testcase name="RxAngular State @rx-angular-state @angular @regression › validates complex policy and dynamic behavior @rx-angular-state" classname="angular\rx-angular-state\rx-angular-state.spec.ts" time="22.418">
+</testcase>
+<testcase name="RxAngular State @rx-angular-state @angular @regression › validates performance generator behavior @rx-angular-state @performance-form" classname="angular\rx-angular-state\rx-angular-state.spec.ts" time="11.596">
+</testcase>
+</testsuite>
+<testsuite name="angular\signals\signals.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="webkit" tests="4" failures="0" skipped="0" time="57.618" errors="0">
+<testcase name="Signals @signals @angular @regression › loads overview and documentation links @signals" classname="angular\signals\signals.spec.ts" time="5.864">
+</testcase>
+<testcase name="Signals @signals @angular @regression › validates simple form behavior @signals" classname="angular\signals\signals.spec.ts" time="15.95">
+</testcase>
+<testcase name="Signals @signals @angular @regression › validates complex policy and dynamic behavior @signals" classname="angular\signals\signals.spec.ts" time="23.463">
+</testcase>
+<testcase name="Signals @signals @angular @regression › validates performance generator behavior @signals @performance-form" classname="angular\signals\signals.spec.ts" time="12.341">
+</testcase>
+</testsuite>
+<testsuite name="angular\template-driven\template-driven.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="webkit" tests="4" failures="0" skipped="0" time="53.985" errors="0">
+<testcase name="Template Driven Forms (ngModel) @template-driven @angular @regression › loads overview and documentation links @template-driven" classname="angular\template-driven\template-driven.spec.ts" time="5.744">
+</testcase>
+<testcase name="Template Driven Forms (ngModel) @template-driven @angular @regression › validates simple form behavior @template-driven" classname="angular\template-driven\template-driven.spec.ts" time="15.378">
+</testcase>
+<testcase name="Template Driven Forms (ngModel) @template-driven @angular @regression › validates complex policy and dynamic behavior @template-driven" classname="angular\template-driven\template-driven.spec.ts" time="20.992">
+</testcase>
+<testcase name="Template Driven Forms (ngModel) @template-driven @angular @regression › validates performance generator behavior @template-driven @performance-form" classname="angular\template-driven\template-driven.spec.ts" time="11.871">
+</testcase>
+</testsuite>
+<testsuite name="demo-portal\portal.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="webkit" tests="2" failures="0" skipped="0" time="7.358" errors="0">
+<testcase name="Demo portal @portal @regression › loads application cards and launch links @smoke" classname="demo-portal\portal.spec.ts" time="3.74">
+</testcase>
+<testcase name="Demo portal @portal @regression › opens integration lists without testing Playwright results" classname="demo-portal\portal.spec.ts" time="3.618">
+</testcase>
+</testsuite>
+<testsuite name="documentation\docs.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="webkit" tests="4" failures="0" skipped="0" time="18.491" errors="0">
+<testcase name="Documentation application @docs @regression › loads documentation, navigates packages, and supports deep links @smoke" classname="documentation\docs.spec.ts" time="5.466">
+</testcase>
+<testcase name="Documentation application @docs @regression › search finds state management and package consumption guides" classname="documentation\docs.spec.ts" time="6.157">
+</testcase>
+<testcase name="Documentation application @docs @regression › code blocks and copy-code behavior work when available" classname="documentation\docs.spec.ts" time="3.419">
+</testcase>
+<testcase name="Documentation application @docs @regression › previous and next navigation works where available" classname="documentation\docs.spec.ts" time="3.449">
+</testcase>
+</testsuite>
+<testsuite name="react\context-api\context-api.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="webkit" tests="4" failures="0" skipped="0" time="33.533" errors="0">
+<testcase name="Context API @context @react @regression › loads overview and documentation links @context" classname="react\context-api\context-api.spec.ts" time="4.384">
+</testcase>
+<testcase name="Context API @context @react @regression › validates simple form behavior @context" classname="react\context-api\context-api.spec.ts" time="8.57">
+</testcase>
+<testcase name="Context API @context @react @regression › validates complex policy and dynamic behavior @context" classname="react\context-api\context-api.spec.ts" time="12.434">
+</testcase>
+<testcase name="Context API @context @react @regression › validates performance generator behavior @context @performance-form" classname="react\context-api\context-api.spec.ts" time="8.145">
+</testcase>
+</testsuite>
+<testsuite name="react\jotai\jotai.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="webkit" tests="4" failures="0" skipped="0" time="32.147" errors="0">
+<testcase name="Jotai @jotai @react @regression › loads overview and documentation links @jotai" classname="react\jotai\jotai.spec.ts" time="4.073">
+</testcase>
+<testcase name="Jotai @jotai @react @regression › validates simple form behavior @jotai" classname="react\jotai\jotai.spec.ts" time="8.01">
+</testcase>
+<testcase name="Jotai @jotai @react @regression › validates complex policy and dynamic behavior @jotai" classname="react\jotai\jotai.spec.ts" time="11.529">
+</testcase>
+<testcase name="Jotai @jotai @react @regression › validates performance generator behavior @jotai @performance-form" classname="react\jotai\jotai.spec.ts" time="8.535">
+</testcase>
+</testsuite>
+<testsuite name="react\local-state\local-state.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="webkit" tests="4" failures="0" skipped="0" time="33.38" errors="0">
+<testcase name="Local State @local-state @react @regression › loads overview and documentation links @local-state" classname="react\local-state\local-state.spec.ts" time="4.271">
+</testcase>
+<testcase name="Local State @local-state @react @regression › validates simple form behavior @local-state" classname="react\local-state\local-state.spec.ts" time="8.826">
+</testcase>
+<testcase name="Local State @local-state @react @regression › validates complex policy and dynamic behavior @local-state" classname="react\local-state\local-state.spec.ts" time="11.904">
+</testcase>
+<testcase name="Local State @local-state @react @regression › validates performance generator behavior @local-state @performance-form" classname="react\local-state\local-state.spec.ts" time="8.379">
+</testcase>
+</testsuite>
+<testsuite name="react\mobx\mobx.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="webkit" tests="4" failures="0" skipped="0" time="31.043" errors="0">
+<testcase name="MobX @mobx @react @regression › loads overview and documentation links @mobx" classname="react\mobx\mobx.spec.ts" time="4.259">
+</testcase>
+<testcase name="MobX @mobx @react @regression › validates simple form behavior @mobx" classname="react\mobx\mobx.spec.ts" time="8.37">
+</testcase>
+<testcase name="MobX @mobx @react @regression › validates complex policy and dynamic behavior @mobx" classname="react\mobx\mobx.spec.ts" time="10.286">
+</testcase>
+<testcase name="MobX @mobx @react @regression › validates performance generator behavior @mobx @performance-form" classname="react\mobx\mobx.spec.ts" time="8.128">
+</testcase>
+</testsuite>
+<testsuite name="react\recoil\recoil.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="webkit" tests="4" failures="0" skipped="0" time="35.561" errors="0">
+<testcase name="Recoil @recoil @react @regression › loads overview and documentation links @recoil" classname="react\recoil\recoil.spec.ts" time="4.346">
+</testcase>
+<testcase name="Recoil @recoil @react @regression › validates simple form behavior @recoil" classname="react\recoil\recoil.spec.ts" time="8.944">
+</testcase>
+<testcase name="Recoil @recoil @react @regression › validates complex policy and dynamic behavior @recoil" classname="react\recoil\recoil.spec.ts" time="13.146">
+</testcase>
+<testcase name="Recoil @recoil @react @regression › validates performance generator behavior @recoil @performance-form" classname="react\recoil\recoil.spec.ts" time="9.125">
+</testcase>
+</testsuite>
+<testsuite name="react\redux-toolkit\redux-toolkit.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="webkit" tests="4" failures="0" skipped="0" time="37.24" errors="0">
+<testcase name="Redux Toolkit @redux-toolkit @react @regression › loads overview and documentation links @redux-toolkit" classname="react\redux-toolkit\redux-toolkit.spec.ts" time="4.692">
+</testcase>
+<testcase name="Redux Toolkit @redux-toolkit @react @regression › validates simple form behavior @redux-toolkit" classname="react\redux-toolkit\redux-toolkit.spec.ts" time="10.354">
+</testcase>
+<testcase name="Redux Toolkit @redux-toolkit @react @regression › validates complex policy and dynamic behavior @redux-toolkit" classname="react\redux-toolkit\redux-toolkit.spec.ts" time="13.15">
+</testcase>
+<testcase name="Redux Toolkit @redux-toolkit @react @regression › validates performance generator behavior @redux-toolkit @performance-form" classname="react\redux-toolkit\redux-toolkit.spec.ts" time="9.044">
+</testcase>
+</testsuite>
+<testsuite name="react\zustand\zustand.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="webkit" tests="4" failures="0" skipped="0" time="34.114" errors="0">
+<testcase name="Zustand @zustand @react @regression › loads overview and documentation links @zustand" classname="react\zustand\zustand.spec.ts" time="4.101">
+</testcase>
+<testcase name="Zustand @zustand @react @regression › validates simple form behavior @zustand" classname="react\zustand\zustand.spec.ts" time="8.454">
+</testcase>
+<testcase name="Zustand @zustand @react @regression › validates complex policy and dynamic behavior @zustand" classname="react\zustand\zustand.spec.ts" time="12.424">
+</testcase>
+<testcase name="Zustand @zustand @react @regression › validates performance generator behavior @zustand @performance-form" classname="react\zustand\zustand.spec.ts" time="9.135">
+</testcase>
+</testsuite>
+<testsuite name="reports\reports.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="webkit" tests="5" failures="0" skipped="0" time="15.519" errors="0">
+<testcase name="Existing reports application @reports @regression › Reports menu exposes tests coverage and automation destinations" classname="reports\reports.spec.ts" time="4.78">
+</testcase>
+<testcase name="Existing reports application @reports @regression › Reports menu remains available inside the tests and coverage workspace" classname="reports\reports.spec.ts" time="3.101">
+</testcase>
+<testcase name="Existing reports application @reports @regression › loads the canonical automation summary route" classname="reports\reports.spec.ts" time="2.759">
+</testcase>
+<testcase name="Existing reports application @reports @regression › loads generated report dashboard or useful empty state @smoke" classname="reports\reports.spec.ts" time="2.473">
+</testcase>
+<testcase name="Existing reports application @reports @regression › report links remain local when dashboard exists" classname="reports\reports.spec.ts" time="2.406">
+</testcase>
+</testsuite>
+<testsuite name="shared\cross-framework\cross-framework.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="webkit" tests="3" failures="0" skipped="0" time="20.728" errors="0">
+<testcase name="Cross-framework consistency @regression › Angular, React, and Vanilla simple examples block invalid submit @angular @react @vanilla" classname="shared\cross-framework\cross-framework.spec.ts" time="7.759">
+</testcase>
+<testcase name="Cross-framework consistency @regression › Angular, React, and Vanilla complex examples expose nested sections @angular @react @vanilla" classname="shared\cross-framework\cross-framework.spec.ts" time="6.778">
+</testcase>
+<testcase name="Cross-framework consistency @regression › Angular, React, and Vanilla performance examples expose the same generator inputs @angular @react @vanilla @performance-form" classname="shared\cross-framework\cross-framework.spec.ts" time="6.191">
+</testcase>
+</testsuite>
+<testsuite name="shared\navigation\platform-navigation.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="webkit" tests="1" failures="1" skipped="0" time="4.586" errors="0">
+<testcase name="Platform navigation URLs @hosting-navigation @regression › uses the configured host topology from every application surface" classname="shared\navigation\platform-navigation.spec.ts" time="4.586">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\test-results\shared-navigation-platform-07191-m-every-application-surface-webkit\test-failed-1.png]]
+
+[[ATTACHMENT|..\test-results\shared-navigation-platform-07191-m-every-application-surface-webkit\video.webm]]
+
+[[ATTACHMENT|..\test-results\shared-navigation-platform-07191-m-every-application-surface-webkit\error-context.md]]
+
+[[ATTACHMENT|..\test-results\shared-navigation-platform-07191-m-every-application-surface-webkit\trace.zip]]
+]]>
+</system-out>
+<failure message="Documentation Showcase URLs" type="expect.toEqual">
+<![CDATA[  [webkit] › shared\navigation\platform-navigation.spec.ts:11:3 › Platform navigation URLs @hosting-navigation @regression › uses the configured host topology from every application surface › Documentation 
+
+    Error: Documentation Showcase URLs
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+      Array [
+        "http://127.0.0.1:4302/",
+        "http://127.0.0.1:4304/",
+    -   "http://127.0.0.1:4305/",
+    +   "http://127.0.0.1:4205/",
+      ]
+
+      48 |         expect(links.docs.every((href) => href.startsWith(expected.docsPrefix)), `${surface} Docs URLs`).toBe(true);
+      49 |         expect(new Set(links.docs.map((href) => new URL(href).origin)), `${surface} Docs origins`).toEqual(new Set([expected.docsOrigin]));
+    > 50 |         expect(links.showcases, `${surface} Showcase URLs`).toEqual(expected.showcases);
+         |                                                             ^
+      51 |         expect(links.reports, `${surface} Reports URLs`).toEqual(expected.reports);
+      52 |       });
+      53 |     }
+        at C:\Kalyan\Learning\validation-rules-engine\tests\e2e\shared\navigation\platform-navigation.spec.ts:50:61
+        at C:\Kalyan\Learning\validation-rules-engine\tests\e2e\shared\navigation\platform-navigation.spec.ts:31:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\artifacts\playwright\test-results\shared-navigation-platform-07191-m-every-application-surface-webkit\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\artifacts\playwright\test-results\shared-navigation-platform-07191-m-every-application-surface-webkit\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\artifacts\playwright\test-results\shared-navigation-platform-07191-m-every-application-surface-webkit\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\artifacts\playwright\test-results\shared-navigation-platform-07191-m-every-application-surface-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\artifacts\playwright\test-results\shared-navigation-platform-07191-m-every-application-surface-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="smoke\smoke.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="webkit" tests="2" failures="0" skipped="0" time="26.481" errors="0">
+<testcase name="Repository smoke suite @smoke › loads the portal, documentation, reports, and all showcases @portal @docs @reports @angular @react @vanilla" classname="smoke\smoke.spec.ts" time="7.41">
+</testcase>
+<testcase name="Repository smoke suite @smoke › validates Angular, React, and Vanilla simple forms @angular @react @vanilla" classname="smoke\smoke.spec.ts" time="19.071">
+</testcase>
+</testsuite>
+<testsuite name="vanilla\core\core-forms.spec.ts" timestamp="2026-08-07T02:29:20.499Z" hostname="webkit" tests="4" failures="0" skipped="0" time="26.176" errors="0">
+<testcase name="Vanilla core showcase @vanilla @regression › home page introduces the core-only dependency path @vanilla @smoke" classname="vanilla\core\core-forms.spec.ts" time="2.774">
+</testcase>
+<testcase name="Vanilla core showcase @vanilla @regression › simple form blocks invalid submit and accepts valid data @vanilla @smoke" classname="vanilla\core\core-forms.spec.ts" time="7.612">
+</testcase>
+<testcase name="Vanilla core showcase @vanilla @regression › complex form covers groups, conditionals, and dynamic collections @vanilla" classname="vanilla\core\core-forms.spec.ts" time="9.81">
+</testcase>
+<testcase name="Vanilla core showcase @vanilla @regression › performance form generates controls and measures validation @vanilla @performance-form" classname="vanilla\core\core-forms.spec.ts" time="5.98">
+</testcase>
+</testsuite>
+</testsuites>

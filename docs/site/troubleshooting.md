@@ -26,8 +26,16 @@ Build packages first with `npm run build:packages`. Portal startup does this aut
 
 ## Reports are missing
 
-Run `npm run test:reports`. Use `npm run reports:clean` only when stale generated output needs to be removed.
+Locally, run `npm run test:reports` or `npm run test:ci`. Use `npm run reports:clean` only when stale generated output needs to be removed.
+
+For Azure Static Web Apps, CI does not regenerate reports. Publish and commit evidence instead:
+
+```bash
+npm run evidence:refresh
+git add hosted/evidence
+git commit -m "Update hosted test and automation evidence"
+```
 
 ## Chrome cannot start in CI
 
-Use the CI test command so Karma selects the no-sandbox `ChromeHeadlessCI` launcher. Large Angular showcase coverage also needs a larger Node heap (`NODE_OPTIONS=--max-old-space-size=8192`); without it the instrumented webpack build can exit before writing `reports/showcases/angular/**`.
+Use the CI test command so Karma selects the no-sandbox `ChromeHeadlessCI` launcher. Large Angular showcase coverage also needs a larger Node heap (`NODE_OPTIONS=--max-old-space-size=8192`); without it the instrumented webpack build can exit before writing `reports/showcases/angular/**`. Azure Static Web Apps deployment does not run this suite — publish `hosted/evidence` from a local machine instead.

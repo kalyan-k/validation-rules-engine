@@ -1,0 +1,298 @@
+{
+  "projectName": "vanilla-showcase",
+  "displayName": "Vanilla Showcase",
+  "version": "1.0.0",
+  "startedAt": "2026-08-07T03:19:40.006Z",
+  "finishedAt": "2026-08-07T03:19:46.308Z",
+  "durationMs": 2801.736328125,
+  "browsers": [
+    "Vitest · jsdom"
+  ],
+  "runError": false,
+  "dashboardHref": "../../../index.html",
+  "summaryHref": "../../../index.html#vanilla-showcase/summary",
+  "summary": {
+    "total": 23,
+    "passed": 23,
+    "failed": 0,
+    "skipped": 0
+  },
+  "specs": [
+    {
+      "suite": [
+        "Vanilla showcase application"
+      ],
+      "description": "renders the shared layout, home content, and shell",
+      "status": "passed",
+      "durationMs": 42.447299999999814,
+      "logs": [],
+      "sourceFiles": [
+        "apps/vanilla-showcase/src/app.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Vanilla showcase application"
+      ],
+      "description": "navigates among Home, Simple, Complex, and Performance routes with active state",
+      "status": "passed",
+      "durationMs": 317.0187000000001,
+      "logs": [],
+      "sourceFiles": [
+        "apps/vanilla-showcase/src/app.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Vanilla showcase application"
+      ],
+      "description": "uses home example links as client-side navigation",
+      "status": "passed",
+      "durationMs": 22.855399999999918,
+      "logs": [],
+      "sourceFiles": [
+        "apps/vanilla-showcase/src/app.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationEngine unit coverage"
+      ],
+      "description": "registers case-insensitive policies with balanced duplicate ownership",
+      "status": "passed",
+      "durationMs": 16.713400000000092,
+      "logs": [],
+      "sourceFiles": [
+        "apps/vanilla-showcase/src/coverage.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationEngine unit coverage"
+      ],
+      "description": "replaces and forcibly unregisters a dynamic policy",
+      "status": "passed",
+      "durationMs": 5.45679999999993,
+      "logs": [],
+      "sourceFiles": [
+        "apps/vanilla-showcase/src/coverage.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationEngine unit coverage"
+      ],
+      "description": "supports function, path, negated, and equality dependencies",
+      "status": "passed",
+      "durationMs": 2.963000000000193,
+      "logs": [],
+      "sourceFiles": [
+        "apps/vanilla-showcase/src/coverage.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationEngine unit coverage"
+      ],
+      "description": "registers, validates, clears, and rejects validation groups",
+      "status": "passed",
+      "durationMs": 3.9612999999999374,
+      "logs": [],
+      "sourceFiles": [
+        "apps/vanilla-showcase/src/coverage.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationEngine unit coverage"
+      ],
+      "description": "reports required paths, refreshes group statuses, and updates evaluated groups on field validate",
+      "status": "passed",
+      "durationMs": 2.8231000000000677,
+      "logs": [],
+      "sourceFiles": [
+        "apps/vanilla-showcase/src/coverage.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationEngine unit coverage"
+      ],
+      "description": "publishes revisions, touch state, partial clear, and notifications",
+      "status": "passed",
+      "durationMs": 3.6999000000000706,
+      "logs": [],
+      "sourceFiles": [
+        "apps/vanilla-showcase/src/coverage.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationEngine unit coverage"
+      ],
+      "description": "supports observable-like async values and ignores stale results",
+      "status": "passed",
+      "durationMs": 1.7878000000000611,
+      "logs": [],
+      "sourceFiles": [
+        "apps/vanilla-showcase/src/coverage.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationEngine unit coverage"
+      ],
+      "description": "guards empty names and handles non-string dependency values",
+      "status": "passed",
+      "durationMs": 1.8653000000003885,
+      "logs": [],
+      "sourceFiles": [
+        "apps/vanilla-showcase/src/coverage.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "paths, render, and helpers"
+      ],
+      "description": "reads and mutates nested property paths",
+      "status": "passed",
+      "durationMs": 1.2829000000001543,
+      "logs": [],
+      "sourceFiles": [
+        "apps/vanilla-showcase/src/coverage.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "paths, render, and helpers"
+      ],
+      "description": "creates DOM helpers and renders summaries",
+      "status": "passed",
+      "durationMs": 32.18899999999985,
+      "logs": [],
+      "sourceFiles": [
+        "apps/vanilla-showcase/src/coverage.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "paths, render, and helpers"
+      ],
+      "description": "binds select, checkbox, radio, and textarea controls",
+      "status": "passed",
+      "durationMs": 88.4385000000002,
+      "logs": [],
+      "sourceFiles": [
+        "apps/vanilla-showcase/src/coverage.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "paths, render, and helpers"
+      ],
+      "description": "covers performance helpers and platform urls",
+      "status": "passed",
+      "durationMs": 4.376099999999951,
+      "logs": [],
+      "sourceFiles": [
+        "apps/vanilla-showcase/src/coverage.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Vanilla showcase forms"
+      ],
+      "description": "blocks an invalid simple submission and accepts a valid one, then resets",
+      "status": "passed",
+      "durationMs": 286.97059999999965,
+      "logs": [],
+      "sourceFiles": [
+        "apps/vanilla-showcase/src/forms.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Vanilla showcase forms"
+      ],
+      "description": "validates a complex section and saves after populate",
+      "status": "passed",
+      "durationMs": 223.0206000000003,
+      "logs": [],
+      "sourceFiles": [
+        "apps/vanilla-showcase/src/forms.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Vanilla showcase forms"
+      ],
+      "description": "generates a performance form and validates all controls",
+      "status": "passed",
+      "durationMs": 424.0142999999998,
+      "logs": [],
+      "sourceFiles": [
+        "apps/vanilla-showcase/src/forms.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Vanilla showcase forms"
+      ],
+      "description": "registers a policy, validates a field, and clears engine state",
+      "status": "passed",
+      "durationMs": 1.8438000000001011,
+      "logs": [],
+      "sourceFiles": [
+        "apps/vanilla-showcase/src/forms.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Vanilla showcase forms"
+      ],
+      "description": "manages complex dynamic sections and conditional secondary email",
+      "status": "passed",
+      "durationMs": 214.7837000000004,
+      "logs": [],
+      "sourceFiles": [
+        "apps/vanilla-showcase/src/forms.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Vanilla showcase forms"
+      ],
+      "description": "validates on blur by default and shows required markers",
+      "status": "passed",
+      "durationMs": 79.8107,
+      "logs": [],
+      "sourceFiles": [
+        "apps/vanilla-showcase/src/forms.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Vanilla showcase forms"
+      ],
+      "description": "shows performance group badges after validate all",
+      "status": "passed",
+      "durationMs": 317.09000000000015,
+      "logs": [],
+      "sourceFiles": [
+        "apps/vanilla-showcase/src/forms.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "Vanilla showcase forms"
+      ],
+      "description": "populates and resets the performance form",
+      "status": "passed",
+      "durationMs": 704.5046999999995,
+      "logs": [],
+      "sourceFiles": [
+        "apps/vanilla-showcase/src/forms.spec.ts"
+      ]
+    }
+  ]
+}

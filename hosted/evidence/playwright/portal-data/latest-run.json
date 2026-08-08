@@ -1,0 +1,486 @@
+{
+  "schemaVersion": 1,
+  "available": true,
+  "runId": "local-2026-08-07T02-28-39-790Z",
+  "generatedAt": "2026-08-07T03:20:01.089Z",
+  "startTime": "2026-08-07T02:28:39.790Z",
+  "endTime": "2026-08-07T02:37:10.408Z",
+  "durationMs": 510618.726,
+  "status": "failed",
+  "execution": {
+    "scope": "focused",
+    "executedTotal": 255,
+    "configuredTotal": 269,
+    "coveragePercent": 94.8,
+    "recommendedFullCommand": "npm run test:e2e:full"
+  },
+  "catalog": {
+    "generatedAt": "2026-08-07T02:37:12.915Z",
+    "totals": {
+      "total": 269
+    },
+    "browserTotals": {
+      "chromium": {
+        "total": 85
+      },
+      "firefox": {
+        "total": 85
+      },
+      "webkit": {
+        "total": 85
+      },
+      "accessibility-chromium": {
+        "total": 7
+      },
+      "visual-chromium": {
+        "total": 5
+      },
+      "responsive-tablet": {
+        "total": 1
+      },
+      "responsive-mobile": {
+        "total": 1
+      }
+    },
+    "applicationTotals": {
+      "angular": {
+        "total": 110
+      },
+      "portal": {
+        "total": 8
+      },
+      "documentation": {
+        "total": 14
+      },
+      "react": {
+        "total": 86
+      },
+      "reports": {
+        "total": 17
+      },
+      "platform": {
+        "total": 21
+      },
+      "vanilla": {
+        "total": 13
+      }
+    },
+    "suiteTotals": {
+      "regression": {
+        "total": 249
+      },
+      "smoke": {
+        "total": 6
+      },
+      "accessibility": {
+        "total": 7
+      },
+      "visual": {
+        "total": 5
+      },
+      "responsive": {
+        "total": 2
+      }
+    },
+    "angularStateTotals": {
+      "akita": {
+        "total": 12
+      },
+      "custom-rxjs-store": {
+        "total": 12
+      },
+      "elf": {
+        "total": 12
+      },
+      "ngrx": {
+        "total": 12
+      },
+      "ngxs": {
+        "total": 12
+      },
+      "reactive-forms": {
+        "total": 12
+      },
+      "rx-angular-state": {
+        "total": 12
+      },
+      "signals": {
+        "total": 12
+      },
+      "template-driven": {
+        "total": 12
+      },
+      "general": {
+        "total": 2
+      }
+    },
+    "reactStateTotals": {
+      "context": {
+        "total": 12
+      },
+      "jotai": {
+        "total": 12
+      },
+      "local-state": {
+        "total": 12
+      },
+      "mobx": {
+        "total": 12
+      },
+      "recoil": {
+        "total": 12
+      },
+      "redux-toolkit": {
+        "total": 12
+      },
+      "zustand": {
+        "total": 12
+      },
+      "general": {
+        "total": 2
+      }
+    },
+    "vanillaTotals": {
+      "regression": {
+        "total": 12
+      },
+      "accessibility": {
+        "total": 1
+      }
+    }
+  },
+  "totals": {
+    "total": 255,
+    "passed": 252,
+    "failed": 3,
+    "skipped": 0,
+    "flaky": 0
+  },
+  "browserTotals": {
+    "chromium": {
+      "total": 85,
+      "passed": 84,
+      "failed": 1,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "firefox": {
+      "total": 85,
+      "passed": 84,
+      "failed": 1,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "webkit": {
+      "total": 85,
+      "passed": 84,
+      "failed": 1,
+      "skipped": 0,
+      "flaky": 0
+    }
+  },
+  "applicationTotals": {
+    "angular": {
+      "total": 108,
+      "passed": 108,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "portal": {
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "documentation": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "react": {
+      "total": 84,
+      "passed": 84,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "reports": {
+      "total": 15,
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "platform": {
+      "total": 18,
+      "passed": 15,
+      "failed": 3,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "vanilla": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    }
+  },
+  "suiteTotals": {
+    "regression": {
+      "total": 249,
+      "passed": 246,
+      "failed": 3,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "smoke": {
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    }
+  },
+  "angularStateTotals": {
+    "akita": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "custom-rxjs-store": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "elf": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "ngrx": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "ngxs": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "reactive-forms": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "rx-angular-state": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "signals": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "template-driven": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    }
+  },
+  "reactStateTotals": {
+    "context": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "jotai": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "local-state": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "mobx": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "recoil": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "redux-toolkit": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "zustand": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    }
+  },
+  "vanillaTotals": {
+    "regression": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    }
+  },
+  "accessibility": {
+    "total": 0,
+    "passed": 0,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0
+  },
+  "visual": {
+    "total": 0,
+    "passed": 0,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0
+  },
+  "failures": [
+    {
+      "title": "shared\\navigation\\platform-navigation.spec.ts > Platform navigation URLs @hosting-navigation @regression > uses the configured host topology from every application surface",
+      "project": "chromium",
+      "application": "platform",
+      "suite": "regression",
+      "error": "Error: Documentation Showcase URLs\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[2m    \"http://127.0.0.1:4302/\",\u001b[22m\n\u001b[2m    \"http://127.0.0.1:4304/\",\u001b[22m\n\u001b[32m-   \"http://127.0.0.1:4305/\",\u001b[39m\n\u001b[31m+   \"http://127.0.0.1:4205/\",\u001b[39m\n\u001b[2m  ]\u001b[22m",
+      "artifacts": [
+        {
+          "name": "screenshot",
+          "contentType": "image/png",
+          "path": "test-results/shared-navigation-platform-07191-m-every-application-surface-chromium/test-failed-1.png"
+        },
+        {
+          "name": "video",
+          "contentType": "video/webm",
+          "path": "test-results/shared-navigation-platform-07191-m-every-application-surface-chromium/video.webm"
+        },
+        {
+          "name": "error-context",
+          "contentType": "text/markdown",
+          "path": "test-results/shared-navigation-platform-07191-m-every-application-surface-chromium/error-context.md"
+        },
+        {
+          "name": "trace",
+          "contentType": "application/zip",
+          "path": "test-results/shared-navigation-platform-07191-m-every-application-surface-chromium/trace.zip"
+        }
+      ]
+    },
+    {
+      "title": "shared\\navigation\\platform-navigation.spec.ts > Platform navigation URLs @hosting-navigation @regression > uses the configured host topology from every application surface",
+      "project": "firefox",
+      "application": "platform",
+      "suite": "regression",
+      "error": "Error: Documentation Showcase URLs\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[2m    \"http://127.0.0.1:4302/\",\u001b[22m\n\u001b[2m    \"http://127.0.0.1:4304/\",\u001b[22m\n\u001b[32m-   \"http://127.0.0.1:4305/\",\u001b[39m\n\u001b[31m+   \"http://127.0.0.1:4205/\",\u001b[39m\n\u001b[2m  ]\u001b[22m",
+      "artifacts": [
+        {
+          "name": "screenshot",
+          "contentType": "image/png",
+          "path": "test-results/shared-navigation-platform-07191-m-every-application-surface-firefox/test-failed-1.png"
+        },
+        {
+          "name": "video",
+          "contentType": "video/webm",
+          "path": "test-results/shared-navigation-platform-07191-m-every-application-surface-firefox/video.webm"
+        },
+        {
+          "name": "error-context",
+          "contentType": "text/markdown",
+          "path": "test-results/shared-navigation-platform-07191-m-every-application-surface-firefox/error-context.md"
+        },
+        {
+          "name": "trace",
+          "contentType": "application/zip",
+          "path": "test-results/shared-navigation-platform-07191-m-every-application-surface-firefox/trace.zip"
+        }
+      ]
+    },
+    {
+      "title": "shared\\navigation\\platform-navigation.spec.ts > Platform navigation URLs @hosting-navigation @regression > uses the configured host topology from every application surface",
+      "project": "webkit",
+      "application": "platform",
+      "suite": "regression",
+      "error": "Error: Documentation Showcase URLs\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[2m    \"http://127.0.0.1:4302/\",\u001b[22m\n\u001b[2m    \"http://127.0.0.1:4304/\",\u001b[22m\n\u001b[32m-   \"http://127.0.0.1:4305/\",\u001b[39m\n\u001b[31m+   \"http://127.0.0.1:4205/\",\u001b[39m\n\u001b[2m  ]\u001b[22m",
+      "artifacts": [
+        {
+          "name": "screenshot",
+          "contentType": "image/png",
+          "path": "test-results/shared-navigation-platform-07191-m-every-application-surface-webkit/test-failed-1.png"
+        },
+        {
+          "name": "video",
+          "contentType": "video/webm",
+          "path": "test-results/shared-navigation-platform-07191-m-every-application-surface-webkit/video.webm"
+        },
+        {
+          "name": "error-context",
+          "contentType": "text/markdown",
+          "path": "test-results/shared-navigation-platform-07191-m-every-application-surface-webkit/error-context.md"
+        },
+        {
+          "name": "trace",
+          "contentType": "application/zip",
+          "path": "test-results/shared-navigation-platform-07191-m-every-application-surface-webkit/trace.zip"
+        }
+      ]
+    }
+  ],
+  "artifacts": {
+    "htmlReport": "html-report/index.html",
+    "jsonReport": "json/results.json",
+    "junitReport": "junit/test-results.xml",
+    "screenshots": "test-results",
+    "videos": "test-results",
+    "traces": "test-results",
+    "visualDiffs": "visual-diffs"
+  }
+}

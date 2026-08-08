@@ -1,0 +1,298 @@
+{
+  "projectName": "react",
+  "displayName": "React Adapter",
+  "version": "1.0.0",
+  "startedAt": "2026-08-07T02:24:25.570Z",
+  "finishedAt": "2026-08-07T02:24:45.194Z",
+  "durationMs": 1005.904296875,
+  "browsers": [
+    "Vitest · jsdom"
+  ],
+  "runError": false,
+  "dashboardHref": "../../../index.html",
+  "summaryHref": "../../../index.html#react/summary",
+  "summary": {
+    "total": 23,
+    "passed": 23,
+    "failed": 0,
+    "skipped": 0
+  },
+  "specs": [
+    {
+      "suite": [
+        "ValidationEngine"
+      ],
+      "description": "registers case-insensitive policies with balanced duplicate ownership",
+      "status": "passed",
+      "durationMs": 1.6992000000027474,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/engine/validation-engine.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationEngine"
+      ],
+      "description": "replaces and forcibly unregisters a dynamic policy",
+      "status": "passed",
+      "durationMs": 2.004799999998795,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/engine/validation-engine.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationEngine"
+      ],
+      "description": "validates nested fields, optional rules, required results, and deduplicates errors",
+      "status": "passed",
+      "durationMs": 0.9371000000028289,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/engine/validation-engine.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationEngine"
+      ],
+      "description": "supports function, path, negated, and equality dependencies",
+      "status": "passed",
+      "durationMs": 0.8057000000007974,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/engine/validation-engine.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationEngine"
+      ],
+      "description": "validates fields independently and preserves errors from other properties",
+      "status": "passed",
+      "durationMs": 0.9576999999990221,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/engine/validation-engine.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationEngine"
+      ],
+      "description": "registers, validates, clears, and rejects validation groups",
+      "status": "passed",
+      "durationMs": 2.206400000002759,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/engine/validation-engine.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationEngine"
+      ],
+      "description": "publishes revisions, touch state, partial clear, full clear, and notifications",
+      "status": "passed",
+      "durationMs": 2.422899999997753,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/engine/validation-engine.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationEngine"
+      ],
+      "description": "ignores stale promise results for the same field",
+      "status": "passed",
+      "durationMs": 0.5973000000012689,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/engine/validation-engine.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationEngine"
+      ],
+      "description": "supports observable-like async values and propagates rule failures",
+      "status": "passed",
+      "durationMs": 1.154899999997724,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/engine/validation-engine.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "ValidationEngine"
+      ],
+      "description": "guards empty names and handles non-string dependency values",
+      "status": "passed",
+      "durationMs": 0.4850000000005821,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/engine/validation-engine.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "React validation hooks and components"
+      ],
+      "description": "throws a clear missing-provider error",
+      "status": "passed",
+      "durationMs": 16.332800000000134,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/hooks/react-integration.spec.tsx"
+      ]
+    },
+    {
+      "suite": [
+        "React validation hooks and components"
+      ],
+      "description": "exposes an injected engine and merged provider configuration",
+      "status": "passed",
+      "durationMs": 13.322599999999511,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/hooks/react-integration.spec.tsx"
+      ]
+    },
+    {
+      "suite": [
+        "React validation hooks and components"
+      ],
+      "description": "validates change, blur, submit, controlled parsing, checkbox, and reset",
+      "status": "passed",
+      "durationMs": 613.9864999999991,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/hooks/react-integration.spec.tsx"
+      ]
+    },
+    {
+      "suite": [
+        "React validation hooks and components"
+      ],
+      "description": "calls invalid submit and renders linked and unlinked summaries",
+      "status": "passed",
+      "durationMs": 63.83389999999781,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/hooks/react-integration.spec.tsx"
+      ]
+    },
+    {
+      "suite": [
+        "React validation hooks and components"
+      ],
+      "description": "supports custom controls, explicit field validate, and field clear",
+      "status": "passed",
+      "durationMs": 171.68119999999908,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/hooks/react-integration.spec.tsx"
+      ]
+    },
+    {
+      "suite": [
+        "React validation hooks and components"
+      ],
+      "description": "provides low-level validation, groups, touch, and clear methods",
+      "status": "passed",
+      "durationMs": 3.1736999999993714,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/hooks/react-integration.spec.tsx"
+      ]
+    },
+    {
+      "suite": [
+        "React validation hooks and components"
+      ],
+      "description": "balances policy lifecycle in Strict Mode and across multiple forms",
+      "status": "passed",
+      "durationMs": 1.9101000000009662,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/hooks/react-integration.spec.tsx"
+      ]
+    },
+    {
+      "suite": [
+        "React validation hooks and components"
+      ],
+      "description": "supports independent nested providers and models",
+      "status": "passed",
+      "durationMs": 74.6205000000009,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/hooks/react-integration.spec.tsx"
+      ]
+    },
+    {
+      "suite": [
+        "React validation hooks and components"
+      ],
+      "description": "is safe to import and render through the server renderer",
+      "status": "passed",
+      "durationMs": 4.956899999997404,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/hooks/react-integration.spec.tsx"
+      ]
+    },
+    {
+      "suite": [
+        "React validation hooks and components"
+      ],
+      "description": "combines native blur handlers without requiring a browser design system",
+      "status": "passed",
+      "durationMs": 25.000200000002224,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/hooks/react-integration.spec.tsx"
+      ]
+    },
+    {
+      "suite": [
+        "property path utilities"
+      ],
+      "description": "reads nested values and stops safely at missing primitives",
+      "status": "passed",
+      "durationMs": 2.5289000000011583,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/utilities/paths.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "property path utilities"
+      ],
+      "description": "clones nested objects and arrays while creating missing containers",
+      "status": "passed",
+      "durationMs": 0.9392000000007101,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/utilities/paths.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "property path utilities"
+      ],
+      "description": "handles empty paths, root arrays, and stable field IDs",
+      "status": "passed",
+      "durationMs": 0.41899999999986903,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/utilities/paths.spec.ts"
+      ]
+    }
+  ]
+}
