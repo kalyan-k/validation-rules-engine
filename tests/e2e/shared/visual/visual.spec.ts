@@ -7,7 +7,7 @@ test.describe('Targeted visual regression @visual', () => {
     await page.goto(baseUrls.portal);
     await expect(page.getByRole('heading', { name: /Validation behavior/i })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Documentation' })).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Vanilla Showcase' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Vanilla JS Showcase' })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Angular Showcase' })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'React Showcase' })).toBeVisible();
     await page.addStyleTag({

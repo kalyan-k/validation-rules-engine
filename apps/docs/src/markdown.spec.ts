@@ -15,3 +15,11 @@ test('escapes source HTML and rejects unsafe link schemes', () => {
   assert.doesNotMatch(html, /<script>/);
   assert.match(html, /href="#"/);
 });
+
+test('renders markdown tables as HTML tables', () => {
+  const html = renderMarkdown('| Route | Purpose |\n| --- | --- |\n| `/showcases/vanilla/` | Home |');
+  assert.match(html, /<table>/);
+  assert.match(html, /<th>Route<\/th>/);
+  assert.match(html, /<td><code>\/showcases\/vanilla\/<\/code><\/td>/);
+  assert.doesNotMatch(html, /\| Route \| Purpose \|/);
+});

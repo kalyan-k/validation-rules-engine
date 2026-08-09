@@ -83,7 +83,7 @@ async function handleRequest(
   }
   if (requestUrl.pathname === '/api/meta' || requestUrl.pathname === '/api/meta.json') {
     sendJson(response, 200, {
-      version: rootPackage.version ?? '0.0.0',
+      version: rootPackage.version ?? '1.0.0',
       revision: repositoryRevision(),
       builtAt: process.env['VRE_BUILD_TIME'] ?? 'Local development',
       repository: 'https://github.com/kalyan-k/validation-rules-engine',
@@ -204,7 +204,10 @@ function serveFile(response: ServerResponse, root: string, requestedPath: string
     return;
   }
   if ((!existsSync(filePath) || !statSync(filePath).isFile()) && fallbackToIndex) {
-    filePath = path.join(root, 'index.html');
+    const directoryIndex = path.join(root, requestedPath.replace(/\/$/u, ''), 'index.html');
+    filePath = existsSync(directoryIndex) && statSync(directoryIndex).isFile()
+      ? directoryIndex
+      : path.join(root, 'index.html');
   }
   if (!existsSync(filePath) || !statSync(filePath).isFile()) {
     sendText(response, 404, 'Not found');
@@ -282,13 +285,17 @@ function escapeHtml(value: string): string {
 function platformConfigScript(): string {
   // Node single/multi-host always serves at domain root. GitHub Pages base paths are applied
   // only in the static dist/site artifact via VRE_SITE_BASE_PATH.
+  const contactFormEmbedUrl = String(process.env['VRE_CONTACT_FORM_URL'] ?? '').trim();
   return String.raw`(() => {
   const configured = ${JSON.stringify(platformUrls)};
   const siteBase = '';
+  const contactFormEmbedUrl = ${JSON.stringify(contactFormEmbedUrl)};
   const currentOrigin = globalThis.location?.origin ?? '';
   const resolveUrl = (value) => value ? new URL(value, currentOrigin + '/').href.replace(/\/$/, '') : currentOrigin;
   globalThis.vrePlatformConfig = globalThis.vrePlatformConfig || {
     siteBase,
+    contactFormEmbedUrl,
+    features: { docsSearch: true },
     urls: Object.fromEntries(Object.entries(configured).map(([key, value]) => [key, resolveUrl(value)]))
   };
 })();`;
@@ -332,7 +339,7 @@ function missingReportsHtml(): string {
   <script src="/platform-shell.js"></script>
 </head>
 <body>
-  <validation-platform-shell active-application="reports" application-name="Reports" version="${escapeHtml(rootPackage.version ?? '0.0.0')}">
+  <validation-platform-shell active-application="reports" application-name="Reports" version="${escapeHtml(rootPackage.version ?? '1.0.0')}">
     <main>
       <section class="empty">
         <p class="eyebrow">Reports</p>

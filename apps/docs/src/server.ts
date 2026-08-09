@@ -19,7 +19,7 @@ const angularShowcaseUrl = singleHost ? '/showcases/angular' : configuredBaseUrl
 const reactShowcaseUrl = singleHost ? '/showcases/react' : configuredBaseUrl('VRE_REACT_SHOWCASE_URL', 'http://127.0.0.1:4204');
 const vanillaShowcaseUrl = singleHost ? '/showcases/vanilla' : configuredBaseUrl('VRE_VANILLA_SHOWCASE_URL', 'http://127.0.0.1:4205');
 const workspacePackage = JSON.parse(readFileSync(path.join(workspaceRoot, 'package.json'), 'utf8')) as { version?: string };
-const assetVersion = encodeURIComponent(workspacePackage.version ?? '0.0.0');
+const assetVersion = encodeURIComponent(workspacePackage.version ?? '1.0.0');
 const platformAssets = new Set([
   'favicon.ico', 'platform-shell.css', 'platform-shell.js', 'platform-theme.css', 'site.webmanifest',
   'vre-mark.svg',
@@ -61,10 +61,15 @@ function handleRequest(request: IncomingMessage, response: ServerResponse): void
     return;
   }
   if (requestUrl.pathname === '/api/search' || requestUrl.pathname === '/docs/api/search') {
+    // Allow the shared platform shell to query docs search from portal/showcase origins in multi-host mode.
+    response.setHeader('Access-Control-Allow-Origin', '*');
+    response.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
     sendJson(response, 200, { results: searchDocumentation(documentationSearchIndex, requestUrl.searchParams.get('q') ?? '') });
     return;
   }
   if (requestUrl.pathname === '/search-index.json' || requestUrl.pathname === '/docs/search-index.json') {
+    response.setHeader('Access-Control-Allow-Origin', '*');
+    response.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
     sendJson(response, 200, { documents: documentationSearchIndex });
     return;
   }
@@ -121,19 +126,19 @@ function renderPage(entry: DocumentationEntry | undefined, content: string): str
     <section class="nav-section"><h2>${escapeHtml(section)}</h2>${renderNavigationItems(sectionEntries, entry)}</section>
   `;
   }).join('');
-  const showcaseLinks = entry?.slug.startsWith('react-')
-    ? `<a class="showcase-link" href="${reactShowcaseUrl}${entry.showcasePath ?? ''}"><strong>Open React Showcase</strong><span>Try the hooks and policies in a live React application &rarr;</span></a>`
-    : entry?.section === 'Vanilla Showcase' || entry?.section === 'Core Package'
-    ? `<a class="showcase-link" href="${vanillaShowcaseUrl}${entry.showcasePath ?? ''}"><strong>Open Vanilla Showcase</strong><span>Run the same Core policies with framework-free TypeScript forms &rarr;</span></a><a class="showcase-link" href="${platformHref(portalUrl)}"><strong>Open Portal</strong><span>Launch documentation and every showcase from one place &rarr;</span></a>`
+  const showcaseLinks = entry?.section === 'React Package' || entry?.section === 'React Showcase' || entry?.slug.startsWith('react-')
+    ? `<a class="showcase-link" href="${reactShowcaseUrl}${entry?.showcasePath ?? ''}"><strong>Open React Showcase</strong><span>Try the hooks and policies in a live React application &rarr;</span></a>`
+    : entry?.section === 'Vanilla JS Showcase' || entry?.section === 'Core Package'
+    ? `<a class="showcase-link" href="${vanillaShowcaseUrl}${entry?.showcasePath ?? ''}"><strong>Open Vanilla JS Showcase</strong><span>Run the same Core policies with framework-free TypeScript forms &rarr;</span></a><a class="showcase-link" href="${platformHref(portalUrl)}"><strong>Open Portal</strong><span>Launch documentation and every showcase from one place &rarr;</span></a>`
     : entry?.section === 'Introduction'
-    ? `<a class="showcase-link" href="${platformHref(portalUrl)}"><strong>Open Portal</strong><span>Launch documentation and every showcase from one place &rarr;</span></a><a class="showcase-link" href="${vanillaShowcaseUrl}/"><strong>Open Vanilla Showcase</strong><span>See Core policies without Angular or React adapters &rarr;</span></a><a class="showcase-link" href="${angularShowcaseUrl}/"><strong>Open Angular Showcase</strong><span>Explore Angular forms and state integrations &rarr;</span></a><a class="showcase-link" href="${reactShowcaseUrl}/"><strong>Open React Showcase</strong><span>Explore React hooks and state integrations &rarr;</span></a>`
-    : entry?.section === 'Angular Package'
+    ? `<a class="showcase-link" href="${platformHref(portalUrl)}"><strong>Open Portal</strong><span>Launch documentation and every showcase from one place &rarr;</span></a><a class="showcase-link" href="${vanillaShowcaseUrl}/"><strong>Open Vanilla JS Showcase</strong><span>See Core policies without Angular or React adapters &rarr;</span></a><a class="showcase-link" href="${angularShowcaseUrl}/"><strong>Open Angular Showcase</strong><span>Explore Angular forms and state integrations &rarr;</span></a><a class="showcase-link" href="${reactShowcaseUrl}/"><strong>Open React Showcase</strong><span>Explore React hooks and state integrations &rarr;</span></a>`
+    : entry?.section === 'Angular Package' || entry?.section === 'Angular Showcase'
     ? `<a class="showcase-link" href="${angularShowcaseUrl}${entry?.showcasePath ?? ''}"><strong>Open Angular Showcase</strong><span>See the concepts running in a real application &rarr;</span></a>`
-    : `<a class="showcase-link" href="${platformHref(portalUrl)}"><strong>Open Portal</strong><span>Launch documentation and every showcase from one place &rarr;</span></a><a class="showcase-link" href="${vanillaShowcaseUrl}/"><strong>Open Vanilla Showcase</strong><span>Core policies without framework adapters &rarr;</span></a><a class="showcase-link" href="${angularShowcaseUrl}/"><strong>Open Angular Showcase</strong><span>Angular forms and state integrations &rarr;</span></a><a class="showcase-link" href="${reactShowcaseUrl}/"><strong>Open React Showcase</strong><span>React hooks and state integrations &rarr;</span></a>`;
+    : `<a class="showcase-link" href="${platformHref(portalUrl)}"><strong>Open Portal</strong><span>Launch documentation and every showcase from one place &rarr;</span></a><a class="showcase-link" href="${vanillaShowcaseUrl}/"><strong>Open Vanilla JS Showcase</strong><span>Core policies without framework adapters &rarr;</span></a><a class="showcase-link" href="${angularShowcaseUrl}/"><strong>Open Angular Showcase</strong><span>Angular forms and state integrations &rarr;</span></a><a class="showcase-link" href="${reactShowcaseUrl}/"><strong>Open React Showcase</strong><span>React hooks and state integrations &rarr;</span></a>`;
 
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${escapeHtml(entry?.summary ?? 'Validation Rules Engine documentation')}"><meta name="theme-color" content="#10243e"><title>${escapeHtml(entry?.title ?? 'Not found')} &middot; Validation Rules Engine</title><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/vre-mark.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/vre-icon-180.png"><link rel="manifest" href="/site.webmanifest"><link rel="preload" href="/platform-shell.css" as="style"><link rel="stylesheet" href="/platform-shell.css"><link rel="stylesheet" href="/platform-theme.css"><link rel="stylesheet" href="/docs/styles.css"><script src="/platform-config.js?v=${assetVersion}"></script><script src="/platform-shell.js?v=${assetVersion}"></script><script src="/docs/search.js?v=${assetVersion}" defer></script></head>
-  <body><validation-platform-shell active-application="documentation" application-name="Documentation" version="${escapeHtml(workspacePackage.version ?? '0.0.0')}" portal-url="${portalUrl}" docs-url="${docsUrl}" angular-url="${angularShowcaseUrl}" react-url="${reactShowcaseUrl}" vanilla-url="${vanillaShowcaseUrl}">
-  <div class="docs-layout"><aside><div class="docs-search"><label for="docs-search">Search documentation</label><div class="docs-search-control"><input id="docs-search" type="search" role="combobox" placeholder="Search docs..." autocomplete="off" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false"><button id="docs-search-clear" class="docs-search-clear" type="button" aria-label="Clear documentation search" title="Clear search" hidden>&times;</button></div><div id="docs-search-results" class="search-results" role="listbox" hidden></div></div><div class="docs-navigation">${groupedNavigation}</div></aside>
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${escapeHtml(entry?.summary ?? 'Validation Rules Engine documentation')}"><meta name="theme-color" content="#10243e"><title>${escapeHtml(entry?.title ?? 'Not found')} &middot; Validation Rules Engine</title><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/vre-mark.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/vre-icon-180.png"><link rel="manifest" href="/site.webmanifest"><link rel="preload" href="/platform-shell.css" as="style"><link rel="stylesheet" href="/platform-shell.css"><link rel="stylesheet" href="/platform-theme.css"><link rel="stylesheet" href="/docs/styles.css"><script src="/platform-config.js?v=${assetVersion}"></script><script src="/platform-shell.js?v=${assetVersion}"></script></head>
+  <body><validation-platform-shell active-application="documentation" application-name="Documentation" version="${escapeHtml(workspacePackage.version ?? '1.0.0')}" portal-url="${portalUrl}" docs-url="${docsUrl}" angular-url="${angularShowcaseUrl}" react-url="${reactShowcaseUrl}" vanilla-url="${vanillaShowcaseUrl}">
+  <div class="docs-layout"><aside><div class="docs-navigation">${groupedNavigation}</div></aside>
   <main><div class="vr-breadcrumb"><a href="${platformHref(portalUrl)}">Home</a><span>/</span><a href="/docs/overview">Documentation</a><span>/</span><span>${escapeHtml(entry?.section ?? 'Documentation')}</span></div><article id="docs-content">${content}</article>
   ${entry ? `<section class="live-example"><p>Continue in the live platform</p>${showcaseLinks}</section>` : ''}
   <nav class="pager" aria-label="Documentation pages">${previous ? `<a href="/docs/${previous.slug}"><small>Previous</small><strong>&larr; ${escapeHtml(previous.title)}</strong></a>` : '<span></span>'}${next ? `<a class="next" href="/docs/${next.slug}"><small>Next</small><strong>${escapeHtml(next.title)} &rarr;</strong></a>` : ''}</nav></main>
@@ -217,6 +222,8 @@ function sendJavaScript(response: ServerResponse, value: string): void {
 function platformConfigScript(): string {
   return `globalThis.vrePlatformConfig = ${JSON.stringify({
     siteBase: '',
+    contactFormEmbedUrl: String(process.env['VRE_CONTACT_FORM_URL'] ?? '').trim(),
+    features: { docsSearch: true },
     urls: {
       portal: portalUrl,
       docs: docsUrl,

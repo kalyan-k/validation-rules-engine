@@ -80,3 +80,11 @@ main { overflow:hidden; }
 footer { display:flex; justify-content:space-between; gap:2rem; padding:2.2rem 7vw; color:#91a4b8; background:#091725; font-size:.78rem; } footer strong,footer span { display:block; } footer strong { color:#fff; font-size:.9rem; } .footer-links { display:flex; gap:1.2rem; } .footer-links a { color:#c7d4df; text-decoration:none; }
 @media (max-width:1000px) { .site-header nav { display:none; } .hero { grid-template-columns:1fr; } .application-grid,.package-flow { grid-template-columns:1fr; } .adapter-grid { grid-template-columns:1fr; } .flow-arrow { transform:rotate(90deg); justify-self:center; } }
 @media (max-width:720px) { .site-header { padding:0 1rem; } .hero,.section { padding-left:1.2rem; padding-right:1.2rem; } .section-heading,footer { flex-direction:column; align-items:flex-start; } .roadmap-section { grid-template-columns:1fr; } .section-heading { align-items:flex-start; } .future-grid,.playwright-metrics,.playwright-breakdowns,.playwright-info-grid,.playwright-mini-breakdowns { grid-template-columns:1fr; } .playwright-summary-top { flex-direction:column; } }
+.contact-page { max-width:920px; margin:0 auto; padding:clamp(2.5rem,6vw,4.5rem) 1.25rem 5rem; }
+.contact-hero h1 { margin:.35rem 0 1rem; font-size:clamp(2rem,4vw,3.2rem); line-height:1.08; letter-spacing:-.04em; }
+.contact-hero p { max-width:720px; color:var(--muted); }
+.contact-panel { margin-top:2rem; padding:1.25rem; border:1px solid var(--line); border-radius:16px; background:var(--surface); box-shadow:0 12px 35px rgba(19,34,56,.055); }
+.contact-frame { width:100%; min-height:720px; border:0; border-radius:10px; background:#fff; }
+.contact-note,.contact-empty p { color:var(--muted); font-size:.9rem; }
+.contact-empty h2 { margin-top:0; }
+.contact-empty pre { overflow:auto; padding:1rem; border-radius:8px; background:#f4f6f8; }

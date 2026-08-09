@@ -1,6 +1,6 @@
 # Vanilla Examples
 
-Live routes under the Vanilla Showcase:
+Live routes under the Vanilla JS Showcase:
 
 | Example | URL | What to notice |
 | --- | --- | --- |
@@ -12,7 +12,7 @@ Single-host routes use the same paths under `/showcases/vanilla/`.
 
 ## Shared policies with adapters
 
-Write policies against `@validation-rules-engine/core` only. The same policy classes can drive Vanilla DOM forms, Angular directives, and React hooks without rewriting rule definitions.
+Write policies against `@validation-rules-engine/core` only. The same policy classes can drive Vanilla JS DOM forms, Angular directives, and React hooks without rewriting rule definitions.
 
 ## Source location
 

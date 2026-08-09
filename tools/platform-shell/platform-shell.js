@@ -56,6 +56,13 @@ const documentationSections = [
     ]
   },
   {
+    label: 'Angular Showcase',
+    items: [
+      ['Overview', '/docs/angular-showcase-overview'],
+      ['Examples', '/docs/angular-showcase-examples']
+    ]
+  },
+  {
     label: 'React Package',
     items: [
       ['Overview', '/docs/react-overview'],
@@ -96,7 +103,14 @@ const documentationSections = [
     ]
   },
   {
-    label: 'Vanilla Showcase',
+    label: 'React Showcase',
+    items: [
+      ['Overview', '/docs/react-showcase-overview'],
+      ['Examples', '/docs/react-showcase-examples']
+    ]
+  },
+  {
+    label: 'Vanilla JS Showcase',
     items: [
       ['Overview', '/docs/vanilla-overview'],
       ['Quick Start', '/docs/vanilla-quick-start'],
@@ -134,7 +148,7 @@ const documentationSections = [
 ];
 
 const showcaseItems = [
-  ['Vanilla Showcase', 'vanilla'],
+  ['Vanilla JS Showcase', 'vanilla'],
   ['Angular Showcase', 'angular'],
   ['React Showcase', 'react']
 ];
@@ -217,6 +231,182 @@ function isPathActive(pathname) {
     || (resolved.endsWith('/index.html') && location.pathname === resolved.replace(/\/index\.html$/u, ''));
 }
 
+function joinPortalPath(portalBase, pathname) {
+  const relative = String(pathname || '').replace(/^\//u, '');
+  if (!portalBase) {
+    return withSiteBasePath(`/${relative}`);
+  }
+  if (/^https?:\/\//u.test(portalBase)) {
+    return new URL(relative, `${portalBase.replace(/\/$/u, '')}/`).href;
+  }
+  return `${portalBase.replace(/\/$/u, '')}/${relative}`;
+}
+
+function docsHref(docsBase, pathname) {
+  const relative = String(pathname || '').replace(/^\//u, '');
+  if (!docsBase) {
+    return withSiteBasePath(`/${relative}`);
+  }
+  if (/^https?:\/\//u.test(docsBase)) {
+    return new URL(relative, `${docsBase.replace(/\/$/u, '')}/`).href;
+  }
+  return `${docsBase.replace(/\/$/u, '')}/${relative}`;
+}
+
+function docsSearchEnabled(activeApplication, host) {
+  if (host.getAttribute('docs-search') === 'false') {
+    return false;
+  }
+  const config = globalThis.vrePlatformConfig || {};
+  if (config.features?.docsSearch === false) {
+    return false;
+  }
+  if (activeApplication === 'documentation') {
+    return true;
+  }
+  // Only show when platform-config explicitly provides docs (single/multi/Azure/Pages).
+  // Standalone showcase launches without platform-config keep search hidden.
+  return Boolean(config.urls && Object.prototype.hasOwnProperty.call(config.urls, 'docs'));
+}
+
+function bindDocsSearch(root, docsBase) {
+  const searchRoot = root.querySelector('[data-platform-docs-search]');
+  const input = root.querySelector('[data-platform-docs-search-input]');
+  const resultsPanel = root.querySelector('[data-platform-docs-search-results]');
+  const clearButton = root.querySelector('[data-platform-docs-search-clear]');
+  if (!searchRoot || !input || !resultsPanel || !clearButton) {
+    return;
+  }
+
+  let documentsPromise;
+  let activeIndex = -1;
+  const indexUrl = docsHref(docsBase, '/docs/search-index.json');
+
+  const loadDocuments = () => {
+    documentsPromise ??= fetch(indexUrl, { cache: 'force-cache' })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Search index returned ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((payload) => payload.documents ?? [])
+      .catch(() => {
+        searchRoot.hidden = true;
+        return [];
+      });
+    return documentsPromise;
+  };
+
+  const termsFor = (value) => value.toLocaleLowerCase().trim().split(/\s+/u).filter(Boolean);
+  const score = (document, terms) => {
+    if (!terms.every((term) => document.searchableText.includes(term))) return 0;
+    const title = document.title.toLocaleLowerCase();
+    const heading = document.heading.toLocaleLowerCase();
+    return terms.reduce((total, term) => total
+      + (title === term ? 30 : title.includes(term) ? 14 : 0)
+      + (heading === term ? 24 : heading.includes(term) ? 12 : 0)
+      + document.searchableText.split(term).length - 1, 0);
+  };
+
+  const closeResults = () => {
+    resultsPanel.hidden = true;
+    input.setAttribute('aria-expanded', 'false');
+    input.removeAttribute('aria-activedescendant');
+    activeIndex = -1;
+  };
+
+  const syncClearButton = () => {
+    clearButton.hidden = input.value.length === 0;
+  };
+
+  const setActive = (index) => {
+    const options = [...resultsPanel.querySelectorAll('[role="option"]')];
+    if (options.length === 0) return;
+    activeIndex = (index + options.length) % options.length;
+    options.forEach((option, optionIndex) => option.classList.toggle('active', optionIndex === activeIndex));
+    const active = options[activeIndex];
+    input.setAttribute('aria-activedescendant', active.id);
+    active.scrollIntoView({ block: 'nearest' });
+  };
+
+  const renderResults = (matches, query) => {
+    resultsPanel.replaceChildren();
+    if (matches.length === 0) {
+      const empty = document.createElement('p');
+      empty.className = 'platform-search-empty';
+      empty.textContent = query ? `No documentation matches “${query}”.` : 'Type to search documentation.';
+      resultsPanel.append(empty);
+      resultsPanel.hidden = false;
+      input.setAttribute('aria-expanded', 'true');
+      return;
+    }
+    matches.forEach((match, index) => {
+      const option = document.createElement('a');
+      option.id = `platform-docs-search-option-${index}`;
+      option.setAttribute('role', 'option');
+      option.href = docsHref(docsBase, `/docs/${match.slug}`);
+      option.innerHTML = `<small>${match.section}</small><strong></strong><span></span>`;
+      option.querySelector('strong').textContent = match.title;
+      option.querySelector('span').textContent = match.heading === match.title ? match.summary : match.heading;
+      resultsPanel.append(option);
+    });
+    resultsPanel.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+    activeIndex = -1;
+  };
+
+  input.addEventListener('input', async () => {
+    syncClearButton();
+    const query = input.value.trim();
+    if (!query) {
+      closeResults();
+      return;
+    }
+    const documents = await loadDocuments();
+    const terms = termsFor(query);
+    const matches = documents
+      .map((document) => ({ document, score: score(document, terms) }))
+      .filter(({ score: value }) => value > 0)
+      .sort((left, right) => right.score - left.score)
+      .slice(0, 8)
+      .map(({ document }) => document);
+    renderResults(matches, query);
+  });
+
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      setActive(activeIndex + 1);
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      setActive(activeIndex - 1);
+    } else if (event.key === 'Enter' && activeIndex >= 0) {
+      event.preventDefault();
+      resultsPanel.querySelectorAll('[role="option"]')[activeIndex]?.click();
+    } else if (event.key === 'Escape') {
+      closeResults();
+    }
+  });
+
+  clearButton.addEventListener('click', () => {
+    input.value = '';
+    syncClearButton();
+    closeResults();
+    input.focus();
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!event.composedPath().includes(searchRoot)) {
+      closeResults();
+    }
+  });
+
+  if (typeof fetch === 'function') {
+    void loadDocuments();
+  }
+}
+
 class ValidationPlatformShell extends HTMLElement {
   static get observedAttributes() {
     return ['version'];
@@ -229,7 +419,7 @@ class ValidationPlatformShell extends HTMLElement {
 
     const activeApplication = this.getAttribute('active-application') || '';
     const applicationName = this.getAttribute('application-name') || 'Platform';
-    const version = this.getAttribute('version') || '0.0.0';
+    const version = this.getAttribute('version') || '1.0.0';
     const brandMarkUrl = this.getAttribute('brand-mark-url') || withSiteBasePath('/vre-mark.svg');
     const defaultPortalUrl = currentOriginWhen(activeApplication, ['portal', 'reports'], developmentOrigin(4200));
     const urls = {
@@ -239,14 +429,17 @@ class ValidationPlatformShell extends HTMLElement {
       react: configuredBase('react', this.getAttribute('react-url'), currentOriginWhen(activeApplication, ['react-showcase'], developmentOrigin(4204))),
       vanilla: configuredBase('vanilla', this.getAttribute('vanilla-url'), currentOriginWhen(activeApplication, ['vanilla-showcase'], developmentOrigin(4205)))
     };
+    const contactHref = joinPortalPath(urls.portal, '/contact/');
+    const searchEnabled = docsSearchEnabled(activeApplication, this);
     const docsActive = activeApplication === 'documentation';
     const showcasesActive = activeApplication === 'angular-showcase'
       || activeApplication === 'react-showcase'
       || activeApplication === 'vanilla-showcase';
     const reportsActive = activeApplication === 'reports';
+    const contactActive = activeApplication === 'contact';
     const docsNavigation = documentationSections.map((section) => {
       const active = docsActive && isDocsSectionActive(section);
-      return `<a href="${urls.docs}${firstDocsPath(section)}"${active ? ' aria-current="page" class="active"' : ''}>${section.label}</a>`;
+      return `<a href="${docsHref(urls.docs, firstDocsPath(section))}"${active ? ' aria-current="page" class="active"' : ''}>${section.label}</a>`;
     }).join('');
     const showcasesNavigation = showcaseItems.map(([label, target]) => {
       const applicationId = `${target}-showcase`;
@@ -258,22 +451,32 @@ class ValidationPlatformShell extends HTMLElement {
       ['Automation Testing', '/automation/']
     ].map(([label, pathname]) => {
       const active = reportsActive && isPathActive(pathname);
-      return `<a href="${urls.portal}${pathname}"${active ? ' aria-current="page" class="active"' : ''}>${label}</a>`;
+      return `<a href="${joinPortalPath(urls.portal, pathname)}"${active ? ' aria-current="page" class="active"' : ''}>${label}</a>`;
     }).join('');
+    const searchMarkup = searchEnabled ? `
+          <div class="platform-docs-search" data-platform-docs-search>
+            <label class="platform-docs-search-label" for="platform-docs-search-input">Search documentation</label>
+            <div class="platform-docs-search-control">
+              <input id="platform-docs-search-input" data-platform-docs-search-input type="search" role="combobox" placeholder="Search docs..." autocomplete="off" aria-autocomplete="list" aria-controls="platform-docs-search-results" aria-expanded="false">
+              <button data-platform-docs-search-clear class="platform-docs-search-clear" type="button" aria-label="Clear documentation search" hidden>&times;</button>
+            </div>
+            <div id="platform-docs-search-results" data-platform-docs-search-results class="platform-docs-search-results" role="listbox" hidden></div>
+          </div>` : '';
 
     const root = this.attachShadow({ mode: 'open' });
     const injectedStyles = globalThis.validationPlatformShellStyles;
     root.innerHTML = `
-      ${injectedStyles ? `<style>${injectedStyles}</style>` : '<link rel="stylesheet" href="/platform-shell.css">'}
+      ${injectedStyles ? `<style>${injectedStyles}</style>` : `<link rel="stylesheet" href="${withSiteBasePath('/platform-shell.css')}">`}
       <header class="platform-header" part="header">
-        <a class="platform-brand" href="${urls.portal || '/'}" aria-label="Validation Rules Engine home">
+        <a class="platform-brand" href="${urls.portal || withSiteBasePath('/')}" aria-label="Validation Rules Engine home">
           <img class="platform-mark" src="${brandMarkUrl}" width="38" height="38" alt="">
           <span class="platform-brand-copy"><strong>Validation Rules Engine</strong><small>${applicationName}</small></span>
         </a>
         <span class="platform-version" data-version title="Workspace version">v${version}</span>
+        ${searchMarkup}
         <button class="platform-menu" type="button" aria-expanded="false" aria-controls="platform-navigation">Menu</button>
         <nav id="platform-navigation" class="platform-navigation" aria-label="Platform navigation">
-          <a class="platform-nav-link ${activeApplication === 'portal' ? 'active' : ''}" href="${urls.portal}/"${activeApplication === 'portal' ? ' aria-current="page"' : ''}>Home</a>
+          <a class="platform-nav-link ${activeApplication === 'portal' ? 'active' : ''}" href="${joinPortalPath(urls.portal, '/')}"${activeApplication === 'portal' ? ' aria-current="page"' : ''}>Home</a>
           <details class="platform-nav-group ${docsActive ? 'active' : ''}">
             <summary>Docs<span aria-hidden="true"></span></summary>
             <div class="platform-dropdown platform-docs-dropdown">${docsNavigation}</div>
@@ -286,6 +489,7 @@ class ValidationPlatformShell extends HTMLElement {
             <summary>Reports<span aria-hidden="true"></span></summary>
             <div class="platform-dropdown">${reportsNavigation}</div>
           </details>
+          <a class="platform-nav-link ${contactActive ? 'active' : ''}" href="${contactHref}"${contactActive ? ' aria-current="page"' : ''}>Contact</a>
           <a class="platform-nav-link" href="https://github.com/kalyan-k/validation-rules-engine">GitHub</a>
         </nav>
       </header>
@@ -293,9 +497,38 @@ class ValidationPlatformShell extends HTMLElement {
       <footer class="platform-footer" part="footer">
         <div class="platform-footer-brand">
           <img class="platform-footer-mark" src="${brandMarkUrl}" width="30" height="30" alt="">
-          <div><strong>Validation Rules Engine</strong><span>Reusable policy validation for Angular, React, and framework-neutral TypeScript.</span></div>
+          <div>
+            <strong>Validation Rules Engine</strong>
+            <span>Reusable policy validation for Angular, React, Vanilla JS, and framework-neutral TypeScript.</span>
+          </div>
         </div>
-        <div class="platform-footer-meta"><span data-version>v${version}</span><span>MIT License</span><a href="${urls.docs}/docs/overview">Docs</a><a href="${urls.portal}/reports/index.html">Reports</a><a href="https://github.com/kalyan-k/validation-rules-engine">GitHub</a></div>
+        <div class="platform-footer-columns">
+          <section>
+            <h2>Product</h2>
+            <a href="${joinPortalPath(urls.portal, '/')}">Portal</a>
+            <a href="${docsHref(urls.docs, '/docs/overview')}">Documentation</a>
+            <a href="${contactHref}">Contact</a>
+          </section>
+          <section>
+            <h2>Showcases</h2>
+            <a href="${urls.vanilla}/">Vanilla JS</a>
+            <a href="${urls.angular}/">Angular</a>
+            <a href="${urls.react}/">React</a>
+          </section>
+          <section>
+            <h2>Project</h2>
+            <a href="${joinPortalPath(urls.portal, '/reports/index.html')}">Tests &amp; Coverage</a>
+            <a href="${joinPortalPath(urls.portal, '/automation/')}">Automation Testing</a>
+            <a href="${docsHref(urls.docs, '/docs/architecture')}">Architecture</a>
+            <a href="https://github.com/kalyan-k/validation-rules-engine">GitHub</a>
+          </section>
+          <section>
+            <h2>Legal</h2>
+            <span data-version>v${version}</span>
+            <span>MIT License</span>
+            <a href="https://github.com/kalyan-k/validation-rules-engine/blob/master/LICENSE">License</a>
+          </section>
+        </div>
       </footer>`;
 
     const button = root.querySelector('.platform-menu');
@@ -336,12 +569,16 @@ class ValidationPlatformShell extends HTMLElement {
         groups.forEach((group) => { group.open = false; });
       }
     });
+
+    if (searchEnabled) {
+      bindDocsSearch(root, urls.docs);
+    }
   }
 
   attributeChangedCallback(name, _previous, current) {
     if (name === 'version' && this.shadowRoot) {
       this.shadowRoot.querySelectorAll('[data-version]').forEach((element) => {
-        element.textContent = `v${current || '0.0.0'}`;
+        element.textContent = `v${current || '1.0.0'}`;
       });
     }
   }

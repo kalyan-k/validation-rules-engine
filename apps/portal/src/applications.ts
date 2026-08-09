@@ -80,8 +80,8 @@ export const applicationDefinitions: ApplicationDefinition[] = [
   },
   {
     id: 'vanilla-showcase',
-    title: 'Vanilla Showcase',
-    shortTitle: 'Vanilla',
+    title: 'Vanilla JS Showcase',
+    shortTitle: 'Vanilla JS',
     description: 'Framework-free TypeScript forms that call @validation-rules-engine/core directly for simple, complex, and large-form validation.',
     kind: 'showcase',
     url: platformUrls.vanilla,

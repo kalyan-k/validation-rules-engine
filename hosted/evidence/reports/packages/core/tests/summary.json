@@ -2,9 +2,9 @@
   "projectName": "core",
   "displayName": "Core Engine",
   "version": "1.0.0",
-  "startedAt": "2026-08-09T04:00:10.791Z",
-  "finishedAt": "2026-08-09T04:00:12.979Z",
-  "durationMs": 2188,
+  "startedAt": "2026-08-09T18:45:02.827Z",
+  "finishedAt": "2026-08-09T18:45:06.247Z",
+  "durationMs": 3420,
   "summary": {
     "total": 16,
     "passed": 16,
@@ -36,7 +36,7 @@
       ],
       "description": "passes model, value, and message to user-defined rules",
       "status": "passed",
-      "durationMs": 2,
+      "durationMs": 3,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/validator.spec.ts"
@@ -48,7 +48,7 @@
       ],
       "description": "uses the same empty-value semantics as ValidationHelper",
       "status": "passed",
-      "durationMs": 0,
+      "durationMs": 1,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/validator.spec.ts"
@@ -72,7 +72,7 @@
       ],
       "description": "creates validators with property paths and dependencies",
       "status": "passed",
-      "durationMs": 0,
+      "durationMs": 1,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/validator.spec.ts"
@@ -84,7 +84,7 @@
       ],
       "description": "supports number and inclusive minimum/maximum rules",
       "status": "passed",
-      "durationMs": 0,
+      "durationMs": 1,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/validator.spec.ts"
@@ -96,7 +96,7 @@
       ],
       "description": "supports date and number ranges and safely accepts an unknown range type",
       "status": "passed",
-      "durationMs": 0,
+      "durationMs": 1,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/validator.spec.ts"
@@ -120,7 +120,7 @@
       ],
       "description": "supports string, literal regular expression, email, and date rules",
       "status": "passed",
-      "durationMs": 0,
+      "durationMs": 1,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/validator.spec.ts"
@@ -132,7 +132,7 @@
       ],
       "description": "resets metadata completely",
       "status": "passed",
-      "durationMs": 1,
+      "durationMs": 0,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/utils/validation-utils.spec.ts"
@@ -168,7 +168,7 @@
       ],
       "description": "classifies nullish and empty values without rejecting zero or false",
       "status": "passed",
-      "durationMs": 1,
+      "durationMs": 0,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/validation-helper.spec.ts"

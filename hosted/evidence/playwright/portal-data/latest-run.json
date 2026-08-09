@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "available": true,
-  "runId": "local-2026-08-09T04-02-23-721Z",
-  "generatedAt": "2026-08-09T04:14:02.035Z",
-  "startTime": "2026-08-09T04:02:23.721Z",
-  "endTime": "2026-08-09T04:13:59.499Z",
-  "durationMs": 695778.546,
-  "status": "passed",
+  "runId": "local-2026-08-09T18-47-44-846Z",
+  "generatedAt": "2026-08-09T19:34:44.260Z",
+  "startTime": "2026-08-09T18:47:44.846Z",
+  "endTime": "2026-08-09T19:34:33.863Z",
+  "durationMs": 2809017.722,
+  "status": "flaky",
   "execution": {
     "scope": "full",
     "executedTotal": 269,
@@ -15,7 +15,7 @@
     "recommendedFullCommand": "npm run test:e2e:full"
   },
   "catalog": {
-    "generatedAt": "2026-08-09T04:14:01.953Z",
+    "generatedAt": "2026-08-09T19:34:43.916Z",
     "totals": {
       "total": 269
     },
@@ -151,10 +151,10 @@
   },
   "totals": {
     "total": 269,
-    "passed": 269,
+    "passed": 267,
     "failed": 0,
     "skipped": 0,
-    "flaky": 0
+    "flaky": 2
   },
   "browserTotals": {
     "chromium": {
@@ -166,10 +166,10 @@
     },
     "firefox": {
       "total": 85,
-      "passed": 85,
+      "passed": 83,
       "failed": 0,
       "skipped": 0,
-      "flaky": 0
+      "flaky": 2
     },
     "webkit": {
       "total": 85,
@@ -245,10 +245,10 @@
     },
     "platform": {
       "total": 21,
-      "passed": 21,
+      "passed": 19,
       "failed": 0,
       "skipped": 0,
-      "flaky": 0
+      "flaky": 2
     },
     "vanilla": {
       "total": 13,
@@ -261,10 +261,10 @@
   "suiteTotals": {
     "regression": {
       "total": 249,
-      "passed": 249,
+      "passed": 247,
       "failed": 0,
       "skipped": 0,
-      "flaky": 0
+      "flaky": 2
     },
     "smoke": {
       "total": 6,

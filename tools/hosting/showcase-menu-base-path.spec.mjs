@@ -9,6 +9,10 @@ function showcaseHrefs(siteBase, pageUrl) {
     runScripts: 'dangerously',
     url: pageUrl
   });
+  dom.window.fetch = async () => ({
+    ok: true,
+    json: async () => ({ documents: [] })
+  });
   dom.window.eval(`globalThis.vrePlatformConfig = ${JSON.stringify({
     siteBase,
     urls: {

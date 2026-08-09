@@ -4,16 +4,18 @@ test.describe('Existing reports application @reports @regression', () => {
   test('Reports menu exposes tests coverage and automation destinations', async ({ page, baseUrls }) => {
     await page.goto(baseUrls.portal);
     await page.locator('validation-platform-shell summary').filter({ hasText: 'Reports' }).click();
-    await expect(page.getByRole('link', { name: 'Tests & Coverage' })).toHaveAttribute('href', /\/reports\/index\.html$/);
+    const reportsMenu = page.getByLabel('Platform navigation');
+    await expect(reportsMenu.getByRole('link', { name: 'Tests & Coverage' })).toHaveAttribute('href', /\/reports\/index\.html$/);
     // Link presence is asserted; Playwright Results page content is intentionally not exercised here.
-    await expect(page.getByRole('link', { name: 'Automation Testing' })).toHaveAttribute('href', /\/automation\/$/);
+    await expect(reportsMenu.getByRole('link', { name: 'Automation Testing' })).toHaveAttribute('href', /\/automation\/$/);
   });
 
   test('Reports menu remains available inside the tests and coverage workspace', async ({ page, baseUrls }) => {
     await page.goto(`${baseUrls.portal}/reports/index.html`);
     await page.locator('validation-platform-shell summary').filter({ hasText: 'Reports' }).click();
-    await expect(page.getByRole('link', { name: 'Tests & Coverage' })).toHaveAttribute('href', /\/reports\/index\.html$/);
-    await expect(page.getByRole('link', { name: 'Automation Testing' })).toHaveAttribute('href', /\/automation\/$/);
+    const reportsMenu = page.getByLabel('Platform navigation');
+    await expect(reportsMenu.getByRole('link', { name: 'Tests & Coverage' })).toHaveAttribute('href', /\/reports\/index\.html$/);
+    await expect(reportsMenu.getByRole('link', { name: 'Automation Testing' })).toHaveAttribute('href', /\/automation\/$/);
   });
 
   test('loads the canonical automation summary route', async ({ page, baseUrls }) => {

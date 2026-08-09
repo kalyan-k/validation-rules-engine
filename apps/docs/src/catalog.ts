@@ -1,7 +1,7 @@
 export interface DocumentationEntry {
   slug: string;
   title: string;
-  section: 'Introduction' | 'Packages' | 'Core Package' | 'Angular Package' | 'React' | 'React Package' | 'Vanilla Showcase' | 'Guides' | 'Reference' | 'Project';
+  section: 'Introduction' | 'Packages' | 'Core Package' | 'Angular Package' | 'Angular Showcase' | 'React' | 'React Package' | 'React Showcase' | 'Vanilla JS Showcase' | 'Guides' | 'Reference' | 'Project';
   summary: string;
   source: string;
   showcasePath?: string;
@@ -45,6 +45,8 @@ export const documentationCatalog: DocumentationEntry[] = [
   { slug: 'angular-best-practices', title: 'Best Practices', section: 'Angular Package', summary: 'Lifecycle, performance, display strategy, and test guidance.', source: 'angular/angular-best-practices.md', showcasePath: '/showcases/bootstrap' },
   { slug: 'angular-troubleshooting', title: 'Troubleshooting', section: 'Angular Package', summary: 'Common Angular setup, directive, path, and display problems.', source: 'angular/angular-troubleshooting.md', showcasePath: '/showcases/bootstrap' },
   { slug: 'angular-faq', title: 'FAQ', section: 'Angular Package', summary: 'Common Angular adapter questions.', source: 'angular/angular-faq.md', showcasePath: '/showcases/bootstrap' },
+  { slug: 'angular-showcase-overview', title: 'Overview', section: 'Angular Showcase', summary: 'Live Angular application that exercises the Angular adapter across UI and state integrations.', source: 'angular/angular-showcase-overview.md', showcasePath: '/' },
+  { slug: 'angular-showcase-examples', title: 'Examples', section: 'Angular Showcase', summary: 'Live Angular Showcase routes linked to Angular Package guides.', source: 'angular/angular-showcase-examples.md', showcasePath: '/showcases/bootstrap' },
   { slug: 'react-overview', title: 'Overview', section: 'React Package', summary: 'Hooks-first adapter capabilities and package boundaries.', source: 'react/react-overview.md', showcasePath: '/' },
   { slug: 'react-installation', title: 'Installation', section: 'React Package', summary: 'Install React peers and verify workspace compatibility.', source: 'react/react-installation.md', showcasePath: '/' },
   { slug: 'react-quick-start', title: 'Quick Start', section: 'React Package', summary: 'Build a provider-backed controlled form with a core policy.', source: 'react/react-quick-start.md', showcasePath: '/state/local-state/simple' },
@@ -75,9 +77,11 @@ export const documentationCatalog: DocumentationEntry[] = [
   { slug: 'react-best-practices', title: 'Best Practices', section: 'React Package', summary: 'Policy, hook, state ownership, custom input, and performance guidance.', source: 'react/react-best-practices.md', showcasePath: '/state/local-state' },
   { slug: 'react-troubleshooting', title: 'Troubleshooting', section: 'React Package', summary: 'Diagnose provider, policy, path, controlled-input, and async issues.', source: 'react/react-troubleshooting.md', showcasePath: '/' },
   { slug: 'react-faq', title: 'FAQ', section: 'React Package', summary: 'Common React adapter and state integration questions.', source: 'react/react-faq.md', showcasePath: '/' },
-  { slug: 'vanilla-overview', title: 'Overview', section: 'Vanilla Showcase', summary: 'Framework-free TypeScript showcase that consumes Core directly.', source: 'vanilla/vanilla-overview.md', showcasePath: '/' },
-  { slug: 'vanilla-quick-start', title: 'Quick Start', section: 'Vanilla Showcase', summary: 'Install Core and validate plain TypeScript models without an adapter.', source: 'vanilla/vanilla-quick-start.md', showcasePath: '/simple' },
-  { slug: 'vanilla-examples', title: 'Examples', section: 'Vanilla Showcase', summary: 'Simple, complex, and performance Vanilla Showcase routes.', source: 'vanilla/vanilla-examples.md', showcasePath: '/' },
+  { slug: 'react-showcase-overview', title: 'Overview', section: 'React Showcase', summary: 'Live React application that exercises the React adapter across hooks and state integrations.', source: 'react/react-showcase-overview.md', showcasePath: '/' },
+  { slug: 'react-showcase-examples', title: 'Examples', section: 'React Showcase', summary: 'Live React Showcase routes linked to React Package guides.', source: 'react/react-showcase-examples.md', showcasePath: '/state/local-state' },
+  { slug: 'vanilla-overview', title: 'Overview', section: 'Vanilla JS Showcase', summary: 'Framework-free TypeScript showcase that consumes Core directly.', source: 'vanilla/vanilla-overview.md', showcasePath: '/' },
+  { slug: 'vanilla-quick-start', title: 'Quick Start', section: 'Vanilla JS Showcase', summary: 'Install Core and validate plain TypeScript models without an adapter.', source: 'vanilla/vanilla-quick-start.md', showcasePath: '/simple' },
+  { slug: 'vanilla-examples', title: 'Examples', section: 'Vanilla JS Showcase', summary: 'Simple, complex, and performance Vanilla JS Showcase routes.', source: 'vanilla/vanilla-examples.md', showcasePath: '/' },
   { slug: 'policies-and-rules', title: 'Policies & Rules', section: 'Guides', summary: 'Compose rule sets and understand execution behavior.', source: 'policies-and-rules.md', showcasePath: '/showcases/bootstrap' },
   { slug: 'validation-groups', title: 'Validation Groups', section: 'Guides', summary: 'Field groups, policy groups, status, and summaries.', source: 'validation-groups.md', showcasePath: '/showcases/bootstrap' },
   { slug: 'advanced', title: 'Advanced Examples', section: 'Guides', summary: 'Conditional, asynchronous, nested, and dynamic workflows.', source: 'advanced.md', showcasePath: '/showcases/bootstrap' },

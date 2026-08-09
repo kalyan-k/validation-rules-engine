@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Core Engine" tests="16" failures="0" skipped="0" time="2.188">
-  <testsuite name="Core Engine" tests="16" failures="0" skipped="0" timestamp="2026-08-09T04:00:10.791Z" time="2.188">
+<testsuites name="Core Engine" tests="16" failures="0" skipped="0" time="3.420">
+  <testsuite name="Core Engine" tests="16" failures="0" skipped="0" timestamp="2026-08-09T18:45:02.827Z" time="3.420">
     <testcase classname="validation result utilities" name="recognizes only message-shaped validation failures" time="0.002" file="packages/core/src/lib/utils/validation-utils.spec.ts"></testcase>
-    <testcase classname="Validator and ValidatorHelper" name="passes model, value, and message to user-defined rules" time="0.002" file="packages/core/src/lib/validator.spec.ts"></testcase>
-    <testcase classname="Validator and ValidatorHelper" name="uses the same empty-value semantics as ValidationHelper" time="0.000" file="packages/core/src/lib/validator.spec.ts"></testcase>
+    <testcase classname="Validator and ValidatorHelper" name="passes model, value, and message to user-defined rules" time="0.003" file="packages/core/src/lib/validator.spec.ts"></testcase>
+    <testcase classname="Validator and ValidatorHelper" name="uses the same empty-value semantics as ValidationHelper" time="0.001" file="packages/core/src/lib/validator.spec.ts"></testcase>
     <testcase classname="Validator and ValidatorHelper" name="decorates required and checked rules with required metadata" time="0.000" file="packages/core/src/lib/validator.spec.ts"></testcase>
-    <testcase classname="Validator and ValidatorHelper" name="creates validators with property paths and dependencies" time="0.000" file="packages/core/src/lib/validator.spec.ts"></testcase>
-    <testcase classname="Validator and ValidatorHelper" name="supports number and inclusive minimum/maximum rules" time="0.000" file="packages/core/src/lib/validator.spec.ts"></testcase>
-    <testcase classname="Validator and ValidatorHelper" name="supports date and number ranges and safely accepts an unknown range type" time="0.000" file="packages/core/src/lib/validator.spec.ts"></testcase>
+    <testcase classname="Validator and ValidatorHelper" name="creates validators with property paths and dependencies" time="0.001" file="packages/core/src/lib/validator.spec.ts"></testcase>
+    <testcase classname="Validator and ValidatorHelper" name="supports number and inclusive minimum/maximum rules" time="0.001" file="packages/core/src/lib/validator.spec.ts"></testcase>
+    <testcase classname="Validator and ValidatorHelper" name="supports date and number ranges and safely accepts an unknown range type" time="0.001" file="packages/core/src/lib/validator.spec.ts"></testcase>
     <testcase classname="Validator and ValidatorHelper" name="supports ZIP, phone, VIN, and SSN rules" time="0.001" file="packages/core/src/lib/validator.spec.ts"></testcase>
-    <testcase classname="Validator and ValidatorHelper" name="supports string, literal regular expression, email, and date rules" time="0.000" file="packages/core/src/lib/validator.spec.ts"></testcase>
-    <testcase classname="validation metadata utilities" name="resets metadata completely" time="0.001" file="packages/core/src/lib/utils/validation-utils.spec.ts"></testcase>
+    <testcase classname="Validator and ValidatorHelper" name="supports string, literal regular expression, email, and date rules" time="0.001" file="packages/core/src/lib/validator.spec.ts"></testcase>
+    <testcase classname="validation metadata utilities" name="resets metadata completely" time="0.000" file="packages/core/src/lib/utils/validation-utils.spec.ts"></testcase>
     <testcase classname="validation metadata utilities" name="clears touched paths by prefix and safely handles missing metadata" time="0.000" file="packages/core/src/lib/utils/validation-utils.spec.ts"></testcase>
     <testcase classname="validation metadata utilities" name="creates metadata lazily and tracks field visibility" time="0.001" file="packages/core/src/lib/utils/validation-utils.spec.ts"></testcase>
-    <testcase classname="ValidationHelper" name="classifies nullish and empty values without rejecting zero or false" time="0.001" file="packages/core/src/lib/validation-helper.spec.ts"></testcase>
+    <testcase classname="ValidationHelper" name="classifies nullish and empty values without rejecting zero or false" time="0.000" file="packages/core/src/lib/validation-helper.spec.ts"></testcase>
     <testcase classname="ValidationHelper" name="validates regular expressions and common formatted values" time="0.000" file="packages/core/src/lib/validation-helper.spec.ts"></testcase>
     <testcase classname="ValidationHelper" name="validates real dates and inclusive date ranges" time="0.000" file="packages/core/src/lib/validation-helper.spec.ts"></testcase>
     <testcase classname="ValidationHelper" name="validates checked, number, and inclusive numeric boundaries" time="0.000" file="packages/core/src/lib/validation-helper.spec.ts"></testcase>

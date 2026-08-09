@@ -85,7 +85,7 @@ export function createApp(root: HTMLElement): () => void {
   const shell = el('div', { className: 'vr-showcase-shell' }, [
     el('aside', { className: 'vr-showcase-sidebar' }, [
       el('header', { className: 'vr-showcase-sidebar__intro' }, [
-        el('p', { className: 'vr-showcase-sidebar__eyebrow', textContent: 'Vanilla Showcase' }),
+        el('p', { className: 'vr-showcase-sidebar__eyebrow', textContent: 'Vanilla JS Showcase' }),
         el('h2', { textContent: 'Forms showcase' }),
         el('p', {
           textContent: 'Policy validation with imperative TypeScript bindings, nested groups, and measured large-form behavior.'
@@ -102,8 +102,8 @@ export function createApp(root: HTMLElement): () => void {
 
   const platformShell = document.createElement('validation-platform-shell');
   platformShell.setAttribute('active-application', 'vanilla-showcase');
-  platformShell.setAttribute('application-name', 'Vanilla Showcase');
-  platformShell.setAttribute('version', '0.0.0');
+  platformShell.setAttribute('application-name', 'Vanilla JS Showcase');
+  platformShell.setAttribute('version', '1.0.0');
   platformShell.setAttribute('portal-url', platformUrl('portal'));
   platformShell.setAttribute('docs-url', platformUrl('docs'));
   platformShell.setAttribute('angular-url', platformUrl('angular'));

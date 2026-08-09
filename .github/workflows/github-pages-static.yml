@@ -43,6 +43,7 @@ jobs:
           NODE_OPTIONS: --max-old-space-size=8192
           VRE_HOSTED_EVIDENCE: '1'
           VRE_SITE_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          VRE_CONTACT_FORM_URL: ${{ secrets.VRE_CONTACT_FORM_URL }}
           VRE_BUILD_TIME: ${{ github.event.head_commit.timestamp || github.run_started_at }}
         run: npm run build:site
 

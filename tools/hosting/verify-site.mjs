@@ -18,7 +18,9 @@ for (const relativePath of [
   'showcases/angular/index.html',
   'showcases/react/index.html',
   'showcases/vanilla/index.html',
-  'automation/index.html'
+  'automation/index.html',
+  'contact/index.html',
+  'contact.js'
 ]) {
   assert.ok(existsSync(path.join(siteRoot, relativePath)), `Missing hosted output: ${relativePath}`);
 }
@@ -98,6 +100,10 @@ const shellDom = new JSDOM('<!doctype html><body></body>', {
   runScripts: 'dangerously',
   url: 'https://validation-rules-engine.azurewebsites.net/showcases/react/state/local-state'
 });
+shellDom.window.fetch = async () => ({
+  ok: true,
+  json: async () => ({ documents: [] })
+});
 shellDom.window.eval(rootPlatformConfig);
 shellDom.window.eval(readFileSync(path.join(siteRoot, 'platform-shell.js'), 'utf8'));
 const shell = shellDom.window.document.createElement('validation-platform-shell');
@@ -108,8 +114,12 @@ assert.equal(
   'https://validation-rules-engine.azurewebsites.net/docs/overview'
 );
 assert.equal(
-  shell.shadowRoot.querySelector('.platform-footer-meta a')?.getAttribute('href'),
-  'https://validation-rules-engine.azurewebsites.net/docs/overview'
+  shell.shadowRoot.querySelector('.platform-footer-columns a')?.getAttribute('href'),
+  'https://validation-rules-engine.azurewebsites.net/'
+);
+assert.ok(
+  [...shell.shadowRoot.querySelectorAll('.platform-footer-columns a')]
+    .some((link) => link.getAttribute('href') === 'https://validation-rules-engine.azurewebsites.net/docs/overview')
 );
 const showcaseLinks = [...shell.shadowRoot.querySelectorAll('.platform-nav-group')][1]
   .querySelectorAll('a');
@@ -125,6 +135,10 @@ shellDom.window.close();
 const pagesShellDom = new JSDOM('<!doctype html><body></body>', {
   runScripts: 'dangerously',
   url: 'https://kalyan-k.github.io/validation-rules-engine/docs/overview'
+});
+pagesShellDom.window.fetch = async () => ({
+  ok: true,
+  json: async () => ({ documents: [] })
 });
 pagesShellDom.window.eval(`globalThis.vrePlatformConfig = {
   siteBase: '/validation-rules-engine',
@@ -187,6 +201,7 @@ try {
     '/showcases/vanilla/platform-config.js',
     '/reports/',
     '/automation/',
+    '/contact/',
     '/health',
     '/health/ready'
   ];

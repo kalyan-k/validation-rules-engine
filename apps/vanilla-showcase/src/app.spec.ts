@@ -28,7 +28,7 @@ describe('Vanilla showcase application', () => {
     expect(document.body.textContent).toContain('application -> @validation-rules-engine/core');
     expect(document.querySelector('validation-platform-shell')?.getAttribute('active-application')).toBe('vanilla-showcase');
     expect(document.querySelector('a[href*="/docs/core-package"]')?.textContent).toContain('core documentation');
-    expect(document.body.textContent).toContain('Vanilla Showcase');
+    expect(document.body.textContent).toContain('Vanilla JS Showcase');
     expect(document.body.textContent).toContain('Forms showcase');
     cleanup();
   });

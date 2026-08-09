@@ -43,7 +43,7 @@ export function App() {
     <validation-platform-shell
       active-application="react-showcase"
       application-name="React Showcase"
-      version="0.0.0"
+      version="1.0.0"
       portal-url={platformUrl('portal')}
       docs-url={platformUrl('docs')}
       angular-url={platformUrl('angular')}

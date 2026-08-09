@@ -2,9 +2,9 @@
   "projectName": "react-showcase",
   "displayName": "React Showcase",
   "version": "1.0.0",
-  "startedAt": "2026-08-09T04:01:10.025Z",
-  "finishedAt": "2026-08-09T04:02:15.222Z",
-  "durationMs": 72078.84326171875,
+  "startedAt": "2026-08-09T18:46:12.589Z",
+  "finishedAt": "2026-08-09T18:47:34.527Z",
+  "durationMs": 89982.8935546875,
   "browsers": [
     "Vitest · jsdom"
   ],
@@ -24,7 +24,7 @@
       ],
       "description": "renders the shared layout, home content, navigation, and documentation links",
       "status": "passed",
-      "durationMs": 154.66290000000026,
+      "durationMs": 242.15309999999954,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/app.spec.tsx"
@@ -36,7 +36,7 @@
       ],
       "description": "navigates among Home, Simple, Complex, and Performance routes with active state",
       "status": "passed",
-      "durationMs": 645.6673000000001,
+      "durationMs": 903.5246999999999,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/app.spec.tsx"
@@ -48,7 +48,7 @@
       ],
       "description": "uses home example links as client-side navigation",
       "status": "passed",
-      "durationMs": 121.51739999999972,
+      "durationMs": 126.5006000000003,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/app.spec.tsx"
@@ -60,7 +60,7 @@
       ],
       "description": "blocks an invalid simple submission and exposes inline accessible messages",
       "status": "passed",
-      "durationMs": 183.44999999999982,
+      "durationMs": 231.03520000000026,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/app.spec.tsx"
@@ -72,7 +72,7 @@
       ],
       "description": "accepts and resets a valid simple form",
       "status": "passed",
-      "durationMs": 212.11459999999988,
+      "durationMs": 277.09719999999925,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/app.spec.tsx"
@@ -84,7 +84,7 @@
       ],
       "description": "validates simple email on change and links to field documentation",
       "status": "passed",
-      "durationMs": 153.1983999999993,
+      "durationMs": 176.4340000000002,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/app.spec.tsx"
@@ -96,7 +96,7 @@
       ],
       "description": "manages complex dynamic sections, conditional fields, and group validation",
       "status": "passed",
-      "durationMs": 556.3701999999994,
+      "durationMs": 865.3315000000002,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/app.spec.tsx"
@@ -108,7 +108,7 @@
       ],
       "description": "populates, validates, saves, and resets the complex form",
       "status": "passed",
-      "durationMs": 571.6801000000005,
+      "durationMs": 626.2551999999996,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/app.spec.tsx"
@@ -120,7 +120,7 @@
       ],
       "description": "measures validation and supports performance sample/reset/group actions",
       "status": "passed",
-      "durationMs": 9297.650999999998,
+      "durationMs": 10597.841199999999,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/app.spec.tsx"
@@ -132,7 +132,7 @@
       ],
       "description": "renders its home, active navigation, architecture, derived state, and client-side links",
       "status": "passed",
-      "durationMs": 351.15210000000025,
+      "durationMs": 522.5290000000005,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -144,7 +144,7 @@
       ],
       "description": "validates, submits, and resets the simple form with messages and summary",
       "status": "passed",
-      "durationMs": 233.1241,
+      "durationMs": 354.15620000000035,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -156,7 +156,7 @@
       ],
       "description": "handles nested data, dynamic sections, conditional fields, groups, submit, and reset",
       "status": "passed",
-      "durationMs": 908.1643999999997,
+      "durationMs": 1163.6162000000004,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -168,7 +168,7 @@
       ],
       "description": "runs the large-form performance lifecycle and reports live metrics",
       "status": "passed",
-      "durationMs": 9153.113400000002,
+      "durationMs": 10565.5037,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -180,7 +180,7 @@
       ],
       "description": "renders its home, active navigation, architecture, derived state, and client-side links",
       "status": "passed",
-      "durationMs": 175.97869999999966,
+      "durationMs": 254.1081000000013,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -192,7 +192,7 @@
       ],
       "description": "validates, submits, and resets the simple form with messages and summary",
       "status": "passed",
-      "durationMs": 217.96520000000055,
+      "durationMs": 234.69150000000081,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -204,7 +204,7 @@
       ],
       "description": "handles nested data, dynamic sections, conditional fields, groups, submit, and reset",
       "status": "passed",
-      "durationMs": 797.0725000000002,
+      "durationMs": 1073.3487000000023,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -216,7 +216,7 @@
       ],
       "description": "runs the large-form performance lifecycle and reports live metrics",
       "status": "passed",
-      "durationMs": 7908.283000000001,
+      "durationMs": 8472.2837,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -228,7 +228,7 @@
       ],
       "description": "renders its home, active navigation, architecture, derived state, and client-side links",
       "status": "passed",
-      "durationMs": 163.96919999999955,
+      "durationMs": 348.28709999999774,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -240,7 +240,7 @@
       ],
       "description": "validates, submits, and resets the simple form with messages and summary",
       "status": "passed",
-      "durationMs": 218.59460000000036,
+      "durationMs": 482.7505000000019,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -252,7 +252,7 @@
       ],
       "description": "handles nested data, dynamic sections, conditional fields, groups, submit, and reset",
       "status": "passed",
-      "durationMs": 778.6143000000011,
+      "durationMs": 917.367000000002,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -264,7 +264,7 @@
       ],
       "description": "runs the large-form performance lifecycle and reports live metrics",
       "status": "passed",
-      "durationMs": 7082.999899999999,
+      "durationMs": 9168.123000000003,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -276,7 +276,7 @@
       ],
       "description": "renders its home, active navigation, architecture, derived state, and client-side links",
       "status": "passed",
-      "durationMs": 172.0583000000006,
+      "durationMs": 209.05250000000524,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -288,7 +288,7 @@
       ],
       "description": "validates, submits, and resets the simple form with messages and summary",
       "status": "passed",
-      "durationMs": 222.44480000000112,
+      "durationMs": 260.58550000000105,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -300,7 +300,7 @@
       ],
       "description": "handles nested data, dynamic sections, conditional fields, groups, submit, and reset",
       "status": "passed",
-      "durationMs": 788.6628000000019,
+      "durationMs": 877.4010999999955,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -312,7 +312,7 @@
       ],
       "description": "runs the large-form performance lifecycle and reports live metrics",
       "status": "passed",
-      "durationMs": 6944.394400000005,
+      "durationMs": 8890.183899999996,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -324,7 +324,7 @@
       ],
       "description": "renders its home, active navigation, architecture, derived state, and client-side links",
       "status": "passed",
-      "durationMs": 176.6128000000026,
+      "durationMs": 222.7641999999978,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -336,7 +336,7 @@
       ],
       "description": "validates, submits, and resets the simple form with messages and summary",
       "status": "passed",
-      "durationMs": 219.7228999999934,
+      "durationMs": 253.20179999999527,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -348,7 +348,7 @@
       ],
       "description": "handles nested data, dynamic sections, conditional fields, groups, submit, and reset",
       "status": "passed",
-      "durationMs": 764.676999999996,
+      "durationMs": 1001.0846999999994,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -360,7 +360,7 @@
       ],
       "description": "runs the large-form performance lifecycle and reports live metrics",
       "status": "passed",
-      "durationMs": 6896.8269,
+      "durationMs": 9523.250200000002,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -372,7 +372,7 @@
       ],
       "description": "renders its home, active navigation, architecture, derived state, and client-side links",
       "status": "passed",
-      "durationMs": 160.02870000000257,
+      "durationMs": 189.9163999999946,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -384,7 +384,7 @@
       ],
       "description": "validates, submits, and resets the simple form with messages and summary",
       "status": "passed",
-      "durationMs": 202.38500000000204,
+      "durationMs": 230.96820000000298,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -396,7 +396,7 @@
       ],
       "description": "handles nested data, dynamic sections, conditional fields, groups, submit, and reset",
       "status": "passed",
-      "durationMs": 770.2146999999968,
+      "durationMs": 950.4205999999976,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -408,7 +408,7 @@
       ],
       "description": "runs the large-form performance lifecycle and reports live metrics",
       "status": "passed",
-      "durationMs": 6965.516599999995,
+      "durationMs": 9787.943500000001,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -420,7 +420,7 @@
       ],
       "description": "renders its home, active navigation, architecture, derived state, and client-side links",
       "status": "passed",
-      "durationMs": 175.8611000000019,
+      "durationMs": 207.2546999999904,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -432,7 +432,7 @@
       ],
       "description": "validates, submits, and resets the simple form with messages and summary",
       "status": "passed",
-      "durationMs": 221.53319999999803,
+      "durationMs": 217.79730000000563,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -444,7 +444,7 @@
       ],
       "description": "handles nested data, dynamic sections, conditional fields, groups, submit, and reset",
       "status": "passed",
-      "durationMs": 793.8341,
+      "durationMs": 847.075800000006,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"
@@ -456,7 +456,7 @@
       ],
       "description": "runs the large-form performance lifecycle and reports live metrics",
       "status": "passed",
-      "durationMs": 6718.192499999997,
+      "durationMs": 8709.052299999996,
       "logs": [],
       "sourceFiles": [
         "apps/react-showcase/src/state-integrations/state-integrations.spec.tsx"

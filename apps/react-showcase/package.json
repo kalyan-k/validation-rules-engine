@@ -1,6 +1,6 @@
 {
   "name": "@validation-rules-engine/react-showcase",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "description": "Private React showcase application for @validation-rules-engine/react",

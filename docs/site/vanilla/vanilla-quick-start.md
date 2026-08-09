@@ -1,6 +1,6 @@
 # Vanilla Quick Start
 
-Install Core and validate a plain TypeScript model. The Vanilla Showcase follows the same pattern and then binds results to the DOM.
+Install Core and validate a plain TypeScript model. The Vanilla JS Showcase follows the same pattern and then binds results to the DOM.
 
 ## Install
 
@@ -27,7 +27,7 @@ export class AccountPolicy implements ValidationPolicy {
 
 ## Execute with Core helpers
 
-Adapters call Core for you. In a Vanilla (or other Core-only) app you register the policy, run validators, and read `model.validationResults`:
+Adapters call Core for you. In a Vanilla JS (or other Core-only) app you register the policy, run validators, and read `model.validationResults`:
 
 ```ts
 import { ValidatorHelper } from '@validation-rules-engine/core';
@@ -44,7 +44,7 @@ const model = {
 };
 
 // Showcase code evaluates validators and writes ValidationResult metadata onto the model.
-// Open the live Vanilla Showcase to see field touch, blur, submit, and summary wiring.
+// Open the live Vanilla JS Showcase to see field touch, blur, submit, and summary wiring.
 ```
 
 ## Try it live

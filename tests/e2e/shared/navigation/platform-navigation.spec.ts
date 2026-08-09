@@ -14,7 +14,7 @@ test.describe('Platform navigation URLs @hosting-navigation @regression', () => 
       ['Documentation', `${baseUrls.docs}/docs/overview`],
       ['Angular Showcase', `${baseUrls.angular}/state/signals`],
       ['React Showcase', `${baseUrls.react}/state/zustand`],
-      ['Vanilla Showcase', `${baseUrls.vanilla}/simple`],
+      ['Vanilla JS Showcase', `${baseUrls.vanilla}/simple`],
       ['Test & Coverage workspace', `${baseUrls.portal}/reports/index.html`],
       ['Automation report', `${baseUrls.portal}/automation/`]
     ] as const;

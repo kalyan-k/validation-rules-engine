@@ -55,6 +55,7 @@ The production server accepts:
 - `VRE_HOST`: listening interface; defaults to `0.0.0.0` in unified-host mode.
 - `VRE_PUBLIC_URL`: optional canonical public origin, such as `https://validation-rules-engine.azurewebsites.net`. Leave it unset to derive the origin automatically from each browser request.
 - `VRE_SITE_BASE_PATH`: optional public path prefix when the site is not hosted at domain root (GitHub Pages project sites). Leave unset for local, Docker, and Azure Static Web Apps.
+- `VRE_CONTACT_FORM_URL`: optional Google Form embed URL (`https://docs.google.com/forms/d/e/.../viewform?embedded=true`). Injected into `platform-config.js` at build time for the Contact page. Store it as a GitHub Actions secret named `VRE_CONTACT_FORM_URL` so it is not committed to the public repository.
 - `VRE_NO_OPEN=1`: prevents opening a browser on server startup.
 - `VRE_BUILD_TIME`: build timestamp returned by portal metadata.
 
