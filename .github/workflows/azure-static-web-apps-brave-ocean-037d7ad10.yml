@@ -42,9 +42,14 @@ jobs:
           NODE_OPTIONS: --max-old-space-size=8192
           VRE_HOSTED_EVIDENCE: '1'
           VRE_STATIC_WEB_APPS: '1'
-          VRE_CONTACT_FORM_URL: ${{ secrets.VRE_CONTACT_FORM_URL }}
+          # Repository Actions secret/variable required here (build job has no environment:).
+          VRE_CONTACT_FORM_URL: ${{ secrets.VRE_CONTACT_FORM_URL || vars.VRE_CONTACT_FORM_URL }}
           VRE_BUILD_TIME: ${{ github.event.head_commit.timestamp || github.event.pull_request.updated_at || github.run_started_at }}
         run: npm run build:site
+
+      - name: Verify contact form config was injected
+        run: |
+          node -e "const fs=require('fs'); const src=fs.readFileSync('dist/site/platform-config.js','utf8'); if (!/contactFormEmbedUrl = \"https:\\/\\/docs\\.google\\.com\\/forms\\//.test(src)) { console.warn('WARNING: VRE_CONTACT_FORM_URL missing or not a docs.google.com/forms URL — Contact page will show the unconfigured state.'); } else { console.log('Contact form URL embedded in platform-config.js'); }"
 
       - name: Verify assembled site
         run: npm run site:verify

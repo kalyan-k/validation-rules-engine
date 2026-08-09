@@ -112,15 +112,15 @@ var addSorting = (function() {
             i;
 
         for (i = 0; i < rows.length; i += 1) {
-            rows[i].data = loadRowData(rows[i]);
+            rows[i].__sorterData = loadRowData(rows[i]);
         }
     }
     // sorts the table using the data for the ith column
     function sortByIndex(index, desc) {
         var key = cols[index].key,
             sorter = function(a, b) {
-                a = a.data[key];
-                b = b.data[key];
+                a = a.__sorterData[key];
+                b = b.__sorterData[key];
                 return a < b ? -1 : a > b ? 1 : 0;
             },
             finalSorter = sorter,

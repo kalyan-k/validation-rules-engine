@@ -43,7 +43,10 @@ jobs:
           NODE_OPTIONS: --max-old-space-size=8192
           VRE_HOSTED_EVIDENCE: '1'
           VRE_SITE_BASE_PATH: ${{ steps.pages.outputs.base_path }}
-          VRE_CONTACT_FORM_URL: ${{ secrets.VRE_CONTACT_FORM_URL }}
+          # Prefer Actions secret; fall back to Actions variable for local/ops flexibility.
+          # Must be available to this build job (repository secret/variable). Environment-only
+          # secrets on github-pages are invisible here because this job has no environment:.
+          VRE_CONTACT_FORM_URL: ${{ secrets.VRE_CONTACT_FORM_URL || vars.VRE_CONTACT_FORM_URL }}
           VRE_BUILD_TIME: ${{ github.event.head_commit.timestamp || github.run_started_at }}
         run: npm run build:site
 
@@ -53,6 +56,7 @@ jobs:
           test -f dist/site/.nojekyll
           test -f dist/site/404.html
           test -f dist/site/platform-config.js
+          node -e "const fs=require('fs'); const src=fs.readFileSync('dist/site/platform-config.js','utf8'); const configured=/contactFormEmbedUrl = \"https:\\/\\/docs\\.google\\.com\\/forms\\//.test(src); console.log(configured ? 'Contact form URL embedded in platform-config.js' : 'WARNING: VRE_CONTACT_FORM_URL missing or not a docs.google.com/forms URL');"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
