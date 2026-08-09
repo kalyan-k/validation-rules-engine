@@ -48,9 +48,29 @@ function requireText(text, token, filePath, failures) {
   }
 }
 
+function stripScriptElements(html) {
+  let result = '';
+  let cursor = 0;
+  const lower = html.toLocaleLowerCase();
+  while (cursor < html.length) {
+    const open = lower.indexOf('<script', cursor);
+    if (open === -1) {
+      result += html.slice(cursor);
+      break;
+    }
+    result += html.slice(cursor, open);
+    const close = lower.indexOf('</script>', open);
+    if (close === -1) {
+      break;
+    }
+    cursor = close + '</script>'.length;
+  }
+  return result;
+}
+
 function verifyLocalLinks(htmlFile, failures) {
   const html = fs.readFileSync(htmlFile, 'utf8');
-  const linkSource = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/giu, '');
+  const linkSource = stripScriptElements(html);
   const attributes = linkSource.matchAll(/\b(?:href|src)=(['"])(.*?)\1/giu);
   for (const match of attributes) {
     const target = match[2];

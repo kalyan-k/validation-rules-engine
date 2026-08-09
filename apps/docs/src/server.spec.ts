@@ -24,3 +24,13 @@ test('includes Vanilla JS Showcase documentation pages', () => {
   const vanillaOverview = pages.find(({ path }) => path === 'docs/vanilla-overview/index.html');
   assert.ok(vanillaOverview?.html.includes('Open Vanilla JS Showcase'));
 });
+
+test('places Vanilla JS Showcase after Core Package in documentation navigation order', () => {
+  const sections = [...new Set(documentationCatalog.map(({ section }) => section))];
+  const coreIndex = sections.indexOf('Core Package');
+  const vanillaIndex = sections.indexOf('Vanilla JS Showcase');
+  const angularIndex = sections.indexOf('Angular Package');
+  assert.ok(coreIndex >= 0 && vanillaIndex >= 0 && angularIndex >= 0);
+  assert.equal(vanillaIndex, coreIndex + 1);
+  assert.ok(angularIndex > vanillaIndex);
+});

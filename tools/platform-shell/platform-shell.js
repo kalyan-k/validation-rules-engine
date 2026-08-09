@@ -24,6 +24,14 @@ const documentationSections = [
     ]
   },
   {
+    label: 'Vanilla JS Showcase',
+    items: [
+      ['Overview', '/docs/vanilla-overview'],
+      ['Quick Start', '/docs/vanilla-quick-start'],
+      ['Examples', '/docs/vanilla-examples']
+    ]
+  },
+  {
     label: 'Angular Package',
     items: [
       ['Overview', '/docs/angular'],
@@ -107,14 +115,6 @@ const documentationSections = [
     items: [
       ['Overview', '/docs/react-showcase-overview'],
       ['Examples', '/docs/react-showcase-examples']
-    ]
-  },
-  {
-    label: 'Vanilla JS Showcase',
-    items: [
-      ['Overview', '/docs/vanilla-overview'],
-      ['Quick Start', '/docs/vanilla-quick-start'],
-      ['Examples', '/docs/vanilla-examples']
     ]
   },
   {
@@ -402,6 +402,40 @@ function bindDocsSearch(root, docsBase) {
     }
   });
 
+  const focusSearch = () => {
+    const menuButton = root.querySelector('.platform-menu');
+    const navigation = root.querySelector('.platform-navigation');
+    if (menuButton && navigation && getComputedStyle(menuButton).display !== 'none') {
+      menuButton.setAttribute('aria-expanded', 'true');
+      navigation.classList.add('open');
+    }
+    input.focus();
+    input.select();
+  };
+
+  const isEditableTarget = (target) => {
+    if (!(target instanceof Element)) {
+      return false;
+    }
+    const tag = target.tagName;
+    return target.isContentEditable
+      || tag === 'INPUT'
+      || tag === 'TEXTAREA'
+      || tag === 'SELECT';
+  };
+
+  document.addEventListener('keydown', (event) => {
+    const isShortcut = (event.key === 'k' || event.key === 'K') && (event.metaKey || event.ctrlKey);
+    if (!isShortcut) {
+      return;
+    }
+    if (isEditableTarget(event.target) && event.target !== input) {
+      return;
+    }
+    event.preventDefault();
+    focusSearch();
+  });
+
   if (typeof fetch === 'function') {
     void loadDocuments();
   }
@@ -430,6 +464,7 @@ class ValidationPlatformShell extends HTMLElement {
       vanilla: configuredBase('vanilla', this.getAttribute('vanilla-url'), currentOriginWhen(activeApplication, ['vanilla-showcase'], developmentOrigin(4205)))
     };
     const contactHref = joinPortalPath(urls.portal, '/contact/');
+    const aboutHref = joinPortalPath(urls.portal, '/about/');
     const searchEnabled = docsSearchEnabled(activeApplication, this);
     const docsActive = activeApplication === 'documentation';
     const showcasesActive = activeApplication === 'angular-showcase'
@@ -437,6 +472,10 @@ class ValidationPlatformShell extends HTMLElement {
       || activeApplication === 'vanilla-showcase';
     const reportsActive = activeApplication === 'reports';
     const contactActive = activeApplication === 'contact';
+    const aboutActive = activeApplication === 'about';
+    const searchShortcutHint = /Mac|iPhone|iPad|iPod/i.test(globalThis.navigator?.platform || globalThis.navigator?.userAgent || '')
+      ? '⌘K'
+      : 'Ctrl+K';
     const docsNavigation = documentationSections.map((section) => {
       const active = docsActive && isDocsSectionActive(section);
       return `<a href="${docsHref(urls.docs, firstDocsPath(section))}"${active ? ' aria-current="page" class="active"' : ''}>${section.label}</a>`;
@@ -457,7 +496,8 @@ class ValidationPlatformShell extends HTMLElement {
           <div class="platform-docs-search" data-platform-docs-search>
             <label class="platform-docs-search-label" for="platform-docs-search-input">Search documentation</label>
             <div class="platform-docs-search-control">
-              <input id="platform-docs-search-input" data-platform-docs-search-input type="search" role="combobox" placeholder="Search docs..." autocomplete="off" aria-autocomplete="list" aria-controls="platform-docs-search-results" aria-expanded="false">
+              <input id="platform-docs-search-input" data-platform-docs-search-input type="search" role="combobox" placeholder="Search docs..." autocomplete="off" aria-autocomplete="list" aria-controls="platform-docs-search-results" aria-expanded="false" aria-keyshortcuts="Control+K Meta+K">
+              <kbd class="platform-docs-search-shortcut" aria-hidden="true">${searchShortcutHint}</kbd>
               <button data-platform-docs-search-clear class="platform-docs-search-clear" type="button" aria-label="Clear documentation search" hidden>&times;</button>
             </div>
             <div id="platform-docs-search-results" data-platform-docs-search-results class="platform-docs-search-results" role="listbox" hidden></div>
@@ -473,25 +513,28 @@ class ValidationPlatformShell extends HTMLElement {
           <span class="platform-brand-copy"><strong>Validation Rules Engine</strong><small>${applicationName}</small></span>
         </a>
         <span class="platform-version" data-version title="Workspace version">v${version}</span>
-        ${searchMarkup}
-        <button class="platform-menu" type="button" aria-expanded="false" aria-controls="platform-navigation">Menu</button>
-        <nav id="platform-navigation" class="platform-navigation" aria-label="Platform navigation">
-          <a class="platform-nav-link ${activeApplication === 'portal' ? 'active' : ''}" href="${joinPortalPath(urls.portal, '/')}"${activeApplication === 'portal' ? ' aria-current="page"' : ''}>Home</a>
-          <details class="platform-nav-group ${docsActive ? 'active' : ''}">
-            <summary>Docs<span aria-hidden="true"></span></summary>
-            <div class="platform-dropdown platform-docs-dropdown">${docsNavigation}</div>
-          </details>
-          <details class="platform-nav-group ${showcasesActive ? 'active' : ''}">
-            <summary>Showcases<span aria-hidden="true"></span></summary>
-            <div class="platform-dropdown">${showcasesNavigation}</div>
-          </details>
-          <details class="platform-nav-group ${reportsActive ? 'active' : ''}">
-            <summary>Reports<span aria-hidden="true"></span></summary>
-            <div class="platform-dropdown">${reportsNavigation}</div>
-          </details>
-          <a class="platform-nav-link ${contactActive ? 'active' : ''}" href="${contactHref}"${contactActive ? ' aria-current="page"' : ''}>Contact</a>
-          <a class="platform-nav-link" href="https://github.com/kalyan-k/validation-rules-engine">GitHub</a>
-        </nav>
+        <div class="platform-header-end">
+          ${searchMarkup}
+          <button class="platform-menu" type="button" aria-expanded="false" aria-controls="platform-navigation">Menu</button>
+          <nav id="platform-navigation" class="platform-navigation" aria-label="Platform navigation">
+            <a class="platform-nav-link ${activeApplication === 'portal' ? 'active' : ''}" href="${joinPortalPath(urls.portal, '/')}"${activeApplication === 'portal' ? ' aria-current="page"' : ''}>Home</a>
+            <details class="platform-nav-group ${docsActive ? 'active' : ''}">
+              <summary>Docs<span aria-hidden="true"></span></summary>
+              <div class="platform-dropdown platform-docs-dropdown">${docsNavigation}</div>
+            </details>
+            <details class="platform-nav-group ${showcasesActive ? 'active' : ''}">
+              <summary>Showcases<span aria-hidden="true"></span></summary>
+              <div class="platform-dropdown">${showcasesNavigation}</div>
+            </details>
+            <details class="platform-nav-group ${reportsActive ? 'active' : ''}">
+              <summary>Reports<span aria-hidden="true"></span></summary>
+              <div class="platform-dropdown">${reportsNavigation}</div>
+            </details>
+            <a class="platform-nav-link ${aboutActive ? 'active' : ''}" href="${aboutHref}"${aboutActive ? ' aria-current="page"' : ''}>About</a>
+            <a class="platform-nav-link ${contactActive ? 'active' : ''}" href="${contactHref}"${contactActive ? ' aria-current="page"' : ''}>Contact</a>
+            <a class="platform-nav-link" href="https://github.com/kalyan-k/validation-rules-engine">GitHub</a>
+          </nav>
+        </div>
       </header>
       <div class="platform-content"><slot></slot></div>
       <footer class="platform-footer" part="footer">
@@ -507,7 +550,14 @@ class ValidationPlatformShell extends HTMLElement {
             <h2>Product</h2>
             <a href="${joinPortalPath(urls.portal, '/')}">Portal</a>
             <a href="${docsHref(urls.docs, '/docs/overview')}">Documentation</a>
+            <a href="${aboutHref}">About</a>
             <a href="${contactHref}">Contact</a>
+          </section>
+          <section>
+            <h2>Packages</h2>
+            <a href="${docsHref(urls.docs, '/docs/core-package')}">@validation-rules-engine/core</a>
+            <a href="${docsHref(urls.docs, '/docs/angular')}">@validation-rules-engine/angular</a>
+            <a href="${docsHref(urls.docs, '/docs/react-overview')}">@validation-rules-engine/react</a>
           </section>
           <section>
             <h2>Showcases</h2>

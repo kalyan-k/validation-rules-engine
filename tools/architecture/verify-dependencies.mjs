@@ -267,8 +267,8 @@ if (failures.length === 0) {
     'Vanilla showcase must provide a landing page parallel to the Angular and React showcases.'
   );
   expect(
-    shellSource.includes('Vanilla Showcase') && shellSource.includes('vanilla'),
-    'Shared application shell must expose the Vanilla Showcase navigation destination.'
+    shellSource.includes('Vanilla JS Showcase') && shellSource.includes('vanilla'),
+    'Shared application shell must expose the Vanilla JS Showcase navigation destination.'
   );
 
   for (const framework of ['vue']) {

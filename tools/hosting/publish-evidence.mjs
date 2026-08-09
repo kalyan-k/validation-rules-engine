@@ -1,3 +1,4 @@
+import { spawnSync } from 'node:child_process';
 import {
   cpSync,
   existsSync,
@@ -157,6 +158,15 @@ const manifest = {
     'Videos, traces, and screenshots stay local. Visual diffs are copied when present; otherwise a placeholder page is published.'
   ]
 };
+
+const sanitizeResult = spawnSync(
+  process.execPath,
+  [path.join(workspaceRoot, 'tools', 'hosting', 'sanitize-coverage-sorters.mjs'), evidenceReports],
+  { stdio: 'inherit' }
+);
+if (sanitizeResult.status) {
+  process.exitCode = sanitizeResult.status;
+}
 
 writeFileSync(path.join(evidenceRoot, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`, 'utf8');
 

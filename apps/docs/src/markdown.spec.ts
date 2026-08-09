@@ -12,7 +12,8 @@ test('renders headings, lists, links, and fenced code', () => {
 
 test('escapes source HTML and rejects unsafe link schemes', () => {
   const html = renderMarkdown('<script>alert(1)</script>\n\n[unsafe](javascript:alert(1))');
-  assert.doesNotMatch(html, /<script>/);
+  assert.ok(!html.includes('<script>'));
+  assert.ok(html.includes('&lt;script&gt;'));
   assert.match(html, /href="#"/);
 });
 
