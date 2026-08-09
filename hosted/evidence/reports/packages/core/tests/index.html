@@ -248,9 +248,24 @@ function flattenDocsItems(items) {
   return items.flatMap((item) => (Array.isArray(item) ? [item] : flattenDocsItems(item.items)));
 }
 
+function siteBasePrefix() {
+  return String(globalThis.vrePlatformConfig?.siteBase || '').replace(/\/$/, '');
+}
+
+function withSiteBasePath(pathname) {
+  const base = siteBasePrefix();
+  if (!base || typeof pathname !== 'string' || !pathname.startsWith('/')) {
+    return pathname;
+  }
+  if (pathname === base || pathname.startsWith(`${base}/`)) {
+    return pathname;
+  }
+  return `${base}${pathname}`;
+}
+
 function isDocsItemActive(item) {
   if (Array.isArray(item)) {
-    return location.pathname === item[1];
+    return location.pathname === withSiteBasePath(item[1]);
   }
   return item.items.some((child) => isDocsItemActive(child));
 }
@@ -264,9 +279,10 @@ function isDocsSectionActive(section) {
 }
 
 function isPathActive(pathname) {
-  return location.pathname === pathname
-    || (pathname.endsWith('/index.html') && location.pathname === pathname.replace(/index\.html$/u, ''))
-    || (pathname.endsWith('/index.html') && location.pathname === pathname.replace(/\/index\.html$/u, ''));
+  const resolved = withSiteBasePath(pathname);
+  return location.pathname === resolved
+    || (resolved.endsWith('/index.html') && location.pathname === resolved.replace(/index\.html$/u, ''))
+    || (resolved.endsWith('/index.html') && location.pathname === resolved.replace(/\/index\.html$/u, ''));
 }
 
 class ValidationPlatformShell extends HTMLElement {
@@ -484,7 +500,7 @@ if (!customElements.get('validation-platform-shell')) {
         <div><dt>Application</dt><dd>Core Engine</dd></div>
         <div><dt>Report</dt><dd>Test execution report</dd></div>
         <div><dt>Version</dt><dd>1.0.0</dd></div>
-        <div><dt>Generated</dt><dd>2026-08-09T00:39:46.898Z</dd></div>
+        <div><dt>Generated</dt><dd>2026-08-09T04:00:12.979Z</dd></div>
       </dl></div>
     </section>
     <script>(()=>{const root=document.currentScript.previousElementSibling;const button=root.querySelector('button');const key='vre:report-summary';const preference=sessionStorage.getItem(key);const setExpanded=(expanded,persist)=>{root.classList.toggle('collapsed',!expanded);button.setAttribute('aria-expanded',String(expanded));button.querySelector('span').textContent=expanded?'Collapse details':'Expand details';if(persist)sessionStorage.setItem(key,expanded?'expanded':'collapsed');};setExpanded(preference!=='collapsed',false);button.addEventListener('click',()=>setExpanded(button.getAttribute('aria-expanded')!=='true',true));if(preference===null)setTimeout(()=>setExpanded(false,false),10000);})();</script>
@@ -503,7 +519,7 @@ if (!customElements.get('validation-platform-shell')) {
         <div class="card card-pass"><span class="label">Passed</span><strong>16</strong></div>
         <div class="card card-fail"><span class="label">Failed</span><strong>0</strong></div>
         <div class="card card-skip"><span class="label">Skipped</span><strong>0</strong></div>
-        <div class="card"><span class="label">Duration</span><strong>2.33 s</strong></div>
+        <div class="card"><span class="label">Duration</span><strong>2.19 s</strong></div>
         <div class="card"><span class="label">Suites</span><strong>4</strong></div>
       </div>
       <div class="toolbar" aria-label="Test status filters">
@@ -511,7 +527,7 @@ if (!customElements.get('validation-platform-shell')) {
         <button type="button" data-filter="passed">Passed</button>
         <button type="button" data-filter="failed">Failed</button>
         <button type="button" data-filter="skipped">Skipped</button>
-        <span class="metadata">Browser: Chrome Headless 151.0.0.0 (Windows 10) · Started: 2026-08-09T00:39:44.567Z</span>
+        <span class="metadata">Browser: Chrome Headless 151.0.0.0 (Windows 10) · Started: 2026-08-09T04:00:10.791Z</span>
       </div>
       
       <section class="suite" id="suite-validation-result-utilities-0">
@@ -578,7 +594,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>supports number and inclusive minimum/maximum rules</strong>
-        <span class="duration">1 ms</span>
+        <span class="duration">0 ms</span>
       </div>
       <div class="source">Source: <code>packages/core/src/lib/validator.spec.ts</code></div>
       
@@ -644,7 +660,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>creates metadata lazily and tracks field visibility</strong>
-        <span class="duration">0 ms</span>
+        <span class="duration">1 ms</span>
       </div>
       <div class="source">Source: <code>packages/core/src/lib/utils/validation-utils.spec.ts</code></div>
       
@@ -670,7 +686,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>validates regular expressions and common formatted values</strong>
-        <span class="duration">1 ms</span>
+        <span class="duration">0 ms</span>
       </div>
       <div class="source">Source: <code>packages/core/src/lib/validation-helper.spec.ts</code></div>
       
@@ -690,7 +706,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>validates checked, number, and inclusive numeric boundaries</strong>
-        <span class="duration">1 ms</span>
+        <span class="duration">0 ms</span>
       </div>
       <div class="source">Source: <code>packages/core/src/lib/validation-helper.spec.ts</code></div>
       

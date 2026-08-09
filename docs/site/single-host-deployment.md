@@ -53,6 +53,7 @@ The production server accepts:
 - `VRE_PORTAL_PORT`: public listening port; defaults to `4200` outside the container.
 - `VRE_HOST`: listening interface; defaults to `0.0.0.0` in unified-host mode.
 - `VRE_PUBLIC_URL`: optional canonical public origin, such as `https://validation-rules-engine.azurewebsites.net`. Leave it unset to derive the origin automatically from each browser request.
+- `VRE_SITE_BASE_PATH`: optional public path prefix when the site is not hosted at domain root (GitHub Pages project sites). Leave unset for local, Docker, and Azure Static Web Apps.
 - `VRE_NO_OPEN=1`: prevents opening a browser on server startup.
 - `VRE_BUILD_TIME`: build timestamp returned by portal metadata.
 
@@ -67,12 +68,12 @@ Azure Static Web Apps hosts the assembled `dist/site` artifact. The GitHub workf
 Generate evidence locally, commit it, then deploy:
 
 ```bash
-npm run test:ci
-npm run test:e2e:chromium
-npm run evidence:publish
+npm run evidence:refresh
 git add hosted/evidence
 git commit -m "Update hosted test and automation evidence"
 ```
+
+`evidence:refresh` runs unit/coverage reports, the full Playwright catalog (`test:e2e:full`), then publishes into `hosted/evidence/`.
 
 `hosted/evidence/` is the deployable snapshot. `build:site` copies it into `/reports` and `/automation` (Azure sets `VRE_HOSTED_EVIDENCE=1`). If evidence is missing, those routes still load with empty placeholders.
 
@@ -89,6 +90,19 @@ Do **not** point `app_location` at `./apps` or rely on Oryx to build this monore
 `tools/hosting/build-site.mjs` copies `staticwebapp.config.json` for SWA validation. Do not define both `/showcases/angular` and `/showcases/angular/`, and do not use catch-all `/showcases/{app}/*` rewrites — Azure applies those even when real CSS/JS files exist, which blank the React and Vanilla showcases. Use explicit SPA path prefixes (`/state/*`, `/simple`, etc.) instead.
 
 After connecting the repo in the Azure portal, push to `master` (or re-run the workflow).
+
+## GitHub Pages
+
+GitHub Pages also hosts the assembled `dist/site` artifact. Do **not** upload the repository root — it has no `index.html`, which produces the Pages “File not found” 404.
+
+The workflow `.github/workflows/github-pages-static.yml`:
+
+1. Installs Node 22 and runs `npm ci`
+2. Reads the Pages base path from `actions/configure-pages` (for project sites this is `/<repo-name>`)
+3. Runs `npm run build:site` with `VRE_HOSTED_EVIDENCE=1` and `VRE_SITE_BASE_PATH` set to that base path
+4. Uploads only `dist/site` (which includes `index.html`, `.nojekyll`, and a root `404.html` fallback)
+
+Leave `VRE_SITE_BASE_PATH` unset for local single/multi-host, Docker, and Azure Static Web Apps so those hosts stay at domain root.
 
 ## Azure container deployment
 

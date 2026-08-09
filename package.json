@@ -43,7 +43,7 @@
     "build:package:angular": "npm run build:package:core && npm run ng -- build angular --configuration production",
     "build:package:react": "npm run build:package:core && npm run build --workspace @validation-rules-engine/react",
     "build:showcase:angular": "npm run ng -- build angular-showcase --configuration production",
-    "build:showcase:angular:hosted": "npm run ng -- build angular-showcase --configuration hosted",
+    "build:showcase:angular:hosted": "node tools/hosting/run-angular-hosted-build.mjs",
     "build:showcase:react": "npm run build --workspace @validation-rules-engine/react-showcase",
     "build:showcase:react:hosted": "vite build --config apps/react-showcase/vite.config.ts --mode single-host",
     "build:showcase:vanilla": "npm run build --workspace @validation-rules-engine/vanilla-showcase",
@@ -139,7 +139,7 @@
     "reports:verify": "node tools/testing/verify-reports.mjs",
     "reports:open": "node tools/testing/open-reports.mjs",
     "evidence:publish": "node tools/hosting/publish-evidence.mjs",
-    "evidence:refresh": "npm run test:ci && npm run test:e2e:chromium && npm run evidence:publish",
+    "evidence:refresh": "npm run test:ci && npm run test:e2e:full && npm run evidence:publish",
     "lint": "npm run ng -- lint angular",
     "lint:all": "npm run ng -- lint"
   },

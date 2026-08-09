@@ -2,9 +2,9 @@
   "projectName": "core",
   "displayName": "Core Engine",
   "version": "1.0.0",
-  "startedAt": "2026-08-09T00:39:44.567Z",
-  "finishedAt": "2026-08-09T00:39:46.898Z",
-  "durationMs": 2331,
+  "startedAt": "2026-08-09T04:00:10.791Z",
+  "finishedAt": "2026-08-09T04:00:12.979Z",
+  "durationMs": 2188,
   "summary": {
     "total": 16,
     "passed": 16,
@@ -84,7 +84,7 @@
       ],
       "description": "supports number and inclusive minimum/maximum rules",
       "status": "passed",
-      "durationMs": 1,
+      "durationMs": 0,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/validator.spec.ts"
@@ -156,7 +156,7 @@
       ],
       "description": "creates metadata lazily and tracks field visibility",
       "status": "passed",
-      "durationMs": 0,
+      "durationMs": 1,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/utils/validation-utils.spec.ts"
@@ -180,7 +180,7 @@
       ],
       "description": "validates regular expressions and common formatted values",
       "status": "passed",
-      "durationMs": 1,
+      "durationMs": 0,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/validation-helper.spec.ts"
@@ -204,7 +204,7 @@
       ],
       "description": "validates checked, number, and inclusive numeric boundaries",
       "status": "passed",
-      "durationMs": 1,
+      "durationMs": 0,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/validation-helper.spec.ts"

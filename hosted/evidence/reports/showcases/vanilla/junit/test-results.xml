@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites name="vitest tests" tests="23" failures="0" errors="0" time="1.7013073">
-    <testsuite name="src/app.spec.ts" timestamp="2026-08-09T00:42:06.309Z" hostname="karthikk" tests="3" failures="0" errors="0" skipped="0" time="0.1976159">
-        <testcase classname="src/app.spec.ts" name="Vanilla showcase application &gt; renders the shared layout, home content, and shell" time="0.0240044">
+<testsuites name="vitest tests" tests="23" failures="0" errors="0" time="1.6429099">
+    <testsuite name="src/app.spec.ts" timestamp="2026-08-09T04:02:20.303Z" hostname="karthikk" tests="3" failures="0" errors="0" skipped="0" time="0.1808951">
+        <testcase classname="src/app.spec.ts" name="Vanilla showcase application &gt; renders the shared layout, home content, and shell" time="0.0266835">
         </testcase>
-        <testcase classname="src/app.spec.ts" name="Vanilla showcase application &gt; navigates among Home, Simple, Complex, and Performance routes with active state" time="0.1537657">
+        <testcase classname="src/app.spec.ts" name="Vanilla showcase application &gt; navigates among Home, Simple, Complex, and Performance routes with active state" time="0.1417271">
         </testcase>
-        <testcase classname="src/app.spec.ts" name="Vanilla showcase application &gt; uses home example links as client-side navigation" time="0.0180214">
-        </testcase>
-    </testsuite>
-    <testsuite name="src/coverage.spec.ts" timestamp="2026-08-09T00:42:06.311Z" hostname="karthikk" tests="12" failures="0" errors="0" skipped="0" time="0.1277826">
-        <testcase classname="src/coverage.spec.ts" name="ValidationEngine unit coverage &gt; registers case-insensitive policies with balanced duplicate ownership" time="0.0121792">
-        </testcase>
-        <testcase classname="src/coverage.spec.ts" name="ValidationEngine unit coverage &gt; replaces and forcibly unregisters a dynamic policy" time="0.0045457">
-        </testcase>
-        <testcase classname="src/coverage.spec.ts" name="ValidationEngine unit coverage &gt; supports function, path, negated, and equality dependencies" time="0.0034052">
-        </testcase>
-        <testcase classname="src/coverage.spec.ts" name="ValidationEngine unit coverage &gt; registers, validates, clears, and rejects validation groups" time="0.0033473">
-        </testcase>
-        <testcase classname="src/coverage.spec.ts" name="ValidationEngine unit coverage &gt; reports required paths, refreshes group statuses, and updates evaluated groups on field validate" time="0.0024612">
-        </testcase>
-        <testcase classname="src/coverage.spec.ts" name="ValidationEngine unit coverage &gt; publishes revisions, touch state, partial clear, and notifications" time="0.0021229">
-        </testcase>
-        <testcase classname="src/coverage.spec.ts" name="ValidationEngine unit coverage &gt; supports observable-like async values and ignores stale results" time="0.0019851">
-        </testcase>
-        <testcase classname="src/coverage.spec.ts" name="ValidationEngine unit coverage &gt; guards empty names and handles non-string dependency values" time="0.0019417">
-        </testcase>
-        <testcase classname="src/coverage.spec.ts" name="paths, render, and helpers &gt; reads and mutates nested property paths" time="0.0016674">
-        </testcase>
-        <testcase classname="src/coverage.spec.ts" name="paths, render, and helpers &gt; creates DOM helpers and renders summaries" time="0.0168297">
-        </testcase>
-        <testcase classname="src/coverage.spec.ts" name="paths, render, and helpers &gt; binds select, checkbox, radio, and textarea controls" time="0.0719368">
-        </testcase>
-        <testcase classname="src/coverage.spec.ts" name="paths, render, and helpers &gt; covers performance helpers and platform urls" time="0.0035093">
+        <testcase classname="src/app.spec.ts" name="Vanilla showcase application &gt; uses home example links as client-side navigation" time="0.0111072">
         </testcase>
     </testsuite>
-    <testsuite name="src/forms.spec.ts" timestamp="2026-08-09T00:42:06.313Z" hostname="karthikk" tests="8" failures="0" errors="0" skipped="0" time="1.3759088">
-        <testcase classname="src/forms.spec.ts" name="Vanilla showcase forms &gt; blocks an invalid simple submission and accepts a valid one, then resets" time="0.1800477">
+    <testsuite name="src/coverage.spec.ts" timestamp="2026-08-09T04:02:20.306Z" hostname="karthikk" tests="12" failures="0" errors="0" skipped="0" time="0.1129855">
+        <testcase classname="src/coverage.spec.ts" name="ValidationEngine unit coverage &gt; registers case-insensitive policies with balanced duplicate ownership" time="0.0100382">
         </testcase>
-        <testcase classname="src/forms.spec.ts" name="Vanilla showcase forms &gt; validates a complex section and saves after populate" time="0.1863444">
+        <testcase classname="src/coverage.spec.ts" name="ValidationEngine unit coverage &gt; replaces and forcibly unregisters a dynamic policy" time="0.005421">
         </testcase>
-        <testcase classname="src/forms.spec.ts" name="Vanilla showcase forms &gt; generates a performance form and validates all controls" time="0.2521156">
+        <testcase classname="src/coverage.spec.ts" name="ValidationEngine unit coverage &gt; supports function, path, negated, and equality dependencies" time="0.0034088">
         </testcase>
-        <testcase classname="src/forms.spec.ts" name="Vanilla showcase forms &gt; registers a policy, validates a field, and clears engine state" time="0.0013108">
+        <testcase classname="src/coverage.spec.ts" name="ValidationEngine unit coverage &gt; registers, validates, clears, and rejects validation groups" time="0.0020153">
         </testcase>
-        <testcase classname="src/forms.spec.ts" name="Vanilla showcase forms &gt; manages complex dynamic sections and conditional secondary email" time="0.1397298">
+        <testcase classname="src/coverage.spec.ts" name="ValidationEngine unit coverage &gt; reports required paths, refreshes group statuses, and updates evaluated groups on field validate" time="0.0011253">
         </testcase>
-        <testcase classname="src/forms.spec.ts" name="Vanilla showcase forms &gt; validates on blur by default and shows required markers" time="0.0643678">
+        <testcase classname="src/coverage.spec.ts" name="ValidationEngine unit coverage &gt; publishes revisions, touch state, partial clear, and notifications" time="0.0015128">
         </testcase>
-        <testcase classname="src/forms.spec.ts" name="Vanilla showcase forms &gt; shows performance group badges after validate all" time="0.2010025">
+        <testcase classname="src/coverage.spec.ts" name="ValidationEngine unit coverage &gt; supports observable-like async values and ignores stale results" time="0.0010896">
         </testcase>
-        <testcase classname="src/forms.spec.ts" name="Vanilla showcase forms &gt; populates and resets the performance form" time="0.3494924">
+        <testcase classname="src/coverage.spec.ts" name="ValidationEngine unit coverage &gt; guards empty names and handles non-string dependency values" time="0.0012335">
+        </testcase>
+        <testcase classname="src/coverage.spec.ts" name="paths, render, and helpers &gt; reads and mutates nested property paths" time="0.0008201">
+        </testcase>
+        <testcase classname="src/coverage.spec.ts" name="paths, render, and helpers &gt; creates DOM helpers and renders summaries" time="0.0157339">
+        </testcase>
+        <testcase classname="src/coverage.spec.ts" name="paths, render, and helpers &gt; binds select, checkbox, radio, and textarea controls" time="0.0669263">
+        </testcase>
+        <testcase classname="src/coverage.spec.ts" name="paths, render, and helpers &gt; covers performance helpers and platform urls" time="0.0021371">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/forms.spec.ts" timestamp="2026-08-09T04:02:20.308Z" hostname="karthikk" tests="8" failures="0" errors="0" skipped="0" time="1.3490293">
+        <testcase classname="src/forms.spec.ts" name="Vanilla showcase forms &gt; blocks an invalid simple submission and accepts a valid one, then resets" time="0.1828827">
+        </testcase>
+        <testcase classname="src/forms.spec.ts" name="Vanilla showcase forms &gt; validates a complex section and saves after populate" time="0.1649626">
+        </testcase>
+        <testcase classname="src/forms.spec.ts" name="Vanilla showcase forms &gt; generates a performance form and validates all controls" time="0.2793523">
+        </testcase>
+        <testcase classname="src/forms.spec.ts" name="Vanilla showcase forms &gt; registers a policy, validates a field, and clears engine state" time="0.0011623">
+        </testcase>
+        <testcase classname="src/forms.spec.ts" name="Vanilla showcase forms &gt; manages complex dynamic sections and conditional secondary email" time="0.1319093">
+        </testcase>
+        <testcase classname="src/forms.spec.ts" name="Vanilla showcase forms &gt; validates on blur by default and shows required markers" time="0.0674421">
+        </testcase>
+        <testcase classname="src/forms.spec.ts" name="Vanilla showcase forms &gt; shows performance group badges after validate all" time="0.1877209">
+        </testcase>
+        <testcase classname="src/forms.spec.ts" name="Vanilla showcase forms &gt; populates and resets the performance form" time="0.3321602">
         </testcase>
     </testsuite>
 </testsuites>

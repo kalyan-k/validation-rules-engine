@@ -48,10 +48,24 @@ function renderApplications(applications) {
   overallStatus.className = `overall-status ${hasFailure ? 'failed' : allHealthy ? 'healthy' : 'starting'}`;
 }
 
+function apiUrl(pathname) {
+  const siteBase = typeof globalThis.vrePlatformConfig?.siteBase === 'string'
+    ? globalThis.vrePlatformConfig.siteBase
+    : '';
+  let path = pathname.endsWith('.json') ? pathname : `${pathname}.json`;
+  if (!path.startsWith('/')) {
+    path = `/${path}`;
+  }
+  if (!siteBase || path === siteBase || path.startsWith(`${siteBase}/`)) {
+    return path;
+  }
+  return `${siteBase}${path}`;
+}
+
 async function refreshStatus() {
   if (!statusList || !applicationGrid || !overallStatus) return;
   try {
-    const response = await fetch('/api/status', { cache: 'no-store' });
+    const response = await fetch(apiUrl('/api/status'), { cache: 'no-store' });
     const payload = await response.json();
     renderApplications(payload.applications);
   } catch {
@@ -62,7 +76,7 @@ async function refreshStatus() {
 
 async function loadMeta() {
   try {
-    const response = await fetch('/api/meta', { cache: 'no-store' });
+    const response = await fetch(apiUrl('/api/meta'), { cache: 'no-store' });
     const meta = await response.json();
     const version = document.querySelector('#version');
     const revision = document.querySelector('#revision');
@@ -77,7 +91,7 @@ async function loadMeta() {
 async function loadPlaywrightResults() {
   if (!playwrightResults) return;
   try {
-    const response = await fetch('/api/playwright/latest', { cache: 'no-store' });
+    const response = await fetch(apiUrl('/api/playwright/latest'), { cache: 'no-store' });
     const payload = await response.json();
     renderPlaywrightResults(payload);
   } catch {

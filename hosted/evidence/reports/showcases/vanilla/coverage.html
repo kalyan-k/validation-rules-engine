@@ -248,9 +248,24 @@ function flattenDocsItems(items) {
   return items.flatMap((item) => (Array.isArray(item) ? [item] : flattenDocsItems(item.items)));
 }
 
+function siteBasePrefix() {
+  return String(globalThis.vrePlatformConfig?.siteBase || '').replace(/\/$/, '');
+}
+
+function withSiteBasePath(pathname) {
+  const base = siteBasePrefix();
+  if (!base || typeof pathname !== 'string' || !pathname.startsWith('/')) {
+    return pathname;
+  }
+  if (pathname === base || pathname.startsWith(`${base}/`)) {
+    return pathname;
+  }
+  return `${base}${pathname}`;
+}
+
 function isDocsItemActive(item) {
   if (Array.isArray(item)) {
-    return location.pathname === item[1];
+    return location.pathname === withSiteBasePath(item[1]);
   }
   return item.items.some((child) => isDocsItemActive(child));
 }
@@ -264,9 +279,10 @@ function isDocsSectionActive(section) {
 }
 
 function isPathActive(pathname) {
-  return location.pathname === pathname
-    || (pathname.endsWith('/index.html') && location.pathname === pathname.replace(/index\.html$/u, ''))
-    || (pathname.endsWith('/index.html') && location.pathname === pathname.replace(/\/index\.html$/u, ''));
+  const resolved = withSiteBasePath(pathname);
+  return location.pathname === resolved
+    || (resolved.endsWith('/index.html') && location.pathname === resolved.replace(/index\.html$/u, ''))
+    || (resolved.endsWith('/index.html') && location.pathname === resolved.replace(/\/index\.html$/u, ''));
 }
 
 class ValidationPlatformShell extends HTMLElement {
@@ -442,7 +458,7 @@ if (!customElements.get('validation-platform-shell')) {
         <div><dt>Application</dt><dd>Vanilla Showcase</dd></div>
         <div><dt>Report</dt><dd>Code coverage report</dd></div>
         <div><dt>Version</dt><dd>1.0.0</dd></div>
-        <div><dt>Generated</dt><dd>2026-08-09T00:42:06.709Z</dd></div>
+        <div><dt>Generated</dt><dd>2026-08-09T04:02:20.678Z</dd></div>
       </dl></div>
     </section>
     <script>(()=>{const root=document.currentScript.previousElementSibling;const button=root.querySelector('button');const key='vre:report-summary';const preference=sessionStorage.getItem(key);const setExpanded=(expanded,persist)=>{root.classList.toggle('collapsed',!expanded);button.setAttribute('aria-expanded',String(expanded));button.querySelector('span').textContent=expanded?'Collapse details':'Expand details';if(persist)sessionStorage.setItem(key,expanded?'expanded':'collapsed');};setExpanded(preference!=='collapsed',false);button.addEventListener('click',()=>setExpanded(button.getAttribute('aria-expanded')!=='true',true));if(preference===null)setTimeout(()=>setExpanded(false,false),10000);})();</script>

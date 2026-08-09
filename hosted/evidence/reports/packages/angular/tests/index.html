@@ -248,9 +248,24 @@ function flattenDocsItems(items) {
   return items.flatMap((item) => (Array.isArray(item) ? [item] : flattenDocsItems(item.items)));
 }
 
+function siteBasePrefix() {
+  return String(globalThis.vrePlatformConfig?.siteBase || '').replace(/\/$/, '');
+}
+
+function withSiteBasePath(pathname) {
+  const base = siteBasePrefix();
+  if (!base || typeof pathname !== 'string' || !pathname.startsWith('/')) {
+    return pathname;
+  }
+  if (pathname === base || pathname.startsWith(`${base}/`)) {
+    return pathname;
+  }
+  return `${base}${pathname}`;
+}
+
 function isDocsItemActive(item) {
   if (Array.isArray(item)) {
-    return location.pathname === item[1];
+    return location.pathname === withSiteBasePath(item[1]);
   }
   return item.items.some((child) => isDocsItemActive(child));
 }
@@ -264,9 +279,10 @@ function isDocsSectionActive(section) {
 }
 
 function isPathActive(pathname) {
-  return location.pathname === pathname
-    || (pathname.endsWith('/index.html') && location.pathname === pathname.replace(/index\.html$/u, ''))
-    || (pathname.endsWith('/index.html') && location.pathname === pathname.replace(/\/index\.html$/u, ''));
+  const resolved = withSiteBasePath(pathname);
+  return location.pathname === resolved
+    || (resolved.endsWith('/index.html') && location.pathname === resolved.replace(/index\.html$/u, ''))
+    || (resolved.endsWith('/index.html') && location.pathname === resolved.replace(/\/index\.html$/u, ''));
 }
 
 class ValidationPlatformShell extends HTMLElement {
@@ -484,7 +500,7 @@ if (!customElements.get('validation-platform-shell')) {
         <div><dt>Application</dt><dd>Angular Adapter</dd></div>
         <div><dt>Report</dt><dd>Test execution report</dd></div>
         <div><dt>Version</dt><dd>1.0.0</dd></div>
-        <div><dt>Generated</dt><dd>2026-08-09T00:40:02.605Z</dd></div>
+        <div><dt>Generated</dt><dd>2026-08-09T04:00:28.678Z</dd></div>
       </dl></div>
     </section>
     <script>(()=>{const root=document.currentScript.previousElementSibling;const button=root.querySelector('button');const key='vre:report-summary';const preference=sessionStorage.getItem(key);const setExpanded=(expanded,persist)=>{root.classList.toggle('collapsed',!expanded);button.setAttribute('aria-expanded',String(expanded));button.querySelector('span').textContent=expanded?'Collapse details':'Expand details';if(persist)sessionStorage.setItem(key,expanded?'expanded':'collapsed');};setExpanded(preference!=='collapsed',false);button.addEventListener('click',()=>setExpanded(button.getAttribute('aria-expanded')!=='true',true));if(preference===null)setTimeout(()=>setExpanded(false,false),10000);})();</script>
@@ -492,18 +508,18 @@ if (!customElements.get('validation-platform-shell')) {
   <div class="layout">
     <aside aria-label="Test suite navigation">
       <h2>Test suites</h2>
-      <ul><li><a href="#suite-parse-0">$parse</a><span>5/5</span></li>
+      <ul><li><a href="#suite-validatordirective-0">ValidatorDirective</a><span>13/13</span></li>
 <li><a href="#suite-validation-status-and-summary-components-1">validation status and summary components</a><span>8/8</span></li>
 <li><a href="#suite-validation-display-providers-and-module-2">validation display providers and module</a><span>5/5</span></li>
 <li><a href="#suite-validation-display-configuration-3">validation display configuration</a><span>7/7</span></li>
-<li><a href="#suite-validationproviderservice-4">ValidationProviderService</a><span>14/14</span></li>
-<li><a href="#suite-validatordirective-5">ValidatorDirective</a><span>13/13</span></li>
-<li><a href="#suite-validation-display-strategies-materialvalidationdisplaystrategy-6">validation display strategies › MaterialValidationDisplayStrategy</a><span>6/6</span></li>
-<li><a href="#suite-validation-display-strategies-tailwindvalidationdisplaystrategy-7">validation display strategies › TailwindValidationDisplayStrategy</a><span>4/4</span></li>
-<li><a href="#suite-validation-display-strategies-bootstrapvalidationdisplaystrategy-8">validation display strategies › BootstrapValidationDisplayStrategy</a><span>4/4</span></li>
-<li><a href="#suite-validation-display-strategies-genericvalidationdisplaystrategy-9">validation display strategies › GenericValidationDisplayStrategy</a><span>4/4</span></li>
-<li><a href="#suite-validation-display-strategies-default-and-example-strategies-10">validation display strategies › Default and example strategies</a><span>3/3</span></li>
-<li><a href="#suite-validation-dom-utilities-11">validation DOM utilities</a><span>2/2</span></li>
+<li><a href="#suite-validation-display-strategies-default-and-example-strategies-4">validation display strategies › Default and example strategies</a><span>3/3</span></li>
+<li><a href="#suite-validation-display-strategies-materialvalidationdisplaystrategy-5">validation display strategies › MaterialValidationDisplayStrategy</a><span>6/6</span></li>
+<li><a href="#suite-validation-display-strategies-tailwindvalidationdisplaystrategy-6">validation display strategies › TailwindValidationDisplayStrategy</a><span>4/4</span></li>
+<li><a href="#suite-validation-display-strategies-bootstrapvalidationdisplaystrategy-7">validation display strategies › BootstrapValidationDisplayStrategy</a><span>4/4</span></li>
+<li><a href="#suite-validation-display-strategies-genericvalidationdisplaystrategy-8">validation display strategies › GenericValidationDisplayStrategy</a><span>4/4</span></li>
+<li><a href="#suite-parse-9">$parse</a><span>5/5</span></li>
+<li><a href="#suite-validation-dom-utilities-10">validation DOM utilities</a><span>2/2</span></li>
+<li><a href="#suite-validationproviderservice-11">ValidationProviderService</a><span>14/14</span></li>
 <li><a href="#suite-policy-12">Policy</a><span>16/16</span></li></ul>
     </aside>
     <main>
@@ -512,7 +528,7 @@ if (!customElements.get('validation-platform-shell')) {
         <div class="card card-pass"><span class="label">Passed</span><strong>91</strong></div>
         <div class="card card-fail"><span class="label">Failed</span><strong>0</strong></div>
         <div class="card card-skip"><span class="label">Skipped</span><strong>0</strong></div>
-        <div class="card"><span class="label">Duration</span><strong>3.04 s</strong></div>
+        <div class="card"><span class="label">Duration</span><strong>2.70 s</strong></div>
         <div class="card"><span class="label">Suites</span><strong>13</strong></div>
       </div>
       <div class="toolbar" aria-label="Test status filters">
@@ -520,60 +536,140 @@ if (!customElements.get('validation-platform-shell')) {
         <button type="button" data-filter="passed">Passed</button>
         <button type="button" data-filter="failed">Failed</button>
         <button type="button" data-filter="skipped">Skipped</button>
-        <span class="metadata">Browser: Chrome Headless 151.0.0.0 (Windows 10) · Started: 2026-08-09T00:39:59.563Z</span>
+        <span class="metadata">Browser: Chrome Headless 151.0.0.0 (Windows 10) · Started: 2026-08-09T04:00:25.981Z</span>
       </div>
       
-      <section class="suite" id="suite-parse-0">
+      <section class="suite" id="suite-validatordirective-0">
         <details open>
-          <summary><span>$parse</span><span>5 passed · 0 failed · 0 skipped</span></summary>
+          <summary><span>ValidatorDirective</span><span>13 passed · 0 failed · 0 skipped</span></summary>
           <div class="suite-tests">
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
         <span class="status status-passed">passed</span>
-        <strong>returns a no-op for non-string, empty, and malformed expressions</strong>
-        <span class="duration">57 ms</span>
+        <strong>falls back to the default display strategy when no strategy is injected</strong>
+        <span class="duration">83 ms</span>
       </div>
-      <div class="source">Source: <code>packages/angular/src/lib/parser/expression-parser.spec.ts</code></div>
+      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
       
     </article>
 
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
         <span class="status status-passed">passed</span>
-        <strong>evaluates arrays, maps, and keyed reads</strong>
-        <span class="duration">2 ms</span>
+        <strong>parses simple and dotted binding paths</strong>
+        <span class="duration">4 ms</span>
       </div>
-      <div class="source">Source: <code>packages/angular/src/lib/parser/expression-parser.spec.ts</code></div>
+      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
       
     </article>
 
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
         <span class="status status-passed">passed</span>
-        <strong>reads nested properties safely and lets locals override context</strong>
-        <span class="duration">0 ms</span>
+        <strong>binds a policy, detects the control, and registers a field once per form group</strong>
+        <span class="duration">7 ms</span>
       </div>
-      <div class="source">Source: <code>packages/angular/src/lib/parser/expression-parser.spec.ts</code></div>
+      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
       
     </article>
 
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
         <span class="status status-passed">passed</span>
-        <strong>calls methods and caches the compiled function</strong>
-        <span class="duration">1 ms</span>
+        <strong>synchronizes iterable changes and avoids duplicate UI writes</strong>
+        <span class="duration">5 ms</span>
       </div>
-      <div class="source">Source: <code>packages/angular/src/lib/parser/expression-parser.spec.ts</code></div>
+      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
       
     </article>
 
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
         <span class="status status-passed">passed</span>
-        <strong>evaluates unary, binary, short-circuit, and conditional expressions</strong>
-        <span class="duration">2 ms</span>
+        <strong>does not initialize display behavior for an unknown policy</strong>
+        <span class="duration">3 ms</span>
       </div>
-      <div class="source">Source: <code>packages/angular/src/lib/parser/expression-parser.spec.ts</code></div>
+      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>stops listeners and refresh subscriptions on destroy</strong>
+        <span class="duration">7 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>validates on blur, marks the field touched, renders errors, and evaluates its group</strong>
+        <span class="duration">7 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>initializes required markers after view init and marks for check</strong>
+        <span class="duration">3 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>honors a custom validation event and updates conditional required state on input</strong>
+        <span class="duration">4 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>delays checkbox validation and also listens for blur</strong>
+        <span class="duration">6 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>discovers native event targets inside Material-style hosts</strong>
+        <span class="duration">3 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>clears hidden or removed field errors and renders forced refreshes</strong>
+        <span class="duration">3 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>binds every native radio in a radio-group host</strong>
+        <span class="duration">3 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
       
     </article></div>
         </details>
@@ -587,7 +683,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>renders policy-group summaries only for evaluated errors</strong>
-        <span class="duration">20 ms</span>
+        <span class="duration">18 ms</span>
       </div>
       <div class="source">Source: <code>packages/angular/src/lib/components/validation-components.spec.ts</code></div>
       
@@ -597,7 +693,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>renders pending and evaluated policy-group badges</strong>
-        <span class="duration">10 ms</span>
+        <span class="duration">9 ms</span>
       </div>
       <div class="source">Source: <code>packages/angular/src/lib/components/validation-components.spec.ts</code></div>
       
@@ -617,16 +713,6 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>renders a form-group summary only for evaluated groups with errors</strong>
-        <span class="duration">4 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/components/validation-components.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>renders pending, valid, and invalid form-group badges</strong>
         <span class="duration">6 ms</span>
       </div>
       <div class="source">Source: <code>packages/angular/src/lib/components/validation-components.spec.ts</code></div>
@@ -636,8 +722,18 @@ if (!customElements.get('validation-platform-shell')) {
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
         <span class="status status-passed">passed</span>
+        <strong>renders pending, valid, and invalid form-group badges</strong>
+        <span class="duration">5 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/components/validation-components.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
         <strong>subscribes form-group badges to model refresh and rebinds or cleans up safely</strong>
-        <span class="duration">0 ms</span>
+        <span class="duration">1 ms</span>
       </div>
       <div class="source">Source: <code>packages/angular/src/lib/components/validation-components.spec.ts</code></div>
       
@@ -647,7 +743,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>returns an empty global error list when validation results are absent</strong>
-        <span class="duration">0 ms</span>
+        <span class="duration">1 ms</span>
       </div>
       <div class="source">Source: <code>packages/angular/src/lib/components/validation-components.spec.ts</code></div>
       
@@ -657,7 +753,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>shows the global summary only after show-all and lists all messages</strong>
-        <span class="duration">4 ms</span>
+        <span class="duration">5 ms</span>
       </div>
       <div class="source">Source: <code>packages/angular/src/lib/components/validation-components.spec.ts</code></div>
       
@@ -672,18 +768,8 @@ if (!customElements.get('validation-platform-shell')) {
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
         <span class="status status-passed">passed</span>
-        <strong>provides resolved configuration and a factory-created strategy</strong>
-        <span class="duration">4 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/display/validation-display-config.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>configures ValidationModule.forRoot with display providers</strong>
-        <span class="duration">1 ms</span>
+        <strong>provides custom strategy instances and classes</strong>
+        <span class="duration">5 ms</span>
       </div>
       <div class="source">Source: <code>packages/angular/src/lib/display/validation-display-config.spec.ts</code></div>
       
@@ -702,6 +788,16 @@ if (!customElements.get('validation-platform-shell')) {
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
         <span class="status status-passed">passed</span>
+        <strong>configures ValidationModule.forRoot with display providers</strong>
+        <span class="duration">0 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/display/validation-display-config.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
         <strong>provides every preset helper</strong>
         <span class="duration">8 ms</span>
       </div>
@@ -712,8 +808,8 @@ if (!customElements.get('validation-platform-shell')) {
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
         <span class="status status-passed">passed</span>
-        <strong>provides custom strategy instances and classes</strong>
-        <span class="duration">3 ms</span>
+        <strong>provides resolved configuration and a factory-created strategy</strong>
+        <span class="duration">2 ms</span>
       </div>
       <div class="source">Source: <code>packages/angular/src/lib/display/validation-display-config.spec.ts</code></div>
       
@@ -728,18 +824,8 @@ if (!customElements.get('validation-platform-shell')) {
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
         <span class="status status-passed">passed</span>
-        <strong>resolves explicit and legacy presets</strong>
-        <span class="duration">2 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/display/validation-display-config.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>creates the configured built-in or custom strategy</strong>
-        <span class="duration">1 ms</span>
+        <strong>resolves required-indicator modern, legacy, fallback, and tooltip fields</strong>
+        <span class="duration">0 ms</span>
       </div>
       <div class="source">Source: <code>packages/angular/src/lib/display/validation-display-config.spec.ts</code></div>
       
@@ -768,8 +854,28 @@ if (!customElements.get('validation-platform-shell')) {
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
         <span class="status status-passed">passed</span>
-        <strong>resolves required-indicator modern, legacy, fallback, and tooltip fields</strong>
+        <strong>maps legacy class fields and lets typed classes take precedence</strong>
+        <span class="duration">0 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/display/validation-display-config.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>creates the configured built-in or custom strategy</strong>
         <span class="duration">1 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/display/validation-display-config.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>resolves explicit and legacy presets</strong>
+        <span class="duration">0 ms</span>
       </div>
       <div class="source">Source: <code>packages/angular/src/lib/display/validation-display-config.spec.ts</code></div>
       
@@ -783,49 +889,341 @@ if (!customElements.get('validation-platform-shell')) {
       </div>
       <div class="source">Source: <code>packages/angular/src/lib/display/validation-display-config.spec.ts</code></div>
       
+    </article></div>
+        </details>
+      </section>
+
+      <section class="suite" id="suite-validation-display-strategies-default-and-example-strategies-4">
+        <details open>
+          <summary><span>validation display strategies › Default and example strategies</span><span>3 passed · 0 failed · 0 skipped</span></summary>
+          <div class="suite-tests">
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>routes generic and Material elements to the matching strategy</strong>
+        <span class="duration">5 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
+      
     </article>
 
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
         <span class="status status-passed">passed</span>
-        <strong>maps legacy class fields and lets typed classes take precedence</strong>
-        <span class="duration">1 ms</span>
+        <strong>honors forced Material mode and detects Material ancestors within the search limit</strong>
+        <span class="duration">3 ms</span>
       </div>
-      <div class="source">Source: <code>packages/angular/src/lib/display/validation-display-config.spec.ts</code></div>
+      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>exposes a usable immutable PrimeNG example class map</strong>
+        <span class="duration">3 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
       
     </article></div>
         </details>
       </section>
 
-      <section class="suite" id="suite-validationproviderservice-4">
+      <section class="suite" id="suite-validation-display-strategies-materialvalidationdisplaystrategy-5">
+        <details open>
+          <summary><span>validation display strategies › MaterialValidationDisplayStrategy</span><span>6 passed · 0 failed · 0 skipped</span></summary>
+          <div class="suite-tests">
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>does nothing when no matching Material target exists</strong>
+        <span class="duration">2 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>reuses modern and legacy form-field wrappers</strong>
+        <span class="duration">2 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>creates a Material form-field error wrapper, renders mat-error, and clears it</strong>
+        <span class="duration">3 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>detects Material hosts, descendants, and native controls</strong>
+        <span class="duration">3 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>renders standalone checkbox errors, deduplicates containers, labels required state, and clears wrappers</strong>
+        <span class="duration">3 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>renders standalone radio errors and group labels</strong>
+        <span class="duration">3 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
+      
+    </article></div>
+        </details>
+      </section>
+
+      <section class="suite" id="suite-validation-display-strategies-tailwindvalidationdisplaystrategy-6">
+        <details open>
+          <summary><span>validation display strategies › TailwindValidationDisplayStrategy</span><span>4 passed · 0 failed · 0 skipped</span></summary>
+          <div class="suite-tests">
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>returns null for detached controls</strong>
+        <span class="duration">3 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>handles checkbox and radio-group state plus idempotent required markers</strong>
+        <span class="duration">3 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>deduplicates containers, avoids rewriting identical messages, and clears state</strong>
+        <span class="duration">2 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>detects native controls</strong>
+        <span class="duration">2 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
+      
+    </article></div>
+        </details>
+      </section>
+
+      <section class="suite" id="suite-validation-display-strategies-bootstrapvalidationdisplaystrategy-7">
+        <details open>
+          <summary><span>validation display strategies › BootstrapValidationDisplayStrategy</span><span>4 passed · 0 failed · 0 skipped</span></summary>
+          <div class="suite-tests">
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>renders all required-indicator modes and removes stale title/markers</strong>
+        <span class="duration">3 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>detects native controls</strong>
+        <span class="duration">4 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>handles radio groups and missing display roots and labels</strong>
+        <span class="duration">4 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>renders current messages once, applies invalid state, and clears them</strong>
+        <span class="duration">2 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
+      
+    </article></div>
+        </details>
+      </section>
+
+      <section class="suite" id="suite-validation-display-strategies-genericvalidationdisplaystrategy-8">
+        <details open>
+          <summary><span>validation display strategies › GenericValidationDisplayStrategy</span><span>4 passed · 0 failed · 0 skipped</span></summary>
+          <div class="suite-tests">
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>detects native control types</strong>
+        <span class="duration">1 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>renders, replaces, and clears input errors and required markers</strong>
+        <span class="duration">2 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>handles checkbox and radio-group invalid state and label discovery</strong>
+        <span class="duration">4 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>supports radio inputs by name, custom classes, parent labels, and detached hosts</strong>
+        <span class="duration">2 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
+      
+    </article></div>
+        </details>
+      </section>
+
+      <section class="suite" id="suite-parse-9">
+        <details open>
+          <summary><span>$parse</span><span>5 passed · 0 failed · 0 skipped</span></summary>
+          <div class="suite-tests">
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>evaluates arrays, maps, and keyed reads</strong>
+        <span class="duration">2 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/parser/expression-parser.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>evaluates unary, binary, short-circuit, and conditional expressions</strong>
+        <span class="duration">2 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/parser/expression-parser.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>calls methods and caches the compiled function</strong>
+        <span class="duration">0 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/parser/expression-parser.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>reads nested properties safely and lets locals override context</strong>
+        <span class="duration">0 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/parser/expression-parser.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>returns a no-op for non-string, empty, and malformed expressions</strong>
+        <span class="duration">1 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/parser/expression-parser.spec.ts</code></div>
+      
+    </article></div>
+        </details>
+      </section>
+
+      <section class="suite" id="suite-validation-dom-utilities-10">
+        <details open>
+          <summary><span>validation DOM utilities</span><span>2 passed · 0 failed · 0 skipped</span></summary>
+          <div class="suite-tests">
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>finds exact attribute values without selector interpolation</strong>
+        <span class="duration">4 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/utils/validation-utils.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>adds and removes whitespace-delimited class lists</strong>
+        <span class="duration">2 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/utils/validation-utils.spec.ts</code></div>
+      
+    </article></div>
+        </details>
+      </section>
+
+      <section class="suite" id="suite-validationproviderservice-11">
         <details open>
           <summary><span>ValidationProviderService</span><span>14 passed · 0 failed · 0 skipped</span></summary>
           <div class="suite-tests">
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
         <span class="status status-passed">passed</span>
-        <strong>resets form-group registrations and clears all validation state</strong>
-        <span class="duration">3 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/services/validation-provider.service.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>uses validateAll defaults without forcing show-all or group evaluation</strong>
+        <strong>validates all, exposes errors, required state, groups, and refresh notification</strong>
         <span class="duration">2 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/services/validation-provider.service.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>uses show-all to mark a policy group evaluated even when a section is pending</strong>
-        <span class="duration">0 ms</span>
       </div>
       <div class="source">Source: <code>packages/angular/src/lib/services/validation-provider.service.spec.ts</code></div>
       
@@ -844,27 +1242,7 @@ if (!customElements.get('validation-platform-shell')) {
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
         <span class="status status-passed">passed</span>
-        <strong>falls back safely when a mapped policy has no active or registered paths</strong>
-        <span class="duration">2 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/services/validation-provider.service.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>replaces, unregisters, and reports missing policies</strong>
-        <span class="duration">1 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/services/validation-provider.service.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>updates policy groups using registered paths when no form-group policy mapping exists</strong>
+        <strong>returns a policy facade with validation and grouping operations</strong>
         <span class="duration">0 ms</span>
       </div>
       <div class="source">Source: <code>packages/angular/src/lib/services/validation-provider.service.spec.ts</code></div>
@@ -874,18 +1252,8 @@ if (!customElements.get('validation-platform-shell')) {
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
         <span class="status status-passed">passed</span>
-        <strong>returns a policy facade with validation and grouping operations</strong>
-        <span class="duration">2 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/services/validation-provider.service.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>evaluates multiple policies sequentially and updates a policy group</strong>
-        <span class="duration">2 ms</span>
+        <strong>uses validateAll defaults without forcing show-all or group evaluation</strong>
+        <span class="duration">0 ms</span>
       </div>
       <div class="source">Source: <code>packages/angular/src/lib/services/validation-provider.service.spec.ts</code></div>
       
@@ -895,6 +1263,16 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>registers and unregisters form-group and policy-group mappings</strong>
+        <span class="duration">0 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/services/validation-provider.service.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>evaluates a mapped form group and ignores missing mappings or policies</strong>
         <span class="duration">0 ms</span>
       </div>
       <div class="source">Source: <code>packages/angular/src/lib/services/validation-provider.service.spec.ts</code></div>
@@ -924,7 +1302,27 @@ if (!customElements.get('validation-platform-shell')) {
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
         <span class="status status-passed">passed</span>
-        <strong>evaluates a mapped form group and ignores missing mappings or policies</strong>
+        <strong>evaluates multiple policies sequentially and updates a policy group</strong>
+        <span class="duration">2 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/services/validation-provider.service.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>replaces, unregisters, and reports missing policies</strong>
+        <span class="duration">2 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/services/validation-provider.service.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>updates policy groups using registered paths when no form-group policy mapping exists</strong>
         <span class="duration">0 ms</span>
       </div>
       <div class="source">Source: <code>packages/angular/src/lib/services/validation-provider.service.spec.ts</code></div>
@@ -934,412 +1332,30 @@ if (!customElements.get('validation-platform-shell')) {
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
         <span class="status status-passed">passed</span>
-        <strong>validates all, exposes errors, required state, groups, and refresh notification</strong>
-        <span class="duration">1 ms</span>
+        <strong>falls back safely when a mapped policy has no active or registered paths</strong>
+        <span class="duration">0 ms</span>
       </div>
       <div class="source">Source: <code>packages/angular/src/lib/services/validation-provider.service.spec.ts</code></div>
       
-    </article></div>
-        </details>
-      </section>
+    </article>
 
-      <section class="suite" id="suite-validatordirective-5">
-        <details open>
-          <summary><span>ValidatorDirective</span><span>13 passed · 0 failed · 0 skipped</span></summary>
-          <div class="suite-tests">
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
         <span class="status status-passed">passed</span>
-        <strong>clears hidden or removed field errors and renders forced refreshes</strong>
-        <span class="duration">3 ms</span>
+        <strong>uses show-all to mark a policy group evaluated even when a section is pending</strong>
+        <span class="duration">0 ms</span>
       </div>
-      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
+      <div class="source">Source: <code>packages/angular/src/lib/services/validation-provider.service.spec.ts</code></div>
       
     </article>
 
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
         <span class="status status-passed">passed</span>
-        <strong>stops listeners and refresh subscriptions on destroy</strong>
-        <span class="duration">5 ms</span>
+        <strong>resets form-group registrations and clears all validation state</strong>
+        <span class="duration">0 ms</span>
       </div>
-      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>falls back to the default display strategy when no strategy is injected</strong>
-        <span class="duration">2 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>synchronizes iterable changes and avoids duplicate UI writes</strong>
-        <span class="duration">2 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>discovers native event targets inside Material-style hosts</strong>
-        <span class="duration">2 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>delays checkbox validation and also listens for blur</strong>
-        <span class="duration">3 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>validates on blur, marks the field touched, renders errors, and evaluates its group</strong>
-        <span class="duration">2 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>binds every native radio in a radio-group host</strong>
-        <span class="duration">4 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>binds a policy, detects the control, and registers a field once per form group</strong>
-        <span class="duration">2 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>honors a custom validation event and updates conditional required state on input</strong>
-        <span class="duration">3 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>parses simple and dotted binding paths</strong>
-        <span class="duration">1 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>initializes required markers after view init and marks for check</strong>
-        <span class="duration">1 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>does not initialize display behavior for an unknown policy</strong>
-        <span class="duration">2 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/directives/validator.directive.spec.ts</code></div>
-      
-    </article></div>
-        </details>
-      </section>
-
-      <section class="suite" id="suite-validation-display-strategies-materialvalidationdisplaystrategy-6">
-        <details open>
-          <summary><span>validation display strategies › MaterialValidationDisplayStrategy</span><span>6 passed · 0 failed · 0 skipped</span></summary>
-          <div class="suite-tests">
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>detects Material hosts, descendants, and native controls</strong>
-        <span class="duration">2 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>creates a Material form-field error wrapper, renders mat-error, and clears it</strong>
-        <span class="duration">4 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>reuses modern and legacy form-field wrappers</strong>
-        <span class="duration">1 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>renders standalone checkbox errors, deduplicates containers, labels required state, and clears wrappers</strong>
-        <span class="duration">2 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>renders standalone radio errors and group labels</strong>
-        <span class="duration">2 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>does nothing when no matching Material target exists</strong>
-        <span class="duration">1 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
-      
-    </article></div>
-        </details>
-      </section>
-
-      <section class="suite" id="suite-validation-display-strategies-tailwindvalidationdisplaystrategy-7">
-        <details open>
-          <summary><span>validation display strategies › TailwindValidationDisplayStrategy</span><span>4 passed · 0 failed · 0 skipped</span></summary>
-          <div class="suite-tests">
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>deduplicates containers, avoids rewriting identical messages, and clears state</strong>
-        <span class="duration">3 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>handles checkbox and radio-group state plus idempotent required markers</strong>
-        <span class="duration">3 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>returns null for detached controls</strong>
-        <span class="duration">1 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>detects native controls</strong>
-        <span class="duration">1 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
-      
-    </article></div>
-        </details>
-      </section>
-
-      <section class="suite" id="suite-validation-display-strategies-bootstrapvalidationdisplaystrategy-8">
-        <details open>
-          <summary><span>validation display strategies › BootstrapValidationDisplayStrategy</span><span>4 passed · 0 failed · 0 skipped</span></summary>
-          <div class="suite-tests">
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>detects native controls</strong>
-        <span class="duration">1 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>handles radio groups and missing display roots and labels</strong>
-        <span class="duration">2 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>renders current messages once, applies invalid state, and clears them</strong>
-        <span class="duration">2 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>renders all required-indicator modes and removes stale title/markers</strong>
-        <span class="duration">2 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
-      
-    </article></div>
-        </details>
-      </section>
-
-      <section class="suite" id="suite-validation-display-strategies-genericvalidationdisplaystrategy-9">
-        <details open>
-          <summary><span>validation display strategies › GenericValidationDisplayStrategy</span><span>4 passed · 0 failed · 0 skipped</span></summary>
-          <div class="suite-tests">
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>supports radio inputs by name, custom classes, parent labels, and detached hosts</strong>
-        <span class="duration">3 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>detects native control types</strong>
-        <span class="duration">2 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>renders, replaces, and clears input errors and required markers</strong>
-        <span class="duration">2 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>handles checkbox and radio-group invalid state and label discovery</strong>
-        <span class="duration">1 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
-      
-    </article></div>
-        </details>
-      </section>
-
-      <section class="suite" id="suite-validation-display-strategies-default-and-example-strategies-10">
-        <details open>
-          <summary><span>validation display strategies › Default and example strategies</span><span>3 passed · 0 failed · 0 skipped</span></summary>
-          <div class="suite-tests">
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>routes generic and Material elements to the matching strategy</strong>
-        <span class="duration">2 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>honors forced Material mode and detects Material ancestors within the search limit</strong>
-        <span class="duration">1 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>exposes a usable immutable PrimeNG example class map</strong>
-        <span class="duration">1 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/strategies/validation-display-strategies.spec.ts</code></div>
-      
-    </article></div>
-        </details>
-      </section>
-
-      <section class="suite" id="suite-validation-dom-utilities-11">
-        <details open>
-          <summary><span>validation DOM utilities</span><span>2 passed · 0 failed · 0 skipped</span></summary>
-          <div class="suite-tests">
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>finds exact attribute values without selector interpolation</strong>
-        <span class="duration">2 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/utils/validation-utils.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>adds and removes whitespace-delimited class lists</strong>
-        <span class="duration">3 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/utils/validation-utils.spec.ts</code></div>
+      <div class="source">Source: <code>packages/angular/src/lib/services/validation-provider.service.spec.ts</code></div>
       
     </article></div>
         </details>
@@ -1363,7 +1379,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>updates conditional required markers as dependencies change</strong>
-        <span class="duration">1 ms</span>
+        <span class="duration">0 ms</span>
       </div>
       <div class="source">Source: <code>packages/angular/src/lib/policy.spec.ts</code></div>
       
@@ -1373,7 +1389,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>validates all registered fields, collects failures, and removes success sentinels</strong>
-        <span class="duration">0 ms</span>
+        <span class="duration">1 ms</span>
       </div>
       <div class="source">Source: <code>packages/angular/src/lib/policy.spec.ts</code></div>
       
@@ -1383,16 +1399,6 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>clears only this policy fields during full validation and preserves other-policy errors</strong>
-        <span class="duration">1 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/angular/src/lib/policy.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>checks every supplied form group</strong>
         <span class="duration">0 ms</span>
       </div>
       <div class="source">Source: <code>packages/angular/src/lib/policy.spec.ts</code></div>
@@ -1402,8 +1408,18 @@ if (!customElements.get('validation-platform-shell')) {
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
         <span class="status status-passed">passed</span>
-        <strong>resolves nested paths and string dependencies</strong>
+        <strong>checks every supplied form group</strong>
         <span class="duration">1 ms</span>
+      </div>
+      <div class="source">Source: <code>packages/angular/src/lib/policy.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>resolves nested paths and string dependencies</strong>
+        <span class="duration">0 ms</span>
       </div>
       <div class="source">Source: <code>packages/angular/src/lib/policy.spec.ts</code></div>
       
@@ -1463,7 +1479,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>records required state, updates existing entries, and limits property checks</strong>
-        <span class="duration">1 ms</span>
+        <span class="duration">0 ms</span>
       </div>
       <div class="source">Source: <code>packages/angular/src/lib/policy.spec.ts</code></div>
       
@@ -1473,7 +1489,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>waits for Subject-based rules and ignores duplicate asynchronous errors</strong>
-        <span class="duration">1 ms</span>
+        <span class="duration">15 ms</span>
       </div>
       <div class="source">Source: <code>packages/angular/src/lib/policy.spec.ts</code></div>
       

@@ -2,9 +2,9 @@
   "projectName": "vanilla-showcase",
   "displayName": "Vanilla Showcase",
   "version": "1.0.0",
-  "startedAt": "2026-08-09T00:42:01.878Z",
-  "finishedAt": "2026-08-09T00:42:06.709Z",
-  "durationMs": 1696.023193359375,
+  "startedAt": "2026-08-09T04:02:16.566Z",
+  "finishedAt": "2026-08-09T04:02:20.678Z",
+  "durationMs": 1640.404541015625,
   "browsers": [
     "Vitest · jsdom"
   ],
@@ -24,7 +24,7 @@
       ],
       "description": "renders the shared layout, home content, and shell",
       "status": "passed",
-      "durationMs": 24.004399999999805,
+      "durationMs": 26.683500000000095,
       "logs": [],
       "sourceFiles": [
         "apps/vanilla-showcase/src/app.spec.ts"
@@ -36,7 +36,7 @@
       ],
       "description": "navigates among Home, Simple, Complex, and Performance routes with active state",
       "status": "passed",
-      "durationMs": 153.76569999999992,
+      "durationMs": 141.72709999999984,
       "logs": [],
       "sourceFiles": [
         "apps/vanilla-showcase/src/app.spec.ts"
@@ -48,7 +48,7 @@
       ],
       "description": "uses home example links as client-side navigation",
       "status": "passed",
-      "durationMs": 18.02139999999963,
+      "durationMs": 11.107200000000375,
       "logs": [],
       "sourceFiles": [
         "apps/vanilla-showcase/src/app.spec.ts"
@@ -60,7 +60,7 @@
       ],
       "description": "registers case-insensitive policies with balanced duplicate ownership",
       "status": "passed",
-      "durationMs": 12.179200000000037,
+      "durationMs": 10.03819999999996,
       "logs": [],
       "sourceFiles": [
         "apps/vanilla-showcase/src/coverage.spec.ts"
@@ -72,7 +72,7 @@
       ],
       "description": "replaces and forcibly unregisters a dynamic policy",
       "status": "passed",
-      "durationMs": 4.54569999999967,
+      "durationMs": 5.421000000000049,
       "logs": [],
       "sourceFiles": [
         "apps/vanilla-showcase/src/coverage.spec.ts"
@@ -84,7 +84,7 @@
       ],
       "description": "supports function, path, negated, and equality dependencies",
       "status": "passed",
-      "durationMs": 3.40520000000015,
+      "durationMs": 3.4087999999999283,
       "logs": [],
       "sourceFiles": [
         "apps/vanilla-showcase/src/coverage.spec.ts"
@@ -96,7 +96,7 @@
       ],
       "description": "registers, validates, clears, and rejects validation groups",
       "status": "passed",
-      "durationMs": 3.3473000000003594,
+      "durationMs": 2.0153000000000247,
       "logs": [],
       "sourceFiles": [
         "apps/vanilla-showcase/src/coverage.spec.ts"
@@ -108,7 +108,7 @@
       ],
       "description": "reports required paths, refreshes group statuses, and updates evaluated groups on field validate",
       "status": "passed",
-      "durationMs": 2.461199999999735,
+      "durationMs": 1.1252999999999247,
       "logs": [],
       "sourceFiles": [
         "apps/vanilla-showcase/src/coverage.spec.ts"
@@ -120,7 +120,7 @@
       ],
       "description": "publishes revisions, touch state, partial clear, and notifications",
       "status": "passed",
-      "durationMs": 2.122899999999845,
+      "durationMs": 1.5127999999999702,
       "logs": [],
       "sourceFiles": [
         "apps/vanilla-showcase/src/coverage.spec.ts"
@@ -132,7 +132,7 @@
       ],
       "description": "supports observable-like async values and ignores stale results",
       "status": "passed",
-      "durationMs": 1.9850999999998749,
+      "durationMs": 1.0896000000000186,
       "logs": [],
       "sourceFiles": [
         "apps/vanilla-showcase/src/coverage.spec.ts"
@@ -144,7 +144,7 @@
       ],
       "description": "guards empty names and handles non-string dependency values",
       "status": "passed",
-      "durationMs": 1.94170000000031,
+      "durationMs": 1.2335000000000491,
       "logs": [],
       "sourceFiles": [
         "apps/vanilla-showcase/src/coverage.spec.ts"
@@ -156,7 +156,7 @@
       ],
       "description": "reads and mutates nested property paths",
       "status": "passed",
-      "durationMs": 1.6674000000002707,
+      "durationMs": 0.8201000000001386,
       "logs": [],
       "sourceFiles": [
         "apps/vanilla-showcase/src/coverage.spec.ts"
@@ -168,7 +168,7 @@
       ],
       "description": "creates DOM helpers and renders summaries",
       "status": "passed",
-      "durationMs": 16.829699999999775,
+      "durationMs": 15.733899999999949,
       "logs": [],
       "sourceFiles": [
         "apps/vanilla-showcase/src/coverage.spec.ts"
@@ -180,7 +180,7 @@
       ],
       "description": "binds select, checkbox, radio, and textarea controls",
       "status": "passed",
-      "durationMs": 71.93679999999995,
+      "durationMs": 66.92629999999986,
       "logs": [],
       "sourceFiles": [
         "apps/vanilla-showcase/src/coverage.spec.ts"
@@ -192,7 +192,7 @@
       ],
       "description": "covers performance helpers and platform urls",
       "status": "passed",
-      "durationMs": 3.5093000000001666,
+      "durationMs": 2.137100000000146,
       "logs": [],
       "sourceFiles": [
         "apps/vanilla-showcase/src/coverage.spec.ts"
@@ -204,7 +204,7 @@
       ],
       "description": "blocks an invalid simple submission and accepts a valid one, then resets",
       "status": "passed",
-      "durationMs": 180.04770000000008,
+      "durationMs": 182.8827000000001,
       "logs": [],
       "sourceFiles": [
         "apps/vanilla-showcase/src/forms.spec.ts"
@@ -216,7 +216,7 @@
       ],
       "description": "validates a complex section and saves after populate",
       "status": "passed",
-      "durationMs": 186.34439999999995,
+      "durationMs": 164.96259999999984,
       "logs": [],
       "sourceFiles": [
         "apps/vanilla-showcase/src/forms.spec.ts"
@@ -228,7 +228,7 @@
       ],
       "description": "generates a performance form and validates all controls",
       "status": "passed",
-      "durationMs": 252.1156000000001,
+      "durationMs": 279.3523,
       "logs": [],
       "sourceFiles": [
         "apps/vanilla-showcase/src/forms.spec.ts"
@@ -240,7 +240,7 @@
       ],
       "description": "registers a policy, validates a field, and clears engine state",
       "status": "passed",
-      "durationMs": 1.3107999999997446,
+      "durationMs": 1.1622999999999593,
       "logs": [],
       "sourceFiles": [
         "apps/vanilla-showcase/src/forms.spec.ts"
@@ -252,7 +252,7 @@
       ],
       "description": "manages complex dynamic sections and conditional secondary email",
       "status": "passed",
-      "durationMs": 139.72980000000007,
+      "durationMs": 131.90930000000026,
       "logs": [],
       "sourceFiles": [
         "apps/vanilla-showcase/src/forms.spec.ts"
@@ -264,7 +264,7 @@
       ],
       "description": "validates on blur by default and shows required markers",
       "status": "passed",
-      "durationMs": 64.36779999999999,
+      "durationMs": 67.44210000000021,
       "logs": [],
       "sourceFiles": [
         "apps/vanilla-showcase/src/forms.spec.ts"
@@ -276,7 +276,7 @@
       ],
       "description": "shows performance group badges after validate all",
       "status": "passed",
-      "durationMs": 201.0024999999996,
+      "durationMs": 187.7208999999998,
       "logs": [],
       "sourceFiles": [
         "apps/vanilla-showcase/src/forms.spec.ts"
@@ -288,7 +288,7 @@
       ],
       "description": "populates and resets the performance form",
       "status": "passed",
-      "durationMs": 349.4924000000001,
+      "durationMs": 332.1601999999998,
       "logs": [],
       "sourceFiles": [
         "apps/vanilla-showcase/src/forms.spec.ts"

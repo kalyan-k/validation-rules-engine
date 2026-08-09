@@ -248,9 +248,24 @@ function flattenDocsItems(items) {
   return items.flatMap((item) => (Array.isArray(item) ? [item] : flattenDocsItems(item.items)));
 }
 
+function siteBasePrefix() {
+  return String(globalThis.vrePlatformConfig?.siteBase || '').replace(/\/$/, '');
+}
+
+function withSiteBasePath(pathname) {
+  const base = siteBasePrefix();
+  if (!base || typeof pathname !== 'string' || !pathname.startsWith('/')) {
+    return pathname;
+  }
+  if (pathname === base || pathname.startsWith(`${base}/`)) {
+    return pathname;
+  }
+  return `${base}${pathname}`;
+}
+
 function isDocsItemActive(item) {
   if (Array.isArray(item)) {
-    return location.pathname === item[1];
+    return location.pathname === withSiteBasePath(item[1]);
   }
   return item.items.some((child) => isDocsItemActive(child));
 }
@@ -264,9 +279,10 @@ function isDocsSectionActive(section) {
 }
 
 function isPathActive(pathname) {
-  return location.pathname === pathname
-    || (pathname.endsWith('/index.html') && location.pathname === pathname.replace(/index\.html$/u, ''))
-    || (pathname.endsWith('/index.html') && location.pathname === pathname.replace(/\/index\.html$/u, ''));
+  const resolved = withSiteBasePath(pathname);
+  return location.pathname === resolved
+    || (resolved.endsWith('/index.html') && location.pathname === resolved.replace(/index\.html$/u, ''))
+    || (resolved.endsWith('/index.html') && location.pathname === resolved.replace(/\/index\.html$/u, ''));
 }
 
 class ValidationPlatformShell extends HTMLElement {
@@ -484,7 +500,7 @@ if (!customElements.get('validation-platform-shell')) {
         <div><dt>Application</dt><dd>React Adapter</dd></div>
         <div><dt>Report</dt><dd>Test execution report</dd></div>
         <div><dt>Version</dt><dd>1.0.0</dd></div>
-        <div><dt>Generated</dt><dd>2026-08-09T00:40:31.039Z</dd></div>
+        <div><dt>Generated</dt><dd>2026-08-09T04:00:55.125Z</dd></div>
       </dl></div>
     </section>
     <script>(()=>{const root=document.currentScript.previousElementSibling;const button=root.querySelector('button');const key='vre:report-summary';const preference=sessionStorage.getItem(key);const setExpanded=(expanded,persist)=>{root.classList.toggle('collapsed',!expanded);button.setAttribute('aria-expanded',String(expanded));button.querySelector('span').textContent=expanded?'Collapse details':'Expand details';if(persist)sessionStorage.setItem(key,expanded?'expanded':'collapsed');};setExpanded(preference!=='collapsed',false);button.addEventListener('click',()=>setExpanded(button.getAttribute('aria-expanded')!=='true',true));if(preference===null)setTimeout(()=>setExpanded(false,false),10000);})();</script>
@@ -502,7 +518,7 @@ if (!customElements.get('validation-platform-shell')) {
         <div class="card card-pass"><span class="label">Passed</span><strong>23</strong></div>
         <div class="card card-fail"><span class="label">Failed</span><strong>0</strong></div>
         <div class="card card-skip"><span class="label">Skipped</span><strong>0</strong></div>
-        <div class="card"><span class="label">Duration</span><strong>1.08 s</strong></div>
+        <div class="card"><span class="label">Duration</span><strong>1.05 s</strong></div>
         <div class="card"><span class="label">Suites</span><strong>3</strong></div>
       </div>
       <div class="toolbar" aria-label="Test status filters">
@@ -510,7 +526,7 @@ if (!customElements.get('validation-platform-shell')) {
         <button type="button" data-filter="passed">Passed</button>
         <button type="button" data-filter="failed">Failed</button>
         <button type="button" data-filter="skipped">Skipped</button>
-        <span class="metadata">Browser: Vitest · jsdom · Started: 2026-08-09T00:40:08.266Z</span>
+        <span class="metadata">Browser: Vitest · jsdom · Started: 2026-08-09T04:00:34.247Z</span>
       </div>
       
       <section class="suite" id="suite-validationengine-0">
@@ -521,7 +537,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>registers case-insensitive policies with balanced duplicate ownership</strong>
-        <span class="duration">2 ms</span>
+        <span class="duration">3 ms</span>
       </div>
       <div class="source">Source: <code>packages/react/src/engine/validation-engine.spec.ts</code></div>
       
@@ -531,7 +547,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>replaces and forcibly unregisters a dynamic policy</strong>
-        <span class="duration">2 ms</span>
+        <span class="duration">4 ms</span>
       </div>
       <div class="source">Source: <code>packages/react/src/engine/validation-engine.spec.ts</code></div>
       
@@ -581,7 +597,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>publishes revisions, touch state, partial clear, full clear, and notifications</strong>
-        <span class="duration">2 ms</span>
+        <span class="duration">3 ms</span>
       </div>
       <div class="source">Source: <code>packages/react/src/engine/validation-engine.spec.ts</code></div>
       
@@ -611,7 +627,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>guards empty names and handles non-string dependency values</strong>
-        <span class="duration">0 ms</span>
+        <span class="duration">1 ms</span>
       </div>
       <div class="source">Source: <code>packages/react/src/engine/validation-engine.spec.ts</code></div>
       
@@ -627,7 +643,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>throws a clear missing-provider error</strong>
-        <span class="duration">22 ms</span>
+        <span class="duration">20 ms</span>
       </div>
       <div class="source">Source: <code>packages/react/src/hooks/react-integration.spec.tsx</code></div>
       
@@ -637,7 +653,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>exposes an injected engine and merged provider configuration</strong>
-        <span class="duration">15 ms</span>
+        <span class="duration">13 ms</span>
       </div>
       <div class="source">Source: <code>packages/react/src/hooks/react-integration.spec.tsx</code></div>
       
@@ -647,7 +663,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>validates change, blur, submit, controlled parsing, checkbox, and reset</strong>
-        <span class="duration">657 ms</span>
+        <span class="duration">645 ms</span>
       </div>
       <div class="source">Source: <code>packages/react/src/hooks/react-integration.spec.tsx</code></div>
       
@@ -657,7 +673,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>calls invalid submit and renders linked and unlinked summaries</strong>
-        <span class="duration">105 ms</span>
+        <span class="duration">82 ms</span>
       </div>
       <div class="source">Source: <code>packages/react/src/hooks/react-integration.spec.tsx</code></div>
       
@@ -667,7 +683,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>supports custom controls, explicit field validate, and field clear</strong>
-        <span class="duration">148 ms</span>
+        <span class="duration">152 ms</span>
       </div>
       <div class="source">Source: <code>packages/react/src/hooks/react-integration.spec.tsx</code></div>
       
@@ -677,7 +693,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>provides low-level validation, groups, touch, and clear methods</strong>
-        <span class="duration">4 ms</span>
+        <span class="duration">6 ms</span>
       </div>
       <div class="source">Source: <code>packages/react/src/hooks/react-integration.spec.tsx</code></div>
       
@@ -687,7 +703,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>balances policy lifecycle in Strict Mode and across multiple forms</strong>
-        <span class="duration">3 ms</span>
+        <span class="duration">2 ms</span>
       </div>
       <div class="source">Source: <code>packages/react/src/hooks/react-integration.spec.tsx</code></div>
       
@@ -697,7 +713,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>supports independent nested providers and models</strong>
-        <span class="duration">76 ms</span>
+        <span class="duration">71 ms</span>
       </div>
       <div class="source">Source: <code>packages/react/src/hooks/react-integration.spec.tsx</code></div>
       
@@ -717,7 +733,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>combines native blur handlers without requiring a browser design system</strong>
-        <span class="duration">24 ms</span>
+        <span class="duration">23 ms</span>
       </div>
       <div class="source">Source: <code>packages/react/src/hooks/react-integration.spec.tsx</code></div>
       

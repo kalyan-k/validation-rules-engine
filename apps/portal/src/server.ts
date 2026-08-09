@@ -76,12 +76,12 @@ async function handleRequest(
     });
     return;
   }
-  if (requestUrl.pathname === '/api/status') {
+  if (requestUrl.pathname === '/api/status' || requestUrl.pathname === '/api/status.json') {
     await manager.refreshHealth();
     sendJson(response, 200, { applications: manager.getStatuses() });
     return;
   }
-  if (requestUrl.pathname === '/api/meta') {
+  if (requestUrl.pathname === '/api/meta' || requestUrl.pathname === '/api/meta.json') {
     sendJson(response, 200, {
       version: rootPackage.version ?? '0.0.0',
       revision: repositoryRevision(),
@@ -91,7 +91,7 @@ async function handleRequest(
     });
     return;
   }
-  if (requestUrl.pathname === '/api/playwright/latest') {
+  if (requestUrl.pathname === '/api/playwright/latest' || requestUrl.pathname === '/api/playwright/latest.json') {
     if (!existsSync(playwrightPortalDataPath)) {
       sendJson(response, 200, {
         available: false,

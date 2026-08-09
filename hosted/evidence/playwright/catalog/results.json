@@ -7151,7 +7151,7 @@
               ],
               "id": "ec582ac31fb99aa81163-ff04c6114009d7fda966",
               "file": "shared/visual/visual.spec.ts",
-              "line": 18,
+              "line": 19,
               "column": 3
             },
             {
@@ -7174,7 +7174,7 @@
               ],
               "id": "ec582ac31fb99aa81163-6b8e118433f3f36ff511",
               "file": "shared/visual/visual.spec.ts",
-              "line": 23,
+              "line": 25,
               "column": 3
             },
             {
@@ -7197,7 +7197,7 @@
               ],
               "id": "ec582ac31fb99aa81163-5afebcb35d31e6197cfa",
               "file": "shared/visual/visual.spec.ts",
-              "line": 32,
+              "line": 34,
               "column": 3
             },
             {
@@ -7220,7 +7220,7 @@
               ],
               "id": "ec582ac31fb99aa81163-efc78445a7d9df812da1",
               "file": "shared/visual/visual.spec.ts",
-              "line": 41,
+              "line": 43,
               "column": 3
             }
           ]
@@ -7303,8 +7303,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-08-09T00:44:26.655Z",
-    "duration": 671.392,
+    "startTime": "2026-08-09T04:14:01.365Z",
+    "duration": 561.588,
     "expected": 0,
     "skipped": 269,
     "unexpected": 0,

@@ -163,9 +163,24 @@ function flattenDocsItems(items) {
   return items.flatMap((item) => (Array.isArray(item) ? [item] : flattenDocsItems(item.items)));
 }
 
+function siteBasePrefix() {
+  return String(globalThis.vrePlatformConfig?.siteBase || '').replace(/\/$/, '');
+}
+
+function withSiteBasePath(pathname) {
+  const base = siteBasePrefix();
+  if (!base || typeof pathname !== 'string' || !pathname.startsWith('/')) {
+    return pathname;
+  }
+  if (pathname === base || pathname.startsWith(`${base}/`)) {
+    return pathname;
+  }
+  return `${base}${pathname}`;
+}
+
 function isDocsItemActive(item) {
   if (Array.isArray(item)) {
-    return location.pathname === item[1];
+    return location.pathname === withSiteBasePath(item[1]);
   }
   return item.items.some((child) => isDocsItemActive(child));
 }
@@ -179,9 +194,10 @@ function isDocsSectionActive(section) {
 }
 
 function isPathActive(pathname) {
-  return location.pathname === pathname
-    || (pathname.endsWith('/index.html') && location.pathname === pathname.replace(/index\.html$/u, ''))
-    || (pathname.endsWith('/index.html') && location.pathname === pathname.replace(/\/index\.html$/u, ''));
+  const resolved = withSiteBasePath(pathname);
+  return location.pathname === resolved
+    || (resolved.endsWith('/index.html') && location.pathname === resolved.replace(/index\.html$/u, ''))
+    || (resolved.endsWith('/index.html') && location.pathname === resolved.replace(/\/index\.html$/u, ''));
 }
 
 class ValidationPlatformShell extends HTMLElement {

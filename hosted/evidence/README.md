@@ -12,13 +12,19 @@ CI does **not** run the full test matrix for Azure. Instead:
 
 ```bash
 npm run test:ci
-npm run test:e2e:chromium
+npm run test:e2e:full
 npm run evidence:publish
 git add hosted/evidence
 git commit -m "Update hosted test and automation evidence"
 ```
 
-Or in one step after you already have fresh `reports/` and Playwright output:
+Or refresh everything in one command (unit/coverage + full Playwright catalog + publish):
+
+```bash
+npm run evidence:refresh
+```
+
+If you already have fresh `reports/` and Playwright output:
 
 ```bash
 npm run evidence:publish

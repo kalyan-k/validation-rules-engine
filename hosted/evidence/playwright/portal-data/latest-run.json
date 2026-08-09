@@ -1,21 +1,21 @@
 {
   "schemaVersion": 1,
   "available": true,
-  "runId": "local-2026-08-09T00-42-10-147Z",
-  "generatedAt": "2026-08-09T00:44:27.452Z",
-  "startTime": "2026-08-09T00:42:10.147Z",
-  "endTime": "2026-08-09T00:44:25.395Z",
-  "durationMs": 135248.416,
+  "runId": "local-2026-08-09T04-02-23-721Z",
+  "generatedAt": "2026-08-09T04:14:02.035Z",
+  "startTime": "2026-08-09T04:02:23.721Z",
+  "endTime": "2026-08-09T04:13:59.499Z",
+  "durationMs": 695778.546,
   "status": "passed",
   "execution": {
-    "scope": "focused",
-    "executedTotal": 85,
+    "scope": "full",
+    "executedTotal": 269,
     "configuredTotal": 269,
-    "coveragePercent": 31.6,
+    "coveragePercent": 100,
     "recommendedFullCommand": "npm run test:e2e:full"
   },
   "catalog": {
-    "generatedAt": "2026-08-09T00:44:27.353Z",
+    "generatedAt": "2026-08-09T04:14:01.953Z",
     "totals": {
       "total": 269
     },
@@ -150,8 +150,8 @@
     }
   },
   "totals": {
-    "total": 85,
-    "passed": 85,
+    "total": 269,
+    "passed": 269,
     "failed": 0,
     "skipped": 0,
     "flaky": 0
@@ -163,54 +163,96 @@
       "failed": 0,
       "skipped": 0,
       "flaky": 0
-    }
-  },
-  "applicationTotals": {
-    "angular": {
-      "total": 36,
-      "passed": 36,
+    },
+    "firefox": {
+      "total": 85,
+      "passed": 85,
       "failed": 0,
       "skipped": 0,
       "flaky": 0
     },
-    "portal": {
-      "total": 2,
-      "passed": 2,
+    "webkit": {
+      "total": 85,
+      "passed": 85,
       "failed": 0,
       "skipped": 0,
       "flaky": 0
     },
-    "documentation": {
-      "total": 4,
-      "passed": 4,
+    "accessibility-chromium": {
+      "total": 7,
+      "passed": 7,
       "failed": 0,
       "skipped": 0,
       "flaky": 0
     },
-    "react": {
-      "total": 28,
-      "passed": 28,
-      "failed": 0,
-      "skipped": 0,
-      "flaky": 0
-    },
-    "reports": {
+    "visual-chromium": {
       "total": 5,
       "passed": 5,
       "failed": 0,
       "skipped": 0,
       "flaky": 0
     },
+    "responsive-tablet": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "responsive-mobile": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    }
+  },
+  "applicationTotals": {
+    "angular": {
+      "total": 110,
+      "passed": 110,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "portal": {
+      "total": 8,
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "documentation": {
+      "total": 14,
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "react": {
+      "total": 86,
+      "passed": 86,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "reports": {
+      "total": 17,
+      "passed": 17,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
     "platform": {
-      "total": 6,
-      "passed": 6,
+      "total": 21,
+      "passed": 21,
       "failed": 0,
       "skipped": 0,
       "flaky": 0
     },
     "vanilla": {
-      "total": 4,
-      "passed": 4,
+      "total": 13,
+      "passed": 13,
       "failed": 0,
       "skipped": 0,
       "flaky": 0
@@ -218,13 +260,34 @@
   },
   "suiteTotals": {
     "regression": {
-      "total": 83,
-      "passed": 83,
+      "total": 249,
+      "passed": 249,
       "failed": 0,
       "skipped": 0,
       "flaky": 0
     },
     "smoke": {
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "accessibility": {
+      "total": 7,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "visual": {
+      "total": 5,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "responsive": {
       "total": 2,
       "passed": 2,
       "failed": 0,
@@ -234,64 +297,71 @@
   },
   "angularStateTotals": {
     "akita": {
-      "total": 4,
-      "passed": 4,
+      "total": 12,
+      "passed": 12,
       "failed": 0,
       "skipped": 0,
       "flaky": 0
     },
     "custom-rxjs-store": {
-      "total": 4,
-      "passed": 4,
+      "total": 12,
+      "passed": 12,
       "failed": 0,
       "skipped": 0,
       "flaky": 0
     },
     "elf": {
-      "total": 4,
-      "passed": 4,
+      "total": 12,
+      "passed": 12,
       "failed": 0,
       "skipped": 0,
       "flaky": 0
     },
     "ngrx": {
-      "total": 4,
-      "passed": 4,
+      "total": 12,
+      "passed": 12,
       "failed": 0,
       "skipped": 0,
       "flaky": 0
     },
     "ngxs": {
-      "total": 4,
-      "passed": 4,
+      "total": 12,
+      "passed": 12,
       "failed": 0,
       "skipped": 0,
       "flaky": 0
     },
     "reactive-forms": {
-      "total": 4,
-      "passed": 4,
+      "total": 12,
+      "passed": 12,
       "failed": 0,
       "skipped": 0,
       "flaky": 0
     },
     "rx-angular-state": {
-      "total": 4,
-      "passed": 4,
+      "total": 12,
+      "passed": 12,
       "failed": 0,
       "skipped": 0,
       "flaky": 0
     },
     "signals": {
-      "total": 4,
-      "passed": 4,
+      "total": 12,
+      "passed": 12,
       "failed": 0,
       "skipped": 0,
       "flaky": 0
     },
     "template-driven": {
-      "total": 4,
-      "passed": 4,
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "general": {
+      "total": 2,
+      "passed": 2,
       "failed": 0,
       "skipped": 0,
       "flaky": 0
@@ -299,50 +369,57 @@
   },
   "reactStateTotals": {
     "context": {
-      "total": 4,
-      "passed": 4,
+      "total": 12,
+      "passed": 12,
       "failed": 0,
       "skipped": 0,
       "flaky": 0
     },
     "jotai": {
-      "total": 4,
-      "passed": 4,
+      "total": 12,
+      "passed": 12,
       "failed": 0,
       "skipped": 0,
       "flaky": 0
     },
     "local-state": {
-      "total": 4,
-      "passed": 4,
+      "total": 12,
+      "passed": 12,
       "failed": 0,
       "skipped": 0,
       "flaky": 0
     },
     "mobx": {
-      "total": 4,
-      "passed": 4,
+      "total": 12,
+      "passed": 12,
       "failed": 0,
       "skipped": 0,
       "flaky": 0
     },
     "recoil": {
-      "total": 4,
-      "passed": 4,
+      "total": 12,
+      "passed": 12,
       "failed": 0,
       "skipped": 0,
       "flaky": 0
     },
     "redux-toolkit": {
-      "total": 4,
-      "passed": 4,
+      "total": 12,
+      "passed": 12,
       "failed": 0,
       "skipped": 0,
       "flaky": 0
     },
     "zustand": {
-      "total": 4,
-      "passed": 4,
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "general": {
+      "total": 2,
+      "passed": 2,
       "failed": 0,
       "skipped": 0,
       "flaky": 0
@@ -350,23 +427,30 @@
   },
   "vanillaTotals": {
     "regression": {
-      "total": 4,
-      "passed": 4,
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "accessibility": {
+      "total": 1,
+      "passed": 1,
       "failed": 0,
       "skipped": 0,
       "flaky": 0
     }
   },
   "accessibility": {
-    "total": 0,
-    "passed": 0,
+    "total": 7,
+    "passed": 7,
     "failed": 0,
     "skipped": 0,
     "flaky": 0
   },
   "visual": {
-    "total": 0,
-    "passed": 0,
+    "total": 5,
+    "passed": 5,
     "failed": 0,
     "skipped": 0,
     "flaky": 0

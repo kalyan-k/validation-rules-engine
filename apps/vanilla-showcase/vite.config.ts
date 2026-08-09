@@ -1,5 +1,6 @@
 import { resolve } from 'node:path';
 import { defineConfig } from 'vitest/config';
+import { getSiteBasePath, withSiteBase } from '../../tools/hosting/site-base-path.mjs';
 
 const workspaceRoot = resolve(__dirname, '../..');
 const reportsRoot = resolve(workspaceRoot, 'reports/showcases/vanilla');
@@ -7,9 +8,10 @@ const reportsRoot = resolve(workspaceRoot, 'reports/showcases/vanilla');
 export default defineConfig(({ mode }) => {
   const testing = mode === 'test';
   const hosted = mode === 'single-host';
+  const siteBase = getSiteBasePath();
   return {
     root: __dirname,
-    base: hosted ? '/showcases/vanilla/' : '/',
+    base: hosted ? withSiteBase('/showcases/vanilla/', siteBase) : '/',
     publicDir: resolve(__dirname, '../../tools/platform-shell'),
     resolve: {
       alias: {
