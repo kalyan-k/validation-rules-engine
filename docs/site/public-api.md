@@ -34,6 +34,10 @@ The adapter exports `ValidationModule`, `ValidatorDirective`, display configurat
 
 The React adapter exports `ValidationRulesProvider`, `useValidationRules`, `useValidationForm`, `useValidationField`, `ValidationMessage`, `ValidationSummary`, testing helpers, controlled-field props, and React-specific validation result types. React applications should import these APIs from `@validation-rules-engine/react`.
 
+## Core without an adapter
+
+Plain TypeScript and the Vanilla Showcase consume Core contracts (`ValidationPolicy`, `ValidatorHelper`, result metadata) directly. There is no separate Vanilla package API. See [Vanilla Showcase](/docs/vanilla-overview) and [Core Public API](/docs/core-public-api).
+
 ## Compatibility
 
 Core contracts, Angular directive selectors, Angular component selectors, `policy-validation-*` DOM hooks, the Angular stylesheet export, React hook names, React component names, and policy-domain type names remain compatibility contracts. Renaming them requires a planned breaking release.

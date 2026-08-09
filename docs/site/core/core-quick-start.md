@@ -33,7 +33,7 @@ class AccountPolicy implements ValidationPolicy {
 }
 ```
 
-## Register through an adapter
+## Register through an adapter or Core-only
 
 Angular:
 
@@ -46,6 +46,15 @@ React:
 ```tsx
 const policies = [{ name: 'account', policy: new AccountPolicy() }];
 const form = useValidationForm({ initialModel, policies, policyNames: ['account'] });
+```
+
+Vanilla / Core-only:
+
+Build validators from the policy and evaluate them in application code, or open the live [Vanilla Showcase](http://127.0.0.1:4205/simple) to see DOM wiring for the same Core contracts.
+
+```ts
+const helper = new ValidatorHelper();
+const validators = new AccountPolicy().addValidations(helper);
 ```
 
 ## Read results

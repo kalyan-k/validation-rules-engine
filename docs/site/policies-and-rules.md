@@ -40,3 +40,9 @@ Pass a dependency when a field should be validated only for a particular model s
 ```
 
 Applications remain responsible for deciding when to display, persist, or clear these results.
+
+## Try it live
+
+- [Vanilla simple form](http://127.0.0.1:4205/simple)
+- [Angular Bootstrap showcase](http://127.0.0.1:4202/showcases/bootstrap)
+- [React Local State simple](http://127.0.0.1:4204/state/local-state/simple)

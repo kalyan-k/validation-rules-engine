@@ -24,6 +24,10 @@ Register the form-group mapping, use matching group names, and execute validatio
 
 Build packages first with `npm run build:packages`. Portal startup does this automatically.
 
+## Vanilla Showcase routes 404 on GitHub Pages
+
+Project sites are served under `/<repo-name>`. Showcase menu links must include that base path. Rebuild with `VRE_SITE_BASE_PATH` set (the GitHub Pages workflow does this) and confirm `platform-config.js` contains a non-empty `siteBase`.
+
 ## Reports are missing
 
 Locally, run `npm run test:reports` or `npm run test:ci`. Use `npm run reports:clean` only when stale generated output needs to be removed.

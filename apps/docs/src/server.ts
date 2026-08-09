@@ -123,11 +123,13 @@ function renderPage(entry: DocumentationEntry | undefined, content: string): str
   }).join('');
   const showcaseLinks = entry?.slug.startsWith('react-')
     ? `<a class="showcase-link" href="${reactShowcaseUrl}${entry.showcasePath ?? ''}"><strong>Open React Showcase</strong><span>Try the hooks and policies in a live React application &rarr;</span></a>`
-    : entry?.section === 'Core Package'
+    : entry?.section === 'Vanilla Showcase' || entry?.section === 'Core Package'
     ? `<a class="showcase-link" href="${vanillaShowcaseUrl}${entry.showcasePath ?? ''}"><strong>Open Vanilla Showcase</strong><span>Run the same Core policies with framework-free TypeScript forms &rarr;</span></a><a class="showcase-link" href="${platformHref(portalUrl)}"><strong>Open Portal</strong><span>Launch documentation and every showcase from one place &rarr;</span></a>`
     : entry?.section === 'Introduction'
-    ? `<a class="showcase-link" href="${platformHref(portalUrl)}"><strong>Open Portal</strong><span>Launch documentation and every showcase from one place &rarr;</span></a><a class="showcase-link" href="${vanillaShowcaseUrl}/"><strong>Open Vanilla Showcase</strong><span>See Core policies without Angular or React adapters &rarr;</span></a>`
-    : `<a class="showcase-link" href="${angularShowcaseUrl}${entry?.showcasePath ?? ''}"><strong>Open Angular Showcase</strong><span>See the concepts running in a real application &rarr;</span></a>`;
+    ? `<a class="showcase-link" href="${platformHref(portalUrl)}"><strong>Open Portal</strong><span>Launch documentation and every showcase from one place &rarr;</span></a><a class="showcase-link" href="${vanillaShowcaseUrl}/"><strong>Open Vanilla Showcase</strong><span>See Core policies without Angular or React adapters &rarr;</span></a><a class="showcase-link" href="${angularShowcaseUrl}/"><strong>Open Angular Showcase</strong><span>Explore Angular forms and state integrations &rarr;</span></a><a class="showcase-link" href="${reactShowcaseUrl}/"><strong>Open React Showcase</strong><span>Explore React hooks and state integrations &rarr;</span></a>`
+    : entry?.section === 'Angular Package'
+    ? `<a class="showcase-link" href="${angularShowcaseUrl}${entry?.showcasePath ?? ''}"><strong>Open Angular Showcase</strong><span>See the concepts running in a real application &rarr;</span></a>`
+    : `<a class="showcase-link" href="${platformHref(portalUrl)}"><strong>Open Portal</strong><span>Launch documentation and every showcase from one place &rarr;</span></a><a class="showcase-link" href="${vanillaShowcaseUrl}/"><strong>Open Vanilla Showcase</strong><span>Core policies without framework adapters &rarr;</span></a><a class="showcase-link" href="${angularShowcaseUrl}/"><strong>Open Angular Showcase</strong><span>Angular forms and state integrations &rarr;</span></a><a class="showcase-link" href="${reactShowcaseUrl}/"><strong>Open React Showcase</strong><span>React hooks and state integrations &rarr;</span></a>`;
 
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${escapeHtml(entry?.summary ?? 'Validation Rules Engine documentation')}"><meta name="theme-color" content="#10243e"><title>${escapeHtml(entry?.title ?? 'Not found')} &middot; Validation Rules Engine</title><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/vre-mark.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/vre-icon-180.png"><link rel="manifest" href="/site.webmanifest"><link rel="preload" href="/platform-shell.css" as="style"><link rel="stylesheet" href="/platform-shell.css"><link rel="stylesheet" href="/platform-theme.css"><link rel="stylesheet" href="/docs/styles.css"><script src="/platform-config.js?v=${assetVersion}"></script><script src="/platform-shell.js?v=${assetVersion}"></script><script src="/docs/search.js?v=${assetVersion}" defer></script></head>
   <body><validation-platform-shell active-application="documentation" application-name="Documentation" version="${escapeHtml(workspacePackage.version ?? '0.0.0')}" portal-url="${portalUrl}" docs-url="${docsUrl}" angular-url="${angularShowcaseUrl}" react-url="${reactShowcaseUrl}" vanilla-url="${vanillaShowcaseUrl}">
@@ -214,6 +216,7 @@ function sendJavaScript(response: ServerResponse, value: string): void {
 
 function platformConfigScript(): string {
   return `globalThis.vrePlatformConfig = ${JSON.stringify({
+    siteBase: '',
     urls: {
       portal: portalUrl,
       docs: docsUrl,

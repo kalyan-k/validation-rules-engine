@@ -24,7 +24,7 @@ The default developer entry point is now:
 npm start
 ```
 
-This launches the portal, documentation, Angular showcase, and React showcase.
+This launches the portal, documentation, Vanilla showcase, Angular showcase, and React showcase.
 
 ## TypeScript path mappings
 

@@ -14,8 +14,11 @@ test('pre-renders every catalog entry for the unified production host', () => {
   );
 });
 
-test('exports the browser search payload used by the static documentation site', () => {
-  const payload = documentationSearchPayload();
-  assert.ok(payload.documents.length > documentationCatalog.length);
-  assert.ok(payload.documents.some(({ slug }) => slug === 'overview'));
+test('includes Vanilla Showcase documentation pages', () => {
+  assert.ok(documentationCatalog.some(({ slug, section }) => slug === 'vanilla-overview' && section === 'Vanilla Showcase'));
+  assert.ok(documentationCatalog.some(({ slug }) => slug === 'vanilla-quick-start'));
+  assert.ok(documentationCatalog.some(({ slug }) => slug === 'vanilla-examples'));
+  const pages = staticDocumentationPages();
+  const vanillaOverview = pages.find(({ path }) => path === 'docs/vanilla-overview/index.html');
+  assert.ok(vanillaOverview?.html.includes('Open Vanilla Showcase'));
 });

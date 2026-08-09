@@ -35,4 +35,4 @@ The repository contains three publishable packages and several private applicati
 
 ## Where to go next
 
-Start with [Installation & Quick Start](/docs/getting-started), then read [Policies & Rules](/docs/policies-and-rules). Use the live showcases whenever you want to see a concept in a running application.
+Start with [Installation & Quick Start](/docs/getting-started), then read [Policies & Rules](/docs/policies-and-rules). For Core without adapters, open the [Vanilla Showcase guide](/docs/vanilla-overview). Use the live showcases whenever you want to see a concept in a running application.

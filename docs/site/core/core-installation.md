@@ -8,7 +8,7 @@ Install Core when you are writing shared policies, validating plain TypeScript o
 npm install @validation-rules-engine/core
 ```
 
-Application forms usually install `@validation-rules-engine/angular` or `@validation-rules-engine/react`; those adapters depend on Core and expose framework-specific lifecycle APIs.
+Application forms usually install `@validation-rules-engine/angular` or `@validation-rules-engine/react`; those adapters depend on Core and expose framework-specific lifecycle APIs. For a live Core-only UI, open the [Vanilla Showcase](http://127.0.0.1:4205/) or follow the [Vanilla Quick Start](/docs/vanilla-quick-start).
 
 ## Imports
 

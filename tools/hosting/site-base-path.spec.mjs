@@ -41,8 +41,12 @@ assert.equal(
   '/^https?:$/u.test(location.protocol)'
 );
 assert.equal(
-  prefixRootAbsolutePaths('href="/automation/artifacts/x"', '/repo'),
-  'href="/repo/automation/artifacts/x"'
+  prefixRootAbsolutePaths('angular-url="/showcases/angular"', '/validation-rules-engine'),
+  'angular-url="/validation-rules-engine/showcases/angular"'
+);
+assert.equal(
+  prefixRootAbsolutePaths('vanilla-url="/showcases/vanilla"', '/validation-rules-engine'),
+  'vanilla-url="/validation-rules-engine/showcases/vanilla"'
 );
 
 // Empty/unset base path must be a no-op (Azure SWA, local single/multi-host).

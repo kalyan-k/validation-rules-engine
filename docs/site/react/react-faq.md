@@ -10,7 +10,7 @@ No. `@validation-rules-engine/react` works with Local State and can also bridge 
 
 ## Can policies be shared with Angular?
 
-Yes. Policies that import only Core contracts can be reused by Angular and React.
+Yes. Policies that import only Core contracts can be reused by Angular, React, and plain TypeScript callers such as the Vanilla Showcase.
 
 ## Who owns the form model?
 

@@ -1,6 +1,6 @@
 # Core Package
 
-`@validation-rules-engine/core` is the framework-neutral layer. It defines validation policies, validators, helper functions, model metadata, validation results, required-field results, and group status contracts. Angular and React both build on this package without changing rule behavior.
+`@validation-rules-engine/core` is the framework-neutral layer. It defines validation policies, validators, helper functions, model metadata, validation results, required-field results, and group status contracts. Angular and React adapters build on this package without changing rule behavior. The Vanilla Showcase consumes Core directly to demonstrate the same policies in framework-free TypeScript forms.
 
 [Open Live Vanilla Showcase](http://127.0.0.1:4205/) · [Open Portal](http://127.0.0.1:4200/)
 

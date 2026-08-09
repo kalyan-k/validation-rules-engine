@@ -2,7 +2,7 @@
 
 ## Does Validation Rules Engine require Angular Forms?
 
-No. The engine evaluates models. The pure NgRx showcase validates store state without `FormGroup` or `ngModel`.
+No. The engine evaluates models. The pure NgRx showcase validates store state without `FormGroup` or `ngModel`. The Vanilla Showcase validates plain TypeScript objects with DOM controls and no Angular or React runtime.
 
 ## Why does the Angular adapter own policy execution?
 
@@ -22,7 +22,11 @@ Use `replacePolicy()` when generated fields change and unregister the policy whe
 
 ## Are React or Vue packages available?
 
-No. They remain roadmap directions until complete adapters and real consumer showcases exist.
+React is available today as `@validation-rules-engine/react`, with a complete documentation section and React Showcase. Vue is still a roadmap direction until a complete adapter, tests, docs, and consumer showcase exist.
+
+## Can I use Core without Angular or React?
+
+Yes. Install `@validation-rules-engine/core` and evaluate policies from plain TypeScript. The [Vanilla Showcase](/docs/vanilla-overview) is the live Core-only demo (simple, complex, and performance forms).
 
 ## Where are coverage reports?
 

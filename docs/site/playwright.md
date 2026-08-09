@@ -8,7 +8,7 @@ The Playwright suite verifies public user behavior:
 
 - validation behavior,
 - policy composition,
-- Angular and React state-management integrations,
+- Angular, React, and Vanilla state and form integrations,
 - documentation navigation and search,
 - portal navigation,
 - existing report access,
@@ -29,6 +29,7 @@ tests/
   e2e/
     angular/
     react/
+    vanilla/
     documentation/
     demo-portal/
     reports/
@@ -65,6 +66,7 @@ npm run test:e2e
 npm run test:e2e:smoke
 npm run test:e2e:angular
 npm run test:e2e:react
+npm run test:e2e:vanilla
 npm run test:e2e:docs
 npm run test:e2e:portal
 npm run test:e2e:reports
@@ -122,6 +124,7 @@ Tests use Playwright grep-friendly tags:
 - `@regression`
 - `@angular`
 - `@react`
+- `@vanilla`
 - `@docs`
 - `@portal`
 - `@reports`

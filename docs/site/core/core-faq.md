@@ -2,7 +2,7 @@
 
 ## Should applications use Core directly?
 
-Use Core directly for shared policy libraries, adapter development, or non-UI validation. Use Angular or React adapters for application forms.
+Use Core directly for shared policy libraries, adapter development, non-UI validation, or framework-free forms such as the [Vanilla Showcase](/docs/vanilla-overview). Use Angular or React adapters when you need framework lifecycle integration and display helpers for application forms.
 
 ## Does Core mutate the model?
 

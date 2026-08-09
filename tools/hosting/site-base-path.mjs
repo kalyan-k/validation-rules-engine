@@ -50,7 +50,7 @@ export function prefixRootAbsolutePaths(content, siteBase = getSiteBasePath()) {
   }
 
   let result = content.replace(
-    /\b((?:href|src|action|poster|formaction|cite|xlink:href|data-[\w-]+))=(["'])(\/(?!\/)[^"']*)\2/gu,
+    /\b((?:href|src|action|poster|formaction|cite|xlink:href|data-[\w-]+|(?:portal|docs|angular|react|vanilla)-url))=(["'])(\/(?!\/)[^"']*)\2/gu,
     (_full, attr, quote, pathname) => `${attr}=${quote}${prefixPath(pathname, siteBase)}${quote}`
   );
 

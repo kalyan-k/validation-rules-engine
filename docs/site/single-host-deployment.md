@@ -1,17 +1,18 @@
 # Single-Host Deployment
 
-The production platform is one Node service, one public port, and one origin. It serves independently built portal, documentation, Angular, React, report, and automation assets beneath stable subpaths.
+The production platform is one Node service, one public port, and one origin. It serves independently built portal, documentation, Vanilla, Angular, React, report, and automation assets beneath stable subpaths.
 
 | Route | Hosted application |
 | --- | --- |
 | `/` | Portal |
 | `/docs/` | Documentation |
+| `/showcases/vanilla/` | Vanilla Showcase |
 | `/showcases/angular/` | Angular Showcase |
 | `/showcases/react/` | React Showcase |
 | `/reports/` | Tests and coverage |
 | `/automation/` | Playwright automation summary and artifacts |
 
-Angular and React remain separate framework applications. The production host composes their build artifacts instead of merging their source code or runtimes.
+Vanilla, Angular, and React remain separate applications. The production host composes their build artifacts instead of merging their source code or runtimes.
 
 ## Build and run
 
@@ -38,7 +39,7 @@ Run the separately served topology explicitly with:
 npm run start:multi-host
 ```
 
-`npm run portal` is an alias for this mode. It serves the portal, documentation, Angular Showcase, and React Showcase on ports `4200`, `4201`, `4202`, and `4204`. `npm run portal:dev` retains live framework development servers when that workflow is specifically needed.
+`npm run portal` is an alias for this mode. It serves the portal, documentation, Vanilla Showcase, Angular Showcase, and React Showcase on ports `4200`, `4201`, `4205`, `4202`, and `4204`. `npm run portal:dev` retains live framework development servers when that workflow is specifically needed.
 
 Verify that every top-menu link is correct in both topologies with:
 
@@ -57,7 +58,7 @@ The production server accepts:
 - `VRE_NO_OPEN=1`: prevents opening a browser on server startup.
 - `VRE_BUILD_TIME`: build timestamp returned by portal metadata.
 
-No Azure hostname is hardcoded. By default, `platform-config.js` derives the active origin from `window.location` and maps every application to its hosted subpath. The same generated configuration is available at the root and within both framework build directories, so direct Angular and React deep links remain correctly configured. Set `VRE_PUBLIC_URL` only when navigation must use a specific canonical domain instead of the incoming request origin.
+No Azure hostname is hardcoded. By default, `platform-config.js` derives the active origin from `window.location` and maps every application to its hosted subpath. The same generated configuration is available at the root and within showcase build directories, so direct Vanilla, Angular, and React deep links remain correctly configured. Set `VRE_PUBLIC_URL` only when navigation must use a specific canonical domain instead of the incoming request origin.
 
 ## Azure Static Web Apps (free static hosting)
 

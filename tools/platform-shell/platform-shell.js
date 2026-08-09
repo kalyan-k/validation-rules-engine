@@ -96,6 +96,14 @@ const documentationSections = [
     ]
   },
   {
+    label: 'Vanilla Showcase',
+    items: [
+      ['Overview', '/docs/vanilla-overview'],
+      ['Quick Start', '/docs/vanilla-quick-start'],
+      ['Examples', '/docs/vanilla-examples']
+    ]
+  },
+  {
     label: 'Guides',
     items: [
       ['Policies & Rules', '/docs/policies-and-rules'],
@@ -113,7 +121,10 @@ const documentationSections = [
     label: 'Project',
     items: [
       ['Architecture', '/docs/architecture'],
+      ['Single-Host Deployment', '/docs/single-host-deployment'],
+      ['Release & Versioning', '/docs/release-versioning'],
       ['Testing, Coverage & Reports', '/docs/testing'],
+      ['Playwright E2E Testing', '/docs/playwright'],
       ['Migration', '/docs/migration'],
       ['Roadmap', '/docs/roadmap'],
       ['Troubleshooting', '/docs/troubleshooting'],
@@ -141,7 +152,13 @@ function configuredBase(key, attributeValue, fallback) {
   const urls = configuredUrls();
   const configured = [attributeValue, urls[key], urls[`${key}Url`]]
     .find((value) => typeof value === 'string' && value.trim());
-  return normalizedBase(configured, fallback);
+  const base = normalizedBase(configured, fallback);
+  // Root-relative attribute/config values (e.g. docs angular-url="/showcases/angular")
+  // must include the GitHub Pages project base path when present.
+  if (typeof base === 'string' && base.startsWith('/') && !base.startsWith('//')) {
+    return withSiteBasePath(base);
+  }
+  return base;
 }
 
 function currentOriginWhen(activeApplication, applications, fallback) {

@@ -1,7 +1,7 @@
 export interface DocumentationEntry {
   slug: string;
   title: string;
-  section: 'Introduction' | 'Packages' | 'Core Package' | 'Angular Package' | 'React' | 'React Package' | 'Guides' | 'Reference' | 'Project';
+  section: 'Introduction' | 'Packages' | 'Core Package' | 'Angular Package' | 'React' | 'React Package' | 'Vanilla Showcase' | 'Guides' | 'Reference' | 'Project';
   summary: string;
   source: string;
   showcasePath?: string;
@@ -75,6 +75,9 @@ export const documentationCatalog: DocumentationEntry[] = [
   { slug: 'react-best-practices', title: 'Best Practices', section: 'React Package', summary: 'Policy, hook, state ownership, custom input, and performance guidance.', source: 'react/react-best-practices.md', showcasePath: '/state/local-state' },
   { slug: 'react-troubleshooting', title: 'Troubleshooting', section: 'React Package', summary: 'Diagnose provider, policy, path, controlled-input, and async issues.', source: 'react/react-troubleshooting.md', showcasePath: '/' },
   { slug: 'react-faq', title: 'FAQ', section: 'React Package', summary: 'Common React adapter and state integration questions.', source: 'react/react-faq.md', showcasePath: '/' },
+  { slug: 'vanilla-overview', title: 'Overview', section: 'Vanilla Showcase', summary: 'Framework-free TypeScript showcase that consumes Core directly.', source: 'vanilla/vanilla-overview.md', showcasePath: '/' },
+  { slug: 'vanilla-quick-start', title: 'Quick Start', section: 'Vanilla Showcase', summary: 'Install Core and validate plain TypeScript models without an adapter.', source: 'vanilla/vanilla-quick-start.md', showcasePath: '/simple' },
+  { slug: 'vanilla-examples', title: 'Examples', section: 'Vanilla Showcase', summary: 'Simple, complex, and performance Vanilla Showcase routes.', source: 'vanilla/vanilla-examples.md', showcasePath: '/' },
   { slug: 'policies-and-rules', title: 'Policies & Rules', section: 'Guides', summary: 'Compose rule sets and understand execution behavior.', source: 'policies-and-rules.md', showcasePath: '/showcases/bootstrap' },
   { slug: 'validation-groups', title: 'Validation Groups', section: 'Guides', summary: 'Field groups, policy groups, status, and summaries.', source: 'validation-groups.md', showcasePath: '/showcases/bootstrap' },
   { slug: 'advanced', title: 'Advanced Examples', section: 'Guides', summary: 'Conditional, asynchronous, nested, and dynamic workflows.', source: 'advanced.md', showcasePath: '/showcases/bootstrap' },

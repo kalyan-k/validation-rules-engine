@@ -2,9 +2,9 @@
 
 Validation Rules Engine grows through complete, tested capabilities rather than placeholder packages. The current platform keeps future additions discoverable without changing the core dependency direction.
 
-## Framework adapters
+## Framework adapters and showcases
 
-React is implemented as a complete adapter, showcase, documentation section, and independently reported test target. Vue and other adapters can be evaluated only when there is a concrete integration, a deliberate public API, independent tests, and a real consumer showcase. Each adapter must depend on `@validation-rules-engine/core`; core must never depend on an adapter.
+React is implemented as a complete adapter, showcase, documentation section, and independently reported test target. The Vanilla Showcase is a complete Core-only consumer application (simple, complex, and performance forms) with documentation under [Vanilla Showcase](/docs/vanilla-overview); it is not a separate npm package. Vue and other adapters can be evaluated only when there is a concrete integration, a deliberate public API, independent tests, and a real consumer showcase. Each adapter must depend on `@validation-rules-engine/core`; core must never depend on an adapter.
 
 ## Expression evaluation
 

@@ -120,6 +120,38 @@ assert.deepEqual([...showcaseLinks].map((link) => link.getAttribute('href')), [
 ]);
 shellDom.window.close();
 
+// GitHub Pages docs pages set root-relative angular/react/vanilla-url attributes.
+// Those must resolve under the project base path, not the github.io domain root.
+const pagesShellDom = new JSDOM('<!doctype html><body></body>', {
+  runScripts: 'dangerously',
+  url: 'https://kalyan-k.github.io/validation-rules-engine/docs/overview'
+});
+pagesShellDom.window.eval(`globalThis.vrePlatformConfig = {
+  siteBase: '/validation-rules-engine',
+  urls: {
+    portal: 'https://kalyan-k.github.io/validation-rules-engine',
+    docs: 'https://kalyan-k.github.io/validation-rules-engine',
+    angular: 'https://kalyan-k.github.io/validation-rules-engine/showcases/angular',
+    react: 'https://kalyan-k.github.io/validation-rules-engine/showcases/react',
+    vanilla: 'https://kalyan-k.github.io/validation-rules-engine/showcases/vanilla'
+  }
+};`);
+pagesShellDom.window.eval(readFileSync(path.join(siteRoot, 'platform-shell.js'), 'utf8'));
+const pagesShell = pagesShellDom.window.document.createElement('validation-platform-shell');
+pagesShell.setAttribute('active-application', 'documentation');
+pagesShell.setAttribute('angular-url', '/showcases/angular');
+pagesShell.setAttribute('react-url', '/showcases/react');
+pagesShell.setAttribute('vanilla-url', '/showcases/vanilla');
+pagesShellDom.window.document.body.append(pagesShell);
+const pagesShowcaseLinks = [...pagesShell.shadowRoot.querySelectorAll('.platform-nav-group')][1]
+  .querySelectorAll('a');
+assert.deepEqual([...pagesShowcaseLinks].map((link) => link.getAttribute('href')), [
+  '/validation-rules-engine/showcases/vanilla/',
+  '/validation-rules-engine/showcases/angular/',
+  '/validation-rules-engine/showcases/react/'
+]);
+pagesShellDom.window.close();
+
 const reportsIndexPath = path.join(siteRoot, 'reports', 'index.html');
 if (existsSync(reportsIndexPath)) {
   assert.match(readFileSync(reportsIndexPath, 'utf8'), /<script src="\/platform-config\.js"><\/script>/u);

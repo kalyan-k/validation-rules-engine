@@ -1,8 +1,16 @@
 # Installation & Quick Start
 
-Install the framework-neutral engine plus the adapter for your application framework.
+Install the framework-neutral engine, then add an adapter only when your UI framework needs one.
 
-Angular consumers install the Angular adapter and its peer dependency used by the current validator implementation:
+## Core only (Vanilla / plain TypeScript)
+
+```bash
+npm install @validation-rules-engine/core
+```
+
+Use this path for shared policy libraries, non-UI validation, or framework-free forms. Continue with the [Core Quick Start](/docs/core-quick-start) and the live [Vanilla Showcase](/docs/vanilla-overview).
+
+## Angular
 
 ```bash
 npm install @validation-rules-engine/core @validation-rules-engine/angular underscore
@@ -10,7 +18,7 @@ npm install @validation-rules-engine/core @validation-rules-engine/angular under
 
 Angular framework packages are peer dependencies of `@validation-rules-engine/angular`.
 
-React consumers install the React adapter and React peer packages:
+## React
 
 ```bash
 npm install @validation-rules-engine/core @validation-rules-engine/react react react-dom
@@ -18,10 +26,10 @@ npm install @validation-rules-engine/core @validation-rules-engine/react react r
 
 ## Define a policy
 
-A policy returns validators for model paths. Keep messages close to the rule so a policy remains easy to inspect and test.
+A policy returns validators for model paths. Keep messages close to the rule so a policy remains easy to inspect and test. Prefer Core imports when the policy should stay reusable across Vanilla, Angular, and React:
 
 ```ts
-import { ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules-engine/angular';
+import type { ValidationPolicy, Validator, ValidatorHelper } from '@validation-rules-engine/core';
 
 export class AccountPolicy implements ValidationPolicy {
   addValidations(v: ValidatorHelper): Validator[] {
@@ -46,7 +54,7 @@ Import `ValidationModule` once and choose a display setup appropriate for the ap
 export class AppModule {}
 ```
 
-## Register and execute
+## Register and execute (Angular)
 
 ```ts
 validation.register('Account', new AccountPolicy());
@@ -59,7 +67,7 @@ validation.validateAll(model, 'Account', {
 
 `model.validationResults` contains the current failures. Use `clearValidationState()` when the workflow ends or the model is replaced.
 
-## Add the optional stylesheet
+## Add the optional Angular stylesheet
 
 ```json
 {
@@ -71,6 +79,8 @@ validation.validateAll(model, 'Account', {
 
 The package export is stable. Existing `policy-validation-*` selectors remain compatibility APIs.
 
-## React next step
+## Next steps by stack
 
-If you are building a React form, continue with the [React Quick Start](/docs/react-quick-start). It uses the same policy contract with `ValidationRulesProvider`, `useValidationForm`, `useValidationField`, and `ValidationSummary`.
+- Vanilla / Core-only: [Vanilla Quick Start](/docs/vanilla-quick-start) and [http://127.0.0.1:4205/](http://127.0.0.1:4205/)
+- React: [React Quick Start](/docs/react-quick-start)
+- Angular: continue with the Angular Showcase after registration above, or open [http://127.0.0.1:4202/](http://127.0.0.1:4202/)
