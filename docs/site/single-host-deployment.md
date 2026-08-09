@@ -86,7 +86,7 @@ Those environment variables are Azure-workflow-only. Local `npm start`, `npm run
 
 Do **not** point `app_location` at `./apps` or rely on Oryx to build this monorepo.
 
-`tools/hosting/build-site.mjs` copies `staticwebapp.config.json` for SWA validation. Do not define both `/showcases/angular` and `/showcases/angular/`, and do not use `/showcases/angular/*` (Azure treats the empty wildcard as `/showcases/angular/`). Use explicit Angular path prefixes for SPA rewrites instead.
+`tools/hosting/build-site.mjs` copies `staticwebapp.config.json` for SWA validation. Do not define both `/showcases/angular` and `/showcases/angular/`, and do not use catch-all `/showcases/{app}/*` rewrites — Azure applies those even when real CSS/JS files exist, which blank the React and Vanilla showcases. Use explicit SPA path prefixes (`/state/*`, `/simple`, etc.) instead.
 
 After connecting the repo in the Azure portal, push to `master` (or re-run the workflow).
 

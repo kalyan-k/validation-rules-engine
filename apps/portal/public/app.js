@@ -139,7 +139,7 @@ function renderPlaywrightResults(payload) {
       <div class="playwright-links">
         <a href="/automation/artifacts/${escapeHtml(payload.artifacts?.jsonReport || 'json/results.json')}">JSON</a>
         <a href="/automation/artifacts/${escapeHtml(payload.artifacts?.junitReport || 'junit/test-results.xml')}">JUnit</a>
-        <a href="/automation/artifacts/${escapeHtml(payload.artifacts?.visualDiffs || 'visual-diffs')}">Visual diffs</a>
+        <a href="/automation/artifacts/${escapeHtml(payload.artifacts?.visualDiffs || 'visual-diffs')}/">Visual diffs</a>
         ${payload.ci?.url ? `<a href="${escapeHtml(payload.ci.url)}">CI run</a>` : ''}
       </div>
     </article>

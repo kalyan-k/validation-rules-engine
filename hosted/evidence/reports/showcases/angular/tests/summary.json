@@ -2,9 +2,9 @@
   "projectName": "angular-showcase",
   "displayName": "Angular Showcase",
   "version": "1.0.0",
-  "startedAt": "2026-08-08T02:30:07.588Z",
-  "finishedAt": "2026-08-08T02:30:12.114Z",
-  "durationMs": 4526,
+  "startedAt": "2026-08-09T00:40:46.849Z",
+  "finishedAt": "2026-08-09T00:40:51.017Z",
+  "durationMs": 4168,
   "summary": {
     "total": 76,
     "passed": 76,
@@ -24,7 +24,7 @@
       ],
       "description": "validates configuration required, numeric, and boundary rules",
       "status": "passed",
-      "durationMs": 358,
+      "durationMs": 406,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/components/performance-form/performance-form-builder.service.spec.ts"
@@ -36,7 +36,7 @@
       ],
       "description": "builds the correct validator chain for every generated control type",
       "status": "passed",
-      "durationMs": 1,
+      "durationMs": 2,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/components/performance-form/performance-form-builder.service.spec.ts"
@@ -48,7 +48,7 @@
       ],
       "description": "toggles summary and individual/all group collapse state",
       "status": "passed",
-      "durationMs": 2,
+      "durationMs": 1,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/components/performance-form/performance-components.spec.ts"
@@ -96,7 +96,7 @@
       ],
       "description": "falls back to the template-driven strategy and default dynamic policy sizes",
       "status": "passed",
-      "durationMs": 3,
+      "durationMs": 2,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/state-management/angular-state-showcase.component.spec.ts"
@@ -120,7 +120,7 @@
       ],
       "description": "validates complex enterprise groups, dynamic collections, and conditional policies",
       "status": "passed",
-      "durationMs": 5,
+      "durationMs": 6,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/state-management/angular-state-showcase.component.spec.ts"
@@ -144,7 +144,7 @@
       ],
       "description": "validates format and boundary failures in the sample policy",
       "status": "passed",
-      "durationMs": 2,
+      "durationMs": 1,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/application-behavior.spec.ts"
@@ -156,7 +156,7 @@
       ],
       "description": "validates personal and conditionally active shipping and billing paths",
       "status": "passed",
-      "durationMs": 5,
+      "durationMs": 4,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/application-behavior.spec.ts"
@@ -192,7 +192,7 @@
       ],
       "description": "provides the display strategy matching each route framework",
       "status": "passed",
-      "durationMs": 14,
+      "durationMs": 8,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/application-behavior.spec.ts"
@@ -204,7 +204,7 @@
       ],
       "description": "registers every static policy, form-group mapping, and checkout policy group",
       "status": "passed",
-      "durationMs": 1,
+      "durationMs": 2,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/application-behavior.spec.ts"
@@ -229,7 +229,7 @@
       ],
       "description": "clears values, groups, validation state, and messages",
       "status": "passed",
-      "durationMs": 2,
+      "durationMs": 1,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/application-behavior.spec.ts"
@@ -242,7 +242,7 @@
       ],
       "description": "reports invalid and valid submissions",
       "status": "passed",
-      "durationMs": 2,
+      "durationMs": 0,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/application-behavior.spec.ts"
@@ -255,7 +255,7 @@
       ],
       "description": "clears values, groups, validation state, and messages",
       "status": "passed",
-      "durationMs": 1,
+      "durationMs": 0,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/application-behavior.spec.ts"
@@ -306,7 +306,7 @@
       ],
       "description": "clears a completed form, rebinds refresh, and ignores clear while busy",
       "status": "passed",
-      "durationMs": 5,
+      "durationMs": 3,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/components/performance-form/performance-components.spec.ts"
@@ -318,7 +318,7 @@
       ],
       "description": "tracks and toggles section collapse state",
       "status": "passed",
-      "durationMs": 4,
+      "durationMs": 2,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/components/performance-form/performance-components.spec.ts"
@@ -342,7 +342,7 @@
       ],
       "description": "fills all sections, validates badges, and reports error/no-error outcomes",
       "status": "passed",
-      "durationMs": 3,
+      "durationMs": 4,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/components/performance-form/performance-components.spec.ts"
@@ -366,7 +366,7 @@
       ],
       "description": "clears all sections only when actions are available",
       "status": "passed",
-      "durationMs": 4,
+      "durationMs": 2,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/components/performance-form/performance-components.spec.ts"
@@ -390,7 +390,7 @@
       ],
       "description": "updates per-section rendering progress and ignores stale events",
       "status": "passed",
-      "durationMs": 3,
+      "durationMs": 1,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/components/performance-form/performance-components.spec.ts"
@@ -402,7 +402,7 @@
       ],
       "description": "prompts before generation and reports failed or successful submissions",
       "status": "passed",
-      "durationMs": 4,
+      "durationMs": 1,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/components/performance-form/performance-components.spec.ts"
@@ -426,7 +426,7 @@
       ],
       "description": "guards internal render and finish transitions with missing state",
       "status": "passed",
-      "durationMs": 21,
+      "durationMs": 12,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/components/performance-form/performance-components.spec.ts"
@@ -462,7 +462,7 @@
       ],
       "description": "rejects an invalid configuration without building",
       "status": "passed",
-      "durationMs": 1,
+      "durationMs": 2,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/components/performance-form/performance-components.spec.ts"
@@ -486,7 +486,7 @@
       ],
       "description": "computes busy, generated, action, size, and total-control state",
       "status": "passed",
-      "durationMs": 3,
+      "durationMs": 2,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/components/performance-form/performance-components.spec.ts"
@@ -510,7 +510,7 @@
       ],
       "description": "ignores generation while busy",
       "status": "passed",
-      "durationMs": 1,
+      "durationMs": 0,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/components/performance-form/performance-components.spec.ts"
@@ -536,7 +536,7 @@
       ],
       "description": "updates conditional billing state and emits a refresh",
       "status": "passed",
-      "durationMs": 1,
+      "durationMs": 0,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/application-behavior.spec.ts"
@@ -549,7 +549,7 @@
       ],
       "description": "clears nested models, validation groups, and messages",
       "status": "passed",
-      "durationMs": 1,
+      "durationMs": 0,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/application-behavior.spec.ts"
@@ -588,7 +588,7 @@
       ],
       "description": "updates conditional billing state and emits a refresh",
       "status": "passed",
-      "durationMs": 1,
+      "durationMs": 0,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/application-behavior.spec.ts"
@@ -639,7 +639,7 @@
       ],
       "description": "builds deterministic sections, values, policies, groups, and metrics",
       "status": "passed",
-      "durationMs": 5,
+      "durationMs": 3,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/components/performance-form/performance-form-builder.service.spec.ts"
@@ -651,7 +651,7 @@
       ],
       "description": "returns defensive active-name copies and tears down dynamic registrations",
       "status": "passed",
-      "durationMs": 1,
+      "durationMs": 0,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/components/performance-form/performance-form-builder.service.spec.ts"
@@ -663,7 +663,7 @@
       ],
       "description": "clears all present sections and skips missing section data",
       "status": "passed",
-      "durationMs": 1,
+      "durationMs": 0,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/components/performance-form/performance-form-builder.service.spec.ts"
@@ -687,7 +687,7 @@
       ],
       "description": "clears section values and only that section validation state",
       "status": "passed",
-      "durationMs": 3,
+      "durationMs": 0,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/components/performance-form/performance-form-builder.service.spec.ts"
@@ -699,7 +699,7 @@
       ],
       "description": "uses default sync messages and route fallbacks",
       "status": "passed",
-      "durationMs": 3,
+      "durationMs": 2,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/state-management/angular-state-showcase.component.spec.ts"
@@ -711,7 +711,7 @@
       ],
       "description": "falls back to overview labels and preserves models when route strategy is unchanged",
       "status": "passed",
-      "durationMs": 2,
+      "durationMs": 0,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/state-management/angular-state-showcase.component.spec.ts"
@@ -723,7 +723,7 @@
       ],
       "description": "submits, populates, syncs, and resets the simple form",
       "status": "passed",
-      "durationMs": 4,
+      "durationMs": 1,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/state-management/angular-state-showcase.component.spec.ts"
@@ -735,7 +735,7 @@
       ],
       "description": "runs complex form structure changes, policy switches, validation, save, and reset",
       "status": "passed",
-      "durationMs": 6,
+      "durationMs": 8,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/state-management/angular-state-showcase.component.spec.ts"
@@ -747,7 +747,7 @@
       ],
       "description": "resets models when the route switches to another state strategy",
       "status": "passed",
-      "durationMs": 2,
+      "durationMs": 1,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/state-management/angular-state-showcase.component.spec.ts"
@@ -759,7 +759,7 @@
       ],
       "description": "tracks route strategy, page labels, docs links, and router links",
       "status": "passed",
-      "durationMs": 2,
+      "durationMs": 1,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/state-management/angular-state-showcase.component.spec.ts"
@@ -771,7 +771,7 @@
       ],
       "description": "stores snapshots through reducer and NGXS handler helpers",
       "status": "passed",
-      "durationMs": 2,
+      "durationMs": 1,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/state-management/angular-state-showcase.component.spec.ts"
@@ -783,7 +783,7 @@
       ],
       "description": "commits snapshots through each state-management mechanism",
       "status": "passed",
-      "durationMs": 3,
+      "durationMs": 4,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/state-management/angular-state-showcase.component.spec.ts"
@@ -819,7 +819,7 @@
       ],
       "description": "rebinds refresh when the model changes and cancels on generation change or destroy",
       "status": "passed",
-      "durationMs": 2,
+      "durationMs": 1,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/components/performance-form/performance-components.spec.ts"
@@ -831,7 +831,7 @@
       ],
       "description": "ignores validation while actions are unavailable",
       "status": "passed",
-      "durationMs": 2,
+      "durationMs": 1,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/components/performance-form/performance-components.spec.ts"
@@ -867,7 +867,7 @@
       ],
       "description": "fills and clears completed sections but ignores actions while incomplete or disabled",
       "status": "passed",
-      "durationMs": 1,
+      "durationMs": 2,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/components/performance-form/performance-components.spec.ts"
@@ -879,7 +879,7 @@
       ],
       "description": "exposes section status, errors, visibility, counts, and tracking",
       "status": "passed",
-      "durationMs": 1,
+      "durationMs": 3,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/components/performance-form/performance-components.spec.ts"
@@ -891,7 +891,7 @@
       ],
       "description": "initializes registered policies and renders the routed home page inside the shell",
       "status": "passed",
-      "durationMs": 99,
+      "durationMs": 66,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/app.integration.spec.ts"
@@ -903,7 +903,7 @@
       ],
       "description": "renders framework-specific tabs and switches form scenarios through user clicks",
       "status": "passed",
-      "durationMs": 104,
+      "durationMs": 70,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/app.integration.spec.ts"
@@ -915,7 +915,7 @@
       ],
       "description": "contains explicit framework routes, legacy redirects, and a wildcard fallback",
       "status": "passed",
-      "durationMs": 9,
+      "durationMs": 6,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/app.integration.spec.ts"
@@ -927,7 +927,7 @@
       ],
       "description": "submits and clears the Bootstrap sample form through DOM events",
       "status": "passed",
-      "durationMs": 57,
+      "durationMs": 36,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/app.integration.spec.ts"
@@ -939,7 +939,7 @@
       ],
       "description": "redirects legacy and unknown routes",
       "status": "passed",
-      "durationMs": 41,
+      "durationMs": 32,
       "logs": [],
       "sourceFiles": [
         "apps/angular-showcase/src/app/app.integration.spec.ts"

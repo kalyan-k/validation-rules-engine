@@ -38,6 +38,18 @@ assert.doesNotMatch(
   /"route": "\/showcases\/angular\/\*"/u,
   'Use explicit Angular SPA path prefixes instead of /showcases/angular/* which collides with /showcases/angular/'
 );
+assert.doesNotMatch(
+  staticWebAppConfig,
+  /"route": "\/showcases\/react\/\*"/u,
+  'Do not rewrite /showcases/react/*; Azure would serve index.html for CSS/JS assets'
+);
+assert.doesNotMatch(
+  staticWebAppConfig,
+  /"route": "\/showcases\/vanilla\/\*"/u,
+  'Do not rewrite /showcases/vanilla/*; Azure would serve index.html for CSS/JS assets'
+);
+assert.match(staticWebAppConfig, /"route": "\/showcases\/react\/state\/\*"/u);
+assert.match(staticWebAppConfig, /"route": "\/showcases\/vanilla\/simple"/u);
 
 const manifest = JSON.parse(readFileSync(path.join(siteRoot, 'deployment-manifest.json'), 'utf8'));
 assert.deepEqual(manifest.routes, {

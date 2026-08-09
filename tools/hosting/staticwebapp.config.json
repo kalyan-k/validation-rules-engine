@@ -71,11 +71,19 @@
       "rewrite": "/showcases/angular/index.html"
     },
     {
-      "route": "/showcases/react/*",
+      "route": "/showcases/react/state/*",
       "rewrite": "/showcases/react/index.html"
     },
     {
-      "route": "/showcases/vanilla/*",
+      "route": "/showcases/vanilla/simple",
+      "rewrite": "/showcases/vanilla/index.html"
+    },
+    {
+      "route": "/showcases/vanilla/complex",
+      "rewrite": "/showcases/vanilla/index.html"
+    },
+    {
+      "route": "/showcases/vanilla/performance",
       "rewrite": "/showcases/vanilla/index.html"
     }
   ],
@@ -91,6 +99,10 @@
     ]
   },
   "mimeTypes": {
-    ".json": "application/json"
+    ".json": "application/json",
+    ".css": "text/css",
+    ".js": "text/javascript",
+    ".mjs": "text/javascript",
+    ".webmanifest": "application/manifest+json"
   }
 }

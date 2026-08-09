@@ -2,18 +2,17 @@
   "projectName": "core",
   "displayName": "Core Engine",
   "version": "1.0.0",
-  "startedAt": "2026-08-07T01:49:44.239Z",
-  "finishedAt": "2026-08-07T01:49:48.155Z",
-  "durationMs": 3916,
+  "startedAt": "2026-08-09T00:39:44.567Z",
+  "finishedAt": "2026-08-09T00:39:46.898Z",
+  "durationMs": 2331,
   "summary": {
-    "total": 32,
-    "passed": 32,
+    "total": 16,
+    "passed": 16,
     "failed": 0,
     "skipped": 0
   },
   "browsers": [
-    "Chrome Headless 151.0.0.0 (Windows 10)",
-    "Electron 40.10.3 (Windows 10)"
+    "Chrome Headless 151.0.0.0 (Windows 10)"
   ],
   "runError": false,
   "dashboardHref": "../../../index.html",
@@ -25,7 +24,7 @@
       ],
       "description": "recognizes only message-shaped validation failures",
       "status": "passed",
-      "durationMs": 4,
+      "durationMs": 2,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/utils/validation-utils.spec.ts"
@@ -37,7 +36,7 @@
       ],
       "description": "passes model, value, and message to user-defined rules",
       "status": "passed",
-      "durationMs": 3,
+      "durationMs": 2,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/validator.spec.ts"
@@ -73,7 +72,7 @@
       ],
       "description": "creates validators with property paths and dependencies",
       "status": "passed",
-      "durationMs": 1,
+      "durationMs": 0,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/validator.spec.ts"
@@ -85,199 +84,7 @@
       ],
       "description": "supports number and inclusive minimum/maximum rules",
       "status": "passed",
-      "durationMs": 0,
-      "logs": [],
-      "sourceFiles": [
-        "packages/core/src/lib/validator.spec.ts"
-      ]
-    },
-    {
-      "suite": [
-        "Validator and ValidatorHelper"
-      ],
-      "description": "supports date and number ranges and safely accepts an unknown range type",
-      "status": "passed",
       "durationMs": 1,
-      "logs": [],
-      "sourceFiles": [
-        "packages/core/src/lib/validator.spec.ts"
-      ]
-    },
-    {
-      "suite": [
-        "Validator and ValidatorHelper"
-      ],
-      "description": "supports ZIP, phone, VIN, and SSN rules",
-      "status": "passed",
-      "durationMs": 1,
-      "logs": [],
-      "sourceFiles": [
-        "packages/core/src/lib/validator.spec.ts"
-      ]
-    },
-    {
-      "suite": [
-        "Validator and ValidatorHelper"
-      ],
-      "description": "supports string, literal regular expression, email, and date rules",
-      "status": "passed",
-      "durationMs": 1,
-      "logs": [],
-      "sourceFiles": [
-        "packages/core/src/lib/validator.spec.ts"
-      ]
-    },
-    {
-      "suite": [
-        "validation metadata utilities"
-      ],
-      "description": "resets metadata completely",
-      "status": "passed",
-      "durationMs": 1,
-      "logs": [],
-      "sourceFiles": [
-        "packages/core/src/lib/utils/validation-utils.spec.ts"
-      ]
-    },
-    {
-      "suite": [
-        "validation metadata utilities"
-      ],
-      "description": "clears touched paths by prefix and safely handles missing metadata",
-      "status": "passed",
-      "durationMs": 0,
-      "logs": [],
-      "sourceFiles": [
-        "packages/core/src/lib/utils/validation-utils.spec.ts"
-      ]
-    },
-    {
-      "suite": [
-        "validation metadata utilities"
-      ],
-      "description": "creates metadata lazily and tracks field visibility",
-      "status": "passed",
-      "durationMs": 2,
-      "logs": [],
-      "sourceFiles": [
-        "packages/core/src/lib/utils/validation-utils.spec.ts"
-      ]
-    },
-    {
-      "suite": [
-        "ValidationHelper"
-      ],
-      "description": "classifies nullish and empty values without rejecting zero or false",
-      "status": "passed",
-      "durationMs": 0,
-      "logs": [],
-      "sourceFiles": [
-        "packages/core/src/lib/validation-helper.spec.ts"
-      ]
-    },
-    {
-      "suite": [
-        "ValidationHelper"
-      ],
-      "description": "validates regular expressions and common formatted values",
-      "status": "passed",
-      "durationMs": 0,
-      "logs": [],
-      "sourceFiles": [
-        "packages/core/src/lib/validation-helper.spec.ts"
-      ]
-    },
-    {
-      "suite": [
-        "ValidationHelper"
-      ],
-      "description": "validates real dates and inclusive date ranges",
-      "status": "passed",
-      "durationMs": 0,
-      "logs": [],
-      "sourceFiles": [
-        "packages/core/src/lib/validation-helper.spec.ts"
-      ]
-    },
-    {
-      "suite": [
-        "ValidationHelper"
-      ],
-      "description": "validates checked, number, and inclusive numeric boundaries",
-      "status": "passed",
-      "durationMs": 1,
-      "logs": [],
-      "sourceFiles": [
-        "packages/core/src/lib/validation-helper.spec.ts"
-      ]
-    },
-    {
-      "suite": [
-        "validation result utilities"
-      ],
-      "description": "recognizes only message-shaped validation failures",
-      "status": "passed",
-      "durationMs": 2,
-      "logs": [],
-      "sourceFiles": [
-        "packages/core/src/lib/utils/validation-utils.spec.ts"
-      ]
-    },
-    {
-      "suite": [
-        "Validator and ValidatorHelper"
-      ],
-      "description": "passes model, value, and message to user-defined rules",
-      "status": "passed",
-      "durationMs": 1,
-      "logs": [],
-      "sourceFiles": [
-        "packages/core/src/lib/validator.spec.ts"
-      ]
-    },
-    {
-      "suite": [
-        "Validator and ValidatorHelper"
-      ],
-      "description": "uses the same empty-value semantics as ValidationHelper",
-      "status": "passed",
-      "durationMs": 0,
-      "logs": [],
-      "sourceFiles": [
-        "packages/core/src/lib/validator.spec.ts"
-      ]
-    },
-    {
-      "suite": [
-        "Validator and ValidatorHelper"
-      ],
-      "description": "decorates required and checked rules with required metadata",
-      "status": "passed",
-      "durationMs": 0,
-      "logs": [],
-      "sourceFiles": [
-        "packages/core/src/lib/validator.spec.ts"
-      ]
-    },
-    {
-      "suite": [
-        "Validator and ValidatorHelper"
-      ],
-      "description": "creates validators with property paths and dependencies",
-      "status": "passed",
-      "durationMs": 1,
-      "logs": [],
-      "sourceFiles": [
-        "packages/core/src/lib/validator.spec.ts"
-      ]
-    },
-    {
-      "suite": [
-        "Validator and ValidatorHelper"
-      ],
-      "description": "supports number and inclusive minimum/maximum rules",
-      "status": "passed",
-      "durationMs": 0,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/validator.spec.ts"
@@ -313,7 +120,7 @@
       ],
       "description": "supports string, literal regular expression, email, and date rules",
       "status": "passed",
-      "durationMs": 1,
+      "durationMs": 0,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/validator.spec.ts"
@@ -325,7 +132,7 @@
       ],
       "description": "resets metadata completely",
       "status": "passed",
-      "durationMs": 0,
+      "durationMs": 1,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/utils/validation-utils.spec.ts"
@@ -337,7 +144,7 @@
       ],
       "description": "clears touched paths by prefix and safely handles missing metadata",
       "status": "passed",
-      "durationMs": 1,
+      "durationMs": 0,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/utils/validation-utils.spec.ts"
@@ -361,7 +168,7 @@
       ],
       "description": "classifies nullish and empty values without rejecting zero or false",
       "status": "passed",
-      "durationMs": 0,
+      "durationMs": 1,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/validation-helper.spec.ts"
@@ -397,7 +204,7 @@
       ],
       "description": "validates checked, number, and inclusive numeric boundaries",
       "status": "passed",
-      "durationMs": 0,
+      "durationMs": 1,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/validation-helper.spec.ts"

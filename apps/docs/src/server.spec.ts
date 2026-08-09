@@ -8,6 +8,10 @@ test('pre-renders every catalog entry for the unified production host', () => {
   assert.equal(pages.length, documentationCatalog.length);
   assert.ok(pages.every(({ path, html }) => path.startsWith('docs/') && path.endsWith('/index.html') && html.includes('<!doctype html>')));
   assert.ok(pages.every(({ html }) => html.includes('href="/docs/styles.css"') && html.includes('src="/docs/search.js')));
+  assert.ok(
+    pages.every(({ html }) => html.includes('vanilla-url=') && html.includes('angular-url=') && html.includes('react-url=')),
+    'Documentation pages must expose showcase URLs to the platform shell (including vanilla).'
+  );
 });
 
 test('exports the browser search payload used by the static documentation site', () => {

@@ -484,7 +484,7 @@ if (!customElements.get('validation-platform-shell')) {
         <div><dt>Application</dt><dd>Core Engine</dd></div>
         <div><dt>Report</dt><dd>Test execution report</dd></div>
         <div><dt>Version</dt><dd>1.0.0</dd></div>
-        <div><dt>Generated</dt><dd>2026-08-07T01:49:48.155Z</dd></div>
+        <div><dt>Generated</dt><dd>2026-08-09T00:39:46.898Z</dd></div>
       </dl></div>
     </section>
     <script>(()=>{const root=document.currentScript.previousElementSibling;const button=root.querySelector('button');const key='vre:report-summary';const preference=sessionStorage.getItem(key);const setExpanded=(expanded,persist)=>{root.classList.toggle('collapsed',!expanded);button.setAttribute('aria-expanded',String(expanded));button.querySelector('span').textContent=expanded?'Collapse details':'Expand details';if(persist)sessionStorage.setItem(key,expanded?'expanded':'collapsed');};setExpanded(preference!=='collapsed',false);button.addEventListener('click',()=>setExpanded(button.getAttribute('aria-expanded')!=='true',true));if(preference===null)setTimeout(()=>setExpanded(false,false),10000);})();</script>
@@ -492,18 +492,18 @@ if (!customElements.get('validation-platform-shell')) {
   <div class="layout">
     <aside aria-label="Test suite navigation">
       <h2>Test suites</h2>
-      <ul><li><a href="#suite-validation-result-utilities-0">validation result utilities</a><span>2/2</span></li>
-<li><a href="#suite-validator-and-validatorhelper-1">Validator and ValidatorHelper</a><span>16/16</span></li>
-<li><a href="#suite-validation-metadata-utilities-2">validation metadata utilities</a><span>6/6</span></li>
-<li><a href="#suite-validationhelper-3">ValidationHelper</a><span>8/8</span></li></ul>
+      <ul><li><a href="#suite-validation-result-utilities-0">validation result utilities</a><span>1/1</span></li>
+<li><a href="#suite-validator-and-validatorhelper-1">Validator and ValidatorHelper</a><span>8/8</span></li>
+<li><a href="#suite-validation-metadata-utilities-2">validation metadata utilities</a><span>3/3</span></li>
+<li><a href="#suite-validationhelper-3">ValidationHelper</a><span>4/4</span></li></ul>
     </aside>
     <main>
       <div class="cards" aria-label="Test summary">
-        <div class="card"><span class="label">Total</span><strong>32</strong></div>
-        <div class="card card-pass"><span class="label">Passed</span><strong>32</strong></div>
+        <div class="card"><span class="label">Total</span><strong>16</strong></div>
+        <div class="card card-pass"><span class="label">Passed</span><strong>16</strong></div>
         <div class="card card-fail"><span class="label">Failed</span><strong>0</strong></div>
         <div class="card card-skip"><span class="label">Skipped</span><strong>0</strong></div>
-        <div class="card"><span class="label">Duration</span><strong>3.92 s</strong></div>
+        <div class="card"><span class="label">Duration</span><strong>2.33 s</strong></div>
         <div class="card"><span class="label">Suites</span><strong>4</strong></div>
       </div>
       <div class="toolbar" aria-label="Test status filters">
@@ -511,23 +511,13 @@ if (!customElements.get('validation-platform-shell')) {
         <button type="button" data-filter="passed">Passed</button>
         <button type="button" data-filter="failed">Failed</button>
         <button type="button" data-filter="skipped">Skipped</button>
-        <span class="metadata">Browser: Chrome Headless 151.0.0.0 (Windows 10), Electron 40.10.3 (Windows 10) · Started: 2026-08-07T01:49:44.239Z</span>
+        <span class="metadata">Browser: Chrome Headless 151.0.0.0 (Windows 10) · Started: 2026-08-09T00:39:44.567Z</span>
       </div>
       
       <section class="suite" id="suite-validation-result-utilities-0">
         <details open>
-          <summary><span>validation result utilities</span><span>2 passed · 0 failed · 0 skipped</span></summary>
+          <summary><span>validation result utilities</span><span>1 passed · 0 failed · 0 skipped</span></summary>
           <div class="suite-tests">
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>recognizes only message-shaped validation failures</strong>
-        <span class="duration">4 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/core/src/lib/utils/validation-utils.spec.ts</code></div>
-      
-    </article>
-
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
         <span class="status status-passed">passed</span>
@@ -542,13 +532,13 @@ if (!customElements.get('validation-platform-shell')) {
 
       <section class="suite" id="suite-validator-and-validatorhelper-1">
         <details open>
-          <summary><span>Validator and ValidatorHelper</span><span>16 passed · 0 failed · 0 skipped</span></summary>
+          <summary><span>Validator and ValidatorHelper</span><span>8 passed · 0 failed · 0 skipped</span></summary>
           <div class="suite-tests">
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>passes model, value, and message to user-defined rules</strong>
-        <span class="duration">3 ms</span>
+        <span class="duration">2 ms</span>
       </div>
       <div class="source">Source: <code>packages/core/src/lib/validator.spec.ts</code></div>
       
@@ -578,7 +568,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>creates validators with property paths and dependencies</strong>
-        <span class="duration">1 ms</span>
+        <span class="duration">0 ms</span>
       </div>
       <div class="source">Source: <code>packages/core/src/lib/validator.spec.ts</code></div>
       
@@ -588,87 +578,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>supports number and inclusive minimum/maximum rules</strong>
-        <span class="duration">0 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/core/src/lib/validator.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>supports date and number ranges and safely accepts an unknown range type</strong>
         <span class="duration">1 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/core/src/lib/validator.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>supports ZIP, phone, VIN, and SSN rules</strong>
-        <span class="duration">1 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/core/src/lib/validator.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>supports string, literal regular expression, email, and date rules</strong>
-        <span class="duration">1 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/core/src/lib/validator.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>passes model, value, and message to user-defined rules</strong>
-        <span class="duration">1 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/core/src/lib/validator.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>uses the same empty-value semantics as ValidationHelper</strong>
-        <span class="duration">0 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/core/src/lib/validator.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>decorates required and checked rules with required metadata</strong>
-        <span class="duration">0 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/core/src/lib/validator.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>creates validators with property paths and dependencies</strong>
-        <span class="duration">1 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/core/src/lib/validator.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>supports number and inclusive minimum/maximum rules</strong>
-        <span class="duration">0 ms</span>
       </div>
       <div class="source">Source: <code>packages/core/src/lib/validator.spec.ts</code></div>
       
@@ -698,7 +608,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>supports string, literal regular expression, email, and date rules</strong>
-        <span class="duration">1 ms</span>
+        <span class="duration">0 ms</span>
       </div>
       <div class="source">Source: <code>packages/core/src/lib/validator.spec.ts</code></div>
       
@@ -708,7 +618,7 @@ if (!customElements.get('validation-platform-shell')) {
 
       <section class="suite" id="suite-validation-metadata-utilities-2">
         <details open>
-          <summary><span>validation metadata utilities</span><span>6 passed · 0 failed · 0 skipped</span></summary>
+          <summary><span>validation metadata utilities</span><span>3 passed · 0 failed · 0 skipped</span></summary>
           <div class="suite-tests">
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
@@ -725,36 +635,6 @@ if (!customElements.get('validation-platform-shell')) {
         <span class="status status-passed">passed</span>
         <strong>clears touched paths by prefix and safely handles missing metadata</strong>
         <span class="duration">0 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/core/src/lib/utils/validation-utils.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>creates metadata lazily and tracks field visibility</strong>
-        <span class="duration">2 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/core/src/lib/utils/validation-utils.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>resets metadata completely</strong>
-        <span class="duration">0 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/core/src/lib/utils/validation-utils.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>clears touched paths by prefix and safely handles missing metadata</strong>
-        <span class="duration">1 ms</span>
       </div>
       <div class="source">Source: <code>packages/core/src/lib/utils/validation-utils.spec.ts</code></div>
       
@@ -774,53 +654,13 @@ if (!customElements.get('validation-platform-shell')) {
 
       <section class="suite" id="suite-validationhelper-3">
         <details open>
-          <summary><span>ValidationHelper</span><span>8 passed · 0 failed · 0 skipped</span></summary>
+          <summary><span>ValidationHelper</span><span>4 passed · 0 failed · 0 skipped</span></summary>
           <div class="suite-tests">
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>classifies nullish and empty values without rejecting zero or false</strong>
-        <span class="duration">0 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/core/src/lib/validation-helper.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>validates regular expressions and common formatted values</strong>
-        <span class="duration">0 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/core/src/lib/validation-helper.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>validates real dates and inclusive date ranges</strong>
-        <span class="duration">0 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/core/src/lib/validation-helper.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>validates checked, number, and inclusive numeric boundaries</strong>
         <span class="duration">1 ms</span>
-      </div>
-      <div class="source">Source: <code>packages/core/src/lib/validation-helper.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>classifies nullish and empty values without rejecting zero or false</strong>
-        <span class="duration">0 ms</span>
       </div>
       <div class="source">Source: <code>packages/core/src/lib/validation-helper.spec.ts</code></div>
       
@@ -850,7 +690,7 @@ if (!customElements.get('validation-platform-shell')) {
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>validates checked, number, and inclusive numeric boundaries</strong>
-        <span class="duration">0 ms</span>
+        <span class="duration">1 ms</span>
       </div>
       <div class="source">Source: <code>packages/core/src/lib/validation-helper.spec.ts</code></div>
       

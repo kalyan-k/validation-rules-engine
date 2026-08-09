@@ -34,8 +34,9 @@ npm run evidence:publish
 | `artifacts/playwright/json/` | `hosted/evidence/playwright/json/` |
 | `artifacts/playwright/junit/` | `hosted/evidence/playwright/junit/` |
 | `artifacts/playwright/catalog/` | `hosted/evidence/playwright/catalog/` |
+| `artifacts/playwright/visual-diffs/` (when present) | `hosted/evidence/playwright/visual-diffs/` |
 
-Videos, traces, screenshots, and visual diffs are excluded by default so the repo stays within Static Web Apps size limits.
+Videos, traces, and screenshots stay local. If visual diffs are missing, a placeholder page is published at `playwright/visual-diffs/index.html` so the Automation “Visual diffs” link does not 404.
 
 ## Deploy behavior
 
