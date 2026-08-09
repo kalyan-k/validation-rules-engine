@@ -26,20 +26,38 @@ export function withSiteBase(pathname, siteBase = getSiteBasePath()) {
   return `${siteBase}${normalized}`;
 }
 
+function prefixPath(pathname, siteBase) {
+  if (!siteBase || typeof pathname !== 'string' || !pathname.startsWith('/')) {
+    return pathname;
+  }
+  if (pathname.startsWith('//')) {
+    return pathname;
+  }
+  if (pathname === siteBase || pathname.startsWith(`${siteBase}/`)) {
+    return pathname;
+  }
+  return `${siteBase}${pathname}`;
+}
+
 /**
- * Prefix root-absolute paths (href="/...", src='/...', url(/...)) with the site base.
- * Safe to run once; skips values that already start with the base path.
+ * Prefix root-absolute paths in HTML attributes and CSS url(...) with the site base.
+ * Only rewrites quoted attribute values and url() references — never bare `/.../` sequences,
+ * which would corrupt JavaScript regex literals (e.g. /\/$/ or /^https?:$/u).
  */
 export function prefixRootAbsolutePaths(content, siteBase = getSiteBasePath()) {
   if (!siteBase || typeof content !== 'string' || !content.includes('/')) {
     return content;
   }
 
-  return content.replace(/(^|[\s(["'=]|url\()(\/)(?!\/)/gu, (full, lead, _slash, offset, source) => {
-    const rest = source.slice(offset + lead.length);
-    if (rest.startsWith(siteBase)) {
-      return full;
-    }
-    return `${lead}${siteBase}/`;
-  });
+  let result = content.replace(
+    /\b((?:href|src|action|poster|formaction|cite|xlink:href|data-[\w-]+))=(["'])(\/(?!\/)[^"']*)\2/gu,
+    (_full, attr, quote, pathname) => `${attr}=${quote}${prefixPath(pathname, siteBase)}${quote}`
+  );
+
+  result = result.replace(
+    /url\(\s*(['"]?)(\/(?!\/)[^)"']*)\1\s*\)/gu,
+    (_full, quote, pathname) => `url(${quote}${prefixPath(pathname, siteBase)}${quote})`
+  );
+
+  return result;
 }

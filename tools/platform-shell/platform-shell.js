@@ -213,7 +213,7 @@ class ValidationPlatformShell extends HTMLElement {
     const activeApplication = this.getAttribute('active-application') || '';
     const applicationName = this.getAttribute('application-name') || 'Platform';
     const version = this.getAttribute('version') || '0.0.0';
-    const brandMarkUrl = this.getAttribute('brand-mark-url') || '/vre-mark.svg';
+    const brandMarkUrl = this.getAttribute('brand-mark-url') || withSiteBasePath('/vre-mark.svg');
     const defaultPortalUrl = currentOriginWhen(activeApplication, ['portal', 'reports'], developmentOrigin(4200));
     const urls = {
       portal: configuredBase('portal', this.getAttribute('portal-url'), defaultPortalUrl),

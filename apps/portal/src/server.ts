@@ -280,11 +280,15 @@ function escapeHtml(value: string): string {
 }
 
 function platformConfigScript(): string {
+  // Node single/multi-host always serves at domain root. GitHub Pages base paths are applied
+  // only in the static dist/site artifact via VRE_SITE_BASE_PATH.
   return String.raw`(() => {
   const configured = ${JSON.stringify(platformUrls)};
+  const siteBase = '';
   const currentOrigin = globalThis.location?.origin ?? '';
   const resolveUrl = (value) => value ? new URL(value, currentOrigin + '/').href.replace(/\/$/, '') : currentOrigin;
   globalThis.vrePlatformConfig = globalThis.vrePlatformConfig || {
+    siteBase,
     urls: Object.fromEntries(Object.entries(configured).map(([key, value]) => [key, resolveUrl(value)]))
   };
 })();`;

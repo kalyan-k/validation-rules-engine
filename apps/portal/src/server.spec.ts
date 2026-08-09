@@ -22,13 +22,14 @@ test('serves an executable browser runtime configuration', async () => {
     const context = { URL, location: { origin } } as {
       URL: typeof URL;
       location: { origin: string };
-      vrePlatformConfig?: { urls?: Record<string, string> };
+      vrePlatformConfig?: { siteBase?: string; urls?: Record<string, string> };
     };
     runInNewContext(await response.text(), context);
     const expectedUrls = Object.fromEntries(Object.entries(platformUrls).map(([key, value]) => [
       key,
       value ? new URL(value, `${origin}/`).href.replace(/\/$/, '') : origin
     ]));
+    assert.equal(context.vrePlatformConfig?.siteBase, '');
     assert.deepEqual({ ...context.vrePlatformConfig?.urls }, expectedUrls);
   } finally {
     await new Promise<void>((resolve) => server.close(() => resolve()));

@@ -52,6 +52,7 @@ assert.match(staticWebAppConfig, /"route": "\/showcases\/react\/state\/\*"/u);
 assert.match(staticWebAppConfig, /"route": "\/showcases\/vanilla\/simple"/u);
 
 const manifest = JSON.parse(readFileSync(path.join(siteRoot, 'deployment-manifest.json'), 'utf8'));
+assert.equal(manifest.siteBase, '/');
 assert.deepEqual(manifest.routes, {
   portal: '/',
   documentation: '/docs/',
@@ -64,6 +65,8 @@ assert.deepEqual(manifest.routes, {
 
 const portalIndex = readFileSync(path.join(siteRoot, 'index.html'), 'utf8');
 assert.doesNotMatch(portalIndex, /http:\/\/127\.0\.0\.1:42(?:00|01|02|03|04|05)/u);
+assert.match(portalIndex, /href="\/platform-shell\.css"/u);
+assert.doesNotMatch(portalIndex, /\/validation-rules-engine\//u);
 
 const angularIndex = readFileSync(path.join(siteRoot, 'showcases', 'angular', 'index.html'), 'utf8');
 assert.match(angularIndex, /<base href="\/showcases\/angular\/">/u);
@@ -76,6 +79,9 @@ assert.match(docsIndex, /href="\/docs\/styles\.css"/u);
 assert.doesNotMatch(docsIndex, /127\.0\.0\.1/u);
 
 const rootPlatformConfig = readFileSync(path.join(siteRoot, 'platform-config.js'), 'utf8');
+assert.match(rootPlatformConfig, /const siteBase = "";/u);
+assert.match(rootPlatformConfig, /\.replace\(\/\\\/\$\/,\s*''\)/u);
+assert.doesNotMatch(rootPlatformConfig, /validation-rules-engine/u);
 assert.equal(
   readFileSync(path.join(siteRoot, 'showcases', 'angular', 'platform-config.js'), 'utf8'),
   rootPlatformConfig
@@ -161,6 +167,7 @@ try {
   assert.doesNotMatch(portalHtml, /http:\/\/127\.0\.0\.1:42(?:00|01|02|03|04|05)/u);
   const runtimeConfigDom = new JSDOM('<!doctype html>', { runScripts: 'dangerously', url: origin });
   runtimeConfigDom.window.eval(await (await fetch(`${origin}/platform-config.js`)).text());
+  assert.equal(runtimeConfigDom.window.vrePlatformConfig.siteBase, '');
   assert.deepEqual({ ...runtimeConfigDom.window.vrePlatformConfig.urls }, {
     portal: origin,
     docs: origin,
@@ -172,6 +179,10 @@ try {
   const status = await (await fetch(`${origin}/api/status`)).json();
   assert.equal(status.applications.length, 4);
   assert.ok(status.applications.every(({ state }) => state === 'healthy'));
+  const statusJson = await (await fetch(`${origin}/api/status.json`)).json();
+  assert.equal(statusJson.applications.length, 4);
+  const metaJson = await (await fetch(`${origin}/api/meta.json`)).json();
+  assert.ok(metaJson.version);
 } finally {
   await new Promise((resolve) => server.close(resolve));
 }
