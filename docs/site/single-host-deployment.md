@@ -53,7 +53,7 @@ The production server accepts:
 
 - `VRE_PORTAL_PORT`: public listening port; defaults to `4200` outside the container.
 - `VRE_HOST`: listening interface; defaults to `0.0.0.0` in unified-host mode.
-- `VRE_PUBLIC_URL`: optional canonical public origin, such as `https://validation-rules-engine.azurewebsites.net`. Leave it unset to derive the origin automatically from each browser request.
+- `VRE_PUBLIC_URL`: optional canonical public origin, such as `https://kalyan-k.github.io/validation-rules-engine`. Leave it unset to derive the origin automatically from each browser request.
 - `VRE_SITE_BASE_PATH`: optional public path prefix when the site is not hosted at domain root (GitHub Pages project sites). Leave unset for local, Docker, and Azure Static Web Apps.
 - `VRE_CONTACT_FORM_URL`: optional Google Form embed URL (`https://docs.google.com/forms/d/e/.../viewform?embedded=true`). Injected into `platform-config.js` at build time for the Contact page. Store it as a GitHub Actions secret named `VRE_CONTACT_FORM_URL` so it is not committed to the public repository.
 - `VRE_NO_OPEN=1`: prevents opening a browser on server startup.
@@ -113,11 +113,11 @@ For the full Node unified host (dynamic `/api/*`, process health, optional live 
 For an App Service custom container, set `WEBSITES_PORT=8080`. An optional canonical-domain configuration looks like:
 
 ```text
-VRE_PUBLIC_URL=https://validation-rules-engine.azurewebsites.net
+VRE_PUBLIC_URL=https://kalyan-k.github.io/validation-rules-engine
 VRE_NO_OPEN=1
 ```
 
-Replace the example with the assigned `azurewebsites.net` URL or a verified custom domain. The setting is optional when the platform is hosted at the root of a single Azure origin.
+Replace the example with your public origin (GitHub Pages, Azure Static Web Apps / App Service URL, or a verified custom domain). The setting is optional when the platform is hosted at the root of a single origin.
 
 ## Container deployment
 

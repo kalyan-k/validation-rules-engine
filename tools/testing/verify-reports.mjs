@@ -77,6 +77,10 @@ function verifyLocalLinks(htmlFile, failures) {
     if (!target || /^(?:#|data:|https?:|javascript:|mailto:)/iu.test(target)) {
       continue;
     }
+    // Root-absolute platform assets are served by the host (portal/site), not the reports tree.
+    if (target.startsWith('/')) {
+      continue;
+    }
 
     const decodedTarget = decodeURIComponent(target.split(/[?#]/u, 1)[0]);
     const targetPath = path.resolve(path.dirname(htmlFile), decodedTarget);
@@ -150,18 +154,20 @@ function verifyProject(projectName, failures) {
   requireText(testHtml, 'data-filter="failed"', testHtmlPath, failures);
   requireText(testHtml, 'data-filter="skipped"', testHtmlPath, failures);
   requireText(testHtml, 'Source:', testHtmlPath, failures);
-  requireText(testHtml, 'aria-label="Platform navigation"', testHtmlPath, failures);
-  requireText(testHtml, 'Validation Rules Engine', testHtmlPath, failures);
+  requireText(testHtml, 'application-name="Reports"', testHtmlPath, failures);
   requireText(testHtml, 'data-report-summary', testHtmlPath, failures);
   requireText(testHtml, 'vre:report-summary', testHtmlPath, failures);
-  requireText(testHtml, 'data:image/svg+xml;base64', testHtmlPath, failures);
+  requireText(testHtml, 'src="/platform-shell.js"', testHtmlPath, failures);
+  requireText(testHtml, 'href="/platform-shell.css"', testHtmlPath, failures);
+  requireText(testHtml, 'brand-mark-url="/vre-mark.svg"', testHtmlPath, failures);
   requireText(testHtml, '<validation-platform-shell active-application="reports"', testHtmlPath, failures);
   requireText(testHtml, '<script src="/platform-config.js"></script>', testHtmlPath, failures);
-  requireText(coverageWrapper, 'aria-label="Platform navigation"', coverageWrapperPath, failures);
   requireText(coverageWrapper, 'src="./coverage/index.html"', coverageWrapperPath, failures);
   requireText(coverageWrapper, 'data-report-summary', coverageWrapperPath, failures);
   requireText(coverageWrapper, 'vre:report-summary', coverageWrapperPath, failures);
-  requireText(coverageWrapper, 'data:image/svg+xml;base64', coverageWrapperPath, failures);
+  requireText(coverageWrapper, 'src="/platform-shell.js"', coverageWrapperPath, failures);
+  requireText(coverageWrapper, 'href="/platform-shell.css"', coverageWrapperPath, failures);
+  requireText(coverageWrapper, 'brand-mark-url="/vre-mark.svg"', coverageWrapperPath, failures);
   requireText(coverageWrapper, '<validation-platform-shell active-application="reports"', coverageWrapperPath, failures);
   requireText(coverageWrapper, '<script src="/platform-config.js"></script>', coverageWrapperPath, failures);
   requireText(junit, '<testsuites ', junitPath, failures);

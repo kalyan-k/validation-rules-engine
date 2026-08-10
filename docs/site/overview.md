@@ -28,10 +28,20 @@ The repository contains three publishable packages and several private applicati
 
 ## Live demos
 
+Hosted demo (GitHub Pages):
+
+- [Portal](https://kalyan-k.github.io/validation-rules-engine/)
+- [Documentation](https://kalyan-k.github.io/validation-rules-engine/docs/overview)
+- [Vanilla JS Showcase](https://kalyan-k.github.io/validation-rules-engine/showcases/vanilla/)
+- [Angular Showcase](https://kalyan-k.github.io/validation-rules-engine/showcases/angular/)
+- [React Showcase](https://kalyan-k.github.io/validation-rules-engine/showcases/react/)
+
+Local single-host (`npm start`):
+
 - [Open Portal](http://127.0.0.1:4200/)
-- [Vanilla Showcase](http://127.0.0.1:4205/)
-- [Angular Showcase](http://127.0.0.1:4202/)
-- [React Showcase](http://127.0.0.1:4204/)
+- [Vanilla Showcase](http://127.0.0.1:4200/showcases/vanilla/)
+- [Angular Showcase](http://127.0.0.1:4200/showcases/angular/)
+- [React Showcase](http://127.0.0.1:4200/showcases/react/)
 
 ## Where to go next
 

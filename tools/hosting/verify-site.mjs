@@ -98,7 +98,7 @@ assert.equal(
 );
 const shellDom = new JSDOM('<!doctype html><body></body>', {
   runScripts: 'dangerously',
-  url: 'https://validation-rules-engine.azurewebsites.net/showcases/react/state/local-state'
+  url: 'https://example.com/showcases/react/state/local-state'
 });
 shellDom.window.fetch = async () => ({
   ok: true,
@@ -111,22 +111,22 @@ shell.setAttribute('active-application', 'react-showcase');
 shellDom.window.document.body.append(shell);
 assert.equal(
   shell.shadowRoot.querySelector('.platform-docs-dropdown a')?.getAttribute('href'),
-  'https://validation-rules-engine.azurewebsites.net/docs/overview'
+  'https://example.com/docs/overview'
 );
 assert.equal(
   shell.shadowRoot.querySelector('.platform-footer-columns a')?.getAttribute('href'),
-  'https://validation-rules-engine.azurewebsites.net/'
+  'https://example.com/'
 );
 assert.ok(
   [...shell.shadowRoot.querySelectorAll('.platform-footer-columns a')]
-    .some((link) => link.getAttribute('href') === 'https://validation-rules-engine.azurewebsites.net/docs/overview')
+    .some((link) => link.getAttribute('href') === 'https://example.com/docs/overview')
 );
 const showcaseLinks = [...shell.shadowRoot.querySelectorAll('.platform-nav-group')][1]
   .querySelectorAll('a');
 assert.deepEqual([...showcaseLinks].map((link) => link.getAttribute('href')), [
-  'https://validation-rules-engine.azurewebsites.net/showcases/vanilla/',
-  'https://validation-rules-engine.azurewebsites.net/showcases/angular/',
-  'https://validation-rules-engine.azurewebsites.net/showcases/react/'
+  'https://example.com/showcases/vanilla/',
+  'https://example.com/showcases/angular/',
+  'https://example.com/showcases/react/'
 ]);
 shellDom.window.close();
 

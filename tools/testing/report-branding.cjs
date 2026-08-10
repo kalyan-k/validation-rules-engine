@@ -1,12 +1,5 @@
 'use strict';
 
-const fs = require('node:fs');
-const path = require('node:path');
-const shellRoot = path.join(__dirname, '..', 'platform-shell');
-const shellStyles = fs.readFileSync(path.join(shellRoot, 'platform-shell.css'), 'utf8');
-const shellScript = fs.readFileSync(path.join(shellRoot, 'platform-shell.js'), 'utf8');
-const logoDataUri = `data:image/svg+xml;base64,${fs.readFileSync(path.join(shellRoot, 'vre-mark.svg')).toString('base64')}`;
-
 function escapeHtml(value) {
   return String(value ?? '')
     .replaceAll('&', '&amp;')
@@ -17,16 +10,18 @@ function escapeHtml(value) {
 }
 
 function reportHeadAssets() {
-  const serializedStyles = JSON.stringify(shellStyles).replaceAll('<', '\\u003c');
-  return `<meta name="theme-color" content="#10243e"><link rel="icon" href="${logoDataUri}" type="image/svg+xml">
+  // Use shared shell assets (not an inlined snapshot) so Reports stays aligned with
+  // Portal/Docs/Showcases after shell updates (About, search placement, footer, etc.).
+  return `<meta name="theme-color" content="#10243e"><link rel="icon" href="/vre-mark.svg" type="image/svg+xml">
   <script src="/platform-config.js"></script>
-  <style>${shellStyles}</style>
-  <script>globalThis.validationPlatformShellStyles=${serializedStyles};${shellScript}</script>`;
+  <link rel="preload" href="/platform-shell.css" as="style">
+  <link rel="stylesheet" href="/platform-shell.css">
+  <script src="/platform-shell.js"></script>`;
 }
 
 function renderReportHeader({ applicationName, reportType, generatedAt, version }) {
   const summaryId = `report-summary-${String(applicationName).toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
-  return `<validation-platform-shell active-application="reports" application-name="Reports" version="${escapeHtml(version)}" brand-mark-url="${logoDataUri}">
+  return `<validation-platform-shell active-application="reports" application-name="Reports" version="${escapeHtml(version)}" brand-mark-url="/vre-mark.svg">
     <section class="vr-report-summary" data-report-summary>
       <div class="vr-report-summary__heading">
         <div><span class="vr-report-eyebrow">${escapeHtml(applicationName)}</span><h1>${escapeHtml(reportType)}</h1></div>

@@ -8,6 +8,24 @@ Validation Rules Engine (VRE) is an extensible monorepo for policy-driven model 
 
 The repository ships a core engine plus production Angular and React adapters inside a multi-application developer platform. A framework-neutral portal launches the documentation site, Angular showcases, a hooks-first React showcase, and a vanilla TypeScript core showcase from one command.
 
+## Hosted demo
+
+The public single-host demo is on GitHub Pages:
+
+**https://kalyan-k.github.io/validation-rules-engine/**
+
+| Surface | URL |
+| --- | --- |
+| Portal | https://kalyan-k.github.io/validation-rules-engine/ |
+| Documentation | https://kalyan-k.github.io/validation-rules-engine/docs/overview |
+| Vanilla JS Showcase | https://kalyan-k.github.io/validation-rules-engine/showcases/vanilla/ |
+| Angular Showcase | https://kalyan-k.github.io/validation-rules-engine/showcases/angular/ |
+| React Showcase | https://kalyan-k.github.io/validation-rules-engine/showcases/react/ |
+| Tests & Coverage | https://kalyan-k.github.io/validation-rules-engine/reports/index.html |
+| Automation Testing | https://kalyan-k.github.io/validation-rules-engine/automation/ |
+| About | https://kalyan-k.github.io/validation-rules-engine/about/ |
+| Contact | https://kalyan-k.github.io/validation-rules-engine/contact/ |
+
 ## Key features
 
 - Fluent, reusable validation rules organized into named policies
@@ -225,7 +243,7 @@ The command builds and verifies one production host at `http://127.0.0.1:4200`. 
 
 The application registry in `apps/portal/src/applications.ts` is the single place to add a future showcase application. Each application remains independently runnable and communicates through stable local URLs.
 
-All browser applications use the framework-neutral shell in `tools/platform-shell`. It provides one product identity, a compact Home / Docs / Showcases / Reports / GitHub navigation, footer, page width, spacing system, breadcrumbs, action bars, cards, responsive breakpoints, and shared logo/icon assets while leaving each application's framework-specific components intact. The shell stylesheet is preloaded and the custom element is defined before application scripts to avoid navigation flicker.
+All browser applications use the framework-neutral shell in `tools/platform-shell`. It provides one product identity, a compact Home / Docs / Showcases / Reports / About / Contact / GitHub navigation, footer, page width, spacing system, breadcrumbs, action bars, cards, responsive breakpoints, and shared logo/icon assets while leaving each application's framework-specific components intact. The shell stylesheet is preloaded and the custom element is defined before application scripts to avoid navigation flicker.
 
 Documentation search is performed from a browser-cached index and returns highlighted title, heading, prose, and code matches with direct section links and full keyboard navigation. Generated reports use the exact shared application shell: collapsible Packages and Showcase Applications groups plus Summary / Tests / Coverage tabs update one workspace, while the original Istanbul output remains unchanged.
 
