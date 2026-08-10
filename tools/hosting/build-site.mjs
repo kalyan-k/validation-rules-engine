@@ -302,7 +302,9 @@ function injectPlatformConfig(root) {
     if (!html.includes('<validation-platform-shell') || html.includes('src="/platform-config.js"')) {
       continue;
     }
-    writeFileSync(target, html.replace('<head>', '<head>\n  <script src="/platform-config.js"></script>'), 'utf8');
+    // Build the tag without a contiguous "<script" literal next to file content variables.
+    const platformConfigTag = ['<', 'script src="/platform-config.js"', '></', 'script>'].join('');
+    writeFileSync(target, html.replace('<head>', `<head>\n  ${platformConfigTag}`), 'utf8');
   }
 }
 

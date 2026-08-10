@@ -90,6 +90,56 @@ Quick scans may treat missing optional CLIs (Gitleaks/Semgrep/ODC/ZAP) as skippe
 
 Orchestration is Node-based for PowerShell/Git Bash/CI. Install Gitleaks and Semgrep so `where gitleaks` / `where semgrep` succeed. Dependency-Check can use Docker Desktop when the native CLI is absent.
 
+### Docker Desktop setup (Windows) for Dependency-Check / ZAP
+
+Dependency-Check uses the `owasp/dependency-check` image when the native CLI is not installed. ZAP also needs Docker.
+
+1. Install [Docker Desktop for Windows](https://docs.docker.com/desktop/setup/install/windows-install/) if needed.
+2. Start **Docker Desktop** from the Start menu.
+3. Wait until the whale icon shows **Docker Desktop is running** (engine ready).  
+   If you see `failed to connect ... dockerDesktopLinuxEngine`, the engine is not up yet.
+4. In PowerShell, confirm the daemon:
+   ```powershell
+   docker version
+   docker info
+   ```
+   Both should succeed without connection errors.
+5. Pull the Dependency-Check image (first run can take several minutes):
+   ```powershell
+   docker pull owasp/dependency-check:latest
+   ```
+6. Re-run:
+   ```powershell
+   npm run security:dependencies
+   # or
+   npm run security:full
+   ```
+7. **Required for a reliable first NVD download:** create a free [NVD API key](https://nvd.nist.gov/developers/request-an-api-key).
+
+   **Recommended (works for PowerShell and Command Prompt):**
+   ```powershell
+   copy tools\security\config\nvd-api-key.local.example tools\security\config\nvd-api-key.local
+   # edit nvd-api-key.local and paste only your key on one line
+   npm run security:dependencies
+   ```
+   `nvd-api-key.local` is gitignored.
+
+   **Or set the env var in the same shell that runs npm** (PowerShell and cmd do not share variables):
+   ```powershell
+   # PowerShell
+   $env:NVD_API_KEY = "your-key"
+   npm run security:full
+   ```
+   ```bat
+   REM Command Prompt
+   set NVD_API_KEY=your-key
+   npm run security:full
+   ```
+
+   Without a valid key visible to the npm process, Dependency-Check often fails while updating NVD data. npm audit remains the primary SCA gate if Dependency-Check cannot run.
+
+If you prefer not to use Docker locally, install the [OWASP Dependency-Check CLI](https://github.com/jeremylong/DependencyCheck) and put `dependency-check` on your `PATH`. CI still runs Dependency-Check when Docker is available on the runner.
+
 ## False positives
 
 Never disable a scanner to silence noise. Prefer narrow suppressions:
@@ -133,9 +183,12 @@ Security reports are available under `reports/security/`. Portal UI integration 
 | --- | --- |
 | `gitleaks is not installed` | Install CLI or rely on CI; quick profile can skip |
 | Semgrep missing | `pip install semgrep` and ensure Scripts dir is on PATH |
-| Dependency-Check ERROR | Install CLI or start Docker; set `NVD_API_KEY` if NVD throttles |
+| Dependency-Check ERROR / `dockerDesktopLinuxEngine` | Start Docker Desktop and wait until ready; see Docker setup above |
+| Dependency-Check ERROR / NVD update / `No documents exist` | Set a non-empty `$env:NVD_API_KEY` and retry with Docker running |
+| Dependency-Check FAIL with HTML/JSON reports | Real CVSS findings; review `reports/security/dependency-check/` |
 | ZAP ERROR | Start target site, set `ZAP_TARGET_URL`, ensure Docker works |
-| SBOM fails | Run `npm run build:packages` first |
+| SBOM fails with npx/`ECOMPROMISED`/`Cannot find module './scan'` | Run `npm ci` (CycloneDX is a workspace devDependency; avoid relying on a corrupted npx cache) |
+| SBOM CLI missing | Ensure `@cyclonedx/cyclonedx-npm` is installed via `npm ci` |
 
 ## Configuration
 

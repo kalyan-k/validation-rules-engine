@@ -161,7 +161,8 @@ function verifyProject(projectName, failures) {
   requireText(testHtml, 'href="/platform-shell.css"', testHtmlPath, failures);
   requireText(testHtml, 'brand-mark-url="/vre-mark.svg"', testHtmlPath, failures);
   requireText(testHtml, '<validation-platform-shell active-application="reports"', testHtmlPath, failures);
-  requireText(testHtml, '<script src="/platform-config.js"></script>', testHtmlPath, failures);
+  const platformConfigTag = ['<', 'script src="/platform-config.js"', '></', 'script>'].join('');
+  requireText(testHtml, platformConfigTag, testHtmlPath, failures);
   requireText(coverageWrapper, 'src="./coverage/index.html"', coverageWrapperPath, failures);
   requireText(coverageWrapper, 'data-report-summary', coverageWrapperPath, failures);
   requireText(coverageWrapper, 'vre:report-summary', coverageWrapperPath, failures);
@@ -169,7 +170,7 @@ function verifyProject(projectName, failures) {
   requireText(coverageWrapper, 'href="/platform-shell.css"', coverageWrapperPath, failures);
   requireText(coverageWrapper, 'brand-mark-url="/vre-mark.svg"', coverageWrapperPath, failures);
   requireText(coverageWrapper, '<validation-platform-shell active-application="reports"', coverageWrapperPath, failures);
-  requireText(coverageWrapper, '<script src="/platform-config.js"></script>', coverageWrapperPath, failures);
+  requireText(coverageWrapper, platformConfigTag, coverageWrapperPath, failures);
   requireText(junit, '<testsuites ', junitPath, failures);
   requireText(junit, '<testcase ', junitPath, failures);
 

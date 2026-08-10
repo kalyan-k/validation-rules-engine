@@ -29,6 +29,7 @@
     "enabled": true,
     "failOnCVSS": 7,
     "nvdApiKeyEnv": "NVD_API_KEY",
+    "nvdApiKeyFile": "tools/security/config/nvd-api-key.local",
     "limitations": [
       "OWASP Dependency-Check has incomplete coverage for npm/package-lock graphs compared with npm audit.",
       "Treat Dependency-Check as an independent SCA signal, not a replacement for npm audit."

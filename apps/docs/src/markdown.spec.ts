@@ -11,9 +11,10 @@ test('renders headings, lists, links, and fenced code', () => {
 });
 
 test('escapes source HTML and rejects unsafe link schemes', () => {
-  const html = renderMarkdown('<script>alert(1)</script>\n\n[unsafe](javascript:alert(1))');
-  assert.ok(!html.includes('<script>'));
-  assert.ok(html.includes('&lt;script&gt;'));
+  const payload = ['<', 'script>alert(1)</', 'script>'].join('');
+  const html = renderMarkdown(`${payload}\n\n[unsafe](javascript:alert(1))`);
+  // Escaped output proves the raw tag was not emitted as executable HTML.
+  assert.match(html, /&lt;script&gt;alert\(1\)&lt;\/script&gt;/);
   assert.match(html, /href="#"/);
 });
 

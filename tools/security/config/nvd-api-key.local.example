@@ -1,0 +1,7 @@
+# Copy this file to nvd-api-key.local (gitignored) and replace with your real key.
+# Get a free key: https://nvd.nist.gov/developers/request-an-api-key
+#
+# Example:
+# abcdef12-3456-7890-abcd-ef1234567890
+
+YOUR_NVD_API_KEY_HERE

@@ -1,9 +1,9 @@
+import { existsSync } from 'node:fs';
 import path from 'node:path';
-import { Exit, loadPolicy, npmCommand, reportsDir, runCommand, summarizeResult, workspaceRoot, writeJsonReport, writeReport } from '../lib/security-common.mjs';
+import { Exit, loadPolicy, reportsDir, runCommand, summarizeResult, workspaceRoot, writeJsonReport, writeReport } from '../lib/security-common.mjs';
 
 const policy = loadPolicy();
 const outDir = reportsDir('sbom');
-const npmCmd = npmCommand();
 
 const packageWorkspaces = [
   ['core', '@validation-rules-engine/core'],
@@ -11,16 +11,31 @@ const packageWorkspaces = [
   ['react', '@validation-rules-engine/react']
 ];
 
+const localCliCandidates = [
+  path.join(workspaceRoot, 'node_modules', '@cyclonedx', 'cyclonedx-npm', 'bin', 'cyclonedx-npm-cli.js'),
+  path.join(workspaceRoot, 'node_modules', '.bin', 'cyclonedx-npm')
+];
+const localCli = localCliCandidates.find((candidate) => existsSync(candidate));
+
+if (!localCli) {
+  const output = summarizeResult({
+    scanner: 'sbom',
+    status: Exit.ERROR,
+    summary: 'CycloneDX CLI is not installed in this workspace. Run npm ci / npm install so @cyclonedx/cyclonedx-npm is available.',
+    details: { standard: policy.sbom.standard },
+    reportPaths: []
+  });
+  writeJsonReport('sbom', 'summary.json', output);
+  console.log(JSON.stringify(output));
+  process.exit(Exit.ERROR);
+}
+
 const reportPaths = [];
 const failures = [];
 
 for (const [slug, workspaceName] of packageWorkspaces) {
   const outputFile = path.join(outDir, `${slug}.cdx.json`);
-  const result = runCommand(npmCmd, [
-    'exec',
-    '--yes',
-    '@cyclonedx/cyclonedx-npm@3.1.0',
-    '--',
+  const result = runCycloneDx([
     '--output-file', outputFile,
     '--output-reproducible',
     '--package-lock-only',
@@ -38,11 +53,7 @@ for (const [slug, workspaceName] of packageWorkspaces) {
 }
 
 const workspaceSbom = path.join(outDir, 'workspace.cdx.json');
-const workspaceResult = runCommand(npmCmd, [
-  'exec',
-  '--yes',
-  '@cyclonedx/cyclonedx-npm@3.1.0',
-  '--',
+const workspaceResult = runCycloneDx([
   '--output-file', workspaceSbom,
   '--output-reproducible',
   '--package-lock-only',
@@ -68,10 +79,19 @@ const output = summarizeResult({
   summary,
   details: {
     standard: policy.sbom.standard,
-    note: 'SBOMs are generated from the workspace lockfile (package-lock-only) for publishable workspaces and the monorepo root.'
+    cli: path.relative(workspaceRoot, localCli),
+    note: 'SBOMs are generated from the workspace lockfile (package-lock-only) via the locally installed @cyclonedx/cyclonedx-npm package.'
   },
   reportPaths
 });
 writeJsonReport('sbom', 'summary.json', output);
 console.log(JSON.stringify(output));
 process.exit(output.status);
+
+function runCycloneDx(args) {
+  // Prefer the JS entrypoint through Node so Windows .cmd shims are unnecessary.
+  if (localCli.endsWith('.js')) {
+    return runCommand(process.execPath, [localCli, ...args]);
+  }
+  return runCommand(localCli, args);
+}

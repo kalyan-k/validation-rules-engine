@@ -20,6 +20,33 @@ function escapeHtml(value) {
   return String(value ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
 }
 
+function createIntegrationLinks(application, isOpen) {
+  const details = document.createElement('details');
+  details.className = 'integration-links';
+  details.dataset.integrationKey = application.shortTitle;
+  details.open = Boolean(isOpen);
+
+  const summary = document.createElement('summary');
+  summary.textContent = `Explore ${application.shortTitle} integrations`;
+
+  const container = document.createElement('div');
+  for (const link of application.showcaseLinks) {
+    const row = document.createElement('span');
+    const appLink = document.createElement('a');
+    appLink.href = link.url;
+    appLink.textContent = link.label;
+    const docsLink = document.createElement('a');
+    docsLink.href = link.documentationUrl;
+    docsLink.setAttribute('aria-label', `${link.label} documentation`);
+    docsLink.textContent = 'Docs';
+    row.append(appLink, docsLink);
+    container.append(row);
+  }
+
+  details.append(summary, container);
+  return details;
+}
+
 function renderApplications(applications) {
   if (!statusList || !applicationGrid || !overallStatus) return;
   const openIntegrations = new Set(
@@ -36,11 +63,8 @@ function renderApplications(applications) {
   applications.forEach((application, index) => {
     if (!application.showcaseLinks?.length) return;
     const actions = applicationGrid.children[index]?.querySelector('.card-actions');
-    actions?.insertAdjacentHTML('beforebegin', `
-      <details class="integration-links" data-integration-key="${escapeHtml(application.shortTitle)}"${openIntegrations.has(application.shortTitle) ? ' open' : ''}><summary>Explore ${escapeHtml(application.shortTitle)} integrations</summary><div>
-        ${application.showcaseLinks.map((link) => `<span><a href="${escapeHtml(link.url)}">${escapeHtml(link.label)}</a><a href="${escapeHtml(link.documentationUrl)}" aria-label="${escapeHtml(link.label)} documentation">Docs</a></span>`).join('')}
-      </div></details>
-    `);
+    if (!actions) return;
+    actions.before(createIntegrationLinks(application, openIntegrations.has(application.shortTitle)));
   });
   const hasFailure = applications.some(({ state }) => state === 'failed');
   const allHealthy = applications.length > 0 && applications.every(({ state }) => state === 'healthy');
