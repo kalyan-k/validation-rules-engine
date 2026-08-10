@@ -23,6 +23,7 @@ The public single-host demo is on GitHub Pages:
 | React Showcase | https://kalyan-k.github.io/validation-rules-engine/showcases/react/ |
 | Tests & Coverage | https://kalyan-k.github.io/validation-rules-engine/reports/index.html |
 | Automation Testing | https://kalyan-k.github.io/validation-rules-engine/automation/ |
+| Security | https://kalyan-k.github.io/validation-rules-engine/security/ |
 | About | https://kalyan-k.github.io/validation-rules-engine/about/ |
 | Contact | https://kalyan-k.github.io/validation-rules-engine/contact/ |
 
@@ -252,25 +253,31 @@ Documentation search is performed from a browser-cached index and returns highli
 
 ## Security
 
-Validation Rules Engine uses automated security scanning and release gates to identify known dependency vulnerabilities, source-code security issues, exposed secrets, and runtime web security issues.
+Validation Rules Engine uses automated security scanning and release gates to identify known dependency vulnerabilities, source-code security issues, exposed secrets, and runtime web security issues. Public packages (`@validation-rules-engine/core`, `@validation-rules-engine/angular`, `@validation-rules-engine/react`) are published only after synchronized quality gates and the release security gate, with npm provenance from the tagged release workflow.
 
 Security layers:
 
-- SAST (CodeQL, Semgrep)
-- Dependency scanning (npm audit, OWASP Dependency-Check)
-- Secret scanning (Gitleaks)
-- Runtime security testing (optional OWASP ZAP)
-- SBOM generation (CycloneDX)
-- Automated release security gates
+| Layer | Tools |
+| --- | --- |
+| SAST | GitHub CodeQL (CI), Semgrep (local + CI) |
+| SCA | npm audit, OWASP Dependency-Check |
+| Secrets | Gitleaks |
+| Supply chain | CycloneDX SBOM |
+| DAST | Optional OWASP ZAP baseline |
+| Process | `release:security` / `release:verify` before pack or publish |
 
 ```bash
 npm run security:quick      # developer scan (npm audit high+, Gitleaks, Semgrep when installed)
 npm run security:full       # broader local/CI-style scan + SBOM
 npm run release:security    # strictest pre-publish security gate
 npm run release:dry-run     # full release rehearsal without publishing
+npm run security:portal-data
+npm run evidence:publish    # publishes security evidence for the hosted Security report
 ```
 
-Reports are written to `reports/security/` (gitignored). See [SECURITY.md](SECURITY.md) and [tools/security/README.md](tools/security/README.md) for thresholds, installation, false-positive handling, and npm authentication.
+Local scanner output is written to `reports/security/` (gitignored). Hosted evidence is published under `hosted/evidence/security/` and shown in the portal at **Reports → Security** (`/security/`), next to Tests & Coverage and Automation Testing.
+
+See [SECURITY.md](SECURITY.md), [docs/site/security.md](docs/site/security.md), and [tools/security/README.md](tools/security/README.md) for thresholds, installation, false-positive handling, and npm authentication.
 
 ## Roadmap
 

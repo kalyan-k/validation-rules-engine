@@ -242,7 +242,7 @@ build:packages → build:platform → hosted showcase builds → build-site pack
 | `security:sbom` | CycloneDX SBOM generation under `reports/security/sbom`. |
 | `security:zap` | Optional OWASP ZAP baseline (Docker; target must be running). |
 
-Reports land in `reports/security/` (gitignored). Details: [Release & Versioning](/docs/release-versioning) and the repository file `tools/security/README.md`.
+Reports land in `reports/security/` (gitignored) and can be published to the hosted **Reports → Security** page via `npm run evidence:publish`. Details: [Security Scanning & Reports](/docs/security), [Release & Versioning](/docs/release-versioning), and the repository file `tools/security/README.md`.
 
 ### Release & publish
 

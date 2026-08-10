@@ -16,7 +16,8 @@ test.describe('Platform navigation URLs @hosting-navigation @regression', () => 
       ['React Showcase', `${baseUrls.react}/state/zustand`],
       ['Vanilla JS Showcase', `${baseUrls.vanilla}/simple`],
       ['Test & Coverage workspace', `${baseUrls.portal}/reports/index.html`],
-      ['Automation report', `${baseUrls.portal}/automation/`]
+      ['Automation report', `${baseUrls.portal}/automation/`],
+      ['Security report', `${baseUrls.portal}/security/`]
     ] as const;
 
     const expected = {
@@ -24,7 +25,7 @@ test.describe('Platform navigation URLs @hosting-navigation @regression', () => 
       docsOrigin: new URL(baseUrls.docs).origin,
       docsPrefix: `${baseUrls.docs}/docs/`,
       showcases: [`${baseUrls.vanilla}/`, `${baseUrls.angular}/`, `${baseUrls.react}/`],
-      reports: [`${baseUrls.portal}/reports/index.html`, `${baseUrls.portal}/automation/`]
+      reports: [`${baseUrls.portal}/reports/index.html`, `${baseUrls.portal}/automation/`, `${baseUrls.portal}/security/`]
     };
 
     for (const [surface, url] of surfaces) {

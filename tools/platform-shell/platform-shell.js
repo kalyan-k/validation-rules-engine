@@ -140,6 +140,7 @@ const documentationSections = [
       ['Release & Versioning', '/docs/release-versioning'],
       ['Testing, Coverage & Reports', '/docs/testing'],
       ['Playwright E2E Testing', '/docs/playwright'],
+      ['Security Scanning & Reports', '/docs/security'],
       ['Migration', '/docs/migration'],
       ['Roadmap', '/docs/roadmap'],
       ['Troubleshooting', '/docs/troubleshooting'],
@@ -488,7 +489,8 @@ class ValidationPlatformShell extends HTMLElement {
     }).join('');
     const reportsNavigation = [
       ['Tests & Coverage', '/reports/index.html'],
-      ['Automation Testing', '/automation/']
+      ['Automation Testing', '/automation/'],
+      ['Security', '/security/']
     ].map(([label, pathname]) => {
       const active = reportsActive && isPathActive(pathname);
       return `<a href="${joinPortalPath(urls.portal, pathname)}"${active ? ' aria-current="page" class="active"' : ''}>${label}</a>`;
@@ -570,6 +572,7 @@ class ValidationPlatformShell extends HTMLElement {
             <h2>Project</h2>
             <a href="${joinPortalPath(urls.portal, '/reports/index.html')}">Tests &amp; Coverage</a>
             <a href="${joinPortalPath(urls.portal, '/automation/')}">Automation Testing</a>
+            <a href="${joinPortalPath(urls.portal, '/security/')}">Security</a>
             <a href="${docsHref(urls.docs, '/docs/architecture')}">Architecture</a>
             <a href="https://github.com/kalyan-k/validation-rules-engine">GitHub</a>
           </section>

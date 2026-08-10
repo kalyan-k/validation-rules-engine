@@ -1,0 +1,18 @@
+{
+  "scanner": "dependency-check",
+  "status": 0,
+  "label": "PASS",
+  "summary": "No Dependency-Check findings at CVSS >= 7",
+  "details": {
+    "limitations": [
+      "OWASP Dependency-Check has incomplete coverage for npm/package-lock graphs compared with npm audit.",
+      "Treat Dependency-Check as an independent SCA signal, not a replacement for npm audit."
+    ],
+    "runner": "docker"
+  },
+  "reportPaths": [
+    "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\dependency-check\\dependency-check-report.html",
+    "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\dependency-check\\dependency-check-report.json"
+  ],
+  "at": "2026-08-10T03:06:37.312Z"
+}

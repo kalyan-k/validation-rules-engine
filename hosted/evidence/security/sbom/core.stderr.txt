@@ -1,0 +1,4 @@
+
+npm error code ECOMPROMISED
+npm error Lock compromised
+npm error A complete log of this run can be found in: C:\Users\Kalyan\AppData\Local\npm-cache\_logs\2026-08-10T02_06_06_466Z-debug-0.log

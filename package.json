@@ -76,6 +76,7 @@
     "security:sast": "node tools/security/scripts/run-semgrep.mjs",
     "security:sbom": "node tools/security/scripts/run-sbom.mjs",
     "security:zap": "node tools/security/scripts/run-zap.mjs",
+    "security:portal-data": "node tools/security/scripts/build-security-portal-data.mjs",
     "pack:packages:dry-run": "npm run build:packages && npm run version:check:dist && npm pack ./dist/packages/core --dry-run && npm pack ./dist/packages/angular --dry-run && npm pack ./dist/packages/react --dry-run",
     "release:security": "node tools/release/run-release.mjs security",
     "release:check": "node tools/release/run-release.mjs check",

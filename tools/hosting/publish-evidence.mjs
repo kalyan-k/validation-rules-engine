@@ -16,8 +16,10 @@ const workspaceRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)),
 const evidenceRoot = path.join(workspaceRoot, 'hosted', 'evidence');
 const reportsSource = path.join(workspaceRoot, 'reports');
 const playwrightSource = path.join(workspaceRoot, 'artifacts', 'playwright');
+const securitySource = path.join(workspaceRoot, 'reports', 'security');
 const evidenceReports = path.join(evidenceRoot, 'reports');
 const evidencePlaywright = path.join(evidenceRoot, 'playwright');
+const evidenceSecurity = path.join(evidenceRoot, 'security');
 
 /** Heavy / ephemeral Playwright folders stay local; summaries are published for hosting. */
 const playwrightInclude = Object.freeze([
@@ -76,12 +78,16 @@ mkdirSync(evidenceRoot, { recursive: true });
 
 const included = {
   reports: false,
-  playwright: []
+  playwright: [],
+  security: false
 };
 
 resetDirectory(evidenceReports);
 if (existsSync(path.join(reportsSource, 'index.html'))) {
   copyDirectory(reportsSource, evidenceReports);
+  // Security evidence is published separately under hosted/evidence/security.
+  // Never ship Dependency-Check NVD caches (odc.mv.db can be 250MB+) into reports evidence.
+  removeSecurityCachesFromReportsEvidence(evidenceReports);
   included.reports = true;
 } else {
   writeFileSync(
@@ -136,6 +142,34 @@ if (existsSync(visualDiffsSource) && readdirSync(visualDiffsSource).length > 0) 
   included.playwright.push('visual-diffs (placeholder)');
 }
 
+const securityPortalBuild = spawnSync(
+  process.execPath,
+  [path.join(workspaceRoot, 'tools', 'security', 'scripts', 'build-security-portal-data.mjs')],
+  { stdio: 'inherit' }
+);
+if (securityPortalBuild.status) {
+  console.warn('Security portal-data build reported a non-zero exit; continuing with available files.');
+}
+
+resetDirectory(evidenceSecurity);
+if (existsSync(path.join(securitySource, 'portal-data', 'latest.json'))
+  || existsSync(path.join(securitySource, 'security-summary.json'))
+  || existsSync(path.join(securitySource, 'latest.json'))) {
+  copySecurityEvidence(securitySource, evidenceSecurity);
+  included.security = true;
+} else {
+  writeFileSync(
+    path.join(evidenceSecurity, 'README.md'),
+    [
+      '# Security evidence unavailable',
+      '',
+      'Run `npm run security:full` locally, then `npm run evidence:publish`.',
+      ''
+    ].join('\n'),
+    'utf8'
+  );
+}
+
 const packageVersion = JSON.parse(readFileSync(path.join(workspaceRoot, 'package.json'), 'utf8')).version;
 const manifest = {
   version: packageVersion,
@@ -146,16 +180,20 @@ const manifest = {
       folder.endsWith('(placeholder)')
         ? folder
         : `artifacts/playwright/${folder}/`
-    ))
+    )),
+    security: included.security ? 'reports/security/' : null
   },
   sizes: {
     reports: formatBytes(directorySizeBytes(evidenceReports)),
     playwright: formatBytes(directorySizeBytes(evidencePlaywright)),
+    security: formatBytes(directorySizeBytes(evidenceSecurity)),
     total: formatBytes(directorySizeBytes(evidenceRoot))
   },
   notes: [
     'Commit hosted/evidence after publishing so Azure Static Web Apps can ship reports without running tests in CI.',
-    'Videos, traces, and screenshots stay local. Visual diffs are copied when present; otherwise a placeholder page is published.'
+    'Videos, traces, and screenshots stay local. Visual diffs are copied when present; otherwise a placeholder page is published.',
+    'Security evidence is published under hosted/evidence/security (not nested under reports).',
+    'Dependency-Check NVD data caches (odc.mv.db and related data/) are never published; they are local scanner state only.'
   ]
 };
 
@@ -173,9 +211,64 @@ writeFileSync(path.join(evidenceRoot, 'manifest.json'), `${JSON.stringify(manife
 console.log(`Published hosting evidence to ${path.relative(workspaceRoot, evidenceRoot)}`);
 console.log(`- reports: ${included.reports ? 'yes' : 'missing (run tests first)'}`);
 console.log(`- playwright: ${included.playwright.length > 0 ? included.playwright.join(', ') : 'missing (run Playwright first)'}`);
+console.log(`- security: ${included.security ? 'yes' : 'missing (run security:full first)'}`);
 console.log(`- size: ${manifest.sizes.total}`);
 
-if (!included.reports && included.playwright.length === 0) {
-  console.warn('No local reports or Playwright summaries were found. The published evidence folder is a placeholder only.');
+if (!included.reports && included.playwright.length === 0 && !included.security) {
+  console.warn('No local reports, Playwright, or security summaries were found. The published evidence folder is a placeholder only.');
   process.exitCode = 1;
+}
+
+function copySecurityEvidence(source, target) {
+  mkdirSync(target, { recursive: true });
+  for (const entry of readdirSync(source, { withFileTypes: true })) {
+    if (entry.name === 'data') {
+      continue;
+    }
+    const from = path.join(source, entry.name);
+    const to = path.join(target, entry.name);
+    if (entry.isDirectory()) {
+      if (entry.name === 'dependency-check') {
+        copySecurityEvidence(from, to);
+        continue;
+      }
+      copyDirectory(from, to);
+      continue;
+    }
+    if (entry.isFile()) {
+      if (/\.mv\.db$/iu.test(entry.name) || /\.trace\.db$/iu.test(entry.name)) {
+        continue;
+      }
+      mkdirSync(path.dirname(to), { recursive: true });
+      cpSync(from, to, { force: true });
+    }
+  }
+}
+
+function removeSecurityCachesFromReportsEvidence(reportsEvidenceRoot) {
+  const nestedSecurity = path.join(reportsEvidenceRoot, 'security');
+  if (existsSync(nestedSecurity)) {
+    // Prefer the dedicated /security evidence tree; drop nested copy from reports evidence.
+    rmSync(nestedSecurity, { recursive: true, force: true });
+  }
+  // Belt-and-suspenders for any stray ODC cache paths under reports evidence.
+  stripDependencyCheckData(reportsEvidenceRoot);
+}
+
+function stripDependencyCheckData(root) {
+  if (!existsSync(root)) return;
+  for (const entry of readdirSync(root, { withFileTypes: true })) {
+    const fullPath = path.join(root, entry.name);
+    if (entry.isDirectory()) {
+      if (entry.name === 'data' && path.basename(root) === 'dependency-check') {
+        rmSync(fullPath, { recursive: true, force: true });
+        continue;
+      }
+      stripDependencyCheckData(fullPath);
+      continue;
+    }
+    if (entry.isFile() && (/\.mv\.db$/iu.test(entry.name) || /\.trace\.db$/iu.test(entry.name))) {
+      rmSync(fullPath, { force: true });
+    }
+  }
 }

@@ -13,6 +13,10 @@
       "rewrite": "/api/playwright/latest.json"
     },
     {
+      "route": "/api/security/latest",
+      "rewrite": "/api/security/latest.json"
+    },
+    {
       "route": "/health",
       "rewrite": "/api/health.json"
     },
@@ -94,6 +98,7 @@
       "/showcases/*",
       "/reports/*",
       "/automation/*",
+      "/security/*",
       "/api/*",
       "/*.{css,js,mjs,map,json,png,jpg,jpeg,gif,ico,svg,webp,woff,woff2,txt,xml,webmanifest}"
     ]

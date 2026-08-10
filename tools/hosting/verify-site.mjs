@@ -13,12 +13,14 @@ for (const relativePath of [
   'api/status.json',
   'api/meta.json',
   'api/playwright/latest.json',
+  'api/security/latest.json',
   'docs/overview/index.html',
   'docs/search-index.json',
   'showcases/angular/index.html',
   'showcases/react/index.html',
   'showcases/vanilla/index.html',
   'automation/index.html',
+  'security/index.html',
   'contact/index.html',
   'contact.js'
 ]) {
@@ -62,7 +64,8 @@ assert.deepEqual(manifest.routes, {
   reactShowcase: '/showcases/react/',
   vanillaShowcase: '/showcases/vanilla/',
   reports: '/reports/',
-  automation: '/automation/'
+  automation: '/automation/',
+  security: '/security/'
 });
 
 const portalIndex = readFileSync(path.join(siteRoot, 'index.html'), 'utf8');
@@ -201,6 +204,7 @@ try {
     '/showcases/vanilla/platform-config.js',
     '/reports/',
     '/automation/',
+    '/security/',
     '/contact/',
     '/health',
     '/health/ready'

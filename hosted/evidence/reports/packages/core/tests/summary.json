@@ -2,9 +2,9 @@
   "projectName": "core",
   "displayName": "Core Engine",
   "version": "1.0.0",
-  "startedAt": "2026-08-09T18:45:02.827Z",
-  "finishedAt": "2026-08-09T18:45:06.247Z",
-  "durationMs": 3420,
+  "startedAt": "2026-08-09T22:28:09.267Z",
+  "finishedAt": "2026-08-09T22:28:14.289Z",
+  "durationMs": 5022,
   "summary": {
     "total": 16,
     "passed": 16,
@@ -24,7 +24,7 @@
       ],
       "description": "recognizes only message-shaped validation failures",
       "status": "passed",
-      "durationMs": 2,
+      "durationMs": 4,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/utils/validation-utils.spec.ts"
@@ -36,7 +36,7 @@
       ],
       "description": "passes model, value, and message to user-defined rules",
       "status": "passed",
-      "durationMs": 3,
+      "durationMs": 4,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/validator.spec.ts"
@@ -60,7 +60,7 @@
       ],
       "description": "decorates required and checked rules with required metadata",
       "status": "passed",
-      "durationMs": 0,
+      "durationMs": 1,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/validator.spec.ts"
@@ -108,7 +108,7 @@
       ],
       "description": "supports ZIP, phone, VIN, and SSN rules",
       "status": "passed",
-      "durationMs": 1,
+      "durationMs": 2,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/validator.spec.ts"
@@ -132,7 +132,7 @@
       ],
       "description": "resets metadata completely",
       "status": "passed",
-      "durationMs": 0,
+      "durationMs": 2,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/utils/validation-utils.spec.ts"
@@ -144,7 +144,7 @@
       ],
       "description": "clears touched paths by prefix and safely handles missing metadata",
       "status": "passed",
-      "durationMs": 0,
+      "durationMs": 1,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/utils/validation-utils.spec.ts"
@@ -156,7 +156,7 @@
       ],
       "description": "creates metadata lazily and tracks field visibility",
       "status": "passed",
-      "durationMs": 1,
+      "durationMs": 2,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/utils/validation-utils.spec.ts"
@@ -168,7 +168,7 @@
       ],
       "description": "classifies nullish and empty values without rejecting zero or false",
       "status": "passed",
-      "durationMs": 0,
+      "durationMs": 1,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/validation-helper.spec.ts"
@@ -180,7 +180,7 @@
       ],
       "description": "validates regular expressions and common formatted values",
       "status": "passed",
-      "durationMs": 0,
+      "durationMs": 1,
       "logs": [],
       "sourceFiles": [
         "packages/core/src/lib/validation-helper.spec.ts"

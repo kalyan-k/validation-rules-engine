@@ -1,0 +1,597 @@
+{
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "metadata": {
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "npm",
+          "version": "11.6.2"
+        },
+        {
+          "type": "library",
+          "name": "cyclonedx-library",
+          "group": "@cyclonedx",
+          "version": "10.1.0",
+          "author": "Jan Kowalleck",
+          "description": "Core functionality of CycloneDX for JavaScript (Node.js or WebBrowser).",
+          "licenses": [
+            {
+              "license": {
+                "id": "Apache-2.0"
+              }
+            }
+          ],
+          "externalReferences": [
+            {
+              "url": "https://github.com/CycloneDX/cyclonedx-javascript-library/issues",
+              "type": "issue-tracker",
+              "comment": "as detected from PackageJson property \"bugs.url\""
+            },
+            {
+              "url": "git+https://github.com/CycloneDX/cyclonedx-javascript-library.git",
+              "type": "vcs",
+              "comment": "as detected from PackageJson property \"repository.url\""
+            },
+            {
+              "url": "https://github.com/CycloneDX/cyclonedx-javascript-library#readme",
+              "type": "website",
+              "comment": "as detected from PackageJson property \"homepage\""
+            }
+          ]
+        },
+        {
+          "type": "application",
+          "name": "cyclonedx-npm",
+          "group": "@cyclonedx",
+          "version": "6.0.0",
+          "author": "Jan Kowalleck",
+          "description": "Create CycloneDX Software Bill of Materials (SBOM) from NPM projects.",
+          "licenses": [
+            {
+              "license": {
+                "id": "Apache-2.0"
+              }
+            }
+          ],
+          "externalReferences": [
+            {
+              "url": "https://github.com/CycloneDX/cyclonedx-node-npm/issues",
+              "type": "issue-tracker",
+              "comment": "as detected from PackageJson property \"bugs.url\""
+            },
+            {
+              "url": "git+https://github.com/CycloneDX/cyclonedx-node-npm.git",
+              "type": "vcs",
+              "comment": "as detected from PackageJson property \"repository.url\""
+            },
+            {
+              "url": "https://github.com/CycloneDX/cyclonedx-node-npm#readme",
+              "type": "website",
+              "comment": "as detected from PackageJson property \"homepage\""
+            }
+          ]
+        }
+      ]
+    },
+    "component": {
+      "type": "library",
+      "name": "validation-rules-engine-workspace",
+      "version": "1.0.0",
+      "bom-ref": "validation-rules-engine-workspace@1.0.0",
+      "description": "Private monorepo for the Validation Rules Engine, framework adapters, portal, documentation, and showcase applications.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/validation-rules-engine-workspace@1.0.0",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": ""
+        },
+        {
+          "name": "cdx:npm:package:private",
+          "value": "true"
+        }
+      ]
+    },
+    "properties": [
+      {
+        "name": "cdx:reproducible",
+        "value": "true"
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "animations",
+      "group": "@angular",
+      "version": "20.3.27",
+      "bom-ref": "validation-rules-engine-workspace@1.0.0|@angular/animations@20.3.27",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40angular/animations@20.3.27",
+      "externalReferences": [
+        {
+          "url": "https://registry.npmjs.org/@angular/animations/-/animations-20.3.27.tgz",
+          "type": "distribution",
+          "hashes": [
+            {
+              "alg": "SHA-512",
+              "content": "0601939680e20f7a881554b166af313ba0a2ca12a7d3459b850422925645f162368577771e67353940001ea48c87673db8bed7d5962483d952ce389ab0adaf2a"
+            }
+          ],
+          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@angular/animations"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "common",
+      "group": "@angular",
+      "version": "20.3.27",
+      "bom-ref": "validation-rules-engine-workspace@1.0.0|@angular/common@20.3.27",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40angular/common@20.3.27",
+      "externalReferences": [
+        {
+          "url": "https://registry.npmjs.org/@angular/common/-/common-20.3.27.tgz",
+          "type": "distribution",
+          "hashes": [
+            {
+              "alg": "SHA-512",
+              "content": "e1e72d60feb45dab41f73678d1695f99a4f38e61216b3f124aa2ec6d9238559f200dbe6a366c56b70c2df14c52dcd9831c482a74d2fc50f3b813de3ec8a0880a"
+            }
+          ],
+          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@angular/common"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "compiler",
+      "group": "@angular",
+      "version": "20.3.27",
+      "bom-ref": "validation-rules-engine-workspace@1.0.0|@angular/compiler@20.3.27",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40angular/compiler@20.3.27",
+      "externalReferences": [
+        {
+          "url": "https://registry.npmjs.org/@angular/compiler/-/compiler-20.3.27.tgz",
+          "type": "distribution",
+          "hashes": [
+            {
+              "alg": "SHA-512",
+              "content": "8a7dd31d9ebbf06018b8e47d459575f3ecd9cf42868651a29325047cb7802cb8c67fd65a4779feb75f41998c7a1b656417f5ea69d9ded68990daf6e5e8f44048"
+            }
+          ],
+          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@angular/compiler"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "core",
+      "group": "@angular",
+      "version": "20.3.27",
+      "bom-ref": "validation-rules-engine-workspace@1.0.0|@angular/core@20.3.27",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40angular/core@20.3.27",
+      "externalReferences": [
+        {
+          "url": "https://registry.npmjs.org/@angular/core/-/core-20.3.27.tgz",
+          "type": "distribution",
+          "hashes": [
+            {
+              "alg": "SHA-512",
+              "content": "f047d8214493e422a574e1783006164c515107b12dc2a52840165d6abe944b7f7f104cd69bfc26fe244d907da398a7b862e3dad86a1e1d2d5643c551b8e93b0e"
+            }
+          ],
+          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@angular/core"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "forms",
+      "group": "@angular",
+      "version": "20.3.27",
+      "bom-ref": "validation-rules-engine-workspace@1.0.0|@angular/forms@20.3.27",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40angular/forms@20.3.27",
+      "externalReferences": [
+        {
+          "url": "https://registry.npmjs.org/@angular/forms/-/forms-20.3.27.tgz",
+          "type": "distribution",
+          "hashes": [
+            {
+              "alg": "SHA-512",
+              "content": "70d1b6eb08b7b6bde6f00b7aa6ec49a4031593d981844a91100e0993f9256a53305ae6047fc0294c4030d1ae4d51f3310e42f775c249c0345ff2b2ba99ae9361"
+            }
+          ],
+          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@angular/forms"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "platform-browser",
+      "group": "@angular",
+      "version": "20.3.27",
+      "bom-ref": "validation-rules-engine-workspace@1.0.0|@angular/platform-browser@20.3.27",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40angular/platform-browser@20.3.27",
+      "externalReferences": [
+        {
+          "url": "https://registry.npmjs.org/@angular/platform-browser/-/platform-browser-20.3.27.tgz",
+          "type": "distribution",
+          "hashes": [
+            {
+              "alg": "SHA-512",
+              "content": "215db3438ce4ea58b2c39344e3c6d0a929379ce019d6b9830108bb5b82b0d0df1cb3d3185602b7cee968d33c7952a4afd64b8d0c019bd073d1e6d50654e7fd93"
+            }
+          ],
+          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@angular/platform-browser"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "angular",
+      "group": "@validation-rules-engine",
+      "version": "1.0.0",
+      "bom-ref": "validation-rules-engine-workspace@1.0.0|@validation-rules-engine/angular@1.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40validation-rules-engine/angular@1.0.0",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@validation-rules-engine/angular"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "core",
+      "group": "@validation-rules-engine",
+      "version": "1.0.0",
+      "bom-ref": "validation-rules-engine-workspace@1.0.0|@validation-rules-engine/core@1.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40validation-rules-engine/core@1.0.0",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@validation-rules-engine/core"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "rxjs",
+      "version": "7.8.2",
+      "bom-ref": "validation-rules-engine-workspace@1.0.0|rxjs@7.8.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/rxjs@7.8.2",
+      "externalReferences": [
+        {
+          "url": "https://registry.npmjs.org/rxjs/-/rxjs-7.8.2.tgz",
+          "type": "distribution",
+          "hashes": [
+            {
+              "alg": "SHA-512",
+              "content": "76129ff74dd4fcf41963a6e834db4019d59b1bce5601b8d3ff5c58a19202ec5018d3259aa4e05056c56b0e5e7c5bcebffded55a4c341b5157831a5df74cc9214"
+            }
+          ],
+          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/rxjs"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "tslib",
+      "version": "2.4.1",
+      "bom-ref": "validation-rules-engine-workspace@1.0.0|tslib@2.4.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/tslib@2.4.1",
+      "externalReferences": [
+        {
+          "url": "https://registry.npmjs.org/tslib/-/tslib-2.4.1.tgz",
+          "type": "distribution",
+          "hashes": [
+            {
+              "alg": "SHA-512",
+              "content": "b46cb2e1d02344813023b073b01d25ca75a03a97ea8d476af755d70252160f63b02811fba0297f1991bf1d3e01387ad394f30e01294c43bbdec93aa999172b34"
+            }
+          ],
+          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/tslib"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "underscore",
+      "version": "1.13.8",
+      "bom-ref": "validation-rules-engine-workspace@1.0.0|underscore@1.13.8",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/underscore@1.13.8",
+      "externalReferences": [
+        {
+          "url": "https://registry.npmjs.org/underscore/-/underscore-1.13.8.tgz",
+          "type": "distribution",
+          "hashes": [
+            {
+              "alg": "SHA-512",
+              "content": "0d7b43dd9b4443373b33c9b8717a2dc8747e1404b5f02eb86ac058639bea65ec5f62bc8d3670dcd365b884a837add42ea8e61ab358e4b1e5f4fa76578d35e7bd"
+            }
+          ],
+          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/underscore"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "zone.js",
+      "version": "0.15.1",
+      "bom-ref": "validation-rules-engine-workspace@1.0.0|zone.js@0.15.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/zone.js@0.15.1",
+      "externalReferences": [
+        {
+          "url": "https://registry.npmjs.org/zone.js/-/zone.js-0.15.1.tgz",
+          "type": "distribution",
+          "hashes": [
+            {
+              "alg": "SHA-512",
+              "content": "5c4f7a9f9e8842924cecd0285ecc18dd744b716156f37c5ed0188039e303ecae64e7179c39eba5dd0729c7a1aa11e7873645b90d62f9ccec936c47c1e1eb62f3"
+            }
+          ],
+          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/zone.js"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "validation-rules-engine-workspace@1.0.0",
+      "dependsOn": [
+        "validation-rules-engine-workspace@1.0.0|@validation-rules-engine/angular@1.0.0"
+      ]
+    },
+    {
+      "ref": "validation-rules-engine-workspace@1.0.0|@angular/animations@20.3.27",
+      "dependsOn": [
+        "validation-rules-engine-workspace@1.0.0|@angular/core@20.3.27",
+        "validation-rules-engine-workspace@1.0.0|tslib@2.4.1"
+      ]
+    },
+    {
+      "ref": "validation-rules-engine-workspace@1.0.0|@angular/common@20.3.27",
+      "dependsOn": [
+        "validation-rules-engine-workspace@1.0.0|@angular/core@20.3.27",
+        "validation-rules-engine-workspace@1.0.0|rxjs@7.8.2",
+        "validation-rules-engine-workspace@1.0.0|tslib@2.4.1"
+      ]
+    },
+    {
+      "ref": "validation-rules-engine-workspace@1.0.0|@angular/compiler@20.3.27",
+      "dependsOn": [
+        "validation-rules-engine-workspace@1.0.0|tslib@2.4.1"
+      ]
+    },
+    {
+      "ref": "validation-rules-engine-workspace@1.0.0|@angular/core@20.3.27",
+      "dependsOn": [
+        "validation-rules-engine-workspace@1.0.0|@angular/compiler@20.3.27",
+        "validation-rules-engine-workspace@1.0.0|rxjs@7.8.2",
+        "validation-rules-engine-workspace@1.0.0|tslib@2.4.1",
+        "validation-rules-engine-workspace@1.0.0|zone.js@0.15.1"
+      ]
+    },
+    {
+      "ref": "validation-rules-engine-workspace@1.0.0|@angular/forms@20.3.27",
+      "dependsOn": [
+        "validation-rules-engine-workspace@1.0.0|@angular/common@20.3.27",
+        "validation-rules-engine-workspace@1.0.0|@angular/core@20.3.27",
+        "validation-rules-engine-workspace@1.0.0|@angular/platform-browser@20.3.27",
+        "validation-rules-engine-workspace@1.0.0|rxjs@7.8.2",
+        "validation-rules-engine-workspace@1.0.0|tslib@2.4.1"
+      ]
+    },
+    {
+      "ref": "validation-rules-engine-workspace@1.0.0|@angular/platform-browser@20.3.27",
+      "dependsOn": [
+        "validation-rules-engine-workspace@1.0.0|@angular/animations@20.3.27",
+        "validation-rules-engine-workspace@1.0.0|@angular/common@20.3.27",
+        "validation-rules-engine-workspace@1.0.0|@angular/core@20.3.27",
+        "validation-rules-engine-workspace@1.0.0|tslib@2.4.1"
+      ]
+    },
+    {
+      "ref": "validation-rules-engine-workspace@1.0.0|@validation-rules-engine/angular@1.0.0",
+      "dependsOn": [
+        "validation-rules-engine-workspace@1.0.0|@angular/common@20.3.27",
+        "validation-rules-engine-workspace@1.0.0|@angular/compiler@20.3.27",
+        "validation-rules-engine-workspace@1.0.0|@angular/core@20.3.27",
+        "validation-rules-engine-workspace@1.0.0|@angular/forms@20.3.27",
+        "validation-rules-engine-workspace@1.0.0|@validation-rules-engine/core@1.0.0",
+        "validation-rules-engine-workspace@1.0.0|rxjs@7.8.2",
+        "validation-rules-engine-workspace@1.0.0|tslib@2.4.1",
+        "validation-rules-engine-workspace@1.0.0|underscore@1.13.8"
+      ]
+    },
+    {
+      "ref": "validation-rules-engine-workspace@1.0.0|@validation-rules-engine/core@1.0.0",
+      "dependsOn": [
+        "validation-rules-engine-workspace@1.0.0|tslib@2.4.1",
+        "validation-rules-engine-workspace@1.0.0|underscore@1.13.8"
+      ]
+    },
+    {
+      "ref": "validation-rules-engine-workspace@1.0.0|rxjs@7.8.2",
+      "dependsOn": [
+        "validation-rules-engine-workspace@1.0.0|tslib@2.4.1"
+      ]
+    },
+    {
+      "ref": "validation-rules-engine-workspace@1.0.0|tslib@2.4.1"
+    },
+    {
+      "ref": "validation-rules-engine-workspace@1.0.0|underscore@1.13.8"
+    },
+    {
+      "ref": "validation-rules-engine-workspace@1.0.0|zone.js@0.15.1"
+    }
+  ]
+}

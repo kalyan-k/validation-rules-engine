@@ -1,13 +1,14 @@
 import { expect, test } from '../shared/fixtures/test';
 
 test.describe('Existing reports application @reports @regression', () => {
-  test('Reports menu exposes tests coverage and automation destinations', async ({ page, baseUrls }) => {
+  test('Reports menu exposes tests coverage automation and security destinations', async ({ page, baseUrls }) => {
     await page.goto(baseUrls.portal);
     await page.locator('validation-platform-shell summary').filter({ hasText: 'Reports' }).click();
     const reportsMenu = page.getByLabel('Platform navigation');
     await expect(reportsMenu.getByRole('link', { name: 'Tests & Coverage' })).toHaveAttribute('href', /\/reports\/index\.html$/);
     // Link presence is asserted; Playwright Results page content is intentionally not exercised here.
     await expect(reportsMenu.getByRole('link', { name: 'Automation Testing' })).toHaveAttribute('href', /\/automation\/$/);
+    await expect(reportsMenu.getByRole('link', { name: 'Security' })).toHaveAttribute('href', /\/security\/$/);
   });
 
   test('Reports menu remains available inside the tests and coverage workspace', async ({ page, baseUrls }) => {
@@ -16,12 +17,19 @@ test.describe('Existing reports application @reports @regression', () => {
     const reportsMenu = page.getByLabel('Platform navigation');
     await expect(reportsMenu.getByRole('link', { name: 'Tests & Coverage' })).toHaveAttribute('href', /\/reports\/index\.html$/);
     await expect(reportsMenu.getByRole('link', { name: 'Automation Testing' })).toHaveAttribute('href', /\/automation\/$/);
+    await expect(reportsMenu.getByRole('link', { name: 'Security' })).toHaveAttribute('href', /\/security\/$/);
   });
 
   test('loads the canonical automation summary route', async ({ page, baseUrls }) => {
     await page.goto(`${baseUrls.portal}/automation/`);
     await expect(page.getByRole('heading', { name: 'Automation Testing' })).toBeVisible();
     await expect(page.locator('#playwright-results')).toContainText(/Latest run|No Playwright report|Loading Playwright/i);
+  });
+
+  test('loads the canonical security summary route', async ({ page, baseUrls }) => {
+    await page.goto(`${baseUrls.portal}/security/`);
+    await expect(page.getByRole('heading', { name: 'Security' })).toBeVisible();
+    await expect(page.locator('#security-results')).toContainText(/Latest security gate|No security report|Loading security|Security checks/i);
   });
 
   test('loads generated report dashboard or useful empty state @smoke', async ({ page, baseUrls }) => {

@@ -92,6 +92,7 @@ export const documentationCatalog: DocumentationEntry[] = [
   { slug: 'release-versioning', title: 'Release & Versioning', section: 'Project', summary: 'Synchronized Semantic Versioning, quality gates, package previews, and npm publishing.', source: 'release-versioning.md' },
   { slug: 'testing', title: 'Testing, Coverage & Reports', section: 'Project', summary: 'Test commands, coverage gates, and persistent reports.', source: 'testing.md' },
   { slug: 'playwright', title: 'Playwright E2E Testing', section: 'Project', summary: 'Repository-level browser automation, reports, accessibility, visual checks, and portal integration.', source: 'playwright.md' },
+  { slug: 'security', title: 'Security Scanning & Reports', section: 'Project', summary: 'SAST, SCA, secrets, SBOM, CodeQL, release gates, and the hosted Security report for public packages.', source: 'security.md' },
   { slug: 'migration', title: 'Migration', section: 'Project', summary: 'Package boundaries and migration guidance.', source: 'migration.md' },
   { slug: 'roadmap', title: 'Roadmap', section: 'Project', summary: 'Planned platform and adapter directions without placeholder implementations.', source: 'roadmap.md' },
   { slug: 'troubleshooting', title: 'Troubleshooting', section: 'Project', summary: 'Common setup, validation, display, and report issues.', source: 'troubleshooting.md' },

@@ -1,0 +1,14 @@
+{
+  "scanner": "gitleaks",
+  "status": 0,
+  "label": "PASS",
+  "summary": "No secrets detected",
+  "details": {
+    "mode": "git"
+  },
+  "reportPaths": [
+    "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\gitleaks\\gitleaks.json",
+    "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\gitleaks\\gitleaks.sarif"
+  ],
+  "at": "2026-08-10T02:59:19.429Z"
+}

@@ -1,0 +1,87 @@
+{
+  "profile": "full",
+  "at": "2026-08-10T03:07:01.219Z",
+  "exitCode": 0,
+  "label": "PASS",
+  "results": [
+    {
+      "scanner": "npm-audit",
+      "status": 0,
+      "label": "PASS",
+      "summary": "No vulnerabilities at audit-level=high",
+      "details": {
+        "level": "high",
+        "profile": "quick",
+        "rationale": "Public npm libraries should fail the release gate on moderate+ dependency advisories. Local quick scans fail only on high/critical to keep day-to-day development practical."
+      },
+      "reportPaths": [
+        "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\npm-audit\\npm-audit.json",
+        "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\npm-audit\\npm-audit.txt"
+      ],
+      "at": "2026-08-10T02:59:04.164Z"
+    },
+    {
+      "scanner": "gitleaks",
+      "status": 0,
+      "label": "PASS",
+      "summary": "No secrets detected",
+      "details": {
+        "mode": "git"
+      },
+      "reportPaths": [
+        "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\gitleaks\\gitleaks.json",
+        "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\gitleaks\\gitleaks.sarif"
+      ],
+      "at": "2026-08-10T02:59:19.429Z"
+    },
+    {
+      "scanner": "semgrep",
+      "status": 0,
+      "label": "PASS",
+      "summary": "No Semgrep blocking findings",
+      "details": {},
+      "reportPaths": [
+        "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\semgrep\\semgrep.json",
+        "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\semgrep\\semgrep.sarif",
+        "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\semgrep\\semgrep.txt"
+      ],
+      "at": "2026-08-10T03:03:32.844Z"
+    },
+    {
+      "scanner": "dependency-check",
+      "status": 0,
+      "label": "PASS",
+      "summary": "No Dependency-Check findings at CVSS >= 7",
+      "details": {
+        "limitations": [
+          "OWASP Dependency-Check has incomplete coverage for npm/package-lock graphs compared with npm audit.",
+          "Treat Dependency-Check as an independent SCA signal, not a replacement for npm audit."
+        ],
+        "runner": "docker"
+      },
+      "reportPaths": [
+        "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\dependency-check\\dependency-check-report.html",
+        "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\dependency-check\\dependency-check-report.json"
+      ],
+      "at": "2026-08-10T03:06:18.609Z"
+    },
+    {
+      "scanner": "sbom",
+      "status": 0,
+      "label": "PASS",
+      "summary": "Generated CycloneDX SBOM for 4 artifact(s)",
+      "details": {
+        "standard": "CycloneDX",
+        "cli": "node_modules\\@cyclonedx\\cyclonedx-npm\\bin\\cyclonedx-npm-cli.js",
+        "note": "SBOMs are generated from the workspace lockfile (package-lock-only) via the locally installed @cyclonedx/cyclonedx-npm package."
+      },
+      "reportPaths": [
+        "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\sbom\\core.cdx.json",
+        "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\sbom\\angular.cdx.json",
+        "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\sbom\\react.cdx.json",
+        "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\sbom\\workspace.cdx.json"
+      ],
+      "at": "2026-08-10T03:07:01.204Z"
+    }
+  ]
+}

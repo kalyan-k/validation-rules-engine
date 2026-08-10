@@ -175,7 +175,11 @@ Do not commit npm tokens. Use:
 
 ## Portal integration
 
-Security reports are available under `reports/security/`. Portal UI integration is intentionally deferred so existing report navigation stays stable; a future enhancement can surface `security-summary.json` without executing scans from the portal.
+Security reports are generated under `reports/security/` and published into `hosted/evidence/security/` by `npm run evidence:publish` (after `npm run security:portal-data`).
+
+The portal **Reports → Security** page (`/security/`) loads `/api/security/latest` and links artifacts under `/security/artifacts/`. It documents CodeQL (CI), Semgrep, npm audit, Dependency-Check, Gitleaks, SBOM, optional ZAP, and the release gate for the three public packages. The portal does not execute scanners itself.
+
+**Do not commit Dependency-Check `data/` caches** (especially `odc.mv.db`). They are local NVD database files, often 100MB+, and are not required for the Security report page. `evidence:publish` excludes them automatically.
 
 ## Troubleshooting
 

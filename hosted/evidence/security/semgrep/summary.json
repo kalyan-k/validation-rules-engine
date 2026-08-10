@@ -1,0 +1,13 @@
+{
+  "scanner": "semgrep",
+  "status": 0,
+  "label": "PASS",
+  "summary": "No Semgrep blocking findings",
+  "details": {},
+  "reportPaths": [
+    "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\semgrep\\semgrep.json",
+    "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\semgrep\\semgrep.sarif",
+    "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\semgrep\\semgrep.txt"
+  ],
+  "at": "2026-08-10T03:03:32.844Z"
+}

@@ -1,0 +1,18 @@
+{
+  "scanner": "sbom",
+  "status": 0,
+  "label": "PASS",
+  "summary": "Generated CycloneDX SBOM for 4 artifact(s)",
+  "details": {
+    "standard": "CycloneDX",
+    "cli": "node_modules\\@cyclonedx\\cyclonedx-npm\\bin\\cyclonedx-npm-cli.js",
+    "note": "SBOMs are generated from the workspace lockfile (package-lock-only) via the locally installed @cyclonedx/cyclonedx-npm package."
+  },
+  "reportPaths": [
+    "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\sbom\\core.cdx.json",
+    "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\sbom\\angular.cdx.json",
+    "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\sbom\\react.cdx.json",
+    "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\sbom\\workspace.cdx.json"
+  ],
+  "at": "2026-08-10T03:07:01.204Z"
+}

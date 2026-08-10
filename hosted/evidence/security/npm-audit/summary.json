@@ -1,0 +1,16 @@
+{
+  "scanner": "npm-audit",
+  "status": 0,
+  "label": "PASS",
+  "summary": "No vulnerabilities at audit-level=high",
+  "details": {
+    "level": "high",
+    "profile": "quick",
+    "rationale": "Public npm libraries should fail the release gate on moderate+ dependency advisories. Local quick scans fail only on high/critical to keep day-to-day development practical."
+  },
+  "reportPaths": [
+    "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\npm-audit\\npm-audit.json",
+    "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\npm-audit\\npm-audit.txt"
+  ],
+  "at": "2026-08-10T02:59:04.164Z"
+}

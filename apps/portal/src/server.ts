@@ -21,6 +21,10 @@ const playwrightArtifactsRoot = singleHost
   ? path.join(siteRoot, 'automation', 'artifacts')
   : path.join(workspaceRoot, 'artifacts', 'playwright');
 const playwrightPortalDataPath = path.join(playwrightArtifactsRoot, 'portal-data', 'latest-run.json');
+const securityArtifactsRoot = singleHost
+  ? path.join(siteRoot, 'security', 'artifacts')
+  : path.join(workspaceRoot, 'reports', 'security');
+const securityPortalDataPath = path.join(securityArtifactsRoot, 'portal-data', 'latest.json');
 const rootPackage = JSON.parse(readFileSync(path.join(workspaceRoot, 'package.json'), 'utf8')) as { version?: string };
 
 const contentTypes: Record<string, string> = {
@@ -103,6 +107,24 @@ async function handleRequest(
     serveFile(response, path.dirname(playwrightPortalDataPath), path.basename(playwrightPortalDataPath));
     return;
   }
+  if (requestUrl.pathname === '/api/security/latest' || requestUrl.pathname === '/api/security/latest.json') {
+    if (!existsSync(securityPortalDataPath)) {
+      sendJson(response, 200, {
+        available: false,
+        message: 'No security report data is available yet.',
+        command: 'npm run security:full && npm run evidence:publish',
+        checks: [],
+        packages: [
+          '@validation-rules-engine/core',
+          '@validation-rules-engine/angular',
+          '@validation-rules-engine/react'
+        ]
+      });
+      return;
+    }
+    serveFile(response, path.dirname(securityPortalDataPath), path.basename(securityPortalDataPath));
+    return;
+  }
   if (requestUrl.pathname === '/platform-config.js'
     || (singleHost && requestUrl.pathname === '/showcases/angular/platform-config.js')
     || (singleHost && requestUrl.pathname === '/showcases/react/platform-config.js')
@@ -137,6 +159,18 @@ async function handleRequest(
   }
   if (requestUrl.pathname.startsWith('/automation/artifacts/')) {
     serveFile(response, playwrightArtifactsRoot, requestUrl.pathname.slice('/automation/artifacts/'.length));
+    return;
+  }
+  if (requestUrl.pathname === '/security' || requestUrl.pathname === '/security/') {
+    serveFile(
+      response,
+      singleHost ? path.join(siteRoot, 'security') : publicRoot,
+      singleHost ? 'index.html' : 'security.html'
+    );
+    return;
+  }
+  if (requestUrl.pathname.startsWith('/security/artifacts/')) {
+    serveFile(response, securityArtifactsRoot, requestUrl.pathname.slice('/security/artifacts/'.length));
     return;
   }
   if (requestUrl.pathname.startsWith('/playwright/')) {

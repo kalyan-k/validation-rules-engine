@@ -94,6 +94,23 @@ if (playwrightSource) {
   console.log('No Playwright evidence found; /automation will show an empty state until npm run evidence:publish.');
 }
 
+const securityRoot = path.join(siteRoot, 'security');
+mkdirSync(securityRoot, { recursive: true });
+copyFile(path.join(workspaceRoot, 'apps', 'portal', 'public', 'security.html'), path.join(securityRoot, 'index.html'));
+const securitySource = resolveEvidenceSource({
+  liveRoot: path.join(workspaceRoot, 'reports', 'security'),
+  evidenceRoot: path.join(workspaceRoot, 'hosted', 'evidence', 'security'),
+  marker: path.join('portal-data', 'latest.json'),
+  fallbackMarkers: ['security-summary.json', 'latest.json', 'sbom'],
+  preferEvidence: preferHostedEvidence
+});
+if (securitySource) {
+  copyDirectory(securitySource, path.join(securityRoot, 'artifacts'));
+  console.log(`Included security artifacts from ${path.relative(workspaceRoot, securitySource)}`);
+} else {
+  console.log('No security evidence found; /security will show an empty state until npm run evidence:publish.');
+}
+
 const publicBaseUrl = (process.env.VRE_PUBLIC_URL ?? '').replace(/\/$/, '');
 const originBase = publicBaseUrl || siteBase;
 const configuredUrls = {
@@ -155,7 +172,8 @@ writeFileSync(path.join(siteRoot, 'deployment-manifest.json'), `${JSON.stringify
     reactShowcase: withSiteBase('/showcases/react/', siteBase),
     vanillaShowcase: withSiteBase('/showcases/vanilla/', siteBase),
     reports: withSiteBase('/reports/', siteBase),
-    automation: withSiteBase('/automation/', siteBase)
+    automation: withSiteBase('/automation/', siteBase),
+    security: withSiteBase('/security/', siteBase)
   }
 }, null, 2)}\n`, 'utf8');
 
@@ -450,6 +468,27 @@ function writeStaticHostingApis({ version, urls, publicBaseUrl }) {
       available: false,
       message: 'No Playwright report data is available yet. Publish local evidence with npm run evidence:publish.',
       command: 'npm run test:e2e:chromium && npm run evidence:publish'
+    });
+  }
+
+  const securityLatestCandidates = [
+    path.join(workspaceRoot, 'reports', 'security', 'portal-data', 'latest.json'),
+    path.join(workspaceRoot, 'hosted', 'evidence', 'security', 'portal-data', 'latest.json')
+  ];
+  const securityLatestSource = securityLatestCandidates.find((candidate) => existsSync(candidate));
+  if (securityLatestSource) {
+    copyFile(securityLatestSource, path.join(siteRoot, 'api', 'security', 'latest.json'));
+  } else {
+    writeJson('api/security/latest.json', {
+      available: false,
+      message: 'No security report data is available yet. Publish local evidence with npm run evidence:publish.',
+      command: 'npm run security:full && npm run evidence:publish',
+      checks: [],
+      packages: [
+        '@validation-rules-engine/core',
+        '@validation-rules-engine/angular',
+        '@validation-rules-engine/react'
+      ]
     });
   }
 }

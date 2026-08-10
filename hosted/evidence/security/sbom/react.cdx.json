@@ -1,0 +1,371 @@
+{
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "metadata": {
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "npm",
+          "version": "11.6.2"
+        },
+        {
+          "type": "library",
+          "name": "cyclonedx-library",
+          "group": "@cyclonedx",
+          "version": "10.1.0",
+          "author": "Jan Kowalleck",
+          "description": "Core functionality of CycloneDX for JavaScript (Node.js or WebBrowser).",
+          "licenses": [
+            {
+              "license": {
+                "id": "Apache-2.0"
+              }
+            }
+          ],
+          "externalReferences": [
+            {
+              "url": "https://github.com/CycloneDX/cyclonedx-javascript-library/issues",
+              "type": "issue-tracker",
+              "comment": "as detected from PackageJson property \"bugs.url\""
+            },
+            {
+              "url": "git+https://github.com/CycloneDX/cyclonedx-javascript-library.git",
+              "type": "vcs",
+              "comment": "as detected from PackageJson property \"repository.url\""
+            },
+            {
+              "url": "https://github.com/CycloneDX/cyclonedx-javascript-library#readme",
+              "type": "website",
+              "comment": "as detected from PackageJson property \"homepage\""
+            }
+          ]
+        },
+        {
+          "type": "application",
+          "name": "cyclonedx-npm",
+          "group": "@cyclonedx",
+          "version": "6.0.0",
+          "author": "Jan Kowalleck",
+          "description": "Create CycloneDX Software Bill of Materials (SBOM) from NPM projects.",
+          "licenses": [
+            {
+              "license": {
+                "id": "Apache-2.0"
+              }
+            }
+          ],
+          "externalReferences": [
+            {
+              "url": "https://github.com/CycloneDX/cyclonedx-node-npm/issues",
+              "type": "issue-tracker",
+              "comment": "as detected from PackageJson property \"bugs.url\""
+            },
+            {
+              "url": "git+https://github.com/CycloneDX/cyclonedx-node-npm.git",
+              "type": "vcs",
+              "comment": "as detected from PackageJson property \"repository.url\""
+            },
+            {
+              "url": "https://github.com/CycloneDX/cyclonedx-node-npm#readme",
+              "type": "website",
+              "comment": "as detected from PackageJson property \"homepage\""
+            }
+          ]
+        }
+      ]
+    },
+    "component": {
+      "type": "library",
+      "name": "validation-rules-engine-workspace",
+      "version": "1.0.0",
+      "bom-ref": "validation-rules-engine-workspace@1.0.0",
+      "description": "Private monorepo for the Validation Rules Engine, framework adapters, portal, documentation, and showcase applications.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/validation-rules-engine-workspace@1.0.0",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": ""
+        },
+        {
+          "name": "cdx:npm:package:private",
+          "value": "true"
+        }
+      ]
+    },
+    "properties": [
+      {
+        "name": "cdx:reproducible",
+        "value": "true"
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "core",
+      "group": "@validation-rules-engine",
+      "version": "1.0.0",
+      "bom-ref": "validation-rules-engine-workspace@1.0.0|@validation-rules-engine/core@1.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40validation-rules-engine/core@1.0.0",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@validation-rules-engine/core"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "react",
+      "group": "@validation-rules-engine",
+      "version": "1.0.0",
+      "bom-ref": "validation-rules-engine-workspace@1.0.0|@validation-rules-engine/react@1.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40validation-rules-engine/react@1.0.0",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@validation-rules-engine/react"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "react-dom",
+      "version": "19.2.7",
+      "bom-ref": "validation-rules-engine-workspace@1.0.0|react-dom@19.2.7",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/react-dom@19.2.7",
+      "externalReferences": [
+        {
+          "url": "https://registry.npmjs.org/react-dom/-/react-dom-19.2.7.tgz",
+          "type": "distribution",
+          "hashes": [
+            {
+              "alg": "SHA-512",
+              "content": "b74051557bdb884fe8db41dfc3aebdacb6cc0835ad6192ef9898a0cb67f4331b1717eef5a71851df13a4b299ac3bc877665373ca26c09ad09ade5e2560a93a81"
+            }
+          ],
+          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/react-dom"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "react",
+      "version": "19.2.7",
+      "bom-ref": "validation-rules-engine-workspace@1.0.0|react@19.2.7",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/react@19.2.7",
+      "externalReferences": [
+        {
+          "url": "https://registry.npmjs.org/react/-/react-19.2.7.tgz",
+          "type": "distribution",
+          "hashes": [
+            {
+              "alg": "SHA-512",
+              "content": "1cd7bd5ac9536d79852bca3c726c2001e245481bedd5b3dd1c254ab5a695f96940377ea6a53e21711a706dfddf639e9aaf6a085f3b01a4e0222111c0758d0e95"
+            }
+          ],
+          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/react"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "scheduler",
+      "version": "0.27.0",
+      "bom-ref": "validation-rules-engine-workspace@1.0.0|scheduler@0.27.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/scheduler@0.27.0",
+      "externalReferences": [
+        {
+          "url": "https://registry.npmjs.org/scheduler/-/scheduler-0.27.0.tgz",
+          "type": "distribution",
+          "hashes": [
+            {
+              "alg": "SHA-512",
+              "content": "78dbfe5ab55b2aed5fdef6d8253ff1b62179b320391cf20cb5ff48818fe72a0d2c5aacc0504bea63fc66ece71973fa9a7cbc7f88ef4580e99e480a78bf9b62fd"
+            }
+          ],
+          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/scheduler"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "tslib",
+      "version": "2.4.1",
+      "bom-ref": "validation-rules-engine-workspace@1.0.0|tslib@2.4.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/tslib@2.4.1",
+      "externalReferences": [
+        {
+          "url": "https://registry.npmjs.org/tslib/-/tslib-2.4.1.tgz",
+          "type": "distribution",
+          "hashes": [
+            {
+              "alg": "SHA-512",
+              "content": "b46cb2e1d02344813023b073b01d25ca75a03a97ea8d476af755d70252160f63b02811fba0297f1991bf1d3e01387ad394f30e01294c43bbdec93aa999172b34"
+            }
+          ],
+          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/tslib"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "underscore",
+      "version": "1.13.8",
+      "bom-ref": "validation-rules-engine-workspace@1.0.0|underscore@1.13.8",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/underscore@1.13.8",
+      "externalReferences": [
+        {
+          "url": "https://registry.npmjs.org/underscore/-/underscore-1.13.8.tgz",
+          "type": "distribution",
+          "hashes": [
+            {
+              "alg": "SHA-512",
+              "content": "0d7b43dd9b4443373b33c9b8717a2dc8747e1404b5f02eb86ac058639bea65ec5f62bc8d3670dcd365b884a837add42ea8e61ab358e4b1e5f4fa76578d35e7bd"
+            }
+          ],
+          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/underscore"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "validation-rules-engine-workspace@1.0.0",
+      "dependsOn": [
+        "validation-rules-engine-workspace@1.0.0|@validation-rules-engine/react@1.0.0"
+      ]
+    },
+    {
+      "ref": "validation-rules-engine-workspace@1.0.0|@validation-rules-engine/core@1.0.0",
+      "dependsOn": [
+        "validation-rules-engine-workspace@1.0.0|tslib@2.4.1",
+        "validation-rules-engine-workspace@1.0.0|underscore@1.13.8"
+      ]
+    },
+    {
+      "ref": "validation-rules-engine-workspace@1.0.0|@validation-rules-engine/react@1.0.0",
+      "dependsOn": [
+        "validation-rules-engine-workspace@1.0.0|@validation-rules-engine/core@1.0.0",
+        "validation-rules-engine-workspace@1.0.0|react-dom@19.2.7",
+        "validation-rules-engine-workspace@1.0.0|react@19.2.7"
+      ]
+    },
+    {
+      "ref": "validation-rules-engine-workspace@1.0.0|react-dom@19.2.7",
+      "dependsOn": [
+        "validation-rules-engine-workspace@1.0.0|react@19.2.7",
+        "validation-rules-engine-workspace@1.0.0|scheduler@0.27.0"
+      ]
+    },
+    {
+      "ref": "validation-rules-engine-workspace@1.0.0|react@19.2.7"
+    },
+    {
+      "ref": "validation-rules-engine-workspace@1.0.0|scheduler@0.27.0"
+    },
+    {
+      "ref": "validation-rules-engine-workspace@1.0.0|tslib@2.4.1"
+    },
+    {
+      "ref": "validation-rules-engine-workspace@1.0.0|underscore@1.13.8"
+    }
+  ]
+}

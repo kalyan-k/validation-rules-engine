@@ -2,6 +2,7 @@ const statusList = document.querySelector('#status-list');
 const applicationGrid = document.querySelector('#application-grid');
 const overallStatus = document.querySelector('#overall-status');
 const playwrightResults = document.querySelector('#playwright-results');
+const securityResults = document.querySelector('#security-results');
 
 function configureStaticNavigation() {
   const urls = globalThis.vrePlatformConfig?.urls ?? {};
@@ -279,9 +280,157 @@ function formatDuration(value) {
   return `${(ms / 1000).toFixed(1)} s`;
 }
 
+async function loadSecurityResults() {
+  if (!securityResults) return;
+  try {
+    const response = await fetch(apiUrl('/api/security/latest'), { cache: 'no-store' });
+    const payload = await response.json();
+    renderSecurityResults(payload);
+  } catch {
+    renderSecurityResults({
+      available: false,
+      message: 'Security report data could not be loaded.',
+      command: 'npm run security:full && npm run evidence:publish',
+      checks: [],
+      packages: [
+        '@validation-rules-engine/core',
+        '@validation-rules-engine/angular',
+        '@validation-rules-engine/react'
+      ]
+    });
+  }
+}
+
+function renderSecurityResults(payload) {
+  if (!securityResults) return;
+  const checks = Array.isArray(payload.checks) ? payload.checks : [];
+  const totals = payload.totals || {};
+  const packages = payload.packages || [];
+  const statusClass = securityStatusClass(payload.label || 'UNAVAILABLE');
+
+  if (!checks.length) {
+    securityResults.innerHTML = `
+      <article class="playwright-empty">
+        <h3>${escapeHtml(payload.message || 'No security report data is available yet.')}</h3>
+        <p>Generate and publish evidence with <code>${escapeHtml(payload.command || 'npm run security:full && npm run evidence:publish')}</code>.</p>
+      </article>
+    `;
+    return;
+  }
+
+  securityResults.innerHTML = `
+    <article class="playwright-summary security-summary ${escapeHtml(statusClass)}">
+      <div class="playwright-summary-top">
+        <div>
+          <span class="application-index">Latest security gate</span>
+          <h3>${escapeHtml(payload.label || 'UNAVAILABLE')}</h3>
+          <p>${escapeHtml(payload.scannedAt || payload.generatedAt || 'Unknown scan time')}
+            ${payload.profile ? ` &middot; profile <strong>${escapeHtml(payload.profile)}</strong>` : ''}</p>
+          <p class="playwright-run-scope">${escapeHtml(payload.message || 'Security validation summary for public packages and the developer platform.')}</p>
+        </div>
+        <a href="${escapeHtml(sitePath('/security/artifacts/security-summary.json'))}">Open summary JSON</a>
+      </div>
+      <div class="playwright-metrics security-metrics">
+        ${metric('Configured', totals.configured)}
+        ${metric('Executed', totals.executed)}
+        ${metric('Passed', totals.passed)}
+        ${metric('Failed', totals.failed)}
+        ${metric('Errors', totals.errored)}
+      </div>
+      <div class="playwright-info-grid">
+        ${renderSecurityPackagesCard(packages, payload.compliance)}
+        ${renderSecurityStandardsCard(payload.standards)}
+      </div>
+      ${renderSecurityChecksTable(checks)}
+      <div class="playwright-links">
+        <a href="${escapeHtml(sitePath('/security/artifacts/npm-audit/'))}">npm audit</a>
+        <a href="${escapeHtml(sitePath('/security/artifacts/semgrep/'))}">Semgrep</a>
+        <a href="${escapeHtml(sitePath('/security/artifacts/gitleaks/'))}">Gitleaks</a>
+        <a href="${escapeHtml(sitePath('/security/artifacts/dependency-check/'))}">Dependency-Check</a>
+        <a href="${escapeHtml(sitePath('/security/artifacts/sbom/'))}">SBOM</a>
+        <a href="${escapeHtml(sitePath('/docs/security'))}">Security docs</a>
+      </div>
+    </article>
+  `;
+}
+
+function securityStatusClass(label) {
+  const normalized = String(label || '').toUpperCase();
+  if (normalized === 'PASS') return 'pass';
+  if (normalized === 'FAIL') return 'fail';
+  if (normalized === 'ERROR') return 'error';
+  return 'unavailable';
+}
+
+function securityBadgeClass(status) {
+  const normalized = String(status || '').toUpperCase();
+  if (normalized === 'PASS') return 'pass';
+  if (normalized === 'FAIL') return 'fail';
+  if (normalized === 'ERROR') return 'error';
+  return 'info';
+}
+
+function renderSecurityPackagesCard(packages, compliance) {
+  return `
+    <section class="playwright-catalog-card">
+      <h4>Package security posture</h4>
+      <p>${escapeHtml(compliance?.summary || 'Public packages are released through synchronized quality and security gates.')}</p>
+      <ul class="security-package-list">
+        ${(packages || []).map((name) => `<li><code>${escapeHtml(name)}</code></li>`).join('')}
+      </ul>
+    </section>
+  `;
+}
+
+function renderSecurityStandardsCard(standards) {
+  const items = Array.isArray(standards) ? standards : [];
+  return `
+    <section class="playwright-enterprise-card">
+      <h4>Controls &amp; standards</h4>
+      <ul>
+        ${items.map((item) => `<li>${escapeHtml(item)}</li>`).join('') || '<li>SAST, SCA, secrets, SBOM, and release gates.</li>'}
+        <li>CodeQL findings are tracked in GitHub Security / code scanning.</li>
+        <li>Publish uses npm provenance from the tagged release workflow.</li>
+      </ul>
+    </section>
+  `;
+}
+
+function renderSecurityChecksTable(checks) {
+  if (!checks.length) return '';
+  return `
+    <div class="security-checks">
+      <h4>Security checks</h4>
+      <div class="security-check-table" role="table" aria-label="Security checks">
+        <div class="security-check-row security-check-head" role="row">
+          <span role="columnheader">Check</span>
+          <span role="columnheader">Layer</span>
+          <span role="columnheader">Status</span>
+          <span role="columnheader">Summary</span>
+        </div>
+        ${checks.map((check) => `
+          <div class="security-check-row" role="row">
+            <span role="cell"><strong>${escapeHtml(check.name)}</strong><small>${escapeHtml(check.scope || '')}</small></span>
+            <span role="cell">${escapeHtml(check.layer || '')}</span>
+            <span role="cell"><em class="security-status ${escapeHtml(securityBadgeClass(check.status))}">${escapeHtml(check.status || 'UNKNOWN')}</em></span>
+            <span role="cell">${escapeHtml(check.summary || check.description || '')}${renderSecurityArtifactLinks(check)}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function renderSecurityArtifactLinks(check) {
+  const hints = Array.isArray(check.artifactHints) ? check.artifactHints.filter(Boolean) : [];
+  if (!hints.length) return '';
+  return `<span class="security-artifact-links">${hints.map((hint) => `<a href="${escapeHtml(sitePath(`/security/artifacts/${hint}`))}">${escapeHtml(hint.split('/').pop())}</a>`).join(' ')}</span>`;
+}
+
 configureStaticNavigation();
 void loadMeta();
 void loadPlaywrightResults();
+void loadSecurityResults();
 if (statusList && applicationGrid && overallStatus) {
   void refreshStatus();
   setInterval(refreshStatus, 2500);
