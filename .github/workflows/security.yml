@@ -1,0 +1,117 @@
+name: Security scan
+
+on:
+  pull_request:
+  push:
+    branches: [master, main]
+  workflow_dispatch:
+    inputs:
+      include_zap:
+        description: Run OWASP ZAP baseline against the built single-host site
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
+concurrency:
+  group: security-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Setup Gitleaks CLI
+        run: |
+          curl -sSL https://github.com/gitleaks/gitleaks/releases/download/v8.24.3/gitleaks_8.24.3_linux_x64.tar.gz | tar -xz
+          sudo mv gitleaks /usr/local/bin/gitleaks
+          gitleaks version
+
+      - name: Setup Semgrep
+        run: |
+          python3 -m pip install --user semgrep
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          semgrep --version
+
+      - name: Run CI security profile
+        run: npm run security:ci
+        env:
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+
+      - name: Upload security reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-reports
+          path: reports/security/
+          if-no-files-found: warn
+
+  zap:
+    if: github.event_name == 'workflow_dispatch' && inputs.include_zap == true
+    needs: security
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build single-host site
+        run: npm run build:site
+        env:
+          NODE_OPTIONS: --max-old-space-size=8192
+          VRE_HOSTED_EVIDENCE: '1'
+
+      - name: Start single-host server
+        run: |
+          node dist/apps/portal/server.js --single-host &
+          echo $! > .zap-server.pid
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:4200/health >/dev/null; then
+              exit 0
+            fi
+            sleep 2
+          done
+          exit 1
+        env:
+          VRE_NO_OPEN: '1'
+          VRE_PORTAL_PORT: '4200'
+
+      - name: OWASP ZAP baseline
+        uses: zaproxy/action-baseline@v0.14.0
+        with:
+          target: 'http://127.0.0.1:4200'
+          allow_issue_writing: false
+          cmd_options: '-I'
+
+      - name: Stop server
+        if: always()
+        run: |
+          if [ -f .zap-server.pid ]; then kill "$(cat .zap-server.pid)" || true; fi

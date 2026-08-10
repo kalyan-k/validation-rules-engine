@@ -135,6 +135,7 @@ const documentationSections = [
     label: 'Project',
     items: [
       ['Architecture', '/docs/architecture'],
+      ['npm Scripts Guide', '/docs/npm-scripts'],
       ['Single-Host Deployment', '/docs/single-host-deployment'],
       ['Release & Versioning', '/docs/release-versioning'],
       ['Testing, Coverage & Reports', '/docs/testing'],

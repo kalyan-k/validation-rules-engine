@@ -1,0 +1,67 @@
+{
+  "$schema": "./security-policy.schema.json",
+  "version": 1,
+  "description": "Central security thresholds for Validation Rules Engine local, CI, and release gates.",
+  "severity": {
+    "critical": "fail",
+    "high": "fail",
+    "moderate": "fail-on-release",
+    "low": "report",
+    "informational": "report"
+  },
+  "npmAudit": {
+    "quickLevel": "high",
+    "ciLevel": "moderate",
+    "releaseLevel": "moderate",
+    "rationale": "Public npm libraries should fail the release gate on moderate+ dependency advisories. Local quick scans fail only on high/critical to keep day-to-day development practical."
+  },
+  "semgrep": {
+    "configs": ["p/javascript", "p/typescript", "p/security-audit"],
+    "failOn": ["ERROR"],
+    "paths": ["packages", "apps", "tools", "tests", "playwright"],
+    "exclude": ["node_modules", "dist", "reports", "artifacts", "hosted", "docs/private"]
+  },
+  "gitleaks": {
+    "failOnFindings": true,
+    "config": "tools/security/config/gitleaks.toml"
+  },
+  "dependencyCheck": {
+    "enabled": true,
+    "failOnCVSS": 7,
+    "nvdApiKeyEnv": "NVD_API_KEY",
+    "limitations": [
+      "OWASP Dependency-Check has incomplete coverage for npm/package-lock graphs compared with npm audit.",
+      "Treat Dependency-Check as an independent SCA signal, not a replacement for npm audit."
+    ]
+  },
+  "codeql": {
+    "languages": ["javascript"],
+    "paths": ["packages", "apps", "tests", "playwright", "tools"],
+    "pathsIgnore": ["node_modules", "dist", "reports", "artifacts", "hosted", "**/*.min.js"]
+  },
+  "zap": {
+    "mode": "baseline",
+    "failOnWarn": false,
+    "failOnFail": true,
+    "targetEnv": "ZAP_TARGET_URL",
+    "defaultTarget": "http://127.0.0.1:4200",
+    "notes": "ZAP is runtime DAST only. It is optional for local quick scans and required for CI/release full security profiles when a target is available."
+  },
+  "sbom": {
+    "standard": "CycloneDX",
+    "outputDir": "reports/security/sbom",
+    "packages": [
+      "@validation-rules-engine/core",
+      "@validation-rules-engine/angular",
+      "@validation-rules-engine/react"
+    ],
+    "method": "workspace-lockfile-package-lock-only"
+  },
+  "reportsRoot": "reports/security",
+  "profiles": {
+    "quick": ["npm-audit", "gitleaks", "semgrep"],
+    "full": ["npm-audit", "gitleaks", "semgrep", "dependency-check", "sbom"],
+    "release": ["npm-audit", "gitleaks", "semgrep", "dependency-check", "sbom"],
+    "ci": ["npm-audit", "gitleaks", "semgrep", "dependency-check", "sbom"]
+  }
+}

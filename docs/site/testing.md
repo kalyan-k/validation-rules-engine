@@ -13,6 +13,8 @@ npm run test:e2e:smoke
 npm run test:hosting
 ```
 
+For the full root script catalog and recommended sequences (setup → PR checks → release), see [npm Scripts Guide](/docs/npm-scripts).
+
 `test:hosting` launches the platform twice. The multi-host pass checks the configured portal, documentation, Vanilla, Angular, and React origins; the single-host pass checks the equivalent `/docs/`, `/showcases/vanilla/`, `/showcases/angular/`, `/showcases/react/`, `/reports/`, and `/automation/` routes on one origin. Each pass renders Portal, Documentation, Vanilla Showcase, Angular Showcase, React Showcase, and Reports pages and asserts their complete shared top-menu URL matrix.
 
 ## Coverage gates

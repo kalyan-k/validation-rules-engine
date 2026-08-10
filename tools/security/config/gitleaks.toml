@@ -1,0 +1,15 @@
+title = "Validation Rules Engine gitleaks config"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Narrow allowlist for intentional non-secret patterns"
+paths = [
+  '''docs/private/''',
+  '''reports/''',
+  '''artifacts/''',
+  '''hosted/evidence/''',
+  '''node_modules/''',
+  '''dist/'''
+]

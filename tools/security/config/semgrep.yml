@@ -1,0 +1,4 @@
+# Repository-local Semgrep rules / suppressions.
+# Community rulesets are selected via security-policy.json (p/javascript, p/typescript, p/security-audit).
+
+rules: []

@@ -23,13 +23,25 @@ Deprecate a public API in a minor release before removing it in the next planned
 
 ## Release quality gates
 
+Recommended first rehearsal (does not publish):
+
+```bash
+npm run release:dry-run
+```
+
 Run the complete local release gate before creating a version tag:
 
 ```bash
 npm run release:verify
 ```
 
-This verifies synchronized versions, the dependency audit, lint, unit and coverage suites, the single-host production build, and dry-run npm package contents.
+This runs the release security gate first (`npm audit`, Gitleaks, Semgrep, OWASP Dependency-Check, SBOM), then synchronized versions, lint, unit and coverage suites, the single-host production build, hosting navigation checks, dry-run npm package contents, and package inspection.
+
+Security-only gate:
+
+```bash
+npm run release:security
+```
 
 To inspect package contents without publishing:
 
@@ -37,9 +49,19 @@ To inspect package contents without publishing:
 npm run pack:packages:dry-run
 ```
 
+See [npm Scripts Guide](/docs/npm-scripts) for the full release command sequence, [Security tooling](../../tools/security/README.md) for scanner installation and thresholds, and [SECURITY.md](../../SECURITY.md) for disclosure policy.
+
 ## Publishing
 
-Stable releases use a matching Git tag such as `v1.0.0`. Pushing the tag starts `.github/workflows/release.yml`, verifies that the tag and package versions match, reruns every release quality gate, and publishes Core before the Angular and React adapters with npm provenance.
+Stable releases use a matching Git tag such as `v1.0.0`. Pushing the tag starts `.github/workflows/release.yml`, verifies that the tag and package versions match, reruns every release quality gate (including the security gate), and publishes Core before the Angular and React adapters with npm provenance.
+
+Local explicit publish (requires `VRE_CONFIRM_PUBLISH=YES`):
+
+```bash
+npm run release:publish
+```
+
+Do not store npm tokens in the repository. Use npm trusted publishing / OIDC in GitHub Actions or a local authenticated npm session.
 
 Configure the `npm` GitHub environment and npm trusted publishing for the repository before pushing the first release tag. The `@validation-rules-engine` npm organization or user scope must exist and grant the repository permission to publish all three packages.
 

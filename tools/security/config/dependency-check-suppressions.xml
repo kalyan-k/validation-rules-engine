@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+  <!--
+    Add narrow false-positive suppressions here with:
+    - CVE / CPE identifiers
+    - why the finding is a false positive
+    - reviewer / revisit date in comments
+    Never suppress Critical/High findings without documented justification.
+  -->
+</suppressions>

@@ -88,7 +88,10 @@ validation-rules-engine/
 |-- tools/
 |   |-- architecture/          # dependency-boundary verification
 |   |-- platform-shell/        # shared product shell, theme, and navigation
+|   |-- release/               # version sync, package inspection, release orchestration
+|   |-- security/              # SAST/SCA/secrets/SBOM/ZAP orchestration and policy
 |   `-- testing/               # shared Karma config and persistent reports
+|-- SECURITY.md                # vulnerability reporting and disclosure policy
 |-- package.json               # private npm-workspaces root
 `-- tsconfig.json
 ```
@@ -247,6 +250,28 @@ All browser applications use the framework-neutral shell in `tools/platform-shel
 
 Documentation search is performed from a browser-cached index and returns highlighted title, heading, prose, and code matches with direct section links and full keyboard navigation. Generated reports use the exact shared application shell: collapsible Packages and Showcase Applications groups plus Summary / Tests / Coverage tabs update one workspace, while the original Istanbul output remains unchanged.
 
+## Security
+
+Validation Rules Engine uses automated security scanning and release gates to identify known dependency vulnerabilities, source-code security issues, exposed secrets, and runtime web security issues.
+
+Security layers:
+
+- SAST (CodeQL, Semgrep)
+- Dependency scanning (npm audit, OWASP Dependency-Check)
+- Secret scanning (Gitleaks)
+- Runtime security testing (optional OWASP ZAP)
+- SBOM generation (CycloneDX)
+- Automated release security gates
+
+```bash
+npm run security:quick      # developer scan (npm audit high+, Gitleaks, Semgrep when installed)
+npm run security:full       # broader local/CI-style scan + SBOM
+npm run release:security    # strictest pre-publish security gate
+npm run release:dry-run     # full release rehearsal without publishing
+```
+
+Reports are written to `reports/security/` (gitignored). See [SECURITY.md](SECURITY.md) and [tools/security/README.md](tools/security/README.md) for thresholds, installation, false-positive handling, and npm authentication.
+
 ## Roadmap
 
 - Continue strengthening the framework-neutral engine and adapter contract
@@ -289,10 +314,12 @@ npm run build:all
 | `npm run reports:open` | Open the generated report dashboard |
 | `npm run lint:all` | Lint every configured project |
 | `npm run version:check` | Verify synchronized package versions and Core peer compatibility |
+| `npm run security:quick` | Run the local developer security profile |
+| `npm run release:dry-run` | Rehearse security, tests, build, SBOM, and pack without publishing |
 | `npm run pack:packages:dry-run` | Inspect all three npm package payloads without publishing |
-| `npm run release:verify` | Run every release quality gate before tagging or publishing |
+| `npm run release:verify` | Run security gate plus every release quality gate before tagging or publishing |
 
-See [Single-host deployment](docs/site/single-host-deployment.md), [Release and versioning](docs/site/release-versioning.md), [Testing and reports](docs/site/testing.md), and [Playwright E2E Testing](docs/site/playwright.md) for deployment, publishing, report locations, coverage scope, CI behavior, browser automation, and troubleshooting.
+See [npm Scripts Guide](docs/site/npm-scripts.md) for every root script and recommended run order. Also see [Single-host deployment](docs/site/single-host-deployment.md), [Release and versioning](docs/site/release-versioning.md), [Testing and reports](docs/site/testing.md), and [Playwright E2E Testing](docs/site/playwright.md).
 
 ## Contributing
 

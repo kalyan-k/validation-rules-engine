@@ -57,3 +57,12 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Local secrets (never commit)
+/tools/security/config/nvd-api-key.local
+
+# Dependency-Check local NVD caches (can exceed GitHub's 100MB file limit)
+**/dependency-check/data/
+**/*.mv.db
+**/*.trace.db
+/hosted/evidence/reports/security/
