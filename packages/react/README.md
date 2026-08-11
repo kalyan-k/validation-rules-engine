@@ -71,7 +71,7 @@ Custom controls call `form.setFieldValue(path, value, shouldValidate)` and consu
 
 Use React Testing Library normally and wrap components in `ValidationRulesProvider`. The package's source test helper `renderWithValidation` shows the pattern; consumers should generally keep a local equivalent in their own test suite.
 
-Full guides and API details are in the [React documentation](http://127.0.0.1:4201/docs/react-overview). Working examples are in the [React showcase](http://127.0.0.1:4204/).
+Full guides and API details are in the [React documentation](https://kalyan-k.github.io/validation-rules-engine/docs/react-overview). Working examples are in the [React showcase](https://kalyan-k.github.io/validation-rules-engine/showcases/react/).
 
 ## License
 

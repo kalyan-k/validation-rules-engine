@@ -93,11 +93,31 @@ validation-rules-engine/
 |   |-- security/              # SAST/SCA/secrets/SBOM/ZAP orchestration and policy
 |   `-- testing/               # shared Karma config and persistent reports
 |-- SECURITY.md                # vulnerability reporting and disclosure policy
+|-- CONTRIBUTING.md            # setup, tests, review, and compatibility rules
+|-- CODE_OF_CONDUCT.md         # community standards and enforcement contacts
+|-- CHANGELOG.md               # user-visible changes by synchronized version
+|-- LICENSE                    # MIT license text
 |-- package.json               # private npm-workspaces root
 `-- tsconfig.json
 ```
 
+## Supported frameworks
+
+| Surface | Package | When to use |
+| --- | --- | --- |
+| Core / Vanilla TypeScript | `@validation-rules-engine/core` | Shared policies, non-UI validation, or framework-free forms |
+| Angular | `@validation-rules-engine/angular` | Template-driven Angular forms with directives, services, and display strategies |
+| React 19.2 | `@validation-rules-engine/react` | Hooks-first controlled forms with provider, field helpers, and accessible messages |
+
+There is no Vue or other framework adapter in this repository.
+
 ## Installation
+
+Core-only / Vanilla consumers:
+
+```bash
+npm install @validation-rules-engine/core underscore
+```
 
 Angular consumers install the core engine, Angular adapter, and Underscore peer dependency together:
 
@@ -113,7 +133,12 @@ React consumers install the core and React packages with the tested React 19.2 p
 npm install @validation-rules-engine/core @validation-rules-engine/react react react-dom
 ```
 
-See the [React quick start](docs/site/react/react-quick-start.md) for provider, policy, field hook, native input, summary, and submit examples.
+Minimum setup guides:
+
+- [Getting started](docs/site/getting-started.md)
+- [Core quick start](docs/site/core/core-quick-start.md)
+- [React quick start](docs/site/react/react-quick-start.md)
+- Hosted docs: https://kalyan-k.github.io/validation-rules-engine/docs/overview
 
 To use the optional default stylesheet, add its stable package entry point to the Angular workspace configuration:
 
@@ -330,6 +355,8 @@ See [npm Scripts Guide](docs/site/npm-scripts.md) for every root script and reco
 
 ## Contributing
 
+See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, tests, code style, review expectations, and compatibility rules. Community standards and enforcement contacts are in [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+
 Keep changes within the established dependency direction and preserve public behavior unless a breaking release is explicitly planned. Before opening a pull request, run:
 
 ```bash
@@ -343,6 +370,19 @@ npm run lint:all
 ```
 
 Add behavior-focused tests with production changes, do not exclude executable code to raise coverage, and do not scaffold future-framework packages without an implementation. The root and showcase packages are private. The release workflow publishes only synchronized, tagged, quality-gated package artifacts through npm trusted publishing.
+
+## Support and links
+
+| Resource | Link |
+| --- | --- |
+| Hosted docs & demos | https://kalyan-k.github.io/validation-rules-engine/ |
+| Source | https://github.com/kalyan-k/validation-rules-engine |
+| Issues | https://github.com/kalyan-k/validation-rules-engine/issues |
+| Changelog | [CHANGELOG.md](CHANGELOG.md) |
+| Security policy | [SECURITY.md](SECURITY.md) |
+| Contributing | [CONTRIBUTING.md](CONTRIBUTING.md) |
+| Code of conduct | [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) |
+| Contact | [validationrulesengine@gmail.com](mailto:validationrulesengine@gmail.com) |
 
 ## License
 

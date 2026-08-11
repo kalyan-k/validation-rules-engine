@@ -2,12 +2,30 @@
   "name": "@validation-rules-engine/react",
   "version": "1.0.0",
   "description": "React hooks, provider, and accessible components for Validation Rules Engine (VRE)",
-  "keywords": ["react", "validation", "forms", "hooks", "validation-rules-engine", "vre", "policy-validation"],
+  "keywords": [
+    "react",
+    "validation",
+    "forms",
+    "hooks",
+    "validation-rules-engine",
+    "vre",
+    "policy-validation"
+  ],
   "license": "MIT",
   "author": "Kalyan K <validationrulesengine@gmail.com>",
-  "homepage": "https://github.com/kalyan-k/validation-rules-engine#readme",
-  "repository": { "type": "git", "url": "git+ssh://git@github.com:kalyan-k/validation-rules-engine.git" },
-  "bugs": { "url": "https://github.com/kalyan-k/validation-rules-engine/issues" },
+  "homepage": "https://kalyan-k.github.io/validation-rules-engine/docs/react-overview",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kalyan-k/validation-rules-engine.git",
+    "directory": "packages/react"
+  },
+  "bugs": {
+    "url": "https://github.com/kalyan-k/validation-rules-engine/issues",
+    "email": "validationrulesengine@gmail.com"
+  },
+  "engines": {
+    "node": ">=22"
+  },
   "type": "module",
   "main": "./index.js",
   "module": "./index.js",

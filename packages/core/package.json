@@ -13,13 +13,18 @@
   ],
   "license": "MIT",
   "author": "Kalyan K <validationrulesengine@gmail.com>",
-  "homepage": "https://github.com/kalyan-k/validation-rules-engine#readme",
+  "homepage": "https://kalyan-k.github.io/validation-rules-engine/docs/core-package",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com:kalyan-k/validation-rules-engine.git"
+    "url": "git+https://github.com/kalyan-k/validation-rules-engine.git",
+    "directory": "packages/core"
   },
   "bugs": {
-    "url": "https://github.com/kalyan-k/validation-rules-engine/issues"
+    "url": "https://github.com/kalyan-k/validation-rules-engine/issues",
+    "email": "validationrulesengine@gmail.com"
+  },
+  "engines": {
+    "node": ">=22"
   },
   "peerDependencies": {
     "underscore": "^1.13.8"
