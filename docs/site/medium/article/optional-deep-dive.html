@@ -1,0 +1,1487 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Optional Deep Dive · Validation Rules Engine Architecture and Comparison</title>
+  <meta name="description" content="Fuller architecture and comparison material from the Validation Rules Engine Medium article v20260815 optional deep dive.">
+  <style>
+
+    :root {
+      color-scheme: light;
+      --page: #f4f7fb;
+      --paper: #ffffff;
+      --ink: #17202c;
+      --muted: #5f6f82;
+      --line: #dce5ef;
+      --brand: #185a9d;
+      --brand-dark: #10395f;
+      --green: #18775a;
+      --green-soft: #eaf7f1;
+      --blue-soft: #edf6ff;
+      --amber-soft: #fff7df;
+      --amber-line: #ebcf83;
+      --code-bg: #101827;
+      --code-ink: #dbeafe;
+      --radius: 24px;
+      --shadow: 0 22px 64px rgba(25, 42, 70, 0.12);
+      --sans: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+      --serif: Georgia, "Times New Roman", Times, serif;
+      --mono: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(24, 90, 157, 0.13), transparent 34rem),
+        linear-gradient(180deg, #fbfdff 0%, var(--page) 52%, #edf2f8 100%);
+      font-family: var(--sans);
+      line-height: 1.72;
+      padding-top: clamp(20px, 3vw, 30px);
+    }
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .version-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      max-width: 1390px;
+      margin: 0 auto 18px;
+      padding: 0 clamp(16px, 2.5vw, 32px);
+    }
+    .version-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: #314356 !important;
+      background: #fff;
+      font-size: 0.84rem;
+      font-weight: 650;
+      text-decoration: none !important;
+    }
+    .version-tab:hover { border-color: #9db7d4; color: var(--brand-dark) !important; }
+    .version-tab.is-active { color: #fff !important; background: var(--brand-dark); border-color: var(--brand-dark); }
+    .version-tab small { color: inherit; opacity: 0.82; font-weight: 500; }
+
+    .page-shell {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: clamp(18px, 2.5vw, 32px);
+      max-width: 1390px;
+      margin: 0 auto;
+      padding: clamp(18px, 2.5vw, 32px);
+    }
+    .side-nav {
+      position: sticky;
+      top: 24px;
+      align-self: start;
+      display: flex;
+      flex-direction: column;
+      max-height: calc(100vh - 48px);
+      overflow: hidden;
+      padding: 16px 16px 14px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 16px 42px rgba(25, 42, 70, 0.08);
+      backdrop-filter: blur(16px);
+      flex: 1 1 220px;
+      max-width: 278px;
+    }
+    .side-nav-header,
+    .side-nav-footer {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+    }
+    .side-nav h2 {
+      margin: 0;
+      color: var(--brand-dark);
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .side-nav-viewport {
+      position: relative;
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      margin: 8px 0;
+      overscroll-behavior: contain;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .side-nav-viewport::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+      display: none;
+    }
+    .side-nav-track {
+      will-change: auto;
+    }
+    .side-nav a {
+      display: block;
+      padding: 7px 10px;
+      margin: 0;
+      border-radius: 10px;
+      color: #34465c;
+      font-size: 0.92rem;
+      text-decoration: none;
+    }
+    .side-nav a:hover {
+      color: var(--brand-dark);
+      background: #edf6ff;
+      text-decoration: none;
+    }
+    .side-nav a.is-active {
+      color: var(--brand-dark);
+      background: linear-gradient(90deg, #edf6ff, #f8fffc);
+      box-shadow: inset 3px 0 0 var(--brand);
+      font-weight: 700;
+    }
+    .side-nav-arrow {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 30px;
+      border: 1px solid #cfe0f5;
+      border-radius: 999px;
+      color: var(--brand-dark);
+      background: #f7fbff;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+    }
+    .side-nav-arrow.is-visible { display: inline-flex; }
+    .side-nav-arrow:hover {
+      border-color: #9db7d4;
+      background: #edf6ff;
+    }
+    .side-nav-arrow:focus-visible {
+      outline: 3px solid #9ec7ef;
+      outline-offset: 2px;
+    }
+    .side-nav-arrow svg {
+      display: block;
+    }
+    .side-nav .small {
+      margin: 0;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+    main { min-width: 0; flex: 999 1 620px; }
+    .hero, article, .publishing-notes {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+    .hero { overflow: hidden; margin-bottom: 26px; }
+    .hero-top {
+      padding: clamp(34px, 5vw, 58px);
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(16, 57, 95, 0.98), rgba(24, 90, 157, 0.92)),
+        radial-gradient(circle at right top, rgba(31, 143, 106, 0.42), transparent 24rem);
+    }
+    .kicker {
+      margin: 0 0 14px;
+      color: #b9ddff;
+      font-size: 0.78rem;
+      font-weight: 750;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: 1000px;
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(2.35rem, 5vw, 4.7rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+    .subtitle {
+      max-width: 850px;
+      margin: 24px 0 0;
+      color: #e8f4ff;
+      font-size: clamp(1.08rem, 2vw, 1.42rem);
+      line-height: 1.45;
+    }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px; padding: 18px clamp(24px, 5vw, 58px); }
+    .chip {
+      display: inline-flex;
+      padding: 7px 12px;
+      border: 1px solid #cfe0f5;
+      border-radius: 999px;
+      color: #2d4968;
+      background: #f7fbff;
+      font-size: 0.86rem;
+      font-weight: 650;
+    }
+    .publishing-notes { margin-bottom: 26px; padding: clamp(24px, 4vw, 34px); }
+    .publishing-notes h2 { margin: 0 0 10px; font-size: 1.35rem; }
+    .publishing-notes p, .publishing-notes li { color: var(--muted); font-size: 0.94rem; }
+    article { padding: clamp(24px, 5vw, 58px); }
+    article h2 {
+      margin: 62px 0 16px;
+      color: #132b45;
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3vw, 2.48rem);
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+    }
+    .medium-story > h2:first-child { margin-top: 0; }
+    article h3 { margin: 34px 0 12px; color: #183754; font-size: 1.18rem; line-height: 1.3; }
+    article p { max-width: 830px; margin: 16px 0; font-size: 1.04rem; }
+    .lead {
+      color: #26384c;
+      font-family: var(--serif);
+      font-size: clamp(1.3rem, 2vw, 1.68rem);
+      line-height: 1.46;
+    }
+    ul, ol { max-width: 850px; padding-left: 24px; }
+    li { margin: 8px 0; }
+    blockquote {
+      max-width: 850px;
+      margin: 30px 0;
+      padding: 4px 0 4px 24px;
+      border-left: 5px solid var(--brand);
+      color: #23415f;
+      font-family: var(--serif);
+      font-size: 1.32rem;
+      line-height: 1.48;
+    }
+    .disclosure, .takeaway, .fit-card {
+      max-width: 930px;
+      margin: 26px 0;
+      padding: 20px 22px;
+      border-radius: 18px;
+    }
+    .disclosure { border: 1px solid var(--amber-line); color: #493600; background: var(--amber-soft); }
+    .takeaway { border: 1px solid #bcd8f6; background: var(--blue-soft); }
+    .takeaway strong, .fit-card strong { display: block; margin-bottom: 6px; color: var(--brand-dark); }
+
+    .article-figure { max-width: 980px; margin: 34px 0; }
+    .article-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid #cfdbe8;
+      border-radius: 22px;
+      box-shadow: 0 18px 45px rgba(20, 42, 67, 0.15);
+    }
+    .article-figure figcaption {
+      max-width: 900px;
+      margin: 11px auto 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    table {
+      display: block;
+      width: 100%;
+      max-width: 990px;
+      margin: 28px 0;
+      border-collapse: collapse;
+      font-size: 0.94rem;
+      overflow-x: auto;
+    }
+    th, td { padding: 13px 14px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { color: #153655; background: #f0f6ff; }
+    tr:nth-child(even) td { background: #fcfdff; }
+    .code-wrap {
+      max-width: 970px;
+      margin: 26px 0;
+      overflow: hidden;
+      border-radius: 18px;
+      background: var(--code-bg);
+      box-shadow: 0 18px 42px rgba(15, 23, 42, 0.18);
+    }
+    .code-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      color: #a9c5e3;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-family: var(--mono);
+      font-size: 0.82rem;
+    }
+    pre { margin: 0; padding: 20px; overflow: auto; color: var(--code-ink); font-family: var(--mono); font-size: 0.88rem; line-height: 1.6; }
+    code {
+      padding: 0.12em 0.34em;
+      border-radius: 6px;
+      color: #163a5b;
+      background: #edf4fb;
+      font-family: var(--mono);
+      font-size: 0.9em;
+    }
+    pre code { padding: 0; color: inherit; background: transparent; font-size: inherit; }
+    .host-grid, .fit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      gap: 16px;
+      max-width: 980px;
+      margin: 28px 0;
+    }
+    .host-card, .fit-card {
+      margin: 0;
+      padding: 19px;
+      border: 1px solid #cfe0f5;
+      border-radius: 18px;
+      background: #f8fbff;
+    }
+    .host-card h3 { margin: 0 0 8px; }
+    .host-card p { margin: 0; font-size: 0.94rem; line-height: 1.55; }
+    .fit-grid { grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
+    .fit-card.good { border-color: #a8d8c8; background: var(--green-soft); }
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      gap: 14px;
+      max-width: 980px;
+      margin: 26px 0;
+    }
+    .resource-card {
+      display: block;
+      min-height: 142px;
+      padding: 20px;
+      border: 1px solid #cfe0f5;
+      border-radius: 18px;
+      color: var(--ink);
+      background: linear-gradient(145deg, #ffffff, #f3f8ff);
+      text-decoration: none !important;
+      box-shadow: 0 10px 28px rgba(20, 54, 88, 0.07);
+    }
+    .resource-card:hover { border-color: #79a5d1; transform: translateY(-2px); }
+    .resource-card strong { display: block; margin-bottom: 7px; color: var(--brand-dark); font-size: 1.05rem; }
+    .resource-card span { display: block; color: var(--muted); font-size: 0.91rem; line-height: 1.5; }
+    .resource-card .resource-action { margin-top: 12px; color: var(--brand); font-weight: 750; }
+    .sources {
+      max-width: 900px;
+      margin-top: 44px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .sources h3 { margin-top: 0; }
+    .deep-dive {
+      max-width: 1000px;
+      margin-top: 54px;
+      border: 1px solid #a9c8e7;
+      border-radius: 22px;
+      background: #f8fbff;
+      overflow: hidden;
+      box-shadow: 0 16px 42px rgba(20, 54, 88, 0.09);
+    }
+    .deep-dive > summary {
+      position: relative;
+      padding: clamp(22px, 4vw, 32px) clamp(62px, 8vw, 82px) clamp(22px, 4vw, 32px) clamp(22px, 4vw, 32px);
+      cursor: pointer;
+      list-style: none;
+      background: linear-gradient(135deg, #edf6ff, #f8fffc);
+    }
+    .deep-dive > summary::-webkit-details-marker { display: none; }
+    .deep-dive > summary::after {
+      content: "+";
+      position: absolute;
+      top: 50%;
+      right: clamp(20px, 4vw, 32px);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--brand);
+      font-size: 1.75rem;
+      font-weight: 500;
+      line-height: 34px;
+      text-align: center;
+      transform: translateY(-50%);
+    }
+    .deep-dive[open] > summary::after { content: "\2212"; }
+    .deep-dive[open] > summary { border-bottom: 1px solid #c9dcef; }
+    .deep-dive-kicker {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--green);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .deep-dive-title { display: block; color: var(--brand-dark); font-family: var(--serif); font-size: clamp(1.35rem, 2.5vw, 1.8rem); line-height: 1.25; }
+    .deep-dive-prompt { display: block; margin-top: 8px; color: var(--muted); font-size: 0.92rem; line-height: 1.5; }
+    .deep-dive-content { padding: clamp(18px, 3vw, 30px) clamp(24px, 4vw, 40px) clamp(32px, 5vw, 48px); background: #fff; }
+    .deep-dive-content h2 { margin-top: 48px; }
+    .deep-dive-content h2:first-child { margin-top: 20px; }
+    .deep-dive-note {
+      max-width: 900px;
+      margin: 24px 0;
+      padding: 18px 20px;
+      border-left: 5px solid var(--green);
+      border-radius: 0 14px 14px 0;
+      color: #24453a;
+      background: var(--green-soft);
+    }
+    .footer-note {
+      max-width: 1000px;
+      margin: 0 auto 40px;
+      padding: 0 24px;
+      color: var(--muted);
+      font-size: 0.86rem;
+      text-align: center;
+    }
+
+  
+
+    /* Standalone deep-dive page overrides */
+    .hero { margin-bottom: 26px; }
+    .hero-top { padding: clamp(28px, 4vw, 46px); }
+    h1 {
+      max-width: 980px;
+      font-size: clamp(1.9rem, 4vw, 3.1rem);
+      line-height: 1.08;
+    }
+    .subtitle { margin-top: 18px; font-size: clamp(1.02rem, 2vw, 1.22rem); }
+    article { padding: clamp(22px, 4vw, 48px); }
+    .deep-dive-body > h2:first-child { margin-top: 0; }
+    .deep-dive-body h2 { margin-top: 48px; scroll-margin-top: 24px; }
+    .back-to-top {
+      position: fixed;
+      right: clamp(16px, 3vw, 28px);
+      bottom: clamp(16px, 3vw, 28px);
+      z-index: 40;
+      width: 48px;
+      height: 48px;
+      border: 0;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--brand);
+      box-shadow: 0 14px 34px rgba(24, 90, 157, 0.35);
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
+    }
+    .back-to-top.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .back-to-top:hover { background: var(--brand-dark); }
+    .back-to-top:focus-visible {
+      outline: 3px solid #9ec7ef;
+      outline-offset: 3px;
+    }
+    .back-to-top svg {
+      display: block;
+      margin: 0 auto;
+    }
+
+  </style>
+</head>
+<body id="top">
+  <div class="page-shell">
+    <aside class="side-nav" aria-label="Deep dive navigation">
+      <div class="side-nav-header">
+        <h2>Article map</h2>
+        <button class="side-nav-arrow side-nav-arrow-up" type="button" aria-label="Previous section" title="Previous section" hidden>
+          <svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+            <path fill="currentColor" d="M10 5.2 15.8 11l-1.4 1.4L10 8 5.6 12.4 4.2 11 10 5.2z"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="side-nav-viewport">
+        <div class="side-nav-track">
+          <a href="#popular-approaches">Popular approaches</a>
+          <a href="#enterprise-needs">Enterprise needs</a>
+          <a href="#policy-design">Policy design</a>
+          <a href="#package-ownership">Package ownership</a>
+          <a href="#ui-rendering">UI rendering</a>
+          <a href="#framework-adapters">Framework adapters</a>
+          <a href="#demos-packages">Demos and packages</a>
+          <a href="#typescript-extension">TypeScript extension</a>
+          <a href="#enterprise-customization">Enterprise customization</a>
+          <a href="#why-vre">Why VRE</a>
+          <a href="#design-principles">Design principles</a>
+          <a href="#architectural-comparison">Architectural comparison</a>
+          <a href="#end-to-end">End-to-end flow</a>
+          <a href="#state-async">State and async</a>
+          <a href="#adoption">Adoption checklist</a>
+          <a href="#better-fit">When another tool fits</a>
+          <a href="#not-claiming">What VRE is not claiming</a>
+        </div>
+      </div>
+      <div class="side-nav-footer">
+        <button class="side-nav-arrow side-nav-arrow-down" type="button" aria-label="Next section" title="Next section" hidden>
+          <svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+            <path fill="currentColor" d="M10 14.8 4.2 9l1.4-1.4L10 12l4.4-4.4L15.8 9 10 14.8z"></path>
+          </svg>
+        </button>
+        <div class="small">
+          Active section stays centered in the map while you scroll through the middle of the article.
+        </div>
+      </div>
+    </aside>
+
+    <main>
+      <section class="hero">
+        <div class="hero-top">
+          <p class="kicker">Optional deep dive</p>
+          <h1>Want the fuller architecture and comparison?</h1>
+          <p class="subtitle">
+            Detailed validation landscape, policy architecture, rendering customization, framework adapters, enterprise guidance, and comparison notes retained from the long edition.
+          </p>
+        </div>
+        <div class="hero-meta">
+          <span class="chip">Angular · React · TypeScript · Architecture</span>
+        </div>
+      </section>
+
+      <article>
+        <div class="deep-dive-body">
+<h2 id="popular-approaches">Popular validation approaches: strengths and considerations</h2>
+            <p>
+              The short comparison above groups tools by their center of gravity. That keeps the main story readable, but it hides some useful nuance. Mature teams can build excellent reusable validation with any of these approaches; the real choice is which abstraction the architecture should make easiest.
+            </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Tool or approach</th>
+                  <th>What it naturally owns</th>
+                  <th>When a policy layer adds value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Angular Template Driven Forms</strong></td>
+                  <td>Simple forms expressed close to templates through directives and familiar HTML-like validation.</td>
+                  <td>When rules outgrow the template, repeat across workflows, or must also run outside Angular.</td>
+                </tr>
+                <tr>
+                  <td><strong>Angular Reactive Forms</strong></td>
+                  <td>Explicit control trees, validators, observable state, nested groups, and dynamic Angular forms.</td>
+                  <td>When the same domain rule must survive a different control tree, application, or UI framework.</td>
+                </tr>
+                <tr>
+                  <td><strong>Angular Signal Forms</strong></td>
+                  <td>A signal-first model with typed field access, synchronization, and schema-style validation.</td>
+                  <td>When an organization also has React, Vanilla TypeScript, or mature Reactive Forms consumers.</td>
+                </tr>
+                <tr>
+                  <td><strong>React Hook Form / Formik</strong></td>
+                  <td>React form state, registration, touched/errors, submission, and resolver or schema integration.</td>
+                  <td>When business validation needs an identity independent of a React form instance.</td>
+                </tr>
+                <tr>
+                  <td><strong>Zod / Yup / Valibot</strong></td>
+                  <td>Runtime parsing, shape validation, type inference, transformations, and reusable schemas.</td>
+                  <td>When workflow groups, required metadata, display behavior, and named domain policies sit above data shape.</td>
+                </tr>
+                <tr>
+                  <td><strong>Vest</strong></td>
+                  <td>Readable, framework-agnostic validation suites with a test-like mental model.</td>
+                  <td>When a model-path policy abstraction plus first-party Angular and React adapters better matches the platform.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Angular Template Driven Forms</h3>
+            <p>
+              Template Driven Forms keep the form model close to HTML through directives such as <code>ngModel</code>. They are approachable, require relatively little component code, and work well for smaller forms whose validation is naturally expressed beside the input.
+            </p>
+            <ul>
+              <li><strong>Strengths:</strong> familiar HTML-like authoring, quick setup, built-in control state, and a gentle learning curve.</li>
+              <li><strong>Considerations:</strong> complex conditional rules become difficult to trace across templates; reusable cross-field logic needs directives or services; rules are naturally tied to Angular.</li>
+            </ul>
+
+            <h3>Angular Reactive Forms and ValidatorFn</h3>
+            <p>
+              Reactive Forms make the control tree explicit. <code>FormControl</code>, <code>FormGroup</code>, synchronous and asynchronous <code>ValidatorFn</code> implementations, observable state, and dynamic controls form a mature toolbox for substantial Angular applications.
+            </p>
+            <ul>
+              <li><strong>Strengths:</strong> testable control models, strong support for nested/dynamic forms, explicit validation, and excellent Angular integration.</li>
+              <li><strong>Considerations:</strong> domain rules often remain attached to Angular controls; the same policy may be reconstructed for React, Vanilla TypeScript, or another control tree; reusable factories require team conventions.</li>
+            </ul>
+            <div class="code-wrap">
+              <div class="code-title">angular-reactive-validator.ts</div>
+              <pre><code>const profileForm = new FormGroup({
+  email: new FormControl('', [Validators.required, Validators.email]),
+  phone: new FormControl('')
+});
+
+function contactMethodRequired(control: AbstractControl) {
+  return control.get('email')?.value || control.get('phone')?.value
+    ? null
+    : { contactMethodRequired: true };
+}</code></pre>
+            </div>
+
+            <h3>Angular Signal Forms</h3>
+            <p>
+              Signal Forms bring a signal-first mental model, automatic synchronization between form data and fields, typed field access, schema-style validation, and reactive validity/error state. They are especially interesting for new signal-oriented Angular applications.
+            </p>
+            <ul>
+              <li><strong>Strengths:</strong> modern Angular reactivity, centralized schema functions, typed access, and field state exposed through signals.</li>
+              <li><strong>Considerations:</strong> the model is Angular-specific; established Reactive Forms applications still face a migration decision; a separate abstraction remains necessary for cross-framework policy reuse.</li>
+            </ul>
+
+            <h3>React Hook Form</h3>
+            <p>
+              React Hook Form centers its developer experience on <code>useForm</code>, <code>register</code>, <code>handleSubmit</code>, and <code>formState.errors</code>. Its resolver ecosystem connects forms to Zod, Yup, Valibot, Vest, AJV, Joi, and other validation libraries.
+            </p>
+            <ul>
+              <li><strong>Strengths:</strong> focused React API, performance-conscious form state, ergonomic registration, and a broad resolver ecosystem.</li>
+              <li><strong>Considerations:</strong> rules commonly live in registration calls or resolver schemas; reuse outside React requires another boundary; UI lifecycle and domain policy can become coupled if the team does not separate them intentionally.</li>
+            </ul>
+            <div class="code-wrap">
+              <div class="code-title">react-hook-form-style.tsx</div>
+              <pre><code>const { register, handleSubmit, formState: { errors } } = useForm();
+
+return &lt;form onSubmit={handleSubmit(save)}&gt;
+  &lt;input {...register('email', {
+    required: 'Email is required',
+    pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      message: 'Enter a valid email address' }
+  })} /&gt;
+  {errors.email?.message &amp;&amp; &lt;p&gt;{errors.email.message}&lt;/p&gt;}
+&lt;/form&gt;;</code></pre>
+            </div>
+
+            <h3>Formik</h3>
+            <p>
+              Formik provides a familiar React model for values, errors, touched state, submission, field-level and form-level validation, imperative validation methods, and Yup integration.
+            </p>
+            <ul>
+              <li><strong>Strengths:</strong> clear form-state model, synchronous and asynchronous validation, submission helpers, and well-known Yup support.</li>
+              <li><strong>Considerations:</strong> validation naturally follows Formik’s React-specific <code>values</code>/<code>errors</code>/<code>touched</code> shape; Angular or Core-only reuse lives outside Formik.</li>
+            </ul>
+
+            <h3>Yup, Zod, and Valibot</h3>
+            <p>
+              Schema libraries solve the essential problem of runtime data validation. Zod emphasizes TypeScript-first schemas and inferred types; Yup offers expressive object schemas, parsing, assertions, transformations, async support, and TypeScript integration; Valibot emphasizes a modular, type-safe API built from small functions.
+            </p>
+            <ul>
+              <li><strong>Strengths:</strong> excellent API-boundary validation, parsing of unknown data, reusable schemas, type inference, and resolver integration.</li>
+              <li><strong>Considerations:</strong> a schema is not automatically a complete UI-validation system. Required indicators, touched behavior, section groups, summaries, accessible rendering, and enterprise policy naming remain application concerns.</li>
+            </ul>
+
+            <h3>Vest</h3>
+            <p>
+              Vest is the closest philosophical neighbor in this comparison. It uses readable suites and tests, keeps validation framework agnostic, supports focused runs and retained results, and gives careful attention to validation over time—including asynchronous behavior.
+            </p>
+            <ul>
+              <li><strong>Strengths:</strong> test-like syntax, framework-independent suites, focused validation, and thoughtful async handling.</li>
+              <li><strong>Considerations:</strong> its abstraction is suite/test oriented, whereas VRE is policy/model-path oriented and ships Angular/React adapters, required metadata, group status, messages, and summaries as one package family.</li>
+            </ul>
+
+            <div class="deep-dive-note">
+              <strong>The tools can cooperate.</strong> React Hook Form can own React form state, Zod can parse an API payload, and VRE can own a reusable business policy. Architecture becomes clearer when every layer has a specific job.
+            </div>
+
+            <h2 id="enterprise-needs">Where enterprise teams often need more structure</h2>
+            <p>
+              The pressure usually appears after the first successful form: the same domain concept exists in several products; conditional requirements depend on workflow state; a wizard needs section status; a design system must render consistent summaries; different applications use different frameworks and stores; audit or QA teams need a reviewable statement of the rule.
+            </p>
+            <p>
+              Form-centric and schema-centric tools can support these needs through shared validators, schemas, hooks, directives, and wrappers. A policy-centric design makes the organizational unit explicit: the shared asset is a named business policy with an owner, tests, consumers, and a release history.
+            </p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Form-centered boundary</th>
+                  <th>Policy-centered boundary</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Controls or fields are the natural owners of validators.</td>
+                  <td>A named policy owns business validation over model paths.</td>
+                </tr>
+                <tr>
+                  <td>Reuse is created through validator factories, shared schemas, directives, hooks, or wrappers.</td>
+                  <td>Reuse and composition are first-class concepts of the policy package.</td>
+                </tr>
+                <tr>
+                  <td>Form state and validation naturally evolve together.</td>
+                  <td>Form state, validation evaluation, and result rendering can evolve independently.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h2 id="policy-design">Why policy-based validation changes application design</h2>
+            <h3>Policies can live at different levels</h3>
+            <p>
+              A policy should be reusable because the business concept is reusable—not because “shared” sounds architectural. Three scopes are especially useful:
+            </p>
+            <ul>
+              <li><strong>Workflow policy:</strong> rules that belong only to a particular onboarding page, wizard, or transaction.</li>
+              <li><strong>Section policy:</strong> a coherent part of a workflow, such as identity, contact, payment, or security.</li>
+              <li><strong>Domain policy:</strong> a concept intentionally shared across products, such as a company-approved address or consent policy.</li>
+            </ul>
+            <p>
+              A customer-onboarding screen can consume all three. It might register a local <code>AccountOnboardingPolicy</code>, shared <code>AddressPolicy</code> and <code>ConsentPolicy</code>, and a regulated policy only when a product type requires it. On submit it validates everything; while the user moves through a wizard, it validates only the current policy group.
+            </p>
+            <div class="code-wrap">
+              <div class="code-title">compose policies instead of building one mega-policy</div>
+              <pre><code>const policies = [
+  { name: 'customer', policy: new CustomerPolicy() },
+  { name: 'address', policy: new AddressPolicy() },
+  { name: 'consent', policy: new ConsentPolicy() },
+  { name: 'onboarding', policy: new AccountOnboardingPolicy() }
+];
+
+await validation.validate(model, ['customer', 'address']);
+await validation.validate(model, ['consent']);
+await validation.validate(model, policies.map(({ name }) =&gt; name));</code></pre>
+            </div>
+            <p>
+              This also separates a reusable component from the business contract applied to it. An <code>AddressComponent</code> can always use one shared policy when every address must behave identically. Or the page can supply <code>CustomerAddressPolicy</code>, <code>VendorAddressPolicy</code>, or <code>WarehouseAddressPolicy</code> while the component continues to own only fields, interaction, and presentation.
+            </p>
+
+            <h3>Reusable policies turn repetition into architecture</h3>
+            <p>
+              Address validation illustrates the difference. Customer registration, employee profiles, vendor onboarding, warehouses, billing, shipping, and tax workflows may all need street, city, region, country, and postal-code rules. Copying those checks creates several plausible versions of the same idea. A shared <code>AddressPolicy</code> creates one intentionally governed version and one focused test suite.
+            </p>
+            <p>
+              Reuse is not automatic correctness: some workflows genuinely require different rules. Composition keeps that difference visible. A base address policy can be combined with a billing policy, while a configurable policy can target <code>billingAddress</code> or <code>shippingAddress</code> without changing the rule’s meaning.
+            </p>
+
+            <h3>A component can consume multiple policies</h3>
+            <p>
+              Large screens often represent several business concepts. Customer onboarding may include identity, addresses, contacts, payment, security, tax, consent, and preferences. One giant validator is hard to reason about; control-local rules hide cross-section behavior. Multiple small policies provide a middle path.
+            </p>
+            <p>
+              A wizard can validate the active policy group, a tab can display group status, a lazy-loaded section can register its policy when it appears, and a regulated workflow can add a policy only when the selected product requires it. Full submission can still run the complete set.
+            </p>
+
+            <h3>Component-owned and shared policies are both useful</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Ownership model</th>
+                  <th>How it works</th>
+                  <th>When it fits</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Component-owned policy</td>
+                  <td>The feature keeps a small policy beside its screen.</td>
+                  <td>The rule is specific to one workflow but benefits from policy structure and testing.</td>
+                </tr>
+                <tr>
+                  <td>Shared component + shared policy</td>
+                  <td>The component always consumes the organization’s standard policy.</td>
+                  <td>Every consumer must enforce identical rules.</td>
+                </tr>
+                <tr>
+                  <td>Shared component + supplied policy</td>
+                  <td>The component renders fields; its page supplies the business policy.</td>
+                  <td>The UI is reusable but validation varies by context.</td>
+                </tr>
+                <tr>
+                  <td>Enterprise policy package</td>
+                  <td>A platform-owned package publishes domain policies and adapters.</td>
+                  <td>Several products need governed rules with independent UI ownership.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Policies as business assets</h3>
+            <p>
+              A policy can have an owner, semantic version, change log, unit tests, review rules, and known consumers. That makes a requirement such as “postal code is required for US billing addresses” discoverable without tracing templates, hooks, reducers, and schema refinements across several repositories.
+            </p>
+            <p>
+              This framing also improves collaboration. Product and QA can discuss the named behavior; platform teams can publish it; application teams can choose display and interaction; security and backend teams can identify which server-side controls remain authoritative.
+            </p>
+
+            <h3>Separation of concerns: UI, component, policy, engine, and domain rule</h3>
+            <ol>
+              <li><strong>UI:</strong> markup, accessible relationships, focus, colors, placement, and summaries.</li>
+              <li><strong>Component:</strong> edits the model and decides when feedback should be shown.</li>
+              <li><strong>Policy:</strong> names the model paths, conditions, messages, and business expectations.</li>
+              <li><strong>Engine:</strong> registers policies, executes validators, and returns normalized results and metadata.</li>
+              <li><strong>Domain service:</strong> owns complex decisions or remote data that should not be buried in a validator.</li>
+            </ol>
+            <h3>Architectural flexibility without prescribing one model</h3>
+            <p>
+              These boundaries allow architecture to change independently. A product can replace local state with NgRx or Redux Toolkit, move from Bootstrap to a design system, or add another UI host without rewriting the policy itself. VRE does not require one form library, component system, state store, or application architecture around Core.
+            </p>
+
+            <h2 id="package-ownership">What the packages—and your application—own</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Layer</th>
+                  <th>Responsibility</th>
+                  <th>Should not own</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>@validation-rules-engine/core</code></td>
+                  <td>Policies, validators, execution, result models, required/touched metadata, groups, and utilities.</td>
+                  <td>Angular directives, React hooks, product markup, or store reducers.</td>
+                </tr>
+                <tr>
+                  <td><code>@validation-rules-engine/angular</code></td>
+                  <td>Angular directives, services, display strategies, status components, summaries, and lifecycle integration.</td>
+                  <td>The organization’s business rules or permanent design-system decisions.</td>
+                </tr>
+                <tr>
+                  <td><code>@validation-rules-engine/react</code></td>
+                  <td>Provider, engine integration, form and field hooks, messages, summaries, and React lifecycle integration.</td>
+                  <td>Redux state ownership or rules that should also run outside React.</td>
+                </tr>
+                <tr>
+                  <td>Your domain package</td>
+                  <td>Shared policies, custom business rules, naming conventions, tests, and release governance.</td>
+                  <td>Page-specific rendering and interaction.</td>
+                </tr>
+                <tr>
+                  <td>Your application or design system</td>
+                  <td>When to reveal errors, accessible markup, focus behavior, layout, colors, summaries, and store subscriptions.</td>
+                  <td>Duplicated copies of the same cross-product business rule.</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              That last row matters. Required markers may appear immediately, while an error should often wait until blur or submit. A summary may move focus after a failed submit. A section badge may validate one group without revealing every future step. These are user-experience decisions, so the host keeps them even when policy evaluation is shared.
+            </p>
+
+            <h2 id="ui-rendering">UI error rendering is fully customizable</h2>
+            <p>
+              Validation evaluation produces data: property paths, validity, messages, required metadata, touched metadata, policy/group status, and summary entries. Rendering translates that data into a product experience. Keeping those jobs separate lets the same result feed an inline message, an accessible summary, a tab badge, a disabled action, or telemetry without teaching the policy about markup.
+            </p>
+
+            <h3>Rendering flow</h3>
+            <ol>
+              <li>The policy produces normalized results and metadata for model paths.</li>
+              <li>The adapter connects those results to the host’s lifecycle and observation model.</li>
+              <li>A display strategy decides when feedback is eligible to appear.</li>
+              <li>Built-in or custom components render inline messages, summaries, required markers, and group status.</li>
+              <li>The application owns focus, accessible relationships, visual design, and product-specific interaction.</li>
+            </ol>
+
+            <h3>Angular rendering customization</h3>
+            <p>
+              Angular applications can use supplied directives, services, display strategies, message components, summaries, and status components. A display strategy can decide whether an error waits for touch, blur, or submit. Teams can also bind results into Angular Material, Bootstrap, Tailwind, or an internal component library and keep the policy unchanged.
+            </p>
+
+            <h3>React rendering customization</h3>
+            <p>
+              React applications can use the provider, form and field hooks, field helpers, message components, and summaries. Or a design-system field can read the same hook state and render its own labels, descriptions, error regions, and focus behavior. The hook connects lifecycle; the component retains presentation ownership.
+            </p>
+
+            <h2>Ready-to-use UI components without locking into them</h2>
+            <div class="host-grid">
+              <section class="host-card">
+                <h3>Option 1: use built-in rendering</h3>
+                <p>Start quickly with supplied messages, summaries, required metadata, and group/status components. This is useful for prototypes, internal tools, and teams that want consistent defaults.</p>
+              </section>
+              <section class="host-card">
+                <h3>Option 2: replace rendering</h3>
+                <p>Feed normalized results into a company design system. Keep product-specific markup, accessibility behavior, animation, layout, and styling local.</p>
+              </section>
+            </div>
+            <p>
+              “Ready to use” and “customizable” are not opposites. A framework adapter can provide a productive default while Core keeps the result model independent enough for a replacement renderer.
+            </p>
+
+            <h2 id="framework-adapters">UI framework agnostic by design</h2>
+            <p>
+              Framework independence applies to Core policies, not to lifecycle code. Angular directives, React hooks, and direct DOM handlers should look different because their hosts are different. They converge on the same model paths, policy names, validators, and result vocabulary.
+            </p>
+            <h3>Framework adapter architecture</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Host</th>
+                  <th>Adapter responsibility</th>
+                  <th>Reusable asset</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Vanilla TypeScript</td>
+                  <td>Call Core, observe DOM events, and render results directly.</td>
+                  <td rowspan="3">The same framework-free policy and Core result model.</td>
+                </tr>
+                <tr>
+                  <td>Angular</td>
+                  <td>Connect controls, directives, services, display strategy, and change detection.</td>
+                </tr>
+                <tr>
+                  <td>React</td>
+                  <td>Connect providers, hooks, component state, effects, and rendering.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h2>Consuming Core with Vanilla JavaScript or TypeScript</h2>
+            <p>
+              The Core package can be used without a UI adapter. Install <code>@validation-rules-engine/core</code>, build validators from a policy, execute them against a plain model, and render <code>validationResults</code> wherever the application needs them. That makes Core useful for browser pages, Node utilities, prototypes, tests, and non-framework hosts.
+            </p>
+            <div class="code-wrap">
+              <div class="code-title">core-only sketch</div>
+              <pre><code>import { ValidatorHelper } from '@validation-rules-engine/core';
+import { CustomerProfilePolicy } from './customer-profile.policy';
+
+const helper = new ValidatorHelper();
+const validators = new CustomerProfilePolicy()
+  .addValidations(helper);
+
+const model = {
+  firstName: '',
+  email: 'not-an-email',
+  validationResults: [] as unknown[]
+};
+
+// Evaluate the validators for their model paths, write the normalized
+// results to model.validationResults, then render them in the DOM.
+// The Vanilla showcase demonstrates blur, submit, summary, and ARIA wiring.</code></pre>
+            </div>
+            <p>
+              Angular and React add lifecycle convenience; they do not redefine the policy. The live <a href="https://kalyan-k.github.io/validation-rules-engine/showcases/vanilla/">Vanilla</a>, <a href="https://kalyan-k.github.io/validation-rules-engine/showcases/angular/">Angular</a>, and <a href="https://kalyan-k.github.io/validation-rules-engine/showcases/react/">React</a> showcases let you compare those consumption styles side by side.
+            </p>
+
+            <h2 id="demos-packages">Live demos and packages</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Experience</th>
+                  <th>Package or link</th>
+                  <th>What to inspect</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Core / Vanilla</td>
+                  <td><code>@validation-rules-engine/core</code> · <a href="https://kalyan-k.github.io/validation-rules-engine/showcases/vanilla/">Live demo</a></td>
+                  <td>Plain models, policy execution, DOM messages, summaries, touch, and submit.</td>
+                </tr>
+                <tr>
+                  <td>Angular</td>
+                  <td><code>@validation-rules-engine/angular</code> · <a href="https://kalyan-k.github.io/validation-rules-engine/showcases/angular/">Live demo</a></td>
+                  <td>Directives, strategies, group status, summaries, and custom rendering.</td>
+                </tr>
+                <tr>
+                  <td>React</td>
+                  <td><code>@validation-rules-engine/react</code> · <a href="https://kalyan-k.github.io/validation-rules-engine/showcases/react/">Live demo</a></td>
+                  <td>Provider, form and field hooks, message/summary components, and state integration.</td>
+                </tr>
+                <tr>
+                  <td>Source and guides</td>
+                  <td><a href="https://github.com/kalyan-k/validation-rules-engine">GitHub</a> · <a href="https://kalyan-k.github.io/validation-rules-engine/">Documentation</a></td>
+                  <td>Package source, installation, APIs, examples, releases, and architecture guidance.</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="resource-grid" aria-label="Validation Rules Engine resources">
+              <a class="resource-card" href="https://github.com/kalyan-k/validation-rules-engine">
+                <strong>GitHub repository</strong>
+                <span>Browse the source, packages, examples, releases, and project history.</span>
+                <span class="resource-action">Open GitHub →</span>
+              </a>
+              <a class="resource-card" href="https://kalyan-k.github.io/validation-rules-engine/">
+                <strong>Documentation</strong>
+                <span>Start with the concepts, installation guidance, APIs, and framework integrations.</span>
+                <span class="resource-action">Read the docs →</span>
+              </a>
+              <a class="resource-card" href="https://kalyan-k.github.io/validation-rules-engine/showcases/vanilla/">
+                <strong>Vanilla TypeScript demo</strong>
+                <span>See Core validate a plain model without Angular or React.</span>
+                <span class="resource-action">Launch demo →</span>
+              </a>
+              <a class="resource-card" href="https://kalyan-k.github.io/validation-rules-engine/showcases/angular/">
+                <strong>Angular demo</strong>
+                <span>Explore directives, messages, summaries, groups, and display behavior.</span>
+                <span class="resource-action">Launch demo →</span>
+              </a>
+              <a class="resource-card" href="https://kalyan-k.github.io/validation-rules-engine/showcases/react/">
+                <strong>React demo</strong>
+                <span>Explore provider, hook, field, message, and summary integrations.</span>
+                <span class="resource-action">Launch demo →</span>
+              </a>
+            </div>
+
+            <h2 id="typescript-extension">Extensible through TypeScript</h2>
+            <p>
+              Built-in validators cover common mechanics. Organization-specific decisions can use a small custom rule, and repeated concepts can be parameterized with model paths. The goal is not cleverness; the goal is a policy that a reviewer can still read as a business statement.
+            </p>
+
+            <h3>Custom business rule example</h3>
+            <div class="code-wrap">
+              <div class="code-title">loan.policy.ts</div>
+              <pre><code>helper.validateFor('loan.amount')
+  .isRequired('Loan amount is required')
+  .userDefined(
+    'Loan amount exceeds the approved limit',
+    (model, value, message) =&gt;
+      Number(value) &lt;= Number(model.loan.approvedLimit)
+        ? true
+        : { message }
+  );</code></pre>
+            </div>
+            <p>
+              A custom rule should remain small and readable. If it grows into eligibility logic, orchestration, or remote access, call a tested domain helper or service rather than turning the policy into a second application layer.
+            </p>
+
+            <h3>Reusable policy with configurable paths</h3>
+            <div class="code-wrap">
+              <div class="code-title">configurable-address.policy.ts</div>
+              <pre><code>export class ConfigurableAddressPolicy implements ValidationPolicy {
+  constructor(private readonly prefix = 'address') {}
+
+  addValidations(helper: ValidatorHelper): Validator[] {
+    const path = (field: string) =&gt; `${this.prefix}.${field}`;
+
+    return [
+      helper.validateFor(path('street'))
+        .isRequired('Street is required'),
+      helper.validateFor(path('postalCode'))
+        .userDefined('Postal code is not serviceable',
+          (model, value, message) =&gt;
+            isServiceable(model, value) ? true : { message })
+    ];
+  }
+}
+
+const billing = new ConfigurableAddressPolicy('billingAddress');
+const shipping = new ConfigurableAddressPolicy('shippingAddress');</code></pre>
+            </div>
+            <p>
+              Configurable model-path prefixes let the same concept target billing and shipping addresses without duplicating rules. Keep the path factory obvious so the policy still explains itself during code review.
+            </p>
+
+            <h2 id="enterprise-customization">Enterprise customization: shared policies, local presentation</h2>
+            <p>
+              A large organization may maintain a shared policy library, a validation-platform wrapper, several Angular and React products, a Vanilla TypeScript utility, and more than one design system. Consistency does not require every application to draw the same red border. It requires agreement about which layer owns which decision.
+            </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Enterprise concern</th>
+                  <th>Policy-centric support</th>
+                  <th>Practical outcome</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Consistency</td>
+                  <td>Shared domain policies define repeated business validation once.</td>
+                  <td>Intended consumers enforce the same business meaning.</td>
+                </tr>
+                <tr>
+                  <td>Local UI ownership</td>
+                  <td>Applications render normalized results with built-in or custom components.</td>
+                  <td>Products keep their design systems without forking rules.</td>
+                </tr>
+                <tr>
+                  <td>Maintainability</td>
+                  <td>Named policies have focused tests, owners, and versions.</td>
+                  <td>Rule changes are easier to review and roll out.</td>
+                </tr>
+                <tr>
+                  <td>Cross-framework operation</td>
+                  <td>Core policies are consumed through Angular, React, or Core-only hosts.</td>
+                  <td>Platform teams avoid inventing a policy language for each framework.</td>
+                </tr>
+                <tr>
+                  <td>Future change</td>
+                  <td>Adapters isolate framework lifecycle and presentation.</td>
+                  <td>Store, component-library, or framework changes cause less policy churn.</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              Some organizations wrap the packages in an internal module such as <code>@company/validation-platform</code>. That wrapper can provide default display behavior, approved policy packages, telemetry hooks, and adapter setup while still exposing escape hatches for individual products.
+            </p>
+
+            <h2 id="why-vre">Why Validation Rules Engine was created</h2>
+            <p>
+              VRE was created for cases where validation rules need to be explicit, named, reusable, and independent of any single UI implementation—but teams still want practical Angular and React integrations rather than an engine they must wire from scratch.
+            </p>
+            <p>
+              It is not an instruction to abandon Angular Forms, React form libraries, schemas, or local validation. It adds a policy layer when the business rule needs a longer lifespan and a wider audience than one form instance.
+            </p>
+
+            <h2 id="design-principles">Core design principles</h2>
+            <div class="host-grid">
+              <section class="host-card">
+                <h3>Policy first</h3>
+                <p>Business rules live in named policies instead of being scattered across templates, hooks, reducers, and callbacks.</p>
+              </section>
+              <section class="host-card">
+                <h3>Framework adapters</h3>
+                <p>Each host remains idiomatic while consuming the same Core concepts.</p>
+              </section>
+              <section class="host-card">
+                <h3>Plain model paths</h3>
+                <p>Rules target model properties, including nested objects and reusable prefixes.</p>
+              </section>
+              <section class="host-card">
+                <h3>Display is separate</h3>
+                <p>Validation results are data; inline messages, summaries, classes, and required markers are presentation.</p>
+              </section>
+              <section class="host-card">
+                <h3>Groups matter</h3>
+                <p>Large workflows need section validation, status, summaries, submit checks, and programmatic execution.</p>
+              </section>
+              <section class="host-card">
+                <h3>No universal claims</h3>
+                <p>The design optimizes for reusable validation architecture, not for winning every form-validation comparison.</p>
+              </section>
+            </div>
+
+            <h2 id="architectural-comparison">Architectural comparison</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Capability</th>
+                  <th>Angular Reactive Forms</th>
+                  <th>React Hook Form</th>
+                  <th>Validation Rules Engine</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Primary abstraction</td>
+                  <td>Controls, groups, validators, and observable form state.</td>
+                  <td>Registered fields, handlers, form state, and resolvers.</td>
+                  <td>Named policies over plain model paths.</td>
+                </tr>
+                <tr>
+                  <td>Natural fit</td>
+                  <td>Explicit Angular form models.</td>
+                  <td>Efficient and ergonomic React forms.</td>
+                  <td>Reusable business validation across hosts and state choices.</td>
+                </tr>
+                <tr>
+                  <td>Framework independence</td>
+                  <td>Angular-specific.</td>
+                  <td>React-specific.</td>
+                  <td>Core is framework independent; adapters are framework specific.</td>
+                </tr>
+                <tr>
+                  <td>Rule organization</td>
+                  <td>Controls, groups, or custom validator functions.</td>
+                  <td>Registration options, custom functions, or resolver schemas.</td>
+                  <td>Composable policy classes registered by name.</td>
+                </tr>
+                <tr>
+                  <td>Groups and summaries</td>
+                  <td>Form groups and application conventions.</td>
+                  <td>Form state and application conventions.</td>
+                  <td>Shared result/group concepts plus adapter components.</td>
+                </tr>
+                <tr>
+                  <td>Display strategy</td>
+                  <td>Angular templates and component code.</td>
+                  <td>React rendering and field state.</td>
+                  <td>Separated from policy; built-in and custom rendering supported.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h2 id="end-to-end">Real examples and the end-to-end validation flow</h2>
+            <p>
+              The same <code>CustomerProfilePolicy</code> can validate a plain object in Core, be registered under a policy name in Angular, and be supplied through a React provider. The property path and rule remain identical; only the host’s lifecycle bridge changes.
+            </p>
+            <ol>
+              <li>A user edits a model through an Angular control, React field, or DOM input.</li>
+              <li>The host decides that validation should run—for example on blur, group navigation, or submit.</li>
+              <li>The adapter or Core-only engine executes the selected named policies against the plain model.</li>
+              <li>Core produces normalized results plus required, touched, policy, and group metadata.</li>
+              <li>The host updates inline messages, summaries, section status, ARIA relationships, and focus using its own rendering approach.</li>
+            </ol>
+            <p>
+              This flow explains why the policy can remain stable when a team replaces local component state with a store or replaces one component library with another. Model delivery and result rendering change around the policy rather than inside it.
+            </p>
+
+            <h2 id="state-async">State stores and asynchronous rules</h2>
+            <p>
+              NgRx and Redux Toolkit are useful examples because their architectural pressure is obvious: reducers must remain predictable, selectors should derive state, and side effects belong in effects, thunks, listeners, or services. The validation policy should not become a reducer and the reducer should not restate the policy.
+            </p>
+            <ol>
+              <li>Select or receive the current plain model from the store.</li>
+              <li>Run the named policy through Core or the framework adapter.</li>
+              <li>Expose the resulting validation state through the application’s existing observation mechanism.</li>
+              <li>Keep display decisions in the field, component, or design-system layer.</li>
+            </ol>
+            <p>
+              The same pattern generalizes to NGXS, Signals, Zustand, Jotai, MobX, RxJS stores, and local component state. Only the subscription and update APIs change. For asynchronous rules, add cancellation, a request token, or latest-value checks so a slow response for an older value cannot overwrite the result for the value the user sees now.
+            </p>
+
+            <h2 id="adoption">A low-risk adoption checklist</h2>
+            <ol>
+              <li>Choose one rule already duplicated across two screens. Do not begin with the whole application.</li>
+              <li>Write a framework-free policy and focused unit tests for its conditions, paths, and messages.</li>
+              <li>Connect one host and agree on touched, submit, required-marker, summary, and accessibility behavior.</li>
+              <li>Reuse the policy in a second screen or framework. Measure whether the shared ownership actually reduced drift.</li>
+              <li>Only then define naming, package ownership, versioning, and policy-composition conventions for the wider organization.</li>
+            </ol>
+            <p>
+              Stop if the abstraction makes a tiny form harder to understand or if no genuine reuse appears. Continue when the policy becomes easier to review, test, and evolve than its duplicated alternatives. And keep the security boundary explicit: browser validation helps users; the server must still authorize actions, validate untrusted input, and enforce persistence constraints.
+            </p>
+
+            <h2 id="better-fit">When another tool may be the better fit</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Primary need</th>
+                  <th>Likely starting point</th>
+                  <th>Why</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>A small Angular-only form</td>
+                  <td>Template Driven, Reactive, or Signal Forms</td>
+                  <td>Angular already provides the form lifecycle and validation surface.</td>
+                </tr>
+                <tr>
+                  <td>A React form with no cross-host policy requirement</td>
+                  <td>React Hook Form or Formik</td>
+                  <td>The form-state developer experience is the main problem to solve.</td>
+                </tr>
+                <tr>
+                  <td>Parsing unknown input or validating an API contract</td>
+                  <td>Zod, Yup, Valibot, or JSON Schema tooling</td>
+                  <td>Runtime shape, parsing, transformation, and type inference are central.</td>
+                </tr>
+                <tr>
+                  <td>Framework-agnostic validation with a suite/test mental model</td>
+                  <td>Vest</td>
+                  <td>Its suite syntax and execution model may match the team naturally.</td>
+                </tr>
+                <tr>
+                  <td>Named domain policies reused across Angular, React, and Core-only hosts</td>
+                  <td>Validation Rules Engine</td>
+                  <td>Policy composition, model paths, result metadata, and adapters are the intended design center.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h2 id="not-claiming">What Validation Rules Engine is not claiming</h2>
+            <ul>
+              <li>It is not claiming that every form needs a policy layer.</li>
+              <li>It is not a replacement for server-side validation, authorization, sanitization, database constraints, or API-boundary parsing.</li>
+              <li>It does not eliminate host integration; Angular, React, and Vanilla lifecycles remain different.</li>
+              <li>It does not require every policy to be global. Local, shared, supplied, and composed policies are all valid.</li>
+              <li>It does not prevent teams from using Angular Forms, React Hook Form, Formik, Zod, Yup, Valibot, or Vest alongside it.</li>
+            </ul>
+
+            <h2>Coverage retained from the long edition</h2>
+            <p>
+              This optional section deliberately preserves the substantive topics from v20260811 that would otherwise make the main story too long: the detailed validation landscape; strengths and considerations for Angular, React, schema, and suite approaches; enterprise needs; policy levels, reuse, composition, ownership, and business-asset framing; separation of concerns; rendering customization; built-in versus custom UI; framework adapters; Vanilla/Core consumption; TypeScript extension points; enterprise platform design; package responsibilities; design principles; architectural comparison; consumption flow; state-management boundaries; fit guidance; limitations; demos; and factual references.
+            </p>
+            <p>
+              The short story above remains the recommended Medium reading path. This expansion is the reference path for readers who want the fuller architectural discussion without losing the concise introduction.
+            </p>
+
+            <div class="deep-dive-note">
+              <strong>Want runnable examples?</strong> Return to the <a href="https://kalyan-k.github.io/validation-rules-engine/">documentation</a>, browse the <a href="https://github.com/kalyan-k/validation-rules-engine">GitHub repository</a>, or launch the <a href="https://kalyan-k.github.io/validation-rules-engine/showcases/vanilla/">Vanilla</a>, <a href="https://kalyan-k.github.io/validation-rules-engine/showcases/angular/">Angular</a>, and <a href="https://kalyan-k.github.io/validation-rules-engine/showcases/react/">React</a> demos.
+            </div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+      <path fill="currentColor" d="M10 3.5 16 9.2l-1.4 1.4L11 7V16.5H9V7L5.4 10.6 4 9.2 10 3.5z"></path>
+    </svg>
+  </button>
+
+  <script>
+    (function () {
+      const sectionIds = [
+        'popular-approaches',
+        'enterprise-needs',
+        'policy-design',
+        'package-ownership',
+        'ui-rendering',
+        'framework-adapters',
+        'demos-packages',
+        'typescript-extension',
+        'enterprise-customization',
+        'why-vre',
+        'design-principles',
+        'architectural-comparison',
+        'end-to-end',
+        'state-async',
+        'adoption',
+        'better-fit',
+        'not-claiming'
+      ];
+
+      const viewport = document.querySelector('.side-nav-viewport');
+      const upArrow = document.querySelector('.side-nav-arrow-up');
+      const downArrow = document.querySelector('.side-nav-arrow-down');
+      const navLinks = Array.from(document.querySelectorAll('.side-nav-track a[href^="#"]'));
+      const sections = sectionIds
+        .map((id) => document.getElementById(id))
+        .filter(Boolean);
+      const backToTop = document.querySelector('.back-to-top');
+      let ticking = false;
+      let currentIndex = 0;
+      let syncingAsideScroll = false;
+
+      function clamp(value, min, max) {
+        return Math.min(max, Math.max(min, value));
+      }
+
+      function setActiveLink(id) {
+        currentIndex = Math.max(0, navLinks.findIndex((link) => link.getAttribute('href') === '#' + id));
+        for (const link of navLinks) {
+          const isActive = link.getAttribute('href') === '#' + id;
+          link.classList.toggle('is-active', isActive);
+          if (isActive) {
+            link.setAttribute('aria-current', 'true');
+          } else {
+            link.removeAttribute('aria-current');
+          }
+        }
+      }
+
+      function updateArrowState() {
+        if (!viewport) {
+          return;
+        }
+
+        const maxOffset = Math.max(0, viewport.scrollHeight - viewport.clientHeight);
+        const scrollTop = viewport.scrollTop;
+        const canGoUp = scrollTop > 1;
+        const canGoDown = scrollTop < maxOffset - 1;
+
+        if (upArrow) {
+          upArrow.hidden = !canGoUp;
+          upArrow.classList.toggle('is-visible', canGoUp);
+          upArrow.disabled = currentIndex <= 0 && !canGoUp;
+        }
+        if (downArrow) {
+          downArrow.hidden = !canGoDown;
+          downArrow.classList.toggle('is-visible', canGoDown);
+          downArrow.disabled = currentIndex >= navLinks.length - 1 && !canGoDown;
+        }
+      }
+
+      function syncAsideTrack() {
+        if (!viewport || !navLinks.length) {
+          return;
+        }
+
+        const activeLink = navLinks[currentIndex] || navLinks[0];
+        const viewportHeight = viewport.clientHeight;
+        const maxOffset = Math.max(0, viewport.scrollHeight - viewportHeight);
+        const idealOffset = activeLink.offsetTop + (activeLink.offsetHeight / 2) - (viewportHeight / 2);
+        const nextOffset = clamp(idealOffset, 0, maxOffset);
+
+        syncingAsideScroll = true;
+        viewport.scrollTop = nextOffset;
+        window.requestAnimationFrame(function () {
+          syncingAsideScroll = false;
+        });
+
+        updateArrowState();
+      }
+
+      function updateActiveSection() {
+        const offset = 96;
+        let currentId = sections[0] ? sections[0].id : null;
+
+        for (const section of sections) {
+          if (section.getBoundingClientRect().top - offset <= 0) {
+            currentId = section.id;
+          } else {
+            break;
+          }
+        }
+
+        if (currentId) {
+          setActiveLink(currentId);
+        }
+
+        syncAsideTrack();
+
+        if (backToTop) {
+          backToTop.classList.toggle('is-visible', window.scrollY > 480);
+        }
+      }
+
+      function goToIndex(index) {
+        const nextIndex = clamp(index, 0, navLinks.length - 1);
+        const href = navLinks[nextIndex].getAttribute('href');
+        const target = href ? document.querySelector(href) : null;
+        if (!target) {
+          return;
+        }
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      function onScroll() {
+        if (ticking) {
+          return;
+        }
+        ticking = true;
+        window.requestAnimationFrame(function () {
+          updateActiveSection();
+          ticking = false;
+        });
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+
+      if (viewport) {
+        viewport.addEventListener('scroll', function () {
+          if (syncingAsideScroll) {
+            return;
+          }
+          updateArrowState();
+        }, { passive: true });
+      }
+
+      updateActiveSection();
+
+      if (upArrow) {
+        upArrow.addEventListener('click', function () {
+          goToIndex(currentIndex - 1);
+        });
+      }
+      if (downArrow) {
+        downArrow.addEventListener('click', function () {
+          goToIndex(currentIndex + 1);
+        });
+      }
+
+      if (backToTop) {
+        backToTop.addEventListener('click', function () {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

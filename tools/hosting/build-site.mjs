@@ -36,6 +36,10 @@ copyDirectory(path.join(workspaceRoot, 'tools', 'platform-shell'), siteRoot);
 copyDirectory(path.join(distRoot, 'showcases', 'angular'), path.join(siteRoot, 'showcases', 'angular'));
 copyDirectory(path.join(distRoot, 'showcases', 'react'), path.join(siteRoot, 'showcases', 'react'));
 copyDirectory(path.join(distRoot, 'showcases', 'vanilla'), path.join(siteRoot, 'showcases', 'vanilla'));
+copyOptionalDirectory(
+  path.join(workspaceRoot, 'docs', 'site', 'medium'),
+  path.join(siteRoot, 'medium')
+);
 
 const docsRoot = path.join(siteRoot, 'docs');
 mkdirSync(docsRoot, { recursive: true });
