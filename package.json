@@ -161,6 +161,16 @@
     "lint:all": "npm run ng -- lint"
   },
   "license": "MIT",
+  "author": "Kalyan K <validationrulesengine@gmail.com>",
+  "homepage": "https://github.com/kalyan-k/validation-rules-engine#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kalyan-k/validation-rules-engine.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kalyan-k/validation-rules-engine/issues",
+    "email": "validationrulesengine@gmail.com"
+  },
   "dependencies": {
     "@angular/animations": "20.3.27",
     "@angular/cdk": "20.2.14",
