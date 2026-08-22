@@ -1,11 +1,11 @@
 {
   "available": true,
   "version": "1.0.0",
-  "generatedAt": "2026-08-10T03:25:35.718Z",
-  "profile": "full",
+  "generatedAt": "2026-08-22T17:45:40.581Z",
+  "profile": "release",
   "label": "PASS",
   "exitCode": 0,
-  "scannedAt": "2026-08-10T03:07:01.219Z",
+  "scannedAt": "2026-08-15T18:05:29.820Z",
   "packages": [
     "@validation-rules-engine/core",
     "@validation-rules-engine/angular",
@@ -80,7 +80,7 @@
       "description": "Community Semgrep rulesets for JavaScript/TypeScript security patterns on application and library source.",
       "status": "PASS",
       "summary": "No Semgrep blocking findings",
-      "at": "2026-08-10T03:03:32.844Z",
+      "at": "2026-08-15T17:59:32.977Z",
       "artifactHints": [
         "semgrep/semgrep.json",
         "semgrep/semgrep.sarif"
@@ -93,8 +93,8 @@
       "scope": "Local + CI + release",
       "description": "Primary npm advisory gate against package-lock.json. Release fails on moderate+ findings.",
       "status": "PASS",
-      "summary": "No vulnerabilities at audit-level=high",
-      "at": "2026-08-10T02:59:04.164Z",
+      "summary": "No vulnerabilities at audit-level=moderate",
+      "at": "2026-08-15T17:56:00.299Z",
       "artifactHints": [
         "npm-audit/npm-audit.json",
         "npm-audit/npm-audit.txt"
@@ -108,7 +108,7 @@
       "description": "Independent dependency analysis. Complements npm audit; incomplete for some npm graphs.",
       "status": "PASS",
       "summary": "No Dependency-Check findings at CVSS >= 7",
-      "at": "2026-08-10T03:06:18.609Z",
+      "at": "2026-08-15T18:05:06.293Z",
       "artifactHints": [
         "dependency-check/dependency-check-report.html",
         "dependency-check/dependency-check-report.json"
@@ -122,7 +122,7 @@
       "description": "Detects high-confidence secrets, tokens, and credentials in repository content.",
       "status": "PASS",
       "summary": "No secrets detected",
-      "at": "2026-08-10T02:59:19.429Z",
+      "at": "2026-08-15T17:56:03.963Z",
       "artifactHints": [
         "gitleaks/gitleaks.json",
         "gitleaks/gitleaks.sarif"
@@ -150,7 +150,7 @@
       "description": "Software Bill of Materials for workspace and publishable packages (core, angular, react).",
       "status": "PASS",
       "summary": "Generated CycloneDX SBOM for 4 artifact(s)",
-      "at": "2026-08-10T03:07:01.204Z",
+      "at": "2026-08-15T18:05:29.807Z",
       "artifactHints": [
         "sbom/core.cdx.json",
         "sbom/angular.cdx.json",
@@ -180,6 +180,6 @@
     "sbom": "sbom/",
     "zap": "zap/"
   },
-  "message": "Latest full gate: PASS.",
+  "message": "Latest release gate: PASS.",
   "command": "npm run security:full && npm run evidence:publish"
 }

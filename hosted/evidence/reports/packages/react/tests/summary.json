@@ -2,9 +2,9 @@
   "projectName": "react",
   "displayName": "React Adapter",
   "version": "1.0.0",
-  "startedAt": "2026-08-09T18:45:27.999Z",
-  "finishedAt": "2026-08-09T18:45:54.976Z",
-  "durationMs": 1056.28564453125,
+  "startedAt": "2026-08-22T14:12:03.827Z",
+  "finishedAt": "2026-08-22T14:12:09.221Z",
+  "durationMs": 1084.95556640625,
   "browsers": [
     "Vitest · jsdom"
   ],
@@ -20,131 +20,11 @@
   "specs": [
     {
       "suite": [
-        "React validation hooks and components"
-      ],
-      "description": "throws a clear missing-provider error",
-      "status": "passed",
-      "durationMs": 21.014999999999418,
-      "logs": [],
-      "sourceFiles": [
-        "packages/react/src/hooks/react-integration.spec.tsx"
-      ]
-    },
-    {
-      "suite": [
-        "React validation hooks and components"
-      ],
-      "description": "exposes an injected engine and merged provider configuration",
-      "status": "passed",
-      "durationMs": 15.033799999997427,
-      "logs": [],
-      "sourceFiles": [
-        "packages/react/src/hooks/react-integration.spec.tsx"
-      ]
-    },
-    {
-      "suite": [
-        "React validation hooks and components"
-      ],
-      "description": "validates change, blur, submit, controlled parsing, checkbox, and reset",
-      "status": "passed",
-      "durationMs": 621.9074,
-      "logs": [],
-      "sourceFiles": [
-        "packages/react/src/hooks/react-integration.spec.tsx"
-      ]
-    },
-    {
-      "suite": [
-        "React validation hooks and components"
-      ],
-      "description": "calls invalid submit and renders linked and unlinked summaries",
-      "status": "passed",
-      "durationMs": 82.949099999998,
-      "logs": [],
-      "sourceFiles": [
-        "packages/react/src/hooks/react-integration.spec.tsx"
-      ]
-    },
-    {
-      "suite": [
-        "React validation hooks and components"
-      ],
-      "description": "supports custom controls, explicit field validate, and field clear",
-      "status": "passed",
-      "durationMs": 178.49920000000202,
-      "logs": [],
-      "sourceFiles": [
-        "packages/react/src/hooks/react-integration.spec.tsx"
-      ]
-    },
-    {
-      "suite": [
-        "React validation hooks and components"
-      ],
-      "description": "provides low-level validation, groups, touch, and clear methods",
-      "status": "passed",
-      "durationMs": 3.819899999998597,
-      "logs": [],
-      "sourceFiles": [
-        "packages/react/src/hooks/react-integration.spec.tsx"
-      ]
-    },
-    {
-      "suite": [
-        "React validation hooks and components"
-      ],
-      "description": "balances policy lifecycle in Strict Mode and across multiple forms",
-      "status": "passed",
-      "durationMs": 2.265400000000227,
-      "logs": [],
-      "sourceFiles": [
-        "packages/react/src/hooks/react-integration.spec.tsx"
-      ]
-    },
-    {
-      "suite": [
-        "React validation hooks and components"
-      ],
-      "description": "supports independent nested providers and models",
-      "status": "passed",
-      "durationMs": 74.696899999999,
-      "logs": [],
-      "sourceFiles": [
-        "packages/react/src/hooks/react-integration.spec.tsx"
-      ]
-    },
-    {
-      "suite": [
-        "React validation hooks and components"
-      ],
-      "description": "is safe to import and render through the server renderer",
-      "status": "passed",
-      "durationMs": 6.294399999998859,
-      "logs": [],
-      "sourceFiles": [
-        "packages/react/src/hooks/react-integration.spec.tsx"
-      ]
-    },
-    {
-      "suite": [
-        "React validation hooks and components"
-      ],
-      "description": "combines native blur handlers without requiring a browser design system",
-      "status": "passed",
-      "durationMs": 17.924999999999272,
-      "logs": [],
-      "sourceFiles": [
-        "packages/react/src/hooks/react-integration.spec.tsx"
-      ]
-    },
-    {
-      "suite": [
         "ValidationEngine"
       ],
       "description": "registers case-insensitive policies with balanced duplicate ownership",
       "status": "passed",
-      "durationMs": 4.361700000001292,
+      "durationMs": 5.010600000000068,
       "logs": [],
       "sourceFiles": [
         "packages/react/src/engine/validation-engine.spec.ts"
@@ -156,7 +36,7 @@
       ],
       "description": "replaces and forcibly unregisters a dynamic policy",
       "status": "passed",
-      "durationMs": 5.032899999998335,
+      "durationMs": 5.66379999999981,
       "logs": [],
       "sourceFiles": [
         "packages/react/src/engine/validation-engine.spec.ts"
@@ -168,7 +48,7 @@
       ],
       "description": "validates nested fields, optional rules, required results, and deduplicates errors",
       "status": "passed",
-      "durationMs": 2.5995999999977357,
+      "durationMs": 2.091399999999794,
       "logs": [],
       "sourceFiles": [
         "packages/react/src/engine/validation-engine.spec.ts"
@@ -180,7 +60,7 @@
       ],
       "description": "supports function, path, negated, and equality dependencies",
       "status": "passed",
-      "durationMs": 2.080500000000029,
+      "durationMs": 1.3250000000002728,
       "logs": [],
       "sourceFiles": [
         "packages/react/src/engine/validation-engine.spec.ts"
@@ -192,7 +72,7 @@
       ],
       "description": "validates fields independently and preserves errors from other properties",
       "status": "passed",
-      "durationMs": 2.746399999999994,
+      "durationMs": 3.3319000000001324,
       "logs": [],
       "sourceFiles": [
         "packages/react/src/engine/validation-engine.spec.ts"
@@ -204,7 +84,7 @@
       ],
       "description": "registers, validates, clears, and rejects validation groups",
       "status": "passed",
-      "durationMs": 2.9283999999970547,
+      "durationMs": 4.492999999999938,
       "logs": [],
       "sourceFiles": [
         "packages/react/src/engine/validation-engine.spec.ts"
@@ -216,7 +96,7 @@
       ],
       "description": "publishes revisions, touch state, partial clear, full clear, and notifications",
       "status": "passed",
-      "durationMs": 3.8879000000015367,
+      "durationMs": 2.7932999999998174,
       "logs": [],
       "sourceFiles": [
         "packages/react/src/engine/validation-engine.spec.ts"
@@ -228,7 +108,7 @@
       ],
       "description": "ignores stale promise results for the same field",
       "status": "passed",
-      "durationMs": 0.8545000000012806,
+      "durationMs": 0.47499999999990905,
       "logs": [],
       "sourceFiles": [
         "packages/react/src/engine/validation-engine.spec.ts"
@@ -240,7 +120,7 @@
       ],
       "description": "supports observable-like async values and propagates rule failures",
       "status": "passed",
-      "durationMs": 1.4580999999998312,
+      "durationMs": 1.105199999999968,
       "logs": [],
       "sourceFiles": [
         "packages/react/src/engine/validation-engine.spec.ts"
@@ -252,10 +132,130 @@
       ],
       "description": "guards empty names and handles non-string dependency values",
       "status": "passed",
-      "durationMs": 0.885999999998603,
+      "durationMs": 0.8049999999998363,
       "logs": [],
       "sourceFiles": [
         "packages/react/src/engine/validation-engine.spec.ts"
+      ]
+    },
+    {
+      "suite": [
+        "React validation hooks and components"
+      ],
+      "description": "throws a clear missing-provider error",
+      "status": "passed",
+      "durationMs": 22.84990000000016,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/hooks/react-integration.spec.tsx"
+      ]
+    },
+    {
+      "suite": [
+        "React validation hooks and components"
+      ],
+      "description": "exposes an injected engine and merged provider configuration",
+      "status": "passed",
+      "durationMs": 19.57479999999987,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/hooks/react-integration.spec.tsx"
+      ]
+    },
+    {
+      "suite": [
+        "React validation hooks and components"
+      ],
+      "description": "validates change, blur, submit, controlled parsing, checkbox, and reset",
+      "status": "passed",
+      "durationMs": 658.6302000000005,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/hooks/react-integration.spec.tsx"
+      ]
+    },
+    {
+      "suite": [
+        "React validation hooks and components"
+      ],
+      "description": "calls invalid submit and renders linked and unlinked summaries",
+      "status": "passed",
+      "durationMs": 54.04500000000007,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/hooks/react-integration.spec.tsx"
+      ]
+    },
+    {
+      "suite": [
+        "React validation hooks and components"
+      ],
+      "description": "supports custom controls, explicit field validate, and field clear",
+      "status": "passed",
+      "durationMs": 154.38969999999972,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/hooks/react-integration.spec.tsx"
+      ]
+    },
+    {
+      "suite": [
+        "React validation hooks and components"
+      ],
+      "description": "provides low-level validation, groups, touch, and clear methods",
+      "status": "passed",
+      "durationMs": 13.649900000000343,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/hooks/react-integration.spec.tsx"
+      ]
+    },
+    {
+      "suite": [
+        "React validation hooks and components"
+      ],
+      "description": "balances policy lifecycle in Strict Mode and across multiple forms",
+      "status": "passed",
+      "durationMs": 9.720899999999347,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/hooks/react-integration.spec.tsx"
+      ]
+    },
+    {
+      "suite": [
+        "React validation hooks and components"
+      ],
+      "description": "supports independent nested providers and models",
+      "status": "passed",
+      "durationMs": 64.24110000000019,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/hooks/react-integration.spec.tsx"
+      ]
+    },
+    {
+      "suite": [
+        "React validation hooks and components"
+      ],
+      "description": "is safe to import and render through the server renderer",
+      "status": "passed",
+      "durationMs": 18.77060000000074,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/hooks/react-integration.spec.tsx"
+      ]
+    },
+    {
+      "suite": [
+        "React validation hooks and components"
+      ],
+      "description": "combines native blur handlers without requiring a browser design system",
+      "status": "passed",
+      "durationMs": 33.497299999999996,
+      "logs": [],
+      "sourceFiles": [
+        "packages/react/src/hooks/react-integration.spec.tsx"
       ]
     },
     {
@@ -264,7 +264,7 @@
       ],
       "description": "reads nested values and stops safely at missing primitives",
       "status": "passed",
-      "durationMs": 3.0430000000014843,
+      "durationMs": 3.0371000000000095,
       "logs": [],
       "sourceFiles": [
         "packages/react/src/utilities/paths.spec.ts"
@@ -276,7 +276,7 @@
       ],
       "description": "clones nested objects and arrays while creating missing containers",
       "status": "passed",
-      "durationMs": 1.1738000000004831,
+      "durationMs": 2.577099999999973,
       "logs": [],
       "sourceFiles": [
         "packages/react/src/utilities/paths.spec.ts"
@@ -288,7 +288,7 @@
       ],
       "description": "handles empty paths, root arrays, and stable field IDs",
       "status": "passed",
-      "durationMs": 0.47450000000026193,
+      "durationMs": 0.6532000000001972,
       "logs": [],
       "sourceFiles": [
         "packages/react/src/utilities/paths.spec.ts"

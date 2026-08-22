@@ -13,7 +13,7 @@ Use this path for shared policy libraries, non-UI validation, or framework-free 
 ## Angular
 
 ```bash
-npm install @validation-rules-engine/core @validation-rules-engine/angular underscore
+npm install @validation-rules-engine/core @validation-rules-engine/angular
 ```
 
 Angular framework packages are peer dependencies of `@validation-rules-engine/angular`.

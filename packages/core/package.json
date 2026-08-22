@@ -26,9 +26,6 @@
   "engines": {
     "node": ">=22"
   },
-  "peerDependencies": {
-    "underscore": "^1.13.8"
-  },
   "dependencies": {
     "tslib": "^2.3.0"
   },

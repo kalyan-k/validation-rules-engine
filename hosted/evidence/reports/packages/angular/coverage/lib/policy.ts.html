@@ -405,9 +405,7 @@
 <a name='L340'></a><a href='#L340'>340</a>
 <a name='L341'></a><a href='#L341'>341</a>
 <a name='L342'></a><a href='#L342'>342</a>
-<a name='L343'></a><a href='#L343'>343</a>
-<a name='L344'></a><a href='#L344'>344</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L343'></a><a href='#L343'>343</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -749,10 +747,9 @@
 <span class="cline-any cline-yes">58x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
-import { Observable, Subject, forkJoin as observableForkJoin, of as observableOf } from 'rxjs';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Observable, Subject, forkJoin as observableForkJoin, of as observableOf } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import * as _ from 'underscore';
+import { bind, filter, findIndex, forEach, isFunction, uniq } from 'lodash';
 import { getValidationMeta, isValidationFailure, Validator } from '@validation-rules-engine/core';
 import { $parse } from './parser/expression-parser';
 &nbsp;
@@ -783,7 +780,7 @@ export class Policy {
         const hasRequiredError = isValidationFailure(errorMsg);
 &nbsp;
         if (model.requiredResults) {
-            const reqResultIdx = _.findIndex(model.requiredResults, { 'propertyName': propertyName });
+            const reqResultIdx = findIndex(model.requiredResults, { 'propertyName': propertyName });
 &nbsp;
             if (reqResultIdx &gt; -1) {
 &nbsp;
@@ -810,9 +807,9 @@ export class Policy {
         let returnValue = false;
 &nbsp;
         if (model.validationResults) {
-            const filteredArray = _.where(model.validationResults, { 'propertyName': propertyName });
+            const filteredArray = filter(model.validationResults, { 'propertyName': propertyName });
 &nbsp;
-            _.forEach(filteredArray, <span class="fstat-no" title="function not covered" >function (v</span>alue) {
+            forEach(filteredArray, <span class="fstat-no" title="function not covered" >function (v</span>alue) {
 <span class="cstat-no" title="statement not covered" >                <span class="missing-if-branch" title="if path not taken" >I</span>if (value.error &amp;&amp; value.error.message === errorMsg) {</span>
 <span class="cstat-no" title="statement not covered" >                    returnValue = true;</span>
                 }
@@ -840,7 +837,7 @@ export class Policy {
             return true;
         }
 &nbsp;
-        if (_.isFunction(validator.dependency)) {
+        if (isFunction(validator.dependency)) {
             return !!validator.dependency.call(this, model);
         }
 &nbsp;
@@ -889,7 +886,7 @@ export class Policy {
 &nbsp;
         } else {
             // Remove only this policy's property errors (supports multiple policies on one model)
-            const policyProperties = _.uniq(this.validators.map((v) =&gt; v.propertyName));
+            const policyProperties = uniq(this.validators.map((v) =&gt; v.propertyName));
             if (model.validationResults) {
                 model.validationResults = model.validationResults.filter(
                     (result: { propertyName: string }) =&gt; !policyProperties.includes(result.propertyName)
@@ -909,13 +906,13 @@ export class Policy {
                         const callBackFn = this.runValidation.call(self, model, validator, validationRule);
                         const observableFn = (callBackFn instanceof Subject) ? <span class="branch-0 cbranch-no" title="branch not covered" >callBackFn </span>: observableOf(callBackFn);
 &nbsp;
-                        results.push(observableFn.pipe(map(_.bind(this.handleAsyncCall, self, model, validator))));
+                        results.push(observableFn.pipe(map(bind(this.handleAsyncCall, self, model, validator))));
                     }
                 } else {
                     const callBackFn = this.runValidation.call(self, model, validator, validationRule);
                     const observableFn = (callBackFn instanceof Subject) ? callBackFn : observableOf(callBackFn);
 &nbsp;
-                    results.push(observableFn.pipe(map(_.bind(this.handleAsyncCall, self, model, validator))));
+                    results.push(observableFn.pipe(map(bind(this.handleAsyncCall, self, model, validator))));
                 }
             }
         }
@@ -987,7 +984,7 @@ export class Policy {
             const hasRequiredRule = this.validators[validator].validatorsToRun.some((rule) =&gt; rule.checkIsRequired);
             const dependencyMet = this.isDependencySatisfied(model, this.validators[validator]);
             const shouldShowRequired = hasRequiredRule &amp;&amp; dependencyMet;
-            const reqResultIdx = _.findIndex(model.requiredResults, { 'propertyName': fieldName });
+            const reqResultIdx = findIndex(model.requiredResults, { 'propertyName': fieldName });
 &nbsp;
             if (reqResultIdx &gt; -1) {
                 model.requiredResults[reqResultIdx] = {
@@ -1036,7 +1033,7 @@ export class Policy {
             }
         }
 &nbsp;
-        return _.uniq(paths);
+        return uniq(paths);
     }
 &nbsp;
     /**
@@ -1052,13 +1049,13 @@ export class Policy {
         const policyPaths = this.getActivePropertyPaths(model);
         const pathsToCheck = policyPaths.length &gt; 0
             ? policyPaths
-            : _.uniq(registeredPaths);
+            : uniq(registeredPaths);
 &nbsp;
         const meta = getValidationMeta(model);
         const groupErrors: Array&lt;{ propertyName: string; error: { message: string } }&gt; = [];
 &nbsp;
         pathsToCheck.forEach((propertyPath: string) =&gt; {
-            const foundValidationErrorFields = _.where(model.validationResults || [], { 'propertyName': propertyPath });
+            const foundValidationErrorFields = filter(model.validationResults || [], { 'propertyName': propertyPath });
             if (foundValidationErrorFields?.length) {
                 groupErrors.push(...foundValidationErrorFields);
             }
@@ -1099,7 +1096,7 @@ export class Policy {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-08-09T18:45:23.151Z
+                at 2026-08-22T14:02:35.180Z
             </div>
         <script src="../prettify.js"></script>
         <script>

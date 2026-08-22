@@ -5,10 +5,10 @@
 ## Installation
 
 ```bash
-npm install @validation-rules-engine/core underscore
+npm install @validation-rules-engine/core
 ```
 
-`underscore` is a peer dependency retained for validator compatibility.
+Core has no framework peer dependencies.
 
 ## Capabilities
 

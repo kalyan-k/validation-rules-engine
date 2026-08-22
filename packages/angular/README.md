@@ -5,10 +5,10 @@
 ## Installation
 
 ```bash
-npm install @validation-rules-engine/core @validation-rules-engine/angular underscore
+npm install @validation-rules-engine/core @validation-rules-engine/angular
 ```
 
-The core package, Angular framework packages, RxJS, and Underscore are peer dependencies.
+The core package, Angular framework packages, and RxJS are peer dependencies.
 
 Add the optional default stylesheet:
 

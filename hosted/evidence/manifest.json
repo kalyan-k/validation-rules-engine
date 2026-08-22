@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "publishedAt": "2026-08-10T03:25:35.926Z",
+  "publishedAt": "2026-08-22T17:45:40.684Z",
   "source": {
     "reports": "reports/",
     "playwright": [
@@ -14,14 +14,15 @@
     "security": "reports/security/"
   },
   "sizes": {
-    "reports": "267.6 MB",
-    "playwright": "12.5 MB",
+    "reports": "3.7 MB",
+    "playwright": "1.7 MB",
     "security": "11.6 MB",
-    "total": "291.7 MB"
+    "total": "17.0 MB"
   },
   "notes": [
     "Commit hosted/evidence after publishing so Azure Static Web Apps can ship reports without running tests in CI.",
     "Videos, traces, and screenshots stay local. Visual diffs are copied when present; otherwise a placeholder page is published.",
-    "Security evidence excludes Dependency-Check NVD data caches; scanner summaries and SBOM/SARIF/JSON/HTML reports are published."
+    "Security evidence is published under hosted/evidence/security (not nested under reports).",
+    "Dependency-Check NVD data caches (odc.mv.db and related data/) are never published; they are local scanner state only."
   ]
 }

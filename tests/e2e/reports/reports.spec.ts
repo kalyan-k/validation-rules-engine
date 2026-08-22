@@ -28,7 +28,7 @@ test.describe('Existing reports application @reports @regression', () => {
 
   test('loads the canonical security summary route', async ({ page, baseUrls }) => {
     await page.goto(`${baseUrls.portal}/security/`);
-    await expect(page.getByRole('heading', { name: 'Security' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Security', exact: true })).toBeVisible();
     await expect(page.locator('#security-results')).toContainText(/Latest security gate|No security report|Loading security|Security checks/i);
   });
 

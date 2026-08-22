@@ -165,19 +165,47 @@ export class AngularStateShowcasePage {
     await this.generatePerformanceForm();
     await this.generatePerformanceForm();
 
-    await this.clickStable(/Validate all/i);
+    // Prefer text/CSS locators here: Firefox can hang building the ARIA tree
+    // after large generated forms when getByRole walks the whole page.
+    await this.clickPerformanceAction('Validate all');
     await expect(this.page.getByText(/Validate all completed|error\(s\)|no errors/i).first()).toBeVisible({ timeout: 30_000 });
-    await this.clickStable('Clear all', true);
+    await this.clickPerformanceAction('Clear all');
     await expect(this.page.getByRole('heading', { name: /Form configuration/i })).toBeVisible();
   }
 
   private async generatePerformanceForm(): Promise<void> {
-    await this.clickStable('Generate form');
-    await expect(this.page.getByRole('button', { name: 'Generate form' })).toBeEnabled({ timeout: 30_000 });
+    await this.clickPerformanceAction('Generate form');
+    await expect(this.performanceActionButton('Generate form')).toBeEnabled({ timeout: 30_000 });
     await expect(this.page.getByText(/Rendered \d+ controls across \d+ sections/i).first()).toBeVisible({ timeout: 30_000 });
     await expect(this.page.locator('app-performance-form-section').first()).toBeVisible();
     const generatedControls = this.page.locator('app-performance-form-section input, app-performance-form-section select, app-performance-form-section textarea');
     await expect.poll(async () => generatedControls.count(), { timeout: 30_000 }).toBeGreaterThan(0);
+  }
+
+  private performanceActionButton(label: string) {
+    // String hasText matches normalized substrings; avoid ^$ regex — Angular
+    // templates often wrap button labels in whitespace/newlines.
+    return this.page.locator('button').filter({ hasText: label }).first();
+  }
+
+  /**
+   * Performance forms render many controls; avoid getByRole so Firefox does not
+   * time out while building the accessibility tree under load.
+   */
+  private async clickPerformanceAction(label: string): Promise<void> {
+    const button = this.performanceActionButton(label);
+    await expect(button).toBeVisible({ timeout: 30_000 });
+    await expect(button).toBeEnabled({ timeout: 30_000 });
+    await button.scrollIntoViewIfNeeded();
+    try {
+      await button.click({ timeout: 5_000 });
+    } catch {
+      await button.evaluate((element) => {
+        if (element instanceof HTMLButtonElement) {
+          element.click();
+        }
+      });
+    }
   }
 
   private async clickStable(name: string | RegExp, exact = false): Promise<void> {

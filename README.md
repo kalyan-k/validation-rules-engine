@@ -116,13 +116,13 @@ There is no Vue or other framework adapter in this repository.
 Core-only / Vanilla consumers:
 
 ```bash
-npm install @validation-rules-engine/core underscore
+npm install @validation-rules-engine/core
 ```
 
-Angular consumers install the core engine, Angular adapter, and Underscore peer dependency together:
+Angular consumers install the core engine and Angular adapter together:
 
 ```bash
-npm install @validation-rules-engine/core @validation-rules-engine/angular underscore
+npm install @validation-rules-engine/core @validation-rules-engine/angular
 ```
 
 Angular framework packages are peer dependencies of `@validation-rules-engine/angular`.

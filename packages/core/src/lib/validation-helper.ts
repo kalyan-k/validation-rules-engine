@@ -1,5 +1,3 @@
-import * as _ from 'underscore';
-
 export class ValidationHelper {
 
     constructor() { }
@@ -10,7 +8,7 @@ export class ValidationHelper {
             return true;
         }
 
-        if (_.isArray(value) && value.length <= 0) {
+        if (Array.isArray(value) && value.length <= 0) {
             return true;
         }
 

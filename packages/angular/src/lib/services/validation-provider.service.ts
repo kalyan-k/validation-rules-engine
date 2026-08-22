@@ -10,7 +10,7 @@ import {
 	ValidatorHelper
 } from '@validation-rules-engine/core';
 import { Policy } from '../policy';
-import * as _ from 'underscore';
+import { includes } from 'lodash-es';
 
 @Injectable({
 	providedIn: 'root'
@@ -31,7 +31,7 @@ export class ValidationProviderService {
 	register = (name: string, validationPolicy: ValidationPolicy) => {
 		const registeredName = name.toLowerCase() + this.fileSuffix;
 
-		if (_.contains(Object.keys(this.policies), registeredName)) {
+		if (includes(Object.keys(this.policies), registeredName)) {
 			console.log(`Policy with the name '${name}' already registred. Hence skipping the regiser part.`);
 			return;
 		}
@@ -78,12 +78,12 @@ export class ValidationProviderService {
 
 	hasPolicy(name: string): boolean {
 		const registeredName = name.toLowerCase() + this.fileSuffix;
-		return _.contains(Object.keys(this.policies), registeredName);
+		return includes(Object.keys(this.policies), registeredName);
 	}
 
 	getPolicy = (name: string) => {
 		const registeredName = name.toLowerCase() + this.fileSuffix;
-		const policyRegistered = _.contains(Object.keys(this.policies), registeredName);
+		const policyRegistered = includes(Object.keys(this.policies), registeredName);
 
 		if (!policyRegistered) {
 			throw new Error(`Policy named '${name}' has not been registered`);

@@ -3,7 +3,7 @@
   --vr-navy-deep: #091725;
   --vr-teal: #08736a;
   --vr-text-on-dark: #eef6fb;
-  --vr-muted-on-dark: #9db1c5;
+  --vr-muted-on-dark: #b7c8d8;
   display: flex;
   min-height: 100vh;
   flex-direction: column;
@@ -19,9 +19,9 @@
 .platform-docs-search-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .platform-docs-search-control { position: relative; width: 100%; }
 .platform-docs-search input { width: 100%; min-height: 36px; padding: .45rem 4.2rem .45rem .7rem; border: 1px solid rgba(255,255,255,.18); border-radius: 8px; color: #eef6fb; background: rgba(255,255,255,.08); font: inherit; font-size: .76rem; }
-.platform-docs-search input::placeholder { color: #9db1c5; }
+.platform-docs-search input::placeholder { color: #b7c8d8; }
 .platform-docs-search input:focus { outline: 2px solid rgba(67,193,181,.55); border-color: #43c1b5; }
-.platform-docs-search-shortcut { position: absolute; top: 50%; right: 2rem; transform: translateY(-50%); padding: .12rem .35rem; border: 1px solid rgba(255,255,255,.18); border-radius: 5px; color: #9db1c5; background: rgba(255,255,255,.06); font: inherit; font-size: .62rem; font-weight: 700; line-height: 1; pointer-events: none; }
+.platform-docs-search-shortcut { position: absolute; top: 50%; right: 2rem; transform: translateY(-50%); padding: .12rem .35rem; border: 1px solid rgba(255,255,255,.18); border-radius: 5px; color: #c5d4e0; background: rgba(255,255,255,.08); font: inherit; font-size: .62rem; font-weight: 700; line-height: 1; pointer-events: none; }
 .platform-docs-search-clear { position: absolute; top: 50%; right: .35rem; display: grid; width: 1.6rem; height: 1.6rem; padding: 0; transform: translateY(-50%); place-items: center; border: 0; border-radius: 50%; color: #c7d4e0; background: transparent; cursor: pointer; font: inherit; font-size: 1.1rem; }
 .platform-docs-search-clear[hidden] { display: none; }
 .platform-docs-search:focus-within .platform-docs-search-shortcut,

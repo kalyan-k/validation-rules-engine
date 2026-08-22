@@ -131,6 +131,6 @@ If two or more adapters later share non-engine infrastructure, evaluate a shared
 ## Known risks and opportunities
 
 - The Angular expression parser still anchors policy execution to the adapter.
-- `underscore` remains a core peer dependency to preserve validator semantics.
+- Lodash ES (`lodash-es`) is a direct dependency of `@validation-rules-engine/angular` for policy and forms helper utilities.
 - Public package versions are synchronized and verified automatically; tagged releases pass the complete quality gate before npm trusted publishing.
 - Compatibility identifiers retain their historic names and require clear documentation for new consumers.

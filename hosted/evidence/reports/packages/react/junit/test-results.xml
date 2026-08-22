@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites name="vitest tests" tests="23" failures="0" errors="0" time="1.0634851">
-    <testsuite name="src/hooks/react-integration.spec.tsx" timestamp="2026-08-09T18:45:54.522Z" hostname="karthikk" tests="10" failures="0" errors="0" skipped="0" time="1.0266225">
-        <testcase classname="src/hooks/react-integration.spec.tsx" name="React validation hooks and components &gt; throws a clear missing-provider error" time="0.021015">
+<testsuites name="vitest tests" tests="23" failures="0" errors="0" time="1.0892557">
+    <testsuite name="src/engine/validation-engine.spec.ts" timestamp="2026-08-22T14:12:08.911Z" hostname="karthikk" tests="10" failures="0" errors="0" skipped="0" time="0.029366">
+        <testcase classname="src/engine/validation-engine.spec.ts" name="ValidationEngine &gt; registers case-insensitive policies with balanced duplicate ownership" time="0.0050106">
         </testcase>
-        <testcase classname="src/hooks/react-integration.spec.tsx" name="React validation hooks and components &gt; exposes an injected engine and merged provider configuration" time="0.0150338">
+        <testcase classname="src/engine/validation-engine.spec.ts" name="ValidationEngine &gt; replaces and forcibly unregisters a dynamic policy" time="0.0056638">
         </testcase>
-        <testcase classname="src/hooks/react-integration.spec.tsx" name="React validation hooks and components &gt; validates change, blur, submit, controlled parsing, checkbox, and reset" time="0.6219074">
+        <testcase classname="src/engine/validation-engine.spec.ts" name="ValidationEngine &gt; validates nested fields, optional rules, required results, and deduplicates errors" time="0.0020914">
         </testcase>
-        <testcase classname="src/hooks/react-integration.spec.tsx" name="React validation hooks and components &gt; calls invalid submit and renders linked and unlinked summaries" time="0.0829491">
+        <testcase classname="src/engine/validation-engine.spec.ts" name="ValidationEngine &gt; supports function, path, negated, and equality dependencies" time="0.001325">
         </testcase>
-        <testcase classname="src/hooks/react-integration.spec.tsx" name="React validation hooks and components &gt; supports custom controls, explicit field validate, and field clear" time="0.1784992">
+        <testcase classname="src/engine/validation-engine.spec.ts" name="ValidationEngine &gt; validates fields independently and preserves errors from other properties" time="0.0033319">
         </testcase>
-        <testcase classname="src/hooks/react-integration.spec.tsx" name="React validation hooks and components &gt; provides low-level validation, groups, touch, and clear methods" time="0.0038199">
+        <testcase classname="src/engine/validation-engine.spec.ts" name="ValidationEngine &gt; registers, validates, clears, and rejects validation groups" time="0.004493">
         </testcase>
-        <testcase classname="src/hooks/react-integration.spec.tsx" name="React validation hooks and components &gt; balances policy lifecycle in Strict Mode and across multiple forms" time="0.0022654">
+        <testcase classname="src/engine/validation-engine.spec.ts" name="ValidationEngine &gt; publishes revisions, touch state, partial clear, full clear, and notifications" time="0.0027933">
         </testcase>
-        <testcase classname="src/hooks/react-integration.spec.tsx" name="React validation hooks and components &gt; supports independent nested providers and models" time="0.0746969">
+        <testcase classname="src/engine/validation-engine.spec.ts" name="ValidationEngine &gt; ignores stale promise results for the same field" time="0.000475">
         </testcase>
-        <testcase classname="src/hooks/react-integration.spec.tsx" name="React validation hooks and components &gt; is safe to import and render through the server renderer" time="0.0062944">
+        <testcase classname="src/engine/validation-engine.spec.ts" name="ValidationEngine &gt; supports observable-like async values and propagates rule failures" time="0.0011052">
         </testcase>
-        <testcase classname="src/hooks/react-integration.spec.tsx" name="React validation hooks and components &gt; combines native blur handlers without requiring a browser design system" time="0.017925">
-        </testcase>
-    </testsuite>
-    <testsuite name="src/engine/validation-engine.spec.ts" timestamp="2026-08-09T18:45:54.530Z" hostname="karthikk" tests="10" failures="0" errors="0" skipped="0" time="0.0301743">
-        <testcase classname="src/engine/validation-engine.spec.ts" name="ValidationEngine &gt; registers case-insensitive policies with balanced duplicate ownership" time="0.0043617">
-        </testcase>
-        <testcase classname="src/engine/validation-engine.spec.ts" name="ValidationEngine &gt; replaces and forcibly unregisters a dynamic policy" time="0.0050329">
-        </testcase>
-        <testcase classname="src/engine/validation-engine.spec.ts" name="ValidationEngine &gt; validates nested fields, optional rules, required results, and deduplicates errors" time="0.0025996">
-        </testcase>
-        <testcase classname="src/engine/validation-engine.spec.ts" name="ValidationEngine &gt; supports function, path, negated, and equality dependencies" time="0.0020805">
-        </testcase>
-        <testcase classname="src/engine/validation-engine.spec.ts" name="ValidationEngine &gt; validates fields independently and preserves errors from other properties" time="0.0027464">
-        </testcase>
-        <testcase classname="src/engine/validation-engine.spec.ts" name="ValidationEngine &gt; registers, validates, clears, and rejects validation groups" time="0.0029284">
-        </testcase>
-        <testcase classname="src/engine/validation-engine.spec.ts" name="ValidationEngine &gt; publishes revisions, touch state, partial clear, full clear, and notifications" time="0.0038879">
-        </testcase>
-        <testcase classname="src/engine/validation-engine.spec.ts" name="ValidationEngine &gt; ignores stale promise results for the same field" time="0.0008545">
-        </testcase>
-        <testcase classname="src/engine/validation-engine.spec.ts" name="ValidationEngine &gt; supports observable-like async values and propagates rule failures" time="0.0014581">
-        </testcase>
-        <testcase classname="src/engine/validation-engine.spec.ts" name="ValidationEngine &gt; guards empty names and handles non-string dependency values" time="0.000886">
+        <testcase classname="src/engine/validation-engine.spec.ts" name="ValidationEngine &gt; guards empty names and handles non-string dependency values" time="0.000805">
         </testcase>
     </testsuite>
-    <testsuite name="src/utilities/paths.spec.ts" timestamp="2026-08-09T18:45:54.533Z" hostname="karthikk" tests="3" failures="0" errors="0" skipped="0" time="0.0066883">
-        <testcase classname="src/utilities/paths.spec.ts" name="property path utilities &gt; reads nested values and stops safely at missing primitives" time="0.003043">
+    <testsuite name="src/hooks/react-integration.spec.tsx" timestamp="2026-08-22T14:12:08.916Z" hostname="karthikk" tests="10" failures="0" errors="0" skipped="0" time="1.0512005">
+        <testcase classname="src/hooks/react-integration.spec.tsx" name="React validation hooks and components &gt; throws a clear missing-provider error" time="0.0228499">
         </testcase>
-        <testcase classname="src/utilities/paths.spec.ts" name="property path utilities &gt; clones nested objects and arrays while creating missing containers" time="0.0011738">
+        <testcase classname="src/hooks/react-integration.spec.tsx" name="React validation hooks and components &gt; exposes an injected engine and merged provider configuration" time="0.0195748">
         </testcase>
-        <testcase classname="src/utilities/paths.spec.ts" name="property path utilities &gt; handles empty paths, root arrays, and stable field IDs" time="0.0004745">
+        <testcase classname="src/hooks/react-integration.spec.tsx" name="React validation hooks and components &gt; validates change, blur, submit, controlled parsing, checkbox, and reset" time="0.6586302">
+        </testcase>
+        <testcase classname="src/hooks/react-integration.spec.tsx" name="React validation hooks and components &gt; calls invalid submit and renders linked and unlinked summaries" time="0.054045">
+        </testcase>
+        <testcase classname="src/hooks/react-integration.spec.tsx" name="React validation hooks and components &gt; supports custom controls, explicit field validate, and field clear" time="0.1543897">
+        </testcase>
+        <testcase classname="src/hooks/react-integration.spec.tsx" name="React validation hooks and components &gt; provides low-level validation, groups, touch, and clear methods" time="0.0136499">
+        </testcase>
+        <testcase classname="src/hooks/react-integration.spec.tsx" name="React validation hooks and components &gt; balances policy lifecycle in Strict Mode and across multiple forms" time="0.0097209">
+        </testcase>
+        <testcase classname="src/hooks/react-integration.spec.tsx" name="React validation hooks and components &gt; supports independent nested providers and models" time="0.0642411">
+        </testcase>
+        <testcase classname="src/hooks/react-integration.spec.tsx" name="React validation hooks and components &gt; is safe to import and render through the server renderer" time="0.0187706">
+        </testcase>
+        <testcase classname="src/hooks/react-integration.spec.tsx" name="React validation hooks and components &gt; combines native blur handlers without requiring a browser design system" time="0.0334973">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/utilities/paths.spec.ts" timestamp="2026-08-22T14:12:08.920Z" hostname="karthikk" tests="3" failures="0" errors="0" skipped="0" time="0.0086892">
+        <testcase classname="src/utilities/paths.spec.ts" name="property path utilities &gt; reads nested values and stops safely at missing primitives" time="0.0030371">
+        </testcase>
+        <testcase classname="src/utilities/paths.spec.ts" name="property path utilities &gt; clones nested objects and arrays while creating missing containers" time="0.0025771">
+        </testcase>
+        <testcase classname="src/utilities/paths.spec.ts" name="property path utilities &gt; handles empty paths, root arrays, and stable field IDs" time="0.0006532">
         </testcase>
     </testsuite>
 </testsuites>

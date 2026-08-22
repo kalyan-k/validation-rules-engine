@@ -1,6 +1,6 @@
 {
-  "profile": "full",
-  "at": "2026-08-10T03:07:01.219Z",
+  "profile": "release",
+  "at": "2026-08-15T18:05:29.820Z",
   "exitCode": 0,
   "label": "PASS",
   "results": [
@@ -8,17 +8,17 @@
       "scanner": "npm-audit",
       "status": 0,
       "label": "PASS",
-      "summary": "No vulnerabilities at audit-level=high",
+      "summary": "No vulnerabilities at audit-level=moderate",
       "details": {
-        "level": "high",
-        "profile": "quick",
+        "level": "moderate",
+        "profile": "release",
         "rationale": "Public npm libraries should fail the release gate on moderate+ dependency advisories. Local quick scans fail only on high/critical to keep day-to-day development practical."
       },
       "reportPaths": [
         "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\npm-audit\\npm-audit.json",
         "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\npm-audit\\npm-audit.txt"
       ],
-      "at": "2026-08-10T02:59:04.164Z"
+      "at": "2026-08-15T17:56:00.299Z"
     },
     {
       "scanner": "gitleaks",
@@ -32,7 +32,7 @@
         "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\gitleaks\\gitleaks.json",
         "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\gitleaks\\gitleaks.sarif"
       ],
-      "at": "2026-08-10T02:59:19.429Z"
+      "at": "2026-08-15T17:56:03.963Z"
     },
     {
       "scanner": "semgrep",
@@ -45,7 +45,7 @@
         "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\semgrep\\semgrep.sarif",
         "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\semgrep\\semgrep.txt"
       ],
-      "at": "2026-08-10T03:03:32.844Z"
+      "at": "2026-08-15T17:59:32.977Z"
     },
     {
       "scanner": "dependency-check",
@@ -63,7 +63,7 @@
         "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\dependency-check\\dependency-check-report.html",
         "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\dependency-check\\dependency-check-report.json"
       ],
-      "at": "2026-08-10T03:06:18.609Z"
+      "at": "2026-08-15T18:05:06.293Z"
     },
     {
       "scanner": "sbom",
@@ -81,7 +81,7 @@
         "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\sbom\\react.cdx.json",
         "C:\\Kalyan\\Learning\\validation-rules-engine\\reports\\security\\sbom\\workspace.cdx.json"
       ],
-      "at": "2026-08-10T03:07:01.204Z"
+      "at": "2026-08-15T18:05:29.807Z"
     }
   ]
 }

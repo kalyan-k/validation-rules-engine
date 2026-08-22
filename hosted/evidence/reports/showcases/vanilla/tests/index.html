@@ -90,7 +90,7 @@
         <div><dt>Application</dt><dd>Vanilla Showcase</dd></div>
         <div><dt>Report</dt><dd>Test execution report</dd></div>
         <div><dt>Version</dt><dd>1.0.0</dd></div>
-        <div><dt>Generated</dt><dd>2026-08-09T18:47:42.569Z</dd></div>
+        <div><dt>Generated</dt><dd>2026-08-13T02:08:16.018Z</dd></div>
       </dl></div>
     </section>
     <script>(()=>{const root=document.currentScript.previousElementSibling;const button=root.querySelector('button');const key='vre:report-summary';const preference=sessionStorage.getItem(key);const setExpanded=(expanded,persist)=>{root.classList.toggle('collapsed',!expanded);button.setAttribute('aria-expanded',String(expanded));button.querySelector('span').textContent=expanded?'Collapse details':'Expand details';if(persist)sessionStorage.setItem(key,expanded?'expanded':'collapsed');};setExpanded(preference!=='collapsed',false);button.addEventListener('click',()=>setExpanded(button.getAttribute('aria-expanded')!=='true',true));if(preference===null)setTimeout(()=>setExpanded(false,false),10000);})();</script>
@@ -109,7 +109,7 @@
         <div class="card card-pass"><span class="label">Passed</span><strong>23</strong></div>
         <div class="card card-fail"><span class="label">Failed</span><strong>0</strong></div>
         <div class="card card-skip"><span class="label">Skipped</span><strong>0</strong></div>
-        <div class="card"><span class="label">Duration</span><strong>2.01 s</strong></div>
+        <div class="card"><span class="label">Duration</span><strong>2.21 s</strong></div>
         <div class="card"><span class="label">Suites</span><strong>4</strong></div>
       </div>
       <div class="toolbar" aria-label="Test status filters">
@@ -117,7 +117,7 @@
         <button type="button" data-filter="passed">Passed</button>
         <button type="button" data-filter="failed">Failed</button>
         <button type="button" data-filter="skipped">Skipped</button>
-        <span class="metadata">Browser: Vitest · jsdom · Started: 2026-08-09T18:47:36.562Z</span>
+        <span class="metadata">Browser: Vitest · jsdom · Started: 2026-08-13T02:08:11.117Z</span>
       </div>
       
       <section class="suite" id="suite-vanilla-showcase-application-0">
@@ -128,7 +128,7 @@
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>renders the shared layout, home content, and shell</strong>
-        <span class="duration">43 ms</span>
+        <span class="duration">32 ms</span>
       </div>
       <div class="source">Source: <code>apps/vanilla-showcase/src/app.spec.ts</code></div>
       
@@ -138,7 +138,7 @@
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>navigates among Home, Simple, Complex, and Performance routes with active state</strong>
-        <span class="duration">198 ms</span>
+        <span class="duration">389 ms</span>
       </div>
       <div class="source">Source: <code>apps/vanilla-showcase/src/app.spec.ts</code></div>
       
@@ -148,7 +148,7 @@
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>uses home example links as client-side navigation</strong>
-        <span class="duration">21 ms</span>
+        <span class="duration">16 ms</span>
       </div>
       <div class="source">Source: <code>apps/vanilla-showcase/src/app.spec.ts</code></div>
       
@@ -184,7 +184,7 @@
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>supports function, path, negated, and equality dependencies</strong>
-        <span class="duration">2 ms</span>
+        <span class="duration">3 ms</span>
       </div>
       <div class="source">Source: <code>apps/vanilla-showcase/src/coverage.spec.ts</code></div>
       
@@ -194,26 +194,6 @@
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>registers, validates, clears, and rejects validation groups</strong>
-        <span class="duration">4 ms</span>
-      </div>
-      <div class="source">Source: <code>apps/vanilla-showcase/src/coverage.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>reports required paths, refreshes group statuses, and updates evaluated groups on field validate</strong>
-        <span class="duration">1 ms</span>
-      </div>
-      <div class="source">Source: <code>apps/vanilla-showcase/src/coverage.spec.ts</code></div>
-      
-    </article>
-
-    <article class="test test-passed" data-status="passed">
-      <div class="test-heading">
-        <span class="status status-passed">passed</span>
-        <strong>publishes revisions, touch state, partial clear, and notifications</strong>
         <span class="duration">2 ms</span>
       </div>
       <div class="source">Source: <code>apps/vanilla-showcase/src/coverage.spec.ts</code></div>
@@ -223,8 +203,28 @@
     <article class="test test-passed" data-status="passed">
       <div class="test-heading">
         <span class="status status-passed">passed</span>
+        <strong>reports required paths, refreshes group statuses, and updates evaluated groups on field validate</strong>
+        <span class="duration">2 ms</span>
+      </div>
+      <div class="source">Source: <code>apps/vanilla-showcase/src/coverage.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
+        <strong>publishes revisions, touch state, partial clear, and notifications</strong>
+        <span class="duration">3 ms</span>
+      </div>
+      <div class="source">Source: <code>apps/vanilla-showcase/src/coverage.spec.ts</code></div>
+      
+    </article>
+
+    <article class="test test-passed" data-status="passed">
+      <div class="test-heading">
+        <span class="status status-passed">passed</span>
         <strong>supports observable-like async values and ignores stale results</strong>
-        <span class="duration">1 ms</span>
+        <span class="duration">2 ms</span>
       </div>
       <div class="source">Source: <code>apps/vanilla-showcase/src/coverage.spec.ts</code></div>
       
@@ -260,7 +260,7 @@
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>creates DOM helpers and renders summaries</strong>
-        <span class="duration">28 ms</span>
+        <span class="duration">20 ms</span>
       </div>
       <div class="source">Source: <code>apps/vanilla-showcase/src/coverage.spec.ts</code></div>
       
@@ -270,7 +270,7 @@
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>binds select, checkbox, radio, and textarea controls</strong>
-        <span class="duration">81 ms</span>
+        <span class="duration">68 ms</span>
       </div>
       <div class="source">Source: <code>apps/vanilla-showcase/src/coverage.spec.ts</code></div>
       
@@ -280,7 +280,7 @@
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>covers performance helpers and platform urls</strong>
-        <span class="duration">3 ms</span>
+        <span class="duration">4 ms</span>
       </div>
       <div class="source">Source: <code>apps/vanilla-showcase/src/coverage.spec.ts</code></div>
       
@@ -296,7 +296,7 @@
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>blocks an invalid simple submission and accepts a valid one, then resets</strong>
-        <span class="duration">204 ms</span>
+        <span class="duration">345 ms</span>
       </div>
       <div class="source">Source: <code>apps/vanilla-showcase/src/forms.spec.ts</code></div>
       
@@ -306,7 +306,7 @@
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>validates a complex section and saves after populate</strong>
-        <span class="duration">190 ms</span>
+        <span class="duration">176 ms</span>
       </div>
       <div class="source">Source: <code>apps/vanilla-showcase/src/forms.spec.ts</code></div>
       
@@ -316,7 +316,7 @@
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>generates a performance form and validates all controls</strong>
-        <span class="duration">317 ms</span>
+        <span class="duration">265 ms</span>
       </div>
       <div class="source">Source: <code>apps/vanilla-showcase/src/forms.spec.ts</code></div>
       
@@ -326,7 +326,7 @@
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>registers a policy, validates a field, and clears engine state</strong>
-        <span class="duration">1 ms</span>
+        <span class="duration">2 ms</span>
       </div>
       <div class="source">Source: <code>apps/vanilla-showcase/src/forms.spec.ts</code></div>
       
@@ -336,7 +336,7 @@
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>manages complex dynamic sections and conditional secondary email</strong>
-        <span class="duration">153 ms</span>
+        <span class="duration">186 ms</span>
       </div>
       <div class="source">Source: <code>apps/vanilla-showcase/src/forms.spec.ts</code></div>
       
@@ -346,7 +346,7 @@
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>validates on blur by default and shows required markers</strong>
-        <span class="duration">62 ms</span>
+        <span class="duration">61 ms</span>
       </div>
       <div class="source">Source: <code>apps/vanilla-showcase/src/forms.spec.ts</code></div>
       
@@ -356,7 +356,7 @@
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>shows performance group badges after validate all</strong>
-        <span class="duration">203 ms</span>
+        <span class="duration">204 ms</span>
       </div>
       <div class="source">Source: <code>apps/vanilla-showcase/src/forms.spec.ts</code></div>
       
@@ -366,7 +366,7 @@
       <div class="test-heading">
         <span class="status status-passed">passed</span>
         <strong>populates and resets the performance form</strong>
-        <span class="duration">468 ms</span>
+        <span class="duration">408 ms</span>
       </div>
       <div class="source">Source: <code>apps/vanilla-showcase/src/forms.spec.ts</code></div>
       

@@ -1,7 +1,6 @@
-
 import { Observable, Subject, forkJoin as observableForkJoin, of as observableOf } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import * as _ from 'underscore';
+import { bind, filter, findIndex, forEach, isFunction, uniq } from 'lodash-es';
 import { getValidationMeta, isValidationFailure, Validator } from '@validation-rules-engine/core';
 import { $parse } from './parser/expression-parser';
 
@@ -32,7 +31,7 @@ export class Policy {
         const hasRequiredError = isValidationFailure(errorMsg);
 
         if (model.requiredResults) {
-            const reqResultIdx = _.findIndex(model.requiredResults, { 'propertyName': propertyName });
+            const reqResultIdx = findIndex(model.requiredResults, { 'propertyName': propertyName });
 
             if (reqResultIdx > -1) {
 
@@ -59,9 +58,9 @@ export class Policy {
         let returnValue = false;
 
         if (model.validationResults) {
-            const filteredArray = _.where(model.validationResults, { 'propertyName': propertyName });
+            const filteredArray = filter(model.validationResults, { 'propertyName': propertyName });
 
-            _.forEach(filteredArray, function (value) {
+            forEach(filteredArray, function (value) {
                 if (value.error && value.error.message === errorMsg) {
                     returnValue = true;
                 }
@@ -89,7 +88,7 @@ export class Policy {
             return true;
         }
 
-        if (_.isFunction(validator.dependency)) {
+        if (isFunction(validator.dependency)) {
             return !!validator.dependency.call(this, model);
         }
 
@@ -138,7 +137,7 @@ export class Policy {
 
         } else {
             // Remove only this policy's property errors (supports multiple policies on one model)
-            const policyProperties = _.uniq(this.validators.map((v) => v.propertyName));
+            const policyProperties = uniq(this.validators.map((v) => v.propertyName));
             if (model.validationResults) {
                 model.validationResults = model.validationResults.filter(
                     (result: { propertyName: string }) => !policyProperties.includes(result.propertyName)
@@ -158,13 +157,13 @@ export class Policy {
                         const callBackFn = this.runValidation.call(self, model, validator, validationRule);
                         const observableFn = (callBackFn instanceof Subject) ? callBackFn : observableOf(callBackFn);
 
-                        results.push(observableFn.pipe(map(_.bind(this.handleAsyncCall, self, model, validator))));
+                        results.push(observableFn.pipe(map(bind(this.handleAsyncCall, self, model, validator))));
                     }
                 } else {
                     const callBackFn = this.runValidation.call(self, model, validator, validationRule);
                     const observableFn = (callBackFn instanceof Subject) ? callBackFn : observableOf(callBackFn);
 
-                    results.push(observableFn.pipe(map(_.bind(this.handleAsyncCall, self, model, validator))));
+                    results.push(observableFn.pipe(map(bind(this.handleAsyncCall, self, model, validator))));
                 }
             }
         }
@@ -236,7 +235,7 @@ export class Policy {
             const hasRequiredRule = this.validators[validator].validatorsToRun.some((rule) => rule.checkIsRequired);
             const dependencyMet = this.isDependencySatisfied(model, this.validators[validator]);
             const shouldShowRequired = hasRequiredRule && dependencyMet;
-            const reqResultIdx = _.findIndex(model.requiredResults, { 'propertyName': fieldName });
+            const reqResultIdx = findIndex(model.requiredResults, { 'propertyName': fieldName });
 
             if (reqResultIdx > -1) {
                 model.requiredResults[reqResultIdx] = {
@@ -285,7 +284,7 @@ export class Policy {
             }
         }
 
-        return _.uniq(paths);
+        return uniq(paths);
     }
 
     /**
@@ -301,13 +300,13 @@ export class Policy {
         const policyPaths = this.getActivePropertyPaths(model);
         const pathsToCheck = policyPaths.length > 0
             ? policyPaths
-            : _.uniq(registeredPaths);
+            : uniq(registeredPaths);
 
         const meta = getValidationMeta(model);
         const groupErrors: Array<{ propertyName: string; error: { message: string } }> = [];
 
         pathsToCheck.forEach((propertyPath: string) => {
-            const foundValidationErrorFields = _.where(model.validationResults || [], { 'propertyName': propertyPath });
+            const foundValidationErrorFields = filter(model.validationResults || [], { 'propertyName': propertyPath });
             if (foundValidationErrorFields?.length) {
                 groupErrors.push(...foundValidationErrorFields);
             }

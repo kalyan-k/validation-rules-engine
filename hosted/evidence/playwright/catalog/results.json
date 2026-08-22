@@ -5744,7 +5744,7 @@
           "column": 6,
           "specs": [
             {
-              "title": "Reports menu exposes tests coverage and automation destinations",
+              "title": "Reports menu exposes tests coverage automation and security destinations",
               "ok": true,
               "tags": [
                 "reports",
@@ -5761,7 +5761,7 @@
                   "status": "skipped"
                 }
               ],
-              "id": "506f72bfa6249a31c6e6-d03a857a7339891d6b4b",
+              "id": "506f72bfa6249a31c6e6-672d4e7ed99ff04591e3",
               "file": "reports/reports.spec.ts",
               "line": 4,
               "column": 3
@@ -5786,7 +5786,7 @@
               ],
               "id": "506f72bfa6249a31c6e6-f3f560181346702ef7c6",
               "file": "reports/reports.spec.ts",
-              "line": 13,
+              "line": 14,
               "column": 3
             },
             {
@@ -5809,7 +5809,30 @@
               ],
               "id": "506f72bfa6249a31c6e6-ef83c257529b3e2eff03",
               "file": "reports/reports.spec.ts",
-              "line": 21,
+              "line": 23,
+              "column": 3
+            },
+            {
+              "title": "loads the canonical security summary route",
+              "ok": true,
+              "tags": [
+                "reports",
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "506f72bfa6249a31c6e6-512710f9d26abe4ecc1d",
+              "file": "reports/reports.spec.ts",
+              "line": 29,
               "column": 3
             },
             {
@@ -5833,7 +5856,7 @@
               ],
               "id": "506f72bfa6249a31c6e6-2394f3f2bb211c621b72",
               "file": "reports/reports.spec.ts",
-              "line": 27,
+              "line": 35,
               "column": 3
             },
             {
@@ -5856,11 +5879,11 @@
               ],
               "id": "506f72bfa6249a31c6e6-cab90664cc2a1cbb75b3",
               "file": "reports/reports.spec.ts",
-              "line": 33,
+              "line": 41,
               "column": 3
             },
             {
-              "title": "Reports menu exposes tests coverage and automation destinations",
+              "title": "Reports menu exposes tests coverage automation and security destinations",
               "ok": true,
               "tags": [
                 "reports",
@@ -5877,7 +5900,7 @@
                   "status": "skipped"
                 }
               ],
-              "id": "506f72bfa6249a31c6e6-3cd9c87fe69c2013c190",
+              "id": "506f72bfa6249a31c6e6-7b1fe151feaa815ea7f1",
               "file": "reports/reports.spec.ts",
               "line": 4,
               "column": 3
@@ -5902,7 +5925,7 @@
               ],
               "id": "506f72bfa6249a31c6e6-753887cb805a84a2c327",
               "file": "reports/reports.spec.ts",
-              "line": 13,
+              "line": 14,
               "column": 3
             },
             {
@@ -5925,7 +5948,30 @@
               ],
               "id": "506f72bfa6249a31c6e6-bd8abee553c76842b2c5",
               "file": "reports/reports.spec.ts",
-              "line": 21,
+              "line": 23,
+              "column": 3
+            },
+            {
+              "title": "loads the canonical security summary route",
+              "ok": true,
+              "tags": [
+                "reports",
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "506f72bfa6249a31c6e6-4887ca4b2e82fa43e09a",
+              "file": "reports/reports.spec.ts",
+              "line": 29,
               "column": 3
             },
             {
@@ -5949,7 +5995,7 @@
               ],
               "id": "506f72bfa6249a31c6e6-13b706fa1ba2b0beb1cc",
               "file": "reports/reports.spec.ts",
-              "line": 27,
+              "line": 35,
               "column": 3
             },
             {
@@ -5972,11 +6018,11 @@
               ],
               "id": "506f72bfa6249a31c6e6-b11af8b3d6a83d895609",
               "file": "reports/reports.spec.ts",
-              "line": 33,
+              "line": 41,
               "column": 3
             },
             {
-              "title": "Reports menu exposes tests coverage and automation destinations",
+              "title": "Reports menu exposes tests coverage automation and security destinations",
               "ok": true,
               "tags": [
                 "reports",
@@ -5993,7 +6039,7 @@
                   "status": "skipped"
                 }
               ],
-              "id": "506f72bfa6249a31c6e6-0aaa67855fbd8d72297b",
+              "id": "506f72bfa6249a31c6e6-1a0c67d4f9938272c4b6",
               "file": "reports/reports.spec.ts",
               "line": 4,
               "column": 3
@@ -6018,7 +6064,7 @@
               ],
               "id": "506f72bfa6249a31c6e6-e2a1c6109b026201c7f1",
               "file": "reports/reports.spec.ts",
-              "line": 13,
+              "line": 14,
               "column": 3
             },
             {
@@ -6041,7 +6087,30 @@
               ],
               "id": "506f72bfa6249a31c6e6-c345501187f2952ab8f8",
               "file": "reports/reports.spec.ts",
-              "line": 21,
+              "line": 23,
+              "column": 3
+            },
+            {
+              "title": "loads the canonical security summary route",
+              "ok": true,
+              "tags": [
+                "reports",
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "506f72bfa6249a31c6e6-074deb4c22e9f166f13e",
+              "file": "reports/reports.spec.ts",
+              "line": 29,
               "column": 3
             },
             {
@@ -6065,7 +6134,7 @@
               ],
               "id": "506f72bfa6249a31c6e6-69fa477226fa7596dbc6",
               "file": "reports/reports.spec.ts",
-              "line": 27,
+              "line": 35,
               "column": 3
             },
             {
@@ -6088,7 +6157,7 @@
               ],
               "id": "506f72bfa6249a31c6e6-45a7359d3f69ca708e6e",
               "file": "reports/reports.spec.ts",
-              "line": 33,
+              "line": 41,
               "column": 3
             }
           ]
@@ -7303,10 +7372,10 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-08-09T19:34:41.591Z",
-    "duration": 2187.929,
+    "startTime": "2026-08-22T17:45:18.776Z",
+    "duration": 634.765,
     "expected": 0,
-    "skipped": 269,
+    "skipped": 272,
     "unexpected": 0,
     "flaky": 0
   }

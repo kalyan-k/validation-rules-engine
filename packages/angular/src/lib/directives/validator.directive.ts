@@ -16,7 +16,7 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
-import * as _ from 'underscore';
+import { filter, find } from 'lodash-es';
 import { markFieldTouched, RequiredResult, shouldShowFieldErrors } from '@validation-rules-engine/core';
 import { ValidationDisplayConfig, ValidationDisplayContext, ValidationDisplayStrategy } from '../interfaces/validation-display.interface';
 import { ValidationProviderService } from '../services/validation-provider.service';
@@ -280,7 +280,7 @@ export class ValidatorDirective implements OnInit, AfterViewInit, DoCheck, OnDes
       return;
     }
 
-    const filteredResults = _.where(this.actualModel.validationResults || [], {
+    const filteredResults = filter(this.actualModel.validationResults || [], {
       propertyName: this.modelInfo.propertyPath
     });
 
@@ -305,7 +305,7 @@ export class ValidatorDirective implements OnInit, AfterViewInit, DoCheck, OnDes
   }
 
   private syncRequiredUi(): void {
-    const requiredResult = _.findWhere(this.actualModel.requiredResults || [], {
+    const requiredResult = find(this.actualModel.requiredResults || [], {
       propertyName: this.modelInfo.propertyPath
     }) as RequiredResult | undefined;
 
